@@ -78,7 +78,10 @@
         {{#each ../stockarray}}
 
         <tr>
-            <th colspan="1">{{this.partnumber2.partno}}</th>
+            {{#ifpartnumber 'partnumber'}}
+            <th colspan="1">{{this.partnumber}}</th>
+            {{/ifpartnumber}}
+            
             <th colspan="1">{{this.prtdate}}</th>
             <th colspan="2">{{this.prttime}}</th>
             <th colspan="2">{{this.prtpaidamount}}</th>

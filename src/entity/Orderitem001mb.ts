@@ -87,11 +87,7 @@ export class Orderitem001mb {
   )
   materialreceiveditem001wbs: Materialreceiveditem001wb[];
 
-  @OneToMany(
-    () => Returnstock001wb,
-    (returnstock001wb) => returnstock001wb.ordernumber2
-  )
-  returnstock001wbs: Returnstock001wb[];
+
 
 
 

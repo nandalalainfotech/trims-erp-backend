@@ -78,7 +78,9 @@
         {{#each ../stockarray}}
 
         <tr>
-            <th colspan="1">{{this.childpartnumber2.cpartno}}</th>
+            {{#ifchildpartnumber 'childpartnumber'}}
+            <th colspan="1">{{this.childpartnumber}}</th>
+            {{/ifchildpartnumber}}
             <th colspan="1">{{this.cptdate}}</th>
             <th colspan="2">{{this.cpttime}}</th>
             <th colspan="2">{{this.cptpaidamount}}</th>
