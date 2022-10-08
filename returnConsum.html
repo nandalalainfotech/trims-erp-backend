@@ -78,7 +78,10 @@
         {{#each ../stockarray}}
 
         <tr>
-            <th colspan="1">{{this.cuordernumber2.consmno}}</th>
+            {{#ifcuordernumber 'cuordernumber'}}
+            <th colspan="1">{{this.cuordernumber}}</th>
+            {{/ifcuordernumber}}
+           
             <th colspan="1">{{this.cudate}}</th>
             <th colspan="2">{{this.cutime}}</th>
             <th colspan="2">{{this.cupaidamount}}</th>

@@ -78,7 +78,10 @@
         {{#each ../stockarray}}
 
         <tr>
-            <th colspan="1">{{this.ordernumber2.itemcode}}</th>
+            {{#ifordernumber 'ordernumber'}}
+            <th colspan="1">{{this.ordernumber}}</th>
+            {{/ifordernumber}}
+           
             <th colspan="1">{{this.date}}</th>
             <th colspan="2">{{this.time}}</th>
             <th colspan="2">{{this.paidamount}}</th>

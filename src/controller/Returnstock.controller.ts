@@ -93,15 +93,92 @@ export class ReturnstockController {
     }
 
 
+     // --------Item-Pdf---------------
+	@hasRole(Role.superadmin, Role.admin, Role.user, Role.guest)
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Get('itemFullpdf/:unitslno')
+    @Header('Content-Type', 'application/pdf')
+    async downloaditemFullPdf(@Param('unitslno') unitslno: number, @Res() response: Response) {
+        return await this.returnstockService.downloaditemFullPdf(unitslno, response);
+    }
+
+
     @hasRole(Role.superadmin, Role.admin, Role.user, Role.guest)
     @UseGuards(JwtAuthGuard, RolesGuard)
-    @Get('partexcel/:id/:unitslno')
+    @Get('itemFullexcel/:unitslno')
     @Header("Content-Type",
         "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
     @Header("Content-Disposition",
         "attachment; filename=" + "Attendace Report" + ".xlsx")
-    async downloadpartExcel(@Param('unitslno') unitslno: number,@Param('id') id: number, request: Request, @Res() response: Response) {
-        return await this.returnstockService.downloadpartExcel(unitslno,id, response);
+    async downloaditemFullExcel(@Param('unitslno') unitslno: number, request: Request, @Res() response: Response) {
+        return await this.returnstockService.downloaditemFullExcel(unitslno, response);
+    }
+
+    // --------Consum-pdf------------
+
+    @hasRole(Role.superadmin, Role.admin, Role.user, Role.guest)
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Get('consumFullpdf/:unitslno')
+    @Header('Content-Type', 'application/pdf')
+    async downloadconsumFullPdf(@Param('unitslno') unitslno: number, @Res() response: Response) {
+        return await this.returnstockService.downloadconsumFullPdf(unitslno, response);
+    }
+
+
+    @hasRole(Role.superadmin, Role.admin, Role.user, Role.guest)
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Get('consumFullexcel/:unitslno')
+    @Header("Content-Type",
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+    @Header("Content-Disposition",
+        "attachment; filename=" + "Attendace Report" + ".xlsx")
+    async downloadconsumFullExcel(@Param('unitslno') unitslno: number,@Param('id') id: number, request: Request, @Res() response: Response) {
+        return await this.returnstockService.downloadconsumFullExcel(unitslno, response);
+    }
+
+
+    // --------------cpart-pdf----------
+
+    @hasRole(Role.superadmin, Role.admin, Role.user, Role.guest)
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Get('cpartFullpdf/:unitslno')
+    @Header('Content-Type', 'application/pdf')
+    async downloadcpartFullPdf(@Param('unitslno') unitslno: number, @Res() response: Response) {
+        return await this.returnstockService.downloadcpartFullPdf(unitslno, response);
+    }
+
+
+    @hasRole(Role.superadmin, Role.admin, Role.user, Role.guest)
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Get('cpartFullexcel/:unitslno')
+    @Header("Content-Type",
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+    @Header("Content-Disposition",
+        "attachment; filename=" + "Attendace Report" + ".xlsx")
+    async downloadcpartFullExcel(@Param('unitslno') unitslno: number, request: Request, @Res() response: Response) {
+        return await this.returnstockService.downloadcpartFullExcel(unitslno, response);
+    }
+
+    // -------------part-pdf----------
+
+	@hasRole(Role.superadmin, Role.admin, Role.user, Role.guest)
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Get('partFullpdf/:unitslno')
+    @Header('Content-Type', 'application/pdf')
+    async downloadpartFullPdf(@Param('unitslno') unitslno: number, @Res() response: Response) {
+        return await this.returnstockService.downloadpartFullPdf(unitslno, response);
+    }
+
+
+    @hasRole(Role.superadmin, Role.admin, Role.user, Role.guest)
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Get('partFullexcel/:unitslno')
+    @Header("Content-Type",
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+    @Header("Content-Disposition",
+        "attachment; filename=" + "Attendace Report" + ".xlsx")
+    async downloadpartFullExcel(@Param('unitslno') unitslno: number, request: Request, @Res() response: Response) {
+        return await this.returnstockService.downloadpartFullExcel(unitslno, response);
     }
 
 	@hasRole(Role.superadmin, Role.admin, Role.user)

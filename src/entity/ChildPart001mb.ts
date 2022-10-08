@@ -90,12 +90,6 @@ export class Childpart001mb {
   )
   materialreceiveditem001wbs: Materialreceiveditem001wb[];
 
-  @OneToMany(
-    () => Returnstock001wb,
-    (returnstock001wb) => returnstock001wb.childpartnumber2
-  )
-  returnstock001wbs: Returnstock001wb[];
-
 
 
   setProperties(childPartDTO: ChildPartDTO) {

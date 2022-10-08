@@ -1,22 +1,6 @@
 import { ReturnstockDTO } from "src/dto/Returnstock.dto";
-import {
-  Column,
-  Entity,
-  Index,
-  JoinColumn,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-} from "typeorm";
-import { Childpart001mb } from "./ChildPart001mb";
-import { Consumble001mb } from "./Consumble001mb";
-import { Orderitem001mb } from "./Orderitem001mb";
-import { Part001mb } from "./Part001mb";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
-
-@Index("ordernumber", ["ordernumber"], {})
-@Index("cuordernumber", ["cuordernumber"], {})
-@Index("childpartnumber", ["childpartnumber"], {})
-@Index("partnumber", ["partnumber"], {})
 @Entity("returnstock001wb", { schema: "trims" })
 export class Returnstock001wb {
   @PrimaryGeneratedColumn({ type: "int", name: "sl_no" })
@@ -25,7 +9,7 @@ export class Returnstock001wb {
   @Column("int", { name: "unitslno" })
   unitslno: number;
 
-  @Column({ name: "date", type:"date" })
+  @Column( { type:"date" ,name: "date", nullable: true })
   date: Date | null;
 
   @Column("varchar", { name: "time", nullable: true, length: 50 })
@@ -58,7 +42,7 @@ export class Returnstock001wb {
   @Column("int", { name: "rejectitems", nullable: true })
   rejectitems: number | null;
 
-  @Column({ name: "cudate", type:"date" })
+  @Column( {type:"date", name: "cudate", nullable: true })
   cudate: Date | null;
 
   @Column("varchar", { name: "cutime", nullable: true, length: 50 })
@@ -91,7 +75,7 @@ export class Returnstock001wb {
   @Column("int", { name: "curejectitems", nullable: true })
   curejectitems: number | null;
 
-  @Column({ name: "cptdate", type:"date" })
+  @Column( {type:"date", name: "cptdate", nullable: true })
   cptdate: Date | null;
 
   @Column("varchar", { name: "cpttime", nullable: true, length: 50 })
@@ -124,7 +108,7 @@ export class Returnstock001wb {
   @Column("int", { name: "cptrejectitems", nullable: true })
   cptrejectitems: number | null;
 
-  @Column({ name: "prtdate", type:"date" })
+  @Column( {type:"date", name: "prtdate", nullable: true })
   prtdate: Date | null;
 
   @Column("varchar", { name: "prttime", nullable: true, length: 50 })
@@ -168,37 +152,6 @@ export class Returnstock001wb {
 
   @Column("datetime", { name: "updated_datetime", nullable: true })
   updatedDatetime: Date | null;
-
-  @ManyToOne(
-    () => Orderitem001mb,
-    (orderitem001mb) => orderitem001mb.returnstock001wbs,
-    { onDelete: "CASCADE", onUpdate: "CASCADE" }
-  )
-  @JoinColumn([{ name: "ordernumber", referencedColumnName: "slNo" }])
-  ordernumber2: Orderitem001mb;
-
-  @ManyToOne(
-    () => Consumble001mb,
-    (consumble001mb) => consumble001mb.returnstock001wbs,
-    { onDelete: "CASCADE", onUpdate: "CASCADE" }
-  )
-  @JoinColumn([{ name: "cuordernumber", referencedColumnName: "slNo" }])
-  cuordernumber2: Consumble001mb;
-
-  @ManyToOne(
-    () => Childpart001mb,
-    (childpart001mb) => childpart001mb.returnstock001wbs,
-    { onDelete: "CASCADE", onUpdate: "CASCADE" }
-  )
-  @JoinColumn([{ name: "childpartnumber", referencedColumnName: "slNo" }])
-  childpartnumber2: Childpart001mb;
-
-  @ManyToOne(() => Part001mb, (part001mb) => part001mb.returnstock001wbs, {
-    onDelete: "CASCADE",
-    onUpdate: "CASCADE",
-  })
-  @JoinColumn([{ name: "partnumber", referencedColumnName: "slNo" }])
-  partnumber2: Part001mb;
 
 
 

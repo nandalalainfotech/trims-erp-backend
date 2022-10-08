@@ -50,8 +50,19 @@ export class Rawmaterialinspection001wb {
   @Column("int", { name: "accepted_qty", nullable: true })
   acceptedQty: number | null;
 
+  @Column("int", { name: "acceptedsum", nullable: true })
+  acceptedsum: number | null;
+
+
   @Column("int", { name: "rejected_qty", nullable: true })
   rejectedQty: number | null;
+
+  @Column("int", { name: "rejectesum", nullable: true })
+  rejectesum: number | null;
+
+  @Column("int", { name: "closing", nullable: true })
+  closing: number | null;
+
 
   @Column("int", { name: "outstanding", nullable: true })
   outstanding: number | null;
@@ -74,8 +85,17 @@ export class Rawmaterialinspection001wb {
   @Column("int", { name: "cuaccepted_qty", nullable: true })
   cuacceptedQty: number | null;
 
+  @Column("int", { name: "cucolsing", nullable: true })
+  cucolsing: number | null;
+
+  @Column("int", { name: "cuacceptedsum", nullable: true })
+  cuacceptedsum: number | null;
+
   @Column("int", { name: "curejected_qty", nullable: true })
   curejectedQty: number | null;
+  
+  @Column("int", { name: "curejectesum", nullable: true })
+  curejectesum: number | null;
 
   @Column("int", { name: "cuoutstanding", nullable: true })
   cuoutstanding: number | null;
@@ -97,6 +117,16 @@ export class Rawmaterialinspection001wb {
 
   @Column("int", { name: "cptaccepted_qty", nullable: true })
   cptacceptedQty: number | null;
+
+  @Column("int", { name: "cptcolsing", nullable: true })
+  cptcolsing: number | null;
+
+  @Column("int", { name: "cptacceptedsum", nullable: true })
+  cptacceptedsum: number | null;
+
+ 
+  @Column("int", { name: "cptrejectesum", nullable: true })
+  cptrejectesum: number | null;
 
   @Column("int", { name: "cptrejected_qty", nullable: true })
   cptrejectedQty: number | null;
@@ -121,6 +151,15 @@ export class Rawmaterialinspection001wb {
 
   @Column("int", { name: "prtaccepted_qty", nullable: true })
   prtacceptedQty: number | null;
+
+  @Column("int", { name: "prtcolsing", nullable: true })
+  prtcolsing: number | null;
+
+  @Column("int", { name: "prtacceptedsum", nullable: true })
+  prtacceptedsum: number | null;
+
+  @Column("int", { name: "prtrejectesum", nullable: true })
+  prtrejectesum: number | null;
 
   @Column("int", { name: "prtrejected_qty", nullable: true })
   prtrejectedQty: number | null;
@@ -229,6 +268,22 @@ export class Rawmaterialinspection001wb {
     this.cuacceptedQty = rawmaterialinspectionDTO.cuacceptedQty;
     this.curejectedQty = rawmaterialinspectionDTO.curejectedQty;
     this.cuoutstanding = rawmaterialinspectionDTO.cuoutstanding;
+    this.closing = rawmaterialinspectionDTO.closing;
+    
+    this.acceptedsum = rawmaterialinspectionDTO.acceptedsum;
+    this.cuacceptedsum = rawmaterialinspectionDTO.cuacceptedsum;
+    this.cptacceptedsum = rawmaterialinspectionDTO.cptacceptedsum;
+    this.prtacceptedsum = rawmaterialinspectionDTO.prtacceptedsum;
+    this.cptcolsing = rawmaterialinspectionDTO.cptcolsing;
+    this.cucolsing = rawmaterialinspectionDTO.cucolsing;
+    this.prtcolsing = rawmaterialinspectionDTO.prtcolsing;
+
+    this.rejectesum = rawmaterialinspectionDTO.rejectesum;
+    this.curejectesum = rawmaterialinspectionDTO.curejectesum;
+    this.cptrejectesum = rawmaterialinspectionDTO.cptrejectesum;
+    this.prtrejectesum = rawmaterialinspectionDTO.prtrejectesum;
+
+
 
     this.insertUser = rawmaterialinspectionDTO.insertUser;
     this.insertDatetime = rawmaterialinspectionDTO.insertDatetime;
