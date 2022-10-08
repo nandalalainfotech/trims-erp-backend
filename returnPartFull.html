@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            text-align: center;
+        }
+
+        .table-cell {
+            position: relative;
+        }
+
+        table {
+            border-spacing: 0;
+        }
+
+        
+    </style>
+</head>
+
+<body>
+    <table style="border:1px solid black;width: 100%; margin-top: 10px; font-size: 0.8em;">
+        <tr>
+            <th colspan="1" rowspan="4"
+                style="vertical-align : middle;text-align:center;width: 20px;border-right: 1px solid black;">TRIMS</th>
+
+            <th colspan="11" rowspan="2" style="text-align:center;width: 60%;color:red;">
+                SRINIVASA ENTERPRISES</th>
+
+            <th colspan="2" style="font-size: small;width: 25%;text-align:left;">FormatNo.SE/PRD/D01</th>
+        </tr>
+
+        <tr>
+            <th colspan="2" style="font-size: small;width: 25%;text-align:left;">Issue Date:</th>
+        </tr>
+
+        <tr>
+            <th colspan="11" rowspan="2" style="text-align:center;color:blue;">RETURN STOCK ITEM DETAILS</th>
+            <th colspan="2" style="font-size: small;width: 25%;text-align:left;">Rev.No.00</th>
+        </tr>
+        <tr>
+            <th colspan="2" style="font-size: small;width: 25%;text-align:left;">Rev Date:</th>
+        </tr>
+
+
+        <tr>
+            <th colspan="1">Part Code</th>
+            <th colspan="1">Dispatch date</th>
+            <th colspan="2">Time</th>
+            <th colspan="2">Paid Amount</th>
+            <th colspan="2">Mode of Dispatch</th>
+            <th colspan="1">Vehicle No</th>
+            <th colspan="1">Mobile No</th>
+            <th colspan="1">Person Name</th>
+            <th colspan="1">Status</th>
+            <th colspan="1">Reference ID No</th>
+            <th colspan="1">Rejected Quantity</th>
+        </tr>
+
+        {{#each stockarray}}
+
+        <tr>
+            {{#ifpartnumber 'partnumber'}}
+            <th colspan="1">{{this.partnumber}}</th>
+            {{/ifpartnumber}}
+            
+            <th colspan="1">{{this.prtdate}}</th>
+            <th colspan="2">{{this.prttime}}</th>
+            <th colspan="2">{{this.prtpaidamount}}</th>
+            <th colspan="2">{{this.prtdispatch}}</th>
+            <th colspan="1">{{this.prtvichleno}}</th>
+            <th colspan="1">{{this.prtmobilenumber}}</th>
+            <th colspan="1">{{this.prtpersonname}}</th>
+            <th colspan="1">{{this.prtstatus}}</th>
+            <th colspan="1">{{this.prtreferenceid}}</th>
+            <th colspan="1">{{this.prtrejectitems}}</th>
+        </tr>
+
+        {{/each}} 
+
+        <tr>           
+            
+            <td colspan="13" style="text-align:left;font-size: 12px;height:30px;">Prepared by: </th>
+            <td colspan="2" style="text-align:left;font-size: 12px;height:30px;">Authorised Signatory: </th>
+        </tr>
+
+        
+    </table>
+</body>
+
+</html>

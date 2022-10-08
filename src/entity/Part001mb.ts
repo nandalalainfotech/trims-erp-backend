@@ -90,11 +90,6 @@ export class Part001mb {
   )
   materialreceiveditem001wbs: Materialreceiveditem001wb[];
 
-  @OneToMany(
-    () => Returnstock001wb,
-    (returnstock001wb) => returnstock001wb.partnumber2
-  )
-  returnstock001wbs: Returnstock001wb[];
 
 
   @OneToMany(() => Partitem001wb, (partitem001wb) => partitem001wb.prtcode2)

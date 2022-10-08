@@ -53,26 +53,26 @@ export class MaterialmomentsService {
         childpart = await this.rawmaterialinspectionRepository.findOne({ where: { slNo: materialmomentsDTO.childslno } });
         Parts = await this.rawmaterialinspectionRepository.findOne({ where: { slNo: materialmomentsDTO.prtslno } });
 
-        if (materialmomentsDTO.itemslno ? (Rawmaterial.acceptedQty > materialmoments001wb.qunty && Rawmaterial.acceptedQty > 0) : false) {
-            // Rawmaterial.opening = Rawmaterial.acceptedQty - materialmoments001wb.qunty
-            // Rawmaterial.closing = Rawmaterial.acceptedQty - materialmoments001wb.qunty
-            // Rawmaterial.acceptedQty = Rawmaterial.acceptedQty - materialmoments001wb.qunty;
-            // console.log("  Rawmaterial.closing",Rawmaterial.opening);
-            
+        if (materialmomentsDTO.itemslno ? (Rawmaterial.acceptedsum > materialmoments001wb.qunty && Rawmaterial.acceptedsum > 0) : false) {
+            Rawmaterial.closing = Rawmaterial.acceptedsum - materialmoments001wb.qunty
+            Rawmaterial.acceptedsum = Rawmaterial.acceptedsum - materialmoments001wb.qunty;
             await this.rawmaterialinspectionRepository.update({ slNo: materialmomentsDTO.itemslno }, Rawmaterial);
             return this.materialmomentsRepository.save(materialmoments001wb);
-        } else if (materialmomentsDTO.consumslno ? (consumableitem.cuacceptedQty > materialmoments001wb.cuqunty && consumableitem.cuacceptedQty > 0) : false) {
-            consumableitem.cuacceptedQty = consumableitem.cuacceptedQty - materialmoments001wb.cuqunty;
+        } else if (materialmomentsDTO.consumslno ? (consumableitem.cuacceptedsum > materialmoments001wb.cuqunty && consumableitem.cuacceptedsum > 0) : false) {
+            consumableitem.cucolsing = consumableitem.cuacceptedsum - materialmoments001wb.cuqunty;
+            consumableitem.cuacceptedsum = consumableitem.cuacceptedsum - materialmoments001wb.cuqunty;
             await this.rawmaterialinspectionRepository.update({ slNo: materialmomentsDTO.consumslno }, consumableitem);
             return this.materialmomentsRepository.save(materialmoments001wb);
         }
-        else if (materialmomentsDTO.childslno ? (childpart.cptacceptedQty > materialmoments001wb.cptqunty && childpart.cptacceptedQty > 0) : false) {
-            childpart.cptacceptedQty = childpart.cptacceptedQty - materialmoments001wb.cptqunty;
+        else if (materialmomentsDTO.childslno ? (childpart.cptacceptedsum > materialmoments001wb.cptqunty && childpart.cptacceptedsum > 0) : false) {
+            childpart.cptcolsing = childpart.cptacceptedsum - materialmoments001wb.cptqunty;
+            childpart.cptacceptedsum = childpart.cptacceptedsum - materialmoments001wb.cptqunty;
             await this.rawmaterialinspectionRepository.update({ slNo: materialmomentsDTO.childslno }, childpart);
             return this.materialmomentsRepository.save(materialmoments001wb);
         }
-        else if (materialmomentsDTO.prtslno ? (Parts.prtacceptedQty > materialmoments001wb.prtqunty && Parts.prtacceptedQty > 0) : false) {
-            Parts.prtacceptedQty = Parts.prtacceptedQty - materialmoments001wb.prtqunty;
+        else if (materialmomentsDTO.prtslno ? (Parts.prtacceptedsum > materialmoments001wb.prtqunty && Parts.prtacceptedsum > 0) : false) {
+            Parts.prtcolsing = Parts.prtacceptedsum - materialmoments001wb.prtqunty;
+            Parts.prtacceptedsum = Parts.prtacceptedsum - materialmoments001wb.prtqunty;
             await this.rawmaterialinspectionRepository.update({ slNo: materialmomentsDTO.prtslno }, Parts);
             return this.materialmomentsRepository.save(materialmoments001wb);
         } else {
@@ -103,25 +103,28 @@ export class MaterialmomentsService {
         await this.materialmomentsRepository.delete(id);
     }
 
-    async downloaditemPdf(unitslno:any,@Req() request: Request, @Res() response: Response) {
+    async downloaditemPdf(unitslno: any, @Req() request: Request, @Res() response: Response) {
 
-        let matmoment = await this.materialmomentsRepository.find({where:{unitslno:unitslno},
+        let matmoment = await this.materialmomentsRepository.find({
+            where: { unitslno: unitslno },
         });
 
-        let ordeitem = await this.orderItemsRepository.find();
-        let materialitem = await this.materialreceiveditemRepository.find();
+        let returnRawmaterial = await this.rawmaterialinspectionRepository.find({
+            relations: ["itemcode2", "cucode2", "cptcode2", "prtcode2"],
+            where: {  unitslno: unitslno },
+        })
+          
 
 
         var fs = require('fs');
         var pdf = require('dynamic-html-pdf');
         var html = fs.readFileSync('matMomentitem.html', 'utf8');
 
-        pdf.registerHelper('ifitemslno', function (itemslno, options ) {
+        pdf.registerHelper('ifitemslno', function (itemslno, options) {
             if (this.itemslno) {
-                this.matitemslno =  this.itemslno?materialitem.find(x => x.slNo === this.itemslno)?.itemcode: null; 
-                this.itemslno =  this.matitemslno?ordeitem.find(x => x.slNo === this.matitemslno)?.itemcode: null;          
-                return options.fn(this,  this.itemslno);
-              }else{
+                this.itemslno = this.itemslno ? returnRawmaterial.find(x => x.slNo === this.itemslno)?.itemcode2.itemcode : null;
+                return options.fn(this, this.itemslno);
+            } else {
                 return options.inverse(this);
               }
         })
@@ -162,26 +165,30 @@ export class MaterialmomentsService {
 
     
 
-    async downloadconsumablePdf(unitslno:any,@Req() request: Request, @Res() response: Response) {
+    async downloadconsumablePdf(unitslno: any, @Req() request: Request, @Res() response: Response) {
 
-        let matmoment = await this.materialmomentsRepository.find({where:{unitslno:unitslno},
+        let matmoment = await this.materialmomentsRepository.find({
+            where: { unitslno: unitslno },
         });
 
 
         let consumableitem = await this.consumbleRepository.find();
         let materialitem = await this.materialreceiveditemRepository.find();
-    
+
+        let returnRawmaterial = await this.rawmaterialinspectionRepository.find({
+            relations: ["itemcode2", "cucode2", "cptcode2", "prtcode2"],
+            where: {  unitslno: unitslno },
+        })
 
         var fs = require('fs');
         var pdf = require('dynamic-html-pdf');
         var html = fs.readFileSync('matMomentcuItem.html', 'utf8');
 
-        pdf.registerHelper('ifconsumslno', function (consumslno, options ) {
+        pdf.registerHelper('ifconsumslno', function (consumslno, options) {
             if (this.consumslno) {
-                this.matitemslno =  this.consumslno?materialitem.find(x => x.slNo === this.consumslno)?.cucode: null; 
-                this.consumslno =  this.matitemslno?consumableitem.find(x => x.slNo === this.matitemslno)?.consmno: null;          
-                return options.fn(this, this.consumslno); 
-              }else{
+                this.consumslno = this.consumslno ? returnRawmaterial.find(x => x.slNo === this.consumslno)?.cucode2.consmno : null;
+                return options.fn(this, this.consumslno);
+            } else {
                 return options.inverse(this);
               } 
         })
@@ -220,25 +227,29 @@ export class MaterialmomentsService {
 
     }
 
-    async downloadchildPartPdf(unitslno:any,@Req() request: Request, @Res() response: Response) {
+    async downloadchildPartPdf(unitslno: any, @Req() request: Request, @Res() response: Response) {
 
 
-        let matmoment = await this.materialmomentsRepository.find({where:{unitslno:unitslno},
+        let matmoment = await this.materialmomentsRepository.find({
+            where: { unitslno: unitslno },
         });
 
         let childpart = await this.childPartRepository.find();
         let materialitem = await this.materialreceiveditemRepository.find();
 
+        let returnRawmaterial = await this.rawmaterialinspectionRepository.find({
+            relations: ["itemcode2", "cucode2", "cptcode2", "prtcode2"],
+            where: {  unitslno: unitslno },
+        })
 
 
         var fs = require('fs');
         var pdf = require('dynamic-html-pdf');
         var html = fs.readFileSync('matMomentCpart.html', 'utf8');
 
-        pdf.registerHelper('ifchildslno', function (childslno, options ) {
+        pdf.registerHelper('ifchildslno', function (childslno, options) {
             if (this.childslno) {
-                this.matitemslno =  this.childslno?materialitem.find(x => x.slNo === this.childslno)?.cptcode: null; 
-                this.childslno =  this.matitemslno?childpart.find(x => x.slNo === this.matitemslno)?.cpartno: null;            
+                this.childslno = this.childslno ? returnRawmaterial.find(x => x.slNo === this.childslno)?.cptcode2.cpartno : null;
                 return options.fn(this, this.childslno);
               }else{
                 return options.inverse(this);
@@ -279,24 +290,29 @@ export class MaterialmomentsService {
 
     }
 
-    async downloadPartPdf(unitslno:any,@Req() request: Request, @Res() response: Response) {
+    async downloadPartPdf(unitslno: any, @Req() request: Request, @Res() response: Response) {
 
-        let matmoment = await this.materialmomentsRepository.find({where:{unitslno:unitslno},
+        let matmoment = await this.materialmomentsRepository.find({
+            where: { unitslno: unitslno },
         });
 
         let part = await this.PartRepository.find();
         let materialitem = await this.materialreceiveditemRepository.find();
 
+        let returnRawmaterial = await this.rawmaterialinspectionRepository.find({
+            relations: ["itemcode2", "cucode2", "cptcode2", "prtcode2"],
+            where: {  unitslno: unitslno },
+        })
+
         var fs = require('fs');
         var pdf = require('dynamic-html-pdf');
         var html = fs.readFileSync('matMomentPart.html', 'utf8');
 
-        pdf.registerHelper('ifprtslno', function (prtslno, options ) {
+        pdf.registerHelper('ifprtslno', function (prtslno, options) {
             if (this.prtslno) {
-                this.matitemslno =  this.prtslno?materialitem.find(x => x.slNo === this.prtslno)?.prtcode: null; 
-                this.prtslno =  this.matitemslno?part.find(x => x.slNo === this.matitemslno)?.partno: null;       
-                return options.fn(this,  this.prtslno);
-              }else{
+                this.prtslno = this.prtslno ? returnRawmaterial.find(x => x.slNo === this.prtslno)?.prtcode2.partno : null;
+                return options.fn(this, this.prtslno);
+            } else {
                 return options.inverse(this);
               }
         })
@@ -345,11 +361,18 @@ export class MaterialmomentsService {
 
     async downloaditemExcel(unitslno:any,@Req() request: Request, @Res() response: Response) {
 
-        let matmoment = await this.materialmomentsRepository.find({where:{unitslno:unitslno},
+        let matmoment = await this.materialmomentsRepository.find({
+            where: { unitslno: unitslno },
         })
 
         let ordeitem = await this.orderItemsRepository.find();
         let materialitem = await this.materialreceiveditemRepository.find();
+
+        
+        let returnRawmaterial = await this.rawmaterialinspectionRepository.find({
+            relations: ["itemcode2", "cucode2", "cptcode2", "prtcode2"],
+            where: {  unitslno: unitslno },
+        })
 
             let workbook = new excel.Workbook();
             let worksheet = workbook.addWorksheet('Child Part Details_report'); // creating worksheet
@@ -405,9 +428,9 @@ export class MaterialmomentsService {
             };
             worksheet.getCell('B1:F2').alignment = { vertical: 'middle', horizontal: 'center' };
 
-            worksheet.mergeCells('B3:F4');
-            worksheet.getCell('B3:F4').value = "MATERIAL MOMENT ITEM DETAILS";
-            worksheet.getCell('B3:F4').fgColor = { argb: '00b050' };
+        worksheet.mergeCells('B3:F4');
+        worksheet.getCell('B3:F4').value = "MATERIAL MOVEMENTS ITEM DETAILS";
+        worksheet.getCell('B3:F4').fgColor = { argb: '00b050' };
 
             worksheet.getCell('B3:F4').font = {
                 size: 11,
@@ -488,12 +511,10 @@ export class MaterialmomentsService {
                 worksheet.mergeCells('A' + temp);
                 worksheet.getCell('A' + temp).value = orderitemarray[i].slNo;
 
-                let matitemslno: Materialreceiveditem001wb;
+           
 
-                matitemslno = materialitem.find(x => x.slNo === orderitemarray[i].itemslno);
-
-                worksheet.mergeCells('B' + temp);
-                worksheet.getCell('B' + temp).value = matitemslno.itemcode ? ordeitem.find(x => x.slNo === matitemslno.itemcode)?.itemcode : "";
+            worksheet.mergeCells('B' + temp);
+            worksheet.getCell('B' + temp).value = orderitemarray[i].itemslno ? returnRawmaterial.find(x => x.slNo === orderitemarray[i].itemslno)?.itemcode2.itemcode : "";
 
                 worksheet.mergeCells('C' + temp);
                 worksheet.getCell('C' + temp).value = orderitemarray[i].qunty;
@@ -521,12 +542,18 @@ export class MaterialmomentsService {
 
     async downloadconsumableExcel(unitslno:any,@Req() request: Request, @Res() response: Response) {
 
-        let matmoment = await this.materialmomentsRepository.find({where:{unitslno:unitslno},
+        let matmoment = await this.materialmomentsRepository.find({
+            where: { unitslno: unitslno },
         });
 
-        
-        let consumableitem = await this.consumbleRepository.find();
+
         let materialitem = await this.materialreceiveditemRepository.find();
+
+        let returnRawmaterial = await this.rawmaterialinspectionRepository.find({
+            relations: ["itemcode2", "cucode2", "cptcode2", "prtcode2"],
+            where: {  unitslno: unitslno },
+        })
+
 
         let workbook = new excel.Workbook();
         let worksheet = workbook.addWorksheet('Child Part Details_report'); // creating worksheet
@@ -586,7 +613,7 @@ export class MaterialmomentsService {
         worksheet.getCell('B1:F2').alignment = { vertical: 'middle', horizontal: 'center' };
 
         worksheet.mergeCells('B3:F4');
-        worksheet.getCell('B3:F4').value = "MATERIAL MOMENTS CONSUMABLE ITEM DETAILS";
+        worksheet.getCell('B3:F4').value = "MATERIAL MOVEMENTS CONSUMABLE ITEM DETAILS";
         worksheet.getCell('B3:F4').fgColor = { argb: '00b050' };
 
         worksheet.getCell('B3:F4').font = {
@@ -667,12 +694,10 @@ export class MaterialmomentsService {
             worksheet.mergeCells('A' + temp);
             worksheet.getCell('A' + temp).value = orderitemarray[i].slNo;
 
-            let matitemslno: Materialreceiveditem001wb;
-
-            matitemslno = materialitem.find(x => x.slNo === orderitemarray[i].consumslno);
+  
 
             worksheet.mergeCells('B' + temp);
-            worksheet.getCell('B' + temp).value = matitemslno.cucode ? consumableitem.find(x => x.slNo === matitemslno.cucode)?.consmno : "";
+            worksheet.getCell('B' + temp).value = orderitemarray[i].consumslno ? returnRawmaterial.find(x => x.slNo === orderitemarray[i].consumslno)?.cucode2.consmno : "";
 
             worksheet.mergeCells('C' + temp);
             worksheet.getCell('C' + temp).value = orderitemarray[i].cuqunty;
@@ -702,11 +727,17 @@ export class MaterialmomentsService {
 
 async downloadchildPartExcel(unitslno:any,@Req() request: Request, @Res() response: Response) {
 
-    let matmoment = await this.materialmomentsRepository.find({where:{unitslno:unitslno},
-    });
+        let matmoment = await this.materialmomentsRepository.find({
+            where: { unitslno: unitslno },
+        });
 
-    let childpart = await this.childPartRepository.find();
-    let materialitem = await this.materialreceiveditemRepository.find();
+        let childpart = await this.childPartRepository.find();
+        let materialitem = await this.materialreceiveditemRepository.find();
+
+        let returnRawmaterial = await this.rawmaterialinspectionRepository.find({
+            relations: ["itemcode2", "cucode2", "cptcode2", "prtcode2"],
+            where: {  unitslno: unitslno },
+        })
 
 
     let workbook = new excel.Workbook();
@@ -766,9 +797,9 @@ async downloadchildPartExcel(unitslno:any,@Req() request: Request, @Res() respon
     };
     worksheet.getCell('B1:F2').alignment = { vertical: 'middle', horizontal: 'center' };
 
-    worksheet.mergeCells('B3:F4');
-    worksheet.getCell('B3:F4').value = "MATERIAL MOMENTS CHILD PART DETAILS";
-    worksheet.getCell('B3:F4').fgColor = { argb: '00b050' };
+        worksheet.mergeCells('B3:F4');
+        worksheet.getCell('B3:F4').value = "MATERIAL MOVEMENTS CHILD PART DETAILS";
+        worksheet.getCell('B3:F4').fgColor = { argb: '00b050' };
 
     worksheet.getCell('B3:F4').font = {
         size: 11,
@@ -849,45 +880,47 @@ async downloadchildPartExcel(unitslno:any,@Req() request: Request, @Res() respon
                     worksheet.mergeCells('A' + temp);
                     worksheet.getCell('A' + temp).value = orderitemarray[i].slNo;
 
-                    let matitemslno: Materialreceiveditem001wb;
 
-                    matitemslno = materialitem.find(x => x.slNo === orderitemarray[i].childslno);
-    
-                    worksheet.mergeCells('B' + temp);
-                    worksheet.getCell('B' + temp).value = matitemslno.cptcode ? childpart.find(x => x.slNo === matitemslno.cptcode)?.cpartno : "";
-    
-                    worksheet.mergeCells('C' + temp);
-                    worksheet.getCell('C' + temp).value = orderitemarray[i].cptqunty;
-    
-                    worksheet.mergeCells('D' + temp);
-                    worksheet.getCell('D' + temp).value = orderitemarray[i].cptdepartment;
-    
-                    worksheet.mergeCells('E' + temp);
-                    worksheet.getCell('E' + temp).value = orderitemarray[i].cptdate;
-    
-                    worksheet.mergeCells('F' + temp);
-                    worksheet.getCell('F' + temp).value = orderitemarray[i].cptshift;
-    
-                    worksheet.mergeCells('G' + temp);
-                    worksheet.getCell('G' + temp).value = orderitemarray[i].cpttime;
-            }
-               
-return workbook.xlsx.write(response).then(function () {
-    response['status'](200).end();
-});    
+            worksheet.mergeCells('B' + temp);
+            worksheet.getCell('B' + temp).value = orderitemarray[i].childslno ? returnRawmaterial.find(x => x.slNo === orderitemarray[i].childslno)?.cptcode2.cpartno : "";
+
+            worksheet.mergeCells('C' + temp);
+            worksheet.getCell('C' + temp).value = orderitemarray[i].cptqunty;
+
+            worksheet.mergeCells('D' + temp);
+            worksheet.getCell('D' + temp).value = orderitemarray[i].cptdepartment;
+
+            worksheet.mergeCells('E' + temp);
+            worksheet.getCell('E' + temp).value = orderitemarray[i].cptdate;
+
+            worksheet.mergeCells('F' + temp);
+            worksheet.getCell('F' + temp).value = orderitemarray[i].cptshift;
+
+            worksheet.mergeCells('G' + temp);
+            worksheet.getCell('G' + temp).value = orderitemarray[i].cpttime;
+        }
+
+        return workbook.xlsx.write(response).then(function () {
+            response['status'](200).end();
+        });
 
 
 }
 
 // -----------------------------Part-Excel----------------------
 
-async downloadPartExcel(unitslno:any,@Req() request: Request, @Res() response: Response) {
+    async downloadPartExcel(unitslno: any, @Req() request: Request, @Res() response: Response) {
 
-    let matmoment = await this.materialmomentsRepository.find({where:{unitslno:unitslno},
-    });
+        let matmoment = await this.materialmomentsRepository.find({
+            where: { unitslno: unitslno },
+        });
 
-    let part = await this.PartRepository.find();
-    let materialitem = await this.materialreceiveditemRepository.find();
+       
+        let returnRawmaterial = await this.rawmaterialinspectionRepository.find({
+            relations: ["itemcode2", "cucode2", "cptcode2", "prtcode2"],
+            where: {  unitslno: unitslno },
+        })
+
 
     let workbook = new excel.Workbook();
     let worksheet = workbook.addWorksheet('Child Part Details_report'); // creating worksheet
@@ -942,9 +975,9 @@ async downloadPartExcel(unitslno:any,@Req() request: Request, @Res() response: R
     };
     worksheet.getCell('B1:F2').alignment = { vertical: 'middle', horizontal: 'center' };
 
-    worksheet.mergeCells('B3:F4');
-    worksheet.getCell('B3:F4').value = "MATERIAL MOMENTS PART DETAILS";
-    worksheet.getCell('B3:F4').fgColor = { argb: '00b050' };
+        worksheet.mergeCells('B3:F4');
+        worksheet.getCell('B3:F4').value = "MATERIAL MOVEMENTS PART DETAILS";
+        worksheet.getCell('B3:F4').fgColor = { argb: '00b050' };
 
     worksheet.getCell('B3:F4').font = {
         size: 11,
@@ -1026,32 +1059,28 @@ async downloadPartExcel(unitslno:any,@Req() request: Request, @Res() response: R
                     worksheet.mergeCells('A' + temp);
                     worksheet.getCell('A' + temp).value = orderitemarray[i].slNo;
 
-                    let matitemslno: Materialreceiveditem001wb;
+            worksheet.mergeCells('B' + temp);
+            worksheet.getCell('B' + temp).value = orderitemarray[i].prtslno ? returnRawmaterial.find(x => x.slNo === orderitemarray[i].prtslno)?.prtcode2.partno : "";
 
-                    matitemslno = materialitem.find(x => x.slNo === orderitemarray[i].prtslno);
-    
-                    worksheet.mergeCells('B' + temp);
-                    worksheet.getCell('B' + temp).value = matitemslno.prtcode ? part.find(x => x.slNo === matitemslno.prtcode)?.partno : "";
-    
-                    worksheet.mergeCells('C' + temp);
-                    worksheet.getCell('C' + temp).value = orderitemarray[i].prtqunty;
-    
-                    worksheet.mergeCells('D' + temp);
-                    worksheet.getCell('D' + temp).value = orderitemarray[i].prtdepartment;
-    
-                    worksheet.mergeCells('E' + temp);
-                    worksheet.getCell('E' + temp).value = orderitemarray[i].prtdate;
-    
-                    worksheet.mergeCells('F' + temp);
-                    worksheet.getCell('F' + temp).value = orderitemarray[i].prtshift;
-    
-                    worksheet.mergeCells('G' + temp);
-                    worksheet.getCell('G' + temp).value = orderitemarray[i].prttime;
-               
-            }
-return workbook.xlsx.write(response).then(function () {
-    response['status'](200).end();
-});    
+            worksheet.mergeCells('C' + temp);
+            worksheet.getCell('C' + temp).value = orderitemarray[i].prtqunty;
+
+            worksheet.mergeCells('D' + temp);
+            worksheet.getCell('D' + temp).value = orderitemarray[i].prtdepartment;
+
+            worksheet.mergeCells('E' + temp);
+            worksheet.getCell('E' + temp).value = orderitemarray[i].prtdate;
+
+            worksheet.mergeCells('F' + temp);
+            worksheet.getCell('F' + temp).value = orderitemarray[i].prtshift;
+
+            worksheet.mergeCells('G' + temp);
+            worksheet.getCell('G' + temp).value = orderitemarray[i].prttime;
+
+        }
+        return workbook.xlsx.write(response).then(function () {
+            response['status'](200).end();
+        });
 
 
 }

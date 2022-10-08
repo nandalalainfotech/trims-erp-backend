@@ -5,7 +5,7 @@ export class RawmaterialinspectionDTO {
   slNo: number;
   unitslno: number;
   rawmaterialslno: number;
-  itemcode: number;
+  itemcode: number | any;
   itemname: string;
   descrip: string;
   cucode: number;
@@ -49,6 +49,18 @@ export class RawmaterialinspectionDTO {
   orderitemSlno: any;
   
   observationsitems001wbs:  Observationsitems001wb[] = [];
+  closing: number;
+  cucolsing: number;
+  cptcolsing: number;
+  prtcolsing: number;
+  acceptedsum: number;
+  cuacceptedsum: number;
+  cptacceptedsum: number;
+  prtacceptedsum: number;
+  rejectesum: number;
+  curejectesum: number;
+  cptrejectesum: number;
+  prtrejectesum: number;
 
   setProperties(rawmaterialinspection001wb: Rawmaterialinspection001wb) {
     this.slNo = rawmaterialinspection001wb.slNo;

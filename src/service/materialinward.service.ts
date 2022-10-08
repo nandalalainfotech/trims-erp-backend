@@ -156,7 +156,7 @@ export class MaterialinwardService {
   }
 
   async findAll(unitslno: any): Promise<Materialinward001wb[]> {
-    return this.MaterialinwardRepository.find({ relations: ["materialreceiveditem001wbs"],
+    return this.MaterialinwardRepository.find({ relations: ["materialreceiveditem001wbs","purchseSlno2"],
       order: { slNo: "DESC" },
       where: { unitslno: unitslno },
     });

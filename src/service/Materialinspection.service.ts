@@ -134,50 +134,165 @@ export class MaterialinspectionService {
         
         }
      
-            const rawmaterialinspection001wb = new Rawmaterialinspection001wb();
-            rawmaterialinspection001wb.rawmaterialslno2 = materialinspectionDTO.Rawmaterialinspection[i].rawmaterialslno2;
-            rawmaterialinspection001wb.itemcode = materialinspectionDTO.Rawmaterialinspection[i].itemcode;
-            rawmaterialinspection001wb.itemname = materialinspectionDTO.Rawmaterialinspection[i].itemname;
-            rawmaterialinspection001wb.descrip = materialinspectionDTO.Rawmaterialinspection[i].descrip;
-            rawmaterialinspection001wb.cucode = materialinspectionDTO.Rawmaterialinspection[i].cucode;
-            rawmaterialinspection001wb.cuname = materialinspectionDTO.Rawmaterialinspection[i].cuname;
-            rawmaterialinspection001wb.cudescrip = materialinspectionDTO.Rawmaterialinspection[i].cudescrip;
-            rawmaterialinspection001wb.cptcode = materialinspectionDTO.Rawmaterialinspection[i].cptcode;
-            rawmaterialinspection001wb.cptname = materialinspectionDTO.Rawmaterialinspection[i].cptname;
-            rawmaterialinspection001wb.cptdescrip = materialinspectionDTO.Rawmaterialinspection[i].cptdescrip;
-            rawmaterialinspection001wb.prtcode = materialinspectionDTO.Rawmaterialinspection[i].prtcode;
-            rawmaterialinspection001wb.prtname = materialinspectionDTO.Rawmaterialinspection[i].prtname;
-            rawmaterialinspection001wb.prtdescrip = materialinspectionDTO.Rawmaterialinspection[i].prtdescrip;
-            rawmaterialinspection001wb.unitslno = materialinspectionDTO.unitslno;
-
-            rawmaterialinspection001wb.prtqunty = materialinspectionDTO.Rawmaterialinspection[i].prtqunty;
-            rawmaterialinspection001wb.cptqunty = materialinspectionDTO.Rawmaterialinspection[i].cptqunty;
-            rawmaterialinspection001wb.cuqunty = materialinspectionDTO.Rawmaterialinspection[i].cuqunty;
-            rawmaterialinspection001wb.qunty = materialinspectionDTO.Rawmaterialinspection[i].qunty;
-
-            rawmaterialinspection001wb.acceptedQty = materialinspectionDTO.Rawmaterialinspection[i].acceptedQty;
-            rawmaterialinspection001wb.receivedQty = materialinspectionDTO.Rawmaterialinspection[i].receivedQty;
-            rawmaterialinspection001wb.rejectedQty = materialinspectionDTO.Rawmaterialinspection[i].rejectedQty;
-            rawmaterialinspection001wb.outstanding = materialinspectionDTO.Rawmaterialinspection[i].outstanding;
-
-
-            rawmaterialinspection001wb.cureceivedQty = materialinspectionDTO.Rawmaterialinspection[i].cureceivedQty;
-            rawmaterialinspection001wb.cuacceptedQty = materialinspectionDTO.Rawmaterialinspection[i].cuacceptedQty;
-            rawmaterialinspection001wb.curejectedQty = materialinspectionDTO.Rawmaterialinspection[i].curejectedQty;
-            rawmaterialinspection001wb.cuoutstanding = materialinspectionDTO.Rawmaterialinspection[i].cuoutstanding;
-
-            rawmaterialinspection001wb.cptreceivedQty = materialinspectionDTO.Rawmaterialinspection[i].cptreceivedQty;
-            rawmaterialinspection001wb.cptacceptedQty = materialinspectionDTO.Rawmaterialinspection[i].cptacceptedQty;
-            rawmaterialinspection001wb.cptrejectedQty = materialinspectionDTO.Rawmaterialinspection[i].cptrejectedQty;
-            rawmaterialinspection001wb.cptoutstanding = materialinspectionDTO.Rawmaterialinspection[i].cptoutstanding;
-
-            rawmaterialinspection001wb.prtreceivedQty = materialinspectionDTO.Rawmaterialinspection[i].prtreceivedQty;
-            rawmaterialinspection001wb.prtacceptedQty = materialinspectionDTO.Rawmaterialinspection[i].prtacceptedQty;
-            rawmaterialinspection001wb.prtrejectedQty = materialinspectionDTO.Rawmaterialinspection[i].prtrejectedQty;
-            rawmaterialinspection001wb.prtoutstanding = materialinspectionDTO.Rawmaterialinspection[i].prtoutstanding;
-            rawmaterialinspection001wb.unitslno = materialinspectionDTO.unitslno;
-            rawmaterialinspection001wb.insertUser = materialinspectionDTO.insertUser;
-            rawmaterialinspection001wb.insertDatetime = materialinspectionDTO.insertDatetime;
+        let rawmaterialItems: Rawmaterialinspection001wb[] = [];
+        rawmaterialItems = await this.rawmaterialinspectionRepository.createQueryBuilder("rawmaterialinspection001wb")
+          .leftJoinAndSelect("rawmaterialinspection001wb.itemcode2", "itemcode2")
+          .addSelect('rawmaterialinspection001wb.acceptedsum', 'acceptedsum')
+          .addSelect('rawmaterialinspection001wb.rejectesum', 'rejectesum')
+          .where("rawmaterialinspection001wb.itemcode = :itemcode", { itemcode: materialinspectionDTO.Rawmaterialinspection[i].itemcode })
+          .orderBy('rawmaterialinspection001wb.itemcode', 'ASC')
+          .groupBy("rawmaterialinspection001wb.itemcode")
+          .getRawMany();
+  
+        let ordeitem = await this.rawmaterialinspectionRepository.find({ where: { itemcode: materialinspectionDTO.Rawmaterialinspection[i].itemcode } });
+  
+  
+        let consumableitem: Rawmaterialinspection001wb[] = [];
+        consumableitem = await this.rawmaterialinspectionRepository.createQueryBuilder("rawmaterialinspection001wb")
+          .leftJoinAndSelect("rawmaterialinspection001wb.cucode2", "cucode2")
+          .addSelect('rawmaterialinspection001wb.cuacceptedsum', 'cuacceptedsum')
+          .addSelect('rawmaterialinspection001wb.curejectesum', 'curejectesum')
+          .where("rawmaterialinspection001wb.cucode = :cucode", { cucode: materialinspectionDTO.Rawmaterialinspection[i].cucode })
+          .groupBy("rawmaterialinspection001wb.cucode")
+          .getRawMany();
+  
+        let consumbleItems = await this.rawmaterialinspectionRepository.find({ where: { cucode: materialinspectionDTO.Rawmaterialinspection[i].cucode } });
+  
+        let childitem: Rawmaterialinspection001wb[] = [];
+        childitem = await this.rawmaterialinspectionRepository.createQueryBuilder("rawmaterialinspection001wb")
+          .leftJoinAndSelect("rawmaterialinspection001wb.cptcode2", "cptcode2")
+          .addSelect('rawmaterialinspection001wb.cptacceptedsum', 'cptacceptedsum')
+          .addSelect('rawmaterialinspection001wb.cptrejectesum', 'cptrejectesum')
+          .where("rawmaterialinspection001wb.cptcode = :cptcode", { cptcode: materialinspectionDTO.Rawmaterialinspection[i].cptcode })
+          .groupBy("rawmaterialinspection001wb.cptcode")
+          // .groupBy("rawmaterialinspection001wb.prtcode") 
+          .getRawMany();
+  
+  
+          let ChildPartrItems = await this.rawmaterialinspectionRepository.find({ where: { cptcode: materialinspectionDTO.Rawmaterialinspection[i].cptcode } });
+  
+        let partitem: Rawmaterialinspection001wb[] = [];
+        partitem = await this.rawmaterialinspectionRepository.createQueryBuilder("rawmaterialinspection001wb")
+          .leftJoinAndSelect("rawmaterialinspection001wb.prtcode2", "prtcode2")
+          .addSelect('rawmaterialinspection001wb.prtacceptedsum', 'prtacceptedsum')
+          .addSelect('rawmaterialinspection001wb.prtrejectesum', 'prtrejectesum')
+          .where("rawmaterialinspection001wb.prtcode = :prtcode", { prtcode: materialinspectionDTO.Rawmaterialinspection[i].prtcode })
+          .groupBy("rawmaterialinspection001wb.prtcode")
+          .getRawMany();
+  
+          let PartrItems = await this.rawmaterialinspectionRepository.find({ where: { prtcode: materialinspectionDTO.Rawmaterialinspection[i].prtcode } });
+  
+        const rawmaterialinspection001wb = new Rawmaterialinspection001wb();
+  
+        rawmaterialinspection001wb.rawmaterialslno2 = materialinspectionDTO.Rawmaterialinspection[i].rawmaterialslno2;
+        rawmaterialinspection001wb.itemcode = materialinspectionDTO.Rawmaterialinspection[i].itemcode;
+        rawmaterialinspection001wb.itemname = materialinspectionDTO.Rawmaterialinspection[i].itemname;
+        rawmaterialinspection001wb.descrip = materialinspectionDTO.Rawmaterialinspection[i].descrip;
+        rawmaterialinspection001wb.qunty = materialinspectionDTO.Rawmaterialinspection[i].qunty;
+        rawmaterialinspection001wb.acceptedQty = materialinspectionDTO.Rawmaterialinspection[i].acceptedQty;
+        rawmaterialinspection001wb.receivedQty = materialinspectionDTO.Rawmaterialinspection[i].receivedQty;
+        rawmaterialinspection001wb.rejectedQty = materialinspectionDTO.Rawmaterialinspection[i].rejectedQty;
+        rawmaterialinspection001wb.outstanding = materialinspectionDTO.Rawmaterialinspection[i].outstanding;
+       
+        if (ordeitem.length == 0) {
+          rawmaterialinspection001wb.acceptedsum = rawmaterialinspection001wb.acceptedQty
+          rawmaterialinspection001wb.closing = materialinspectionDTO.Rawmaterialinspection[i].closing;
+        }
+        if (ordeitem.length != 0 && rawmaterialinspection001wb.acceptedQty) {
+          rawmaterialinspection001wb.acceptedsum = ordeitem[ordeitem.length - 1].acceptedsum + rawmaterialinspection001wb.acceptedQty;
+          rawmaterialinspection001wb.closing = ordeitem[ordeitem.length - 1].closing;
+        }
+  
+        if (ordeitem.length == 0) {
+          rawmaterialinspection001wb.rejectesum = rawmaterialinspection001wb.rejectedQty
+        }
+        if (ordeitem.length != 0 && rawmaterialinspection001wb.acceptedQty) {
+          rawmaterialinspection001wb.rejectesum = Number(ordeitem[ordeitem.length - 1].rejectesum) + rawmaterialinspection001wb.rejectedQty;
+        }
+  
+        rawmaterialinspection001wb.cucode = materialinspectionDTO.Rawmaterialinspection[i].cucode;
+        rawmaterialinspection001wb.cuname = materialinspectionDTO.Rawmaterialinspection[i].cuname;
+        rawmaterialinspection001wb.cudescrip = materialinspectionDTO.Rawmaterialinspection[i].cudescrip;
+        rawmaterialinspection001wb.cuqunty = materialinspectionDTO.Rawmaterialinspection[i].cuqunty;
+        rawmaterialinspection001wb.cureceivedQty = materialinspectionDTO.Rawmaterialinspection[i].cureceivedQty;
+        rawmaterialinspection001wb.cuacceptedQty = materialinspectionDTO.Rawmaterialinspection[i].cuacceptedQty;
+        rawmaterialinspection001wb.curejectedQty = materialinspectionDTO.Rawmaterialinspection[i].curejectedQty;
+        rawmaterialinspection001wb.cuoutstanding = materialinspectionDTO.Rawmaterialinspection[i].cuoutstanding;
+        
+  
+        // rawmaterialinspection001wb.cuacceptedsum = Number(consumableitem[i].cuacceptedsum) + rawmaterialinspection001wb.cuacceptedQty;
+  
+  
+        if (consumbleItems.length == 0) {
+          rawmaterialinspection001wb.cuacceptedsum = rawmaterialinspection001wb.cuacceptedQty
+          rawmaterialinspection001wb.cucolsing= materialinspectionDTO.Rawmaterialinspection[i].cucolsing
+        }
+        if (consumbleItems.length != 0 && rawmaterialinspection001wb.cuacceptedQty) {
+          rawmaterialinspection001wb.cuacceptedsum = Number(consumbleItems[consumbleItems.length-1].cuacceptedsum) + rawmaterialinspection001wb.cuacceptedQty;
+          rawmaterialinspection001wb.cucolsing = consumbleItems[consumbleItems.length - 1].cucolsing;
+        }
+  
+        if (consumbleItems.length == 0) {
+  
+          rawmaterialinspection001wb.curejectesum = rawmaterialinspection001wb.curejectedQty
+        }
+        if (consumbleItems.length != 0 && rawmaterialinspection001wb.curejectedQty) {
+  
+          rawmaterialinspection001wb.curejectesum = Number(consumbleItems[consumbleItems.length-1].curejectesum) + rawmaterialinspection001wb.curejectedQty;
+        }
+        rawmaterialinspection001wb.cptcode = materialinspectionDTO.Rawmaterialinspection[i].cptcode;
+        rawmaterialinspection001wb.cptname = materialinspectionDTO.Rawmaterialinspection[i].cptname;
+        rawmaterialinspection001wb.cptdescrip = materialinspectionDTO.Rawmaterialinspection[i].cptdescrip;
+        rawmaterialinspection001wb.cptqunty = materialinspectionDTO.Rawmaterialinspection[i].cptqunty;
+        rawmaterialinspection001wb.cptreceivedQty = materialinspectionDTO.Rawmaterialinspection[i].cptreceivedQty;
+        rawmaterialinspection001wb.cptacceptedQty = materialinspectionDTO.Rawmaterialinspection[i].cptacceptedQty;
+        rawmaterialinspection001wb.cptrejectedQty = materialinspectionDTO.Rawmaterialinspection[i].cptrejectedQty;
+        rawmaterialinspection001wb.cptoutstanding = materialinspectionDTO.Rawmaterialinspection[i].cptoutstanding;
+        
+  
+        if (ChildPartrItems.length == 0) {
+          rawmaterialinspection001wb.cptacceptedsum = rawmaterialinspection001wb.cptacceptedQty
+          rawmaterialinspection001wb.cptcolsing= materialinspectionDTO.Rawmaterialinspection[i].cptcolsing;
+        }
+        if (ChildPartrItems.length != 0 && rawmaterialinspection001wb.cptacceptedQty) {
+          rawmaterialinspection001wb.cptacceptedsum = Number(ChildPartrItems[ChildPartrItems.length-1].cptacceptedsum) + rawmaterialinspection001wb.cptacceptedQty;
+          rawmaterialinspection001wb.cptcolsing = ChildPartrItems[ChildPartrItems.length-1].cptcolsing
+        }
+        if (ChildPartrItems.length == 0) {
+          rawmaterialinspection001wb.cptrejectesum = rawmaterialinspection001wb.cptrejectedQty
+        }
+        if (ChildPartrItems.length != 0 && rawmaterialinspection001wb.cptrejectedQty) {
+          rawmaterialinspection001wb.cptrejectesum = Number(ChildPartrItems[ChildPartrItems.length-1].cptrejectesum) + rawmaterialinspection001wb.cptrejectedQty;
+        }
+  
+        rawmaterialinspection001wb.prtcode = materialinspectionDTO.Rawmaterialinspection[i].prtcode;
+        rawmaterialinspection001wb.prtname = materialinspectionDTO.Rawmaterialinspection[i].prtname;
+        rawmaterialinspection001wb.prtdescrip = materialinspectionDTO.Rawmaterialinspection[i].prtdescrip;
+        rawmaterialinspection001wb.prtqunty = materialinspectionDTO.Rawmaterialinspection[i].prtqunty;
+        rawmaterialinspection001wb.prtreceivedQty = materialinspectionDTO.Rawmaterialinspection[i].prtreceivedQty;
+        rawmaterialinspection001wb.prtacceptedQty = materialinspectionDTO.Rawmaterialinspection[i].prtacceptedQty;
+        rawmaterialinspection001wb.prtrejectedQty = materialinspectionDTO.Rawmaterialinspection[i].prtrejectedQty;
+        rawmaterialinspection001wb.prtoutstanding = materialinspectionDTO.Rawmaterialinspection[i].prtoutstanding;
+        
+  
+        if (PartrItems.length == 0) {
+          rawmaterialinspection001wb.prtacceptedsum = rawmaterialinspection001wb.prtacceptedQty;
+          rawmaterialinspection001wb.prtcolsing =materialinspectionDTO.Rawmaterialinspection[i].prtcolsing;
+        }
+        if (PartrItems.length != 0 && rawmaterialinspection001wb.prtacceptedQty) {
+          rawmaterialinspection001wb.prtacceptedsum = Number(PartrItems[PartrItems.length-1].prtacceptedsum) + rawmaterialinspection001wb.prtacceptedQty;
+          rawmaterialinspection001wb.prtcolsing = PartrItems[PartrItems.length-1].prtcolsing;
+        }
+        if (PartrItems.length == 0) {
+          rawmaterialinspection001wb.prtrejectesum = rawmaterialinspection001wb.prtrejectedQty
+        }
+        if (PartrItems.length != 0 && rawmaterialinspection001wb.prtrejectedQty) {
+          rawmaterialinspection001wb.prtrejectesum = Number(PartrItems[PartrItems.length-1].prtrejectesum) + rawmaterialinspection001wb.prtrejectedQty;
+        }
+        rawmaterialinspection001wb.unitslno = materialinspectionDTO.unitslno;
+        rawmaterialinspection001wb.insertUser = materialinspectionDTO.insertUser;
+        rawmaterialinspection001wb.insertUser = materialinspectionDTO.insertUser;
+        rawmaterialinspection001wb.insertDatetime = materialinspectionDTO.insertDatetime;
             rawmaterialinspection001wb.observationsitems001wbs = observationsitems001wbs;
             observationsitems001wbs=[];
           let supcontact =  await this.rawmaterialinspectionRepository.save(rawmaterialinspection001wb);

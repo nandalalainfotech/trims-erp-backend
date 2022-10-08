@@ -89,11 +89,7 @@ export class Consumble001mb {
   )
   materialreceiveditem001wbs: Materialreceiveditem001wb[];
 
-  @OneToMany(
-    () => Returnstock001wb,
-    (returnstock001wb) => returnstock001wb.cuordernumber2
-  )
-  returnstock001wbs: Returnstock001wb[];
+
 
   setProperties(consumbleDTO: ConsumbleDTO) {
     this.slNo = consumbleDTO.slNo;
