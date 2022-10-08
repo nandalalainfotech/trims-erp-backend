@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            /* border-collapse: collapse; */
+            text-align: center;
+        }
+
+        table {
+            border-spacing: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <table style="border:1px solid black;width: 100%; margin-top: 10px; font-size: 0.8em;">
+        <tr>
+            <th colspan="4" rowspan="4"
+                style="vertical-align : middle;text-align:center;width: 20px;border-right: 1px solid black;">TRIMS</th>
+
+           
+                <th colspan="28" rowspan="2" style="text-align:center;width: 60%;color:red;">
+                    SRINIVASA ENTERPRISES</th>
+
+            <th colspan="4" style="font-size: small;text-align:left;">FormatNo.SE/MTN/RO</th>
+        </tr>
+
+        <tr>
+            <th colspan="4" style="font-size: small;width: 5%;text-align:left;">Issue Date:01.02.2019</th>
+        </tr>
+
+        <tr>
+            <th colspan="28" rowspan="2" style="text-align:center;color:blue;">STATUTORY DETAILS</th>
+            <th colspan="4" style="font-size: small;width: 5%;text-align:left;">Rev.No.00</th>
+        </tr>
+
+        <tr>
+            <th colspan="4" style="font-size: small;width: 5%;text-align:left;">Rev Date:</th>
+        </tr>
+
+        <tr>
+            
+            <th colspan="1">SL:NO</th>
+            <th colspan="1">EMPLOYEE CODE</th>
+            <th colspan="1">EMPLOYEE NAME</th>
+            <th colspan="2">ESI NO</th>
+            <th colspan="2">ESISCHEME</th>
+            <th colspan="2">ESI START DATE</th>
+            <th colspan="2">ESI END DATE</th>
+            <th colspan="2">PF NO</th>
+            <th colspan="2">PF SCHEME</th>
+            <th colspan="2">PF START DATE</th>
+            <th colspan="2">PF END DATE</th>
+            <th colspan="2">INSURENCE NO</th>
+            <th colspan="2">INSURENCE SCHEME</th>
+            <th colspan="2">INSURENCE START DATE</th>
+            <th colspan="2">INSURENCE END DATE</th>
+            <th colspan="2">MEDICLAIME NO</th>
+            <th colspan="2">MEDICLAIME SCHEME</th>
+            <th colspan="3">MEDICLAIME START DATE</th>
+            <th colspan="2">MEDICLAIME END DATE</th>
+            
+
+        </tr>
+        {{#each statorycheck}}
+        <tr>
+            <th colspan="1">{{this.slNo}}</th>  
+            <th colspan="1">{{this.ecode}}</th> 
+            <th colspan="1">{{this.ename}}</th> 
+            <th colspan="2">{{this.esno}}</th>
+            <th colspan="2">{{this.escheme}}</th>
+            <th colspan="2">{{this.esstartdate}}</th>
+            <th colspan="2">{{this.esenddate}}</th>
+            <th colspan="2">{{this.pfno}}</th>
+            <th colspan="2">{{this.pscheme}}</th>
+            <th colspan="2">{{this.pfstartdate}}</th>
+            <th colspan="2">{{this.pfenddate}}</th>
+            <th colspan="2">{{this.insurno}}</th>
+            <th colspan="2">{{this.inscheme}}</th>
+            <th colspan="2">{{this.instartdate}}</th>
+            <th colspan="2">{{this.insenddate}}</th>
+            <th colspan="2">{{this.mediclno}}</th>
+            <th colspan="2">{{this.mscheme}}</th>
+            <th colspan="3">{{this.mstartdate}}</th>
+            <th colspan="2">{{this.menddate}}</th>
+
+        </tr>
+        {{/each}}
+
+    </table>
+</body>
+
+</html>
+

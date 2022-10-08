@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            text-align: center;
+        }
+
+        .table-cell {
+            position: relative;
+        }
+
+        table {
+            border-spacing: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <table style="border:1px solid black;width: 100%; margin-top: 10px; font-size: 0.8em;">
+        
+        <tr>
+            <th colspan="1" rowspan="4"
+                style="vertical-align : middle;text-align:center;width: 20px;border-right: 1px solid black;">TRIMS</th>
+
+            <th colspan="8" rowspan="2" style="text-align:center;width: 60%;color:red;">
+                SRINIVASA ENTERPRISES</th>
+
+            <th colspan="2" style="font-size: small;width: 25%;text-align:left;">FormatNo.SE/PRD/D01</th>
+        </tr>
+
+        <tr>
+            <th colspan="2" style="font-size: small;width: 25%;text-align:left;">Issue Date:01.02.2019</th>
+        </tr>
+
+        <tr>
+            <th colspan="8" rowspan="2" style="text-align:center;color:blue;">LIST OF FIXTURE DETAILS</th>
+            <th colspan="2" style="font-size: small;width: 25%;text-align:left;">Rev.No.00</th>
+        </tr>
+        <tr>
+            <th colspan="2" style="font-size: small;width: 25%;text-align:left;">Rev Date:</th>
+        </tr>
+
+        <tr>
+            <th colspan="1">SL.No.</th>
+            <th colspan="2">Fixture Code</th>            
+            <th colspan="1">Fixture Name</th>
+            <th colspan="1">Year of Purchase</th>
+            <th colspan="1">Capacity</th>
+            <th colspan="1">Type/Size</th>
+            <th colspan="1">Make</th>
+            <th colspan="1">Location</th>
+            <th colspan="2">Status</th>
+
+        </tr>
+       
+        {{#each machinecheck}}
+        <tr>
+            <td colspan="1">{{this.slNo}}</td>
+            <td colspan="2">{{this.fcode}}</td>
+            <td colspan="1">{{this.fname}}</td>
+            <td colspan="1">{{this.fyear}}</td>
+            <td colspan="1">{{this.fcapacity}}</td>
+            <td colspan="1">{{this.ftype}}</td>
+            <td colspan="1">{{this.fmake}}</td>
+            <td colspan="1">{{this.flocation}}</td>
+            <td colspan="2">{{this.sslno2.name}}</td>
+
+        </tr>
+        {{/each}}
+
+        
+    </table>
+</body>
+
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <style>
+        th {
+            border: 1px solid black;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        td {
+            border: 1px solid black;
+            text-align: left !important;
+            /* font-weight: bold; */
+            font-size: 22px;
+        }
+        table {
+            border-spacing: 0;
+        }
+
+        .pagebreak {
+            page-break-inside: avoid;
+           
+        }
+
+        .total {
+            text-align: right !important;
+            font-size: 16px;
+        }
+        .data {
+            text-align: center !important;
+            font-size: 16px;
+        }
+        p {
+            font-weight: bold;
+            font-size: 22px;
+        }
+    </style>
+</head>
+<body>
+   
+    <table class="pagebreak" style="width: 100%;padding-top: 120px;">
+        <tr>
+            <th colspan="15" style="width: 30px;height: 40px;font-size: 24px;font-family: verdana;">SRINIVASA ENTERPRISES</th>
+        </tr>
+        <tr>
+            <th colspan="15" style="width: 30px;height: 30px;font-size: 20px;font-family: verdana;">MATERIAL INWARD RECORD</th>
+        </tr>
+        {{#each Materialinward}}
+        <tr style="height: 30px;">
+            <td colspan="5" style="width: 50px;">
+                <p class="spans">DC No:</p>{{this.dcNo}}
+            </td>
+            <td colspan="5">
+                <p class="spans">Invoice No:</p>{{this.invoiceno}}
+            </td>
+            <td colspan="5">
+                <p class="spans">DC Date:</p>{{this.dcDate}}
+            </td>
+        </tr>
+
+        <tr style="height: 30px;">
+            <td colspan="5" style="width: 50px;">
+                <p class="spans">PO No:</p>{{this.purchseSlno2.pono}}
+            </td>
+            <td colspan="5">
+                <p class="spans">Supplier Name:</p>{{this.supliername}}
+            </td>
+            <td colspan="5">
+                <p class="spans">Goods Recieved No:</p>{{this.grn}}
+            </td>
+        </tr>
+
+        <tr style="height: 30px;font-size: 24px;font-weight:bold;">
+            <th colspan="1" class="data">SL: No</th>
+            <th colspan="2" class="data">item code</th>
+            <th colspan="2" class="data">item name</th>
+            <th colspan="1" class="data">UnitRate</th>
+            <th colspan="2" class="data">Quantity</th>
+            <th colspan="2" class="data">Recieved Quantity</th>
+            <th colspan="1" class="data">Accepted Quantity</th>
+            <th colspan="1" class="data">Rejected Quantity</th>
+            <th colspan="1" class="data">Outstanding Quantity</th>
+            <th colspan="2" class="data">TotalAmount</th>
+        </tr>
+       
+        {{#each ../Materialinwarditem}}
+        {{#iforderslno 'itemcode'}}
+        <tr style="height: 30px;">
+            <td colspan="1" class="data">{{this.slNo}}</td>
+            <td colspan="2" class="data">{{this.itemcode}}</td>
+            <td colspan="2" class="data">{{this.itemname}}</td>
+            <td colspan="1" class="data">{{this.unitrate}}</td>
+            <td colspan="2" class="data">{{this.qunty}}</td>
+            <td colspan="2" class="data">{{this.receivedQty}}</td>
+            <td colspan="1" class="data">{{this.acceptedQty}}</td>
+            <td colspan="1" class="data">{{this.rejectedQty}}</td>
+            <td colspan="1" class="data">{{this.outstanding}}</td>
+            <td colspan="2" class="data">{{this.totalamount}}</td>
+       </tr>
+       {{/iforderslno}}
+     
+       {{#ifcucode 'cucode'}}
+       <tr style="height: 30px;">
+        <td colspan="1" class="data">{{this.slNo}}</td>
+        <td colspan="2" class="data">{{this.cucode}}</td>
+        <td colspan="2" class="data">{{this.cuname}}</td>
+        <td colspan="1" class="data">{{this.cunitrate}}</td>
+        <td colspan="2" class="data">{{this.cuqunty}}</td>
+        <td colspan="2" class="data">{{this.cureceivedQty}}</td>
+        <td colspan="1" class="data">{{this.cuacceptedQty}}</td>
+        <td colspan="1" class="data">{{this.curejectedQty}}</td>
+        <td colspan="1" class="data">{{this.cuoutstanding}}</td>
+        <td colspan="2" class="data">{{this.cutotalamount}}</td>
+       </tr>
+       {{/ifcucode}}
+
+        {{#ifcptcode 'cptcode'}}
+        <tr style="height: 30px;">
+            <td colspan="1" class="data">{{this.slNo}}</td>
+            <td colspan="2" class="data">{{this.cptcode}}</td>
+            <td colspan="2" class="data">{{this.cptname}}</td>
+            <td colspan="1" class="data">{{this.cptunitrate}}</td>
+            <td colspan="2" class="data">{{this.cptqunty}}</td>
+            <td colspan="2" class="data">{{this.cptreceivedQty}}</td>
+            <td colspan="1" class="data">{{this.cptacceptedQty}}</td>
+            <td colspan="1" class="data">{{this.cptrejectedQty}}</td>
+            <td colspan="1" class="data">{{this.cptoutstanding}}</td>
+            <td colspan="2" class="data">{{this.cpttotalamount}}</td>
+        </tr>
+        {{/ifcptcode}}
+
+        {{#ifprtcode 'prtcode'}}
+        <tr style="height: 30px;">
+            <td colspan="1" class="data">{{this.slNo}}</td>
+            <td colspan="2" class="data">{{this.prtcode}}</td>
+            <td colspan="2" class="data">{{this.prtmname}}</td>
+            <td colspan="1" class="data">{{this.prtunitrate}}</td>
+            <td colspan="2" class="data">{{this.prtqunty}}</td>
+            <td colspan="2" class="data">{{this.prtreceivedQty}}</td>
+            <td colspan="1" class="data">{{this.prtacceptedQty}}</td>
+            <td colspan="1" class="data">{{this.prtrejectedQty}}</td>
+            <td colspan="1" class="data">{{this.prtoutstanding}}</td>
+            <td colspan="2" class="data">{{this.prttotalamount}}</td>
+        </tr>
+        {{/ifprtcode}} 
+        {{/each}} {{/each}}
+        <tr style="height: 30px;">
+            <td colspan="1" class="data"></td>
+            <td colspan="2" class="total"></td>
+            <td colspan="2" class="data"></td>
+            <td colspan="1" class="data"></td>
+            <td colspan="2" class="data"></td>
+            <td colspan="2" class="data"></td>
+            <td colspan="1" class="data"></td>
+            <td colspan="1" class="data"></td>
+            <td colspan="1" class="data">Total</td>
+            <td colspan="2" class="data">{{totalAmount}}</td>
+        </tr>
+        <tr style="height: 100px">
+            <td colspan="15">Amount Chargeable (in words)<br><br>{{Totalwords}} ONLY
+                <br><br>Terms and Conditions:{{this.termsCondition}}</td>
+        </tr>
+        <tr style="height: 50px">
+            <td colspan="15" class="total">Authorised Signatory</td>
+        </tr>
+    </table>
+</body>

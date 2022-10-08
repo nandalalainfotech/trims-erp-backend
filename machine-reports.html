@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            text-align: center;
+            border: 1px solid black;
+        }
+
+        table {
+            border-spacing: 0;
+        }
+
+        .table-cell {
+            position: relative;
+
+        }
+
+        tr:nth-child(even) {
+            background-color: #D6EEEE;
+        }
+
+        /* .table-cell:before {
+            position: absolute;
+            content: "";
+            top: -1px;
+            left: -1px;
+            background-color: transparent;
+            border: solid #ddd 1px;
+            width: calc(100% + 2px);
+            height: calc(100% + 2px);
+        } */
+    </style>
+</head>
+
+<!-- --------Preventive Plan--------------- -->
+
+<body>
+    <table style="border:1px solid black;width: 100%; margin-top: 10px; font-size: 0.8em;">
+        <tr>
+            <th colspan="4" rowspan="4" style="text-align:center;">TRIMS</th>
+            <th colspan="25" rowspan="2" style="vertical-align : middle;text-align:center;">
+                TRIMS SOLUTIONS</th>
+            <th colspan="4" style="text-align:left;font-size: 10px;">Formate No:SE/RTM/R0</th>
+        </tr>
+
+        <tr>
+            <th colspan="4" style="text-align:left;font-size: 10px;">Issue Date:12-12-12</th>
+        </tr>
+
+        <tr>
+            <th colspan="25" rowspan="2 " style="text-align:center;">PREVENTIVE MAINTENANCE PLAN</th>
+            <th colspan="4" style="text-align:left;font-size: 10px;">Rev.No:00</th>
+        </tr>
+
+        <tr>
+            <th colspan="4" style="text-align:left;font-size: 10px;">Rev Date:1-1-22</th>
+        </tr>
+
+        <tr>
+            <th colspan="2" rowspan="2">SL.No.</th>
+            <th colspan="2" rowspan="2">M/C No</th>
+            <th colspan="3" rowspan="2">M/C NAME</th>
+            <th colspan="1" rowspan="2">Status</th>
+            <th colspan="24">YEAR: {{yearPlan}}</th>
+        </tr>
+        <tr>
+            <th colspan="2 ">APR</th>
+            <th colspan="2 ">MAY</th>
+            <th colspan="2 ">JUN</th>
+            <th colspan="2 ">JUL</th>
+            <th colspan="2 ">AUG</th>
+            <th colspan="2 ">SEP</th>
+            <th colspan="2 ">OCT</th>
+            <th colspan="2 ">NOV</th>
+            <th colspan="2 ">DEC</th>
+            <th colspan="2 ">JAN</th>
+            <th colspan="2 ">FEB</th>
+            <th colspan="2 ">MAR</th>
+        </tr>
+
+        {{#each preplans}}
+
+        <tr>
+            <td colspan="2 ">{{this.slNo}}</td>
+            <td colspan="2 ">{{this.mslno2.mcode}}</td>
+            <td colspan="3 ">{{this.mslno2.mname}}</td>
+            <td colspan="1 ">P/A</td>
+
+            {{#ifCond v1 v2}}
+            {{#switch1 this.date}}
+            <td colspan="2 "> {{#case 'APR'}} P {{/case}} </td>
+            <td colspan="2 "> {{#case 'MAY'}} P {{/case}} </td>
+            <td colspan="2 "> {{#case 'JUN'}} P {{/case}} </td>
+            <td colspan="2 "> {{#case 'JUL'}} P {{/case}} </td>
+            <td colspan="2 ">{{#case 'AUG'}} P {{/case}} </td>
+            <td colspan="2 ">{{#case 'SEP'}} P {{/case}} </td>
+            <td colspan="2 ">{{#case 'OCT'}} P {{/case}} </td>
+            <td colspan="2 ">{{#case 'NOV'}} P{{/case}} </td>
+            <td colspan="2 ">{{#case 'DEC'}} P {{/case}} </td>
+            <td colspan="2 "> {{#case 'JAN'}} P {{/case}} </td>
+            <td colspan="2 ">{{#case 'FEB'}} P {{/case}} </td>
+            <td colspan="2 ">{{#case 'MAR'}} P {{/case}} </td>
+            {{/switch1}}
+
+            {{else}}
+            {{#switch1 this.date}}
+            <td colspan="2 "> {{#case 'APR'}} {{this.date}} {{/case}} </td>
+            <td colspan="2 "> {{#case 'MAY'}} {{this.date}} {{/case}} </td>
+            <td colspan="2 "> {{#case 'JUN'}} {{this.date}} {{/case}} </td>
+            <td colspan="2 "> {{#case 'JUL'}} {{this.date}} {{/case}} </td>
+            <td colspan="2 ">{{#case 'AUG'}} {{this.date}} {{/case}} </td>
+            <td colspan="2 ">{{#case 'SEP'}} {{this.date}} {{/case}} </td>
+            <td colspan="2 ">{{#case 'OCT'}} {{this.date}} {{/case}} </td>
+            <td colspan="2 ">{{#case 'NOV'}} {{this.date}}{{/case}} </td>
+            <td colspan="2 ">{{#case 'DEC'}} {{this.date}} {{/case}} </td>
+            <td colspan="2 "> {{#case 'JAN'}} {{this.date}} {{/case}} </td>
+            <td colspan="2 ">{{#case 'FEB'}} {{this.date}} {{/case}} </td>
+            <td colspan="2 ">{{#case 'MAR'}} {{this.date}} {{/case}} </td>
+            {{/switch1}}
+            {{/ifCond}}
+        </tr>
+        {{/each}}
+    </table>
+    <br>
+    <br>
+    <br>
+    <table style="border:1px solid black;width: 100%; margin-top: 10px; font-size: 0.8em;">
+        <tr>
+            <th colspan="4" rowspan="4"
+                style="vertical-align : middle;text-align:center;width: 20px;border-right: 1px solid black;">TRIMS</th>
+
+            <th colspan="25" rowspan="2" style="text-align:center;width: 100%;">
+                TRIMS SOLUTIONS</th>
+
+            <th colspan="2" style="font-size: small;">FormatNo.TRIMS/MTN/RO</th>
+        </tr>
+
+        <tr>
+            <th colspan="2" style="font-size: small;width: 5%;">Issue Date:01.02.2019</th>
+        </tr>
+
+        <tr>
+            <th colspan="25" rowspan="2" style="text-align:center;">PREVENTIVE MAINTENANCE CHECKLIST</th>
+            <th colspan="2" style="font-size: small;width: 5%;">Rev.No.00</th>
+        </tr>
+
+        <tr>
+            <th colspan="2" style="font-size: small;width: 5%;">Rev Date:</th>
+        </tr>
+
+        <tr>
+            <th colspan="9">Machine No: {{preChecklists.mslno2.mcode}}</th>
+            <th colspan="22" rowspan="2">Machine Name:{{preChecklists.mslno2.mname}}</th>
+        </tr>
+
+        <tr>
+            <th colspan="9">Date: {{preChecklists.checkpointdate}}</th>
+        </tr>
+
+        <tr>
+            <th colspan="1">SL:NO</th>
+            <th colspan="22">Check Points</th>
+            <th colspan="9">Observation</th>
+        </tr>
+
+        {{#each prechecks}}
+        <tr>
+            <td colspan="1">{{this.slNo}}</td>
+            <td colspan="22">{{this.cpslno2.checkpoints}}</td>
+            <td colspan="9">{{this.observation}}</td>
+        </tr>
+        {{/each}}
+
+    </table>
+    <br>
+    <br>
+    <br>
+    <table style="border:1px solid black;width: 100%; margin-top: 10px; font-size: 0.8em;">
+        <tr>
+            <th colspan="4" rowspan="4" style="text-align:center;">TRIMS</th>
+            <th colspan="30" rowspan="2" style="vertical-align : middle;text-align:center;">
+                TRIMS SOLUTIONS</th>
+            <th colspan="4" style="text-align:left;font-size: 10px;">Formate no:Trims/RTM/R0</th>
+        </tr>
+
+        <tr>
+            <th colspan="4" style="text-align:left;font-size: 10px;">Issue Date:12-12-12</th>
+        </tr>
+
+        <tr>
+            <th colspan="30" rowspan="2 " style="text-align:center;">DAILY MAINTENANCE CHECKLIST</th>
+            <th colspan="4" style="text-align:left;font-size: 10px;">Rev.No:00</th>
+        </tr>
+
+        <tr>
+            <th colspan="4" style="text-align:left;font-size: 10px;">Rev Date:1-1-22</th>
+        </tr>
+
+        <tr colspan="38">
+            <th colspan="5" style="text-align:left;">Machine Name: {{dailyChecksList.mslno2.mname}}</th>
+            <th colspan="15" style="text-align:left;border-left: hotpink !important;">Machine No:
+                {{dailyChecksList.mslno2.mcode}}</th>
+            <th colspan="11" style="text-align:left;">Month Name: {{monthnames}}</th>
+            <th colspan="7" style="text-align:left;">Year: {{years}}</th>
+        </tr>
+
+        <tr>
+            <th rowspan="2" style="text-align:center;">Sl.No:</th>
+            <th colspan="4" rowspan="2" style="text-align:center;">Check points</th>
+            <th colspan="1" rowspan="2" style="text-align:center;">Frq</th>
+            <th colspan="31" style="text-align:center;">Days</th>
+        </tr>
+        <tr>
+            <th>01</th>
+            <th>02</th>
+            <th>03</th>
+            <th>04</th>
+            <th>05</th>
+            <th>06</th>
+            <th>07</th>
+            <th>08</th>
+            <th>09</th>
+            <th>10</th>
+            <th>11</th>
+            <th>12</th>
+            <th>13</th>
+            <th>14</th>
+            <th>15</th>
+            <th>16</th>
+            <th>17</th>
+            <th>18</th>
+            <th>19</th>
+            <th>20</th>
+            <th>21</th>
+            <th>22</th>
+            <th>23</th>
+            <th>24</th>
+            <th>25</th>
+            <th>26</th>
+            <th>27</th>
+            <th>28</th>
+            <th>29</th>
+            <th>30</th>
+            <th>31</th>
+        </tr>
+
+        {{#each dailyChecks}}
+        <td>{{this.slNo}}</td>
+        <td colspan="4">{{this.cpslno2.checkpoints}}</td>
+        <td colspan="1">D</td>
+        {{#switch2 this.date }}
+        <td>{{#case '0'}} X {{/case}} </td>
+        <td>{{#case '1'}} X {{/case}} </td>
+        <td>{{#case '2'}} X {{/case}} </td>
+        <td>{{#case '3'}} X {{/case}} </td>
+        <td>{{#case '4'}} X {{/case}} </td>
+        <td>{{#case '5'}} X {{/case}} </td>
+        <td>{{#case '6'}} X {{/case}} </td>
+        <td>{{#case '7'}} X {{/case}} </td>
+        <td>{{#case '8'}} X {{/case}} </td>
+        <td>{{#case '9'}} X {{/case}} </td>
+        <td>{{#case '10'}} X {{/case}} </td>
+        <td>{{#case '11'}} X {{/case}} </td>
+        <td>{{#case '12'}} X {{/case}} </td>
+        <td>{{#case '13'}} X {{/case}} </td>
+        <td>{{#case '14'}} X {{/case}} </td>
+        <td>{{#case '15'}} X {{/case}} </td>
+        <td>{{#case '16'}} X {{/case}} </td>
+        <td>{{#case '17'}} X {{/case}} </td>
+        <td>{{#case '18'}} X {{/case}} </td>
+        <td>{{#case '19'}} X {{/case}} </td>
+        <td>{{#case '20'}} X {{/case}} </td>
+        <td>{{#case '21'}} X {{/case}} </td>
+        <td>{{#case '22'}} X {{/case}} </td>
+        <td>{{#case '23'}} X {{/case}} </td>
+        <td>{{#case '24'}} X {{/case}} </td>
+        <td>{{#case '25'}} X {{/case}} </td>
+        <td>{{#case '26'}} X {{/case}} </td>
+        <td>{{#case '27'}} X {{/case}} </td>
+        <td>{{#case '28'}} X {{/case}} </td>
+        <td>{{#case '29'}} X {{/case}} </td>
+        <td>{{#case '30'}} X {{/case}} </td>
+        {{/switch2}}
+        </tr>
+        {{/each}}
+
+    </table>
+
+    <br>
+    <br>
+    <br>
+    <table style="border:1px solid black;width: 100%; margin-top: 10px; font-size: 0.8em;">
+        <tr>
+            <th colspan="4" rowspan="4"
+                style="vertical-align : middle;text-align:center;width: 20px;border-right: 1px solid black;">TRIMS</th>
+
+            <th colspan="25" rowspan="2" style="text-align:center;width: 100%;">
+                TRIMS SOLUTIONS</th>
+
+            <th colspan="4" style="font-size: small;">FormatNo.TRIMS/MTN/RO</th>
+        </tr>
+
+        <tr>
+            <th colspan="4" style="font-size: small;width: 5%;">Issue Date:01.02.2019</th>
+        </tr>
+
+        <tr>
+            <th colspan="25" rowspan="2" style="text-align:center;">BREAKDOWN REGISTER</th>
+            <th colspan="4" style="font-size: small;width: 5%;">Rev.No.00</th>
+        </tr>
+
+        <tr>
+            <th colspan="4" style="font-size: small;width: 5%;">Rev Date:</th>
+        </tr>
+
+        <tr>
+            <th colspan="3">SL:NO</th>
+            <th colspan="3">MACHINE CODE</th>
+            <th colspan="3">MACHINE NAME</th>
+            <th colspan="3">DATE</th>
+            <th colspan="3">BREAKDOWN DETAILS</th>
+            <th colspan="3">ROOT CAUSE</th>
+            <th colspan="3">PREVENTIVE ACTION</th>
+            <th colspan="2">END TIME</th>
+            <th colspan="2">SPARES USED</th>
+            <th colspan="1">SPARES COST</th>
+            <th colspan="1">SPARES QTY</th>
+            <th colspan="2">SPARES TOTAL COST</th>
+            <th colspan="1">ATTEND BY</th>
+            <th colspan="1">REMARKS</th>
+            <th colspan="1">File Name</th>
+        </tr>
+        {{#each bdownRegs}}
+        <tr>
+            <th colspan="3">{{this.slNo}}</th>
+            <th colspan="3">{{this.mslno2.mcode}}</th>
+            <th colspan="3">{{this.mslno2.mname}}</th>
+            <th colspan="3">{{this.date}}</th>
+            <th colspan="3">{{this.bdsl2.name}}</th>
+            <th colspan="3">{{this.rcsl2.name}}</th>
+            <th colspan="3">{{this.pasl2.name}}</th>
+            <th colspan="2">{{this.endTime}}</th>
+            <th colspan="2">{{this.sslno2.spares}}</th>
+            <th colspan="1">{{this.sslno2.sparescost}}</th>
+            <th colspan="1">{{this.sparesQty}}</th>
+            <th colspan="2">{{this.spareCost}}</th>
+            <th colspan="1">{{this.attendby}}</th>
+            <th colspan="1">{{this.remarks}}</th>
+            <th colspan="1">{{this.filename}}</th>
+        </tr>
+        {{/each}}
+
+    </table>
+</body>
+
+</html>

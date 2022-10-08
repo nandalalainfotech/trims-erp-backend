@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <style>
+        th {
+            border: 1px solid black;
+            text-align: center;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        td {
+            border: 1px solid black;
+            text-align: center;
+            font-size: 15px;
+        }
+
+        .table-cell {
+            position: relative;
+        }
+
+        table {
+            border-spacing: 0;
+        }
+
+        p {
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        
+    </style>
+</head>
+
+<body>
+    <table style="border:1px solid black;width: 100%; margin-top: 10px; font-size: 0.8em;">
+        <tr>
+            <th colspan="2" rowspan="4"
+                style="vertical-align : middle;text-align:center;width: 20px;border-right: 1px solid black;">TRIMS</th>
+
+            <th colspan="11" rowspan="2" style="text-align:center;width: 60%;">
+                SRINIVASA ENTERPRISES</th>
+
+            <th colspan="3" style="font-size: small;width: 25%;text-align:left;">FormatNo.SE/PRD/D01</th>
+        </tr>
+
+        <tr>
+            <th colspan="3" style="font-size: small;width: 25%;text-align:left;">Issue Date:</th>
+        </tr>
+
+        <tr>
+            <th colspan="11" rowspan="2" style="text-align:center;color:blue;">INCOMING INSPECTION DETAILS</th>
+            <th colspan="3" style="font-size: small;width: 25%;text-align:left;">Rev.No.00</th>
+        </tr>
+        <tr>
+            <th colspan="3" style="font-size: small;width: 25%;text-align:left;">Rev Date:</th>
+        </tr>
+        {{#each materialInspection}}
+        <tr style="height: 30px;">
+            <td colspan="4" style="width: 50px;">
+                <p class="spans">Incoming Inspection Report NO:</p>{{this.iirno}}
+            </td>
+            <td colspan="5">
+                <p class="spans">Supplier/Customer Name:</p>{{this.scname}}
+            </td>
+            <td colspan="4">
+                <p class="spans">DC or Inv.No:</p>{{this.dcno}}
+            </td>
+            <td colspan="2">
+                <p class="spans">DC or Inv.Date:</p>{{this.pdate}}
+            </td>
+        </tr>
+
+        <tr style="height: 30px;">
+            {{#ifgrnumber 'grnumber'}}
+            <td colspan="4" style="width: 50px;">
+                <p class="spans">Goods Recived No:</p>{{this.grnumber}}
+            </td>
+            {{/ifgrnumber}}
+            <td colspan="5">
+                <p class="spans">Customer PO Number:</p>{{this.cponumber}}
+            </td>
+            <td colspan="4">
+                <p class="spans">Self PO Number:</p>{{this.sponumber}}
+            </td>
+            <td colspan="2">
+                <p class="spans">Other Reference No:</p>{{this.refno}}
+            </td>
+        </tr>
+
+        <tr style="height: 30px;">
+            <th colspan="1" rowspan="2">Category Name</th>
+            <th colspan="1" rowspan="2">Parameter</th>
+            <th colspan="1" rowspan="2">Specification</th>
+            <th colspan="1" rowspan="2">Method Of Inspection</th>
+            <th colspan="10" rowspan="1">Observation</th>
+            <th colspan="1" rowspan="2">Remarks</th>
+        </tr>
+
+        <tr>
+            <th colspan="1">1</th>
+            <th colspan="1">2</th>
+            <th colspan="1">3</th>
+            <th colspan="1">4</th>
+            <th colspan="1">5</th>
+            <th colspan="1">6</th>
+            <th colspan="1">7</th>
+            <th colspan="1">8</th>
+            <th colspan="1">9</th>
+            <th colspan="1">10</th>
+        </tr>
+        
+
+        {{#ifordernumber 'ordernumber'}}
+        {{#each observation}}
+
+        {{#iforder 'order'}}
+        <tr style="height: 30px;">
+            <td colspan="1">{{this.ordernumber}}</td>
+            <td colspan="1">{{this.orderparameter}}</td>
+            <td colspan="1">{{this.orderspecification}}</td>
+            <td colspan="1">{{this.orderinspection}}</td>
+            <td colspan="1">{{this.orderobservartion}}</td>
+            <td colspan="1">{{this.orderobservartion1}}</td>
+            <td colspan="1">{{this.orderobservartion2}}</td>
+            <td colspan="1">{{this.orderobservartion3}}</td>
+            <td colspan="1">{{this.orderobservartion4}}</td>
+            <td colspan="1">{{this.orderobservartion5}}</td>
+            <td colspan="1">{{this.orderobservartion6}}</td>
+            <td colspan="1">{{this.orderobservartion7}}</td>
+            <td colspan="1">{{this.orderobservartion8}}</td>
+            <td colspan="1">{{this.orderobservartion9}}</td>
+            <td colspan="2"></td>
+        </tr>
+        {{/iforder}}
+
+        {{#ifconsum 'consum'}}
+        <tr style="height: 30px;">
+            <td colspan="1">{{this.consumnumber}}</td>
+            <td colspan="1">{{this.consumparameter}}</td>
+            <td colspan="1">{{this.consumspecification}}</td>
+            <td colspan="1">{{this.consuminspection}}</td>
+            <td colspan="1">{{this.consumobservartion}}</td>
+            <td colspan="1">{{this.consumobservartion1}}</td>
+            <td colspan="1">{{this.consumobservartion2}}</td>
+            <td colspan="1">{{this.consumobservartion3}}</td>
+            <td colspan="1">{{this.consumobservartion4}}</td>
+            <td colspan="1">{{this.consumobservartion5}}</td>
+            <td colspan="1">{{this.consumobservartion6}}</td>
+            <td colspan="1">{{this.consumobservartion7}}</td>
+            <td colspan="1">{{this.consumobservartion8}}</td>
+            <td colspan="1">{{this.consumobservartion9}}</td>
+            <td colspan="2"></td>
+        </tr>
+        {{/ifconsum}}
+
+        {{#ifchild 'child'}}
+        <tr style="height: 30px;">
+            <td colspan="1">{{this.childnumber}}</td>
+            <td colspan="1">{{this.childparameter}}</td>
+            <td colspan="1">{{this.childspecification}}</td>
+            <td colspan="1">{{this.childinspection}}</td>
+            <td colspan="1">{{this.childobservartion}}</td>
+            <td colspan="1">{{this.childobservartion1}}</td>
+            <td colspan="1">{{this.childobservartion2}}</td>
+            <td colspan="1">{{this.childobservartion3}}</td>
+            <td colspan="1">{{this.childobservartion4}}</td>
+            <td colspan="1">{{this.childobservartion5}}</td>
+            <td colspan="1">{{this.childobservartion6}}</td>
+            <td colspan="1">{{this.childobservartion7}}</td>
+            <td colspan="1">{{this.childobservartion8}}</td>
+            <td colspan="1">{{this.childobservartion9}}</td>
+            <td colspan="2"></td>
+        </tr>
+        {{/ifchild}}
+
+        {{#ifpart 'part'}}
+        <tr style="height: 30px;">
+            <td colspan="1">{{this.partnumber}}</td>
+            <td colspan="1">{{this.partparameter}}</td>
+            <td colspan="1">{{this.partspecification}}</td>
+            <td colspan="1">{{this.partinspection}}</td>
+            <td colspan="1">{{this.partobservartion}}</td>
+            <td colspan="1">{{this.partobservartion1}}</td>
+            <td colspan="1">{{this.partobservartion2}}</td>
+            <td colspan="1">{{this.partobservartion3}}</td>
+            <td colspan="1">{{this.partobservartion4}}</td>
+            <td colspan="1">{{this.partobservartion5}}</td>
+            <td colspan="1">{{this.partobservartion6}}</td>
+            <td colspan="1">{{this.partobservartion7}}</td>
+            <td colspan="1">{{this.partobservartion8}}</td>
+            <td colspan="1">{{this.partobservartion9}}</td>
+            <td colspan="2"></td>
+        </tr>
+        {{/ifpart}}
+
+        {{/each}} 
+        {{/ifordernumber}}
+        {{/each}}
+        <tr>           
+            
+            <td colspan="13" style="text-align:left;font-size: 12px;height:30px;">Prepared by: </th>
+            <td colspan="2" style="text-align:left;font-size: 12px;height:30px;">Authorised Signatory: </th>
+        </tr>
+
+        
+    </table>
+</body>
+
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            /* border-collapse: collapse; */
+            text-align: center;
+        }
+
+        table {
+            border-spacing: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <table style="border:1px solid black;width: 100%; margin-top: 10px; font-size: 0.8em;">
+        <tr>
+            <th colspan="4" rowspan="4"
+                style="vertical-align : middle;text-align:center;width: 20px;border-right: 1px solid black;">TRIMS</th>
+
+            <th colspan="27" rowspan="2" style="text-align:center;width: 100%;">
+                SRINIVASA ENTERPRISES</th>
+
+            <th colspan="4" style="font-size: small;text-align:left;">FormatNo.SE/MTN/RO</th>
+        </tr>
+
+        <tr>
+            <th colspan="4" style="font-size: small;width: 5%;text-align:left;">Issue Date:01.02.2019</th>
+        </tr>
+
+        <tr>
+            <th colspan="27" rowspan="2" style="text-align:center;">EMPLOYEE DETAILS</th>
+            <th colspan="4" style="font-size: small;width: 5%;text-align:left;">Rev.No.00</th>
+        </tr>
+
+        <tr>
+            <th colspan="4" style="font-size: small;width: 5%;text-align:left;">Rev Date:</th>
+        </tr>
+
+        <tr>
+            <th colspan="3">SL:NO</th>
+            <th colspan="3">Employee Code</th>
+            <th colspan="3">Employee Name</th>
+            <th colspan="3">Designation</th>
+            <th colspan="3">Age</th>
+            <th colspan="3">Date of Joining</th>
+            <th colspan="3">Date of Birth</th>
+            <th colspan="2">Father Name</th>
+            <th colspan="2">Blood Group</th>
+            <th colspan="1">Gender</th>
+            <th colspan="1">Maritial Status</th>
+            <th colspan="1">No of Children</th>
+            <th colspan="1">No of Dependants</th>
+            <th colspan="1">Temporary Address</th>
+            <th colspan="1">Permanent Address</th>
+            <th colspan="1">Educational Qualification</th>
+            <th colspan="1">Experience</th>
+            <th colspan="1">Previous Training Details</th>
+            <th colspan="4">File Details</th>
+            
+
+        </tr>
+        {{#each employeedetailscheck}}
+        <tr>
+            <th colspan="3">{{this.slNo}}</th>
+            <th colspan="3">{{this.empcode}}</th>
+            <th colspan="3">{{this.empname}}</th>
+            <th colspan="3">{{this.des}}</th>
+            <th colspan="3">{{this.age}}</th>
+            <th colspan="3">{{this.doj}}</th>
+            <th colspan="3">{{this.dob}}</th>
+            <th colspan="2">{{this.fname}}</th>
+            <th colspan="2">{{this.bgroup}}</th>
+            <th colspan="1">{{this.female}}</th>
+            <th colspan="1">{{this.married}}</th>
+            <th colspan="1">{{this.child}}</th>
+            <th colspan="1">{{this.dep}}</th>
+            <th colspan="1">{{this.add1}}</th>
+            <th colspan="1">{{this.add2}}</th>
+            <th colspan="1">{{this.edu}}</th>
+            <th colspan="1">{{this.exp}}</th>
+            <th colspan="1">{{this.det}}</th>
+            <th colspan="4">{{this.filename}}</th>
+
+        </tr>
+        {{/each}}
+
+    </table>
+</body>
+
+</html>
+

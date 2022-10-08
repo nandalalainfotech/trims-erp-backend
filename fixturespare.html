@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            text-align: center;
+        }
+
+        .table-cell {
+            position: relative;
+        }
+
+        table {
+            border-spacing: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <table style="border:1px solid black;width: 100%; margin-top: 10px; font-size: 0.8em;">
+        
+        <tr>
+            <th colspan="1" rowspan="4"
+                style="vertical-align : middle;text-align:center;width: 20px;border-right: 1px solid black;">TRIMS</th>
+
+            <th colspan="8" rowspan="2" style="text-align:center;width: 60%;color:red;">
+                SRINIVASA ENTERPRISES</th>
+
+            <th colspan="2" style="font-size: small;width: 25%;text-align:left;">FormatNo.SE/PRD/D01</th>
+        </tr>
+
+        <tr>
+            <th colspan="2" style="font-size: small;width: 25%;text-align:left;">Issue Date:01.02.2019</th>
+        </tr>
+
+        <tr>
+            <th colspan="8" rowspan="2" style="text-align:center;color:blue;">LIST OF FIXTURE SPARES DETAILS</th>
+            <th colspan="2" style="font-size: small;width: 25%;text-align:left;">Rev.No.00</th>
+        </tr>
+        <tr>
+            <th colspan="2" style="font-size: small;width: 25%;text-align:left;">Rev Date:</th>
+        </tr>
+
+        <tr>
+            <th colspan="1">SL.No.</th>
+            <th  colspan="2">Fixture Code</th>            
+            <th  colspan="1">Fixture Spares</th>
+            <th  colspan="1">Fixture Spares Cost</th>
+            <th  colspan="1">Fixture Specification</th>
+            <th  colspan="1">Fixture Lead Time</th>
+            <th  colspan="1">Fixture Minimum stock Level</th>
+            <th  colspan="2">Fixture Re-order Level(ROL)</th>
+            <th  colspan="1">Fixture Status</th>
+
+        </tr>
+
+        {{#each sparescheck}}
+        <tr>
+            <td  colspan="1">{{this.slNo}}</td>
+            <td  colspan="2">{{this.msslno2.fcode}}</td>
+            <td  colspan="1">{{this.fspares}}</td>
+            <td  colspan="1">{{this.fsparescost}}</td>
+            <td  colspan="1">{{this.fspecification}}</td>
+            <td  colspan="1">{{this.fleadtime}}</td>
+            <td  colspan="1">{{this.fminimumstocklevel}}</td>
+            <td  colspan="2">{{this.freorderlevel}}</td>
+            <td  colspan="1">{{this.sslno2.name}}</td>
+
+        </tr>
+        {{/each}}
+
+        
+    </table>
+</body>
+
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <style>
+        table,
+        th {
+            border: 1px solid black;
+            text-align: center;
+        }
+
+        td {
+            border: 1px solid black;
+            text-align: left !important;
+            font-size: 16px;
+        }
+
+        table {
+            border-spacing: 0;
+        }
+
+        .total {
+            text-align: right !important;
+            font-size: 16px;
+        }
+
+        .data {
+            text-align: center !important;
+            font-size: 16px;
+        }
+
+        p {
+            font-weight: bold;
+            font-size: 22px;
+        }
+    </style>
+</head>
+
+<body>
+    <table style="width: 100%;">
+
+
+        <tr>
+            <th colspan="15" style="width: 30px;height: 20px;font-size: 20px;font-family: verdana;">SALES INVOICE</th>
+        </tr>
+        {{#each salesInvoices}}
+     
+        <tr style="height: 50px;">
+           
+            <td colspan="9" style="width: 50px;">
+                <p class="spans">Custemer Code:</p>{{this.custmrSlno2.custemercode}}
+            </td>
+            
+            <td colspan="3">
+                <p class="spans">Date:</p>{{this.cDate}}
+            </td>
+            <td colspan="3">
+                <p class="spans">Consignee No (Ship To)</p>{{this.consignee}}
+            </td>
+        </tr>
+    
+        <tr style="height: 50px;">
+    
+            <td colspan="9" style="width: 50px;">
+                <p class="spans">Custemer Name:</p>{{this.custmrSlno2.custemername}}
+            </td>
+    
+            <td colspan="3">
+                <p class="spans">Invoice Date:</p>{{this.date}}
+            </td>
+            <td colspan="3">
+                <p class="spans">Reference No</p>{{this.refno}}
+            </td>
+          
+        </tr>
+    
+        <tr style="height: 50px;">
+    
+          <td colspan="9" style="width: 50px;">
+              <p class="spans">Sales Invoice No:</p>{{this.sInvoice}}
+          </td>
+    
+          <td colspan="3">
+              <p class="spans">Dispached Through:</p>{{this.dispatchThrough}}
+          </td>
+          <td colspan="3">
+              <p class="spans">Other Reference:</p>{{this.otherRef}}
+          </td>
+        
+      </tr>
+    
+      <tr style="height: 50px;">
+    
+        <td colspan="9" style="width: 50px;">
+            <p class="spans">PO NO:</p>{{this.pono}}
+        </td>
+    
+        <td colspan="3">
+            <p class="spans">Terms Of Delivery:</p>{{this.termsDelivery}}
+        </td>
+        <td colspan="3">
+            <p class="spans">Custemer (Bill From):</p>{{this.supplierFrom}}
+        </td>
+      
+    </tr>
+    
+    <tr style="height: 50px;">
+    
+      <td colspan="9" style="width: 50px;">
+          <p class="spans">HSN/SAC:</p>{{this.hsn}}
+      </td>
+    
+      <td colspan="6">
+          <p class="spans">Due On:</p>{{this.dueOn}}
+      </td>
+    
+    
+    </tr>
+        
+
+       
+        <tr style="height: 30px;">
+            <th colspan="2" class="data">SL: No</th>
+            <th colspan="2" class="data">Description of Goods</th>
+            <th colspan="2" class="data">HSN/SAC</th>
+            <th colspan="2" class="data">Part No</th>
+            <th colspan="2" class="data">Due On</th>
+            <th colspan="1" class="data">Quantity</th>
+            <th colspan="1" class="data">Rate</th>
+            <th colspan="1" class="data">Uom</th>
+            <th colspan="2" class="data">Amount</th>
+        </tr>
+    
+        
+        {{/each}}
+        
+       
+       
+        <tr style="height: 30px;">
+            <td colspan="2" class="data"></td>
+            <td colspan="2" class="total">Total</td>
+            <td colspan="2" class="data"></td>
+            <td colspan="2" class="data"></td>
+            <td colspan="2" class="data"></td>
+            <td colspan="1" class="data"></td>
+            <td colspan="1" class="data"></td>
+            <td colspan="1" class="data"></td>
+            <td colspan="2" class="data">{{totalAmount}}</td>
+        </tr>
+
+        <tr style="height: 100px">
+            <td colspan="15">Amount Chargeable (in words)<br><br>{{Totalwords}}<br><br>Terms and Conditions:</td>
+        </tr>
+
+        <tr style="height: 50px">
+            <td colspan="15" class="total">Authorised Signatory</td>
+        </tr>
+        
+    </table>
+</body>
+
+</html>
+
+

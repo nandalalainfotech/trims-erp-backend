@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            text-align: center;
+        }
+
+        .table-cell {
+            position: relative;
+        }
+
+        table {
+            border-spacing: 0;
+        }
+
+        
+    </style>
+</head>
+
+<body>
+    <table style="border:1px solid black;width: 100%; margin-top: 10px; font-size: 0.8em;">
+        <tr>
+            <th colspan="1" rowspan="4"
+                style="vertical-align : middle;text-align:center;width: 20px;border-right: 1px solid black;">TRIMS</th>
+
+            <th colspan="11" rowspan="2" style="text-align:center;width: 60%;color:red;">
+                SRINIVASA ENTERPRISES</th>
+
+            <th colspan="2" style="font-size: small;width: 25%;text-align:left;">FormatNo:SE/PRD/D01</th>
+        </tr>
+
+        <tr>
+            <th colspan="2" style="font-size: small;width: 25%;text-align:left;">Issue Date:</th>
+        </tr>
+
+        <tr>
+            <th colspan="11" rowspan="2" style="text-align:center;color:blue;">CHILD PART DETAILS</th>
+            <th colspan="2" style="font-size: small;width: 25%;text-align:left;">Rev.No.00</th>
+        </tr>
+        <tr>
+            <th colspan="2" style="font-size: small;width: 25%;text-align:left;">Rev Date:</th>
+        </tr>
+
+
+        <tr>
+            <th colspan="1">SL No</th>
+            <th colspan="1">Consumable Code</th>
+            <th colspan="1">Consumable Name</th>
+            <th colspan="1">Consumable Description</th>
+            <th colspan="1">Sampling Plan</th>
+            <th colspan="1">UOM</th>
+            <th colspan="1">Quantity</th>
+            <th colspan="1">GST</th>
+            <th colspan="1">Unit Rate</th>
+            <th colspan="1">HSN/SAC</th>
+            <th colspan="1">Location</th>
+            <th colspan="1">Min Stock Level</th>
+            <th colspan="1">Re-Oreder Level</th>
+            <th colspan="1">Lead Time</th>
+
+        </tr>
+
+        {{#each ChildPart}}
+        <tr>
+            <th colspan="1">{{this.slNo}}</th>
+            <th colspan="1">{{this.cpartno}}</th>
+            <th colspan="1">{{this.cpartname}}</th>
+            <th colspan="1">{{this.descrip}}</th>
+            <th colspan="1">{{this.splan}}</th>
+            <th colspan="1">{{this.uom}}</th>
+            <th colspan="1">{{this.qunty}}</th>
+            <th colspan="1">{{this.gst}}</th>
+            <th colspan="1">{{this.unitamount}}</th>
+            <th colspan="1">{{this.hsn}}</th>
+            <th colspan="1">{{this.location}}</th>
+            <th colspan="1">{{this.mslevel}}</th>
+            <th colspan="1">{{this.orderlevel}}</th>
+            <th colspan="1">{{this.leadtime}}</th>
+
+        </tr>      
+
+        {{/each}}
+
+        <tr>           
+            
+            <td colspan="13" style="text-align:left;font-size: 12px;height:30px;">Prepared by: </th>
+            <td colspan="2" style="text-align:left;font-size: 12px;height:30px;">Authorised Signatory: </th>
+        </tr>
+
+        
+    </table>
+</body>
+
+</html>

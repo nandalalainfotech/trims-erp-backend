@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <style>
+        table,
+        th {
+            border: 1px solid black;
+            text-align: center;
+        }
+
+        td {
+            border: 1px solid black;
+            text-align: left !important;
+            font-size: 16px;
+        }
+         .pagebreak {
+            page-break-inside: avoid;
+           
+        }
+
+        table {
+            border-spacing: 0;
+        }
+
+        .total {
+            text-align: right !important;
+            font-size: 16px;
+        }
+
+        .data {
+            text-align: center !important;
+            font-size: 16px;
+        }
+
+        p {
+            font-weight: bold;
+            font-size: 22px;
+        }
+
+        
+    </style>
+</head>
+
+<body>
+    <table style="border:1px solid black;width: 100%; margin-top: 200px; font-size: 0.8em;">
+        <tr>
+            <th colspan="2" rowspan="4"
+                style="vertical-align : middle;text-align:center;width: 20px;border-right: 1px solid black;">TRIMS</th>
+
+            <th colspan="11" rowspan="2" style="text-align:center;width: 60%;">
+                SRINIVASA ENTERPRISES</th>
+
+            <th colspan="3" style="font-size: small;width: 25%;text-align:left;">FormatNo.SE/PRD/D01</th>
+        </tr>
+
+        <tr>
+            <th colspan="3" style="font-size: small;width: 25%;text-align:left;">Issue Date:</th>
+        </tr>
+
+        <tr>
+            <th colspan="11" rowspan="2" style="text-align:center;color:blue;">PURCHASE INVOICE REPORT</th>
+            <th colspan="3" style="font-size: small;width: 25%;text-align:left;">Rev.No.00</th>
+        </tr>
+        <tr>
+            <th colspan="3" style="font-size: small;width: 25%;text-align:left;">Rev Date:</th>
+        </tr>
+
+        {{#each PurInvoicePay}}
+
+        {{#ifgrno 'grnNo'}}
+        <tr style="height: 30px;">
+            <td colspan="4" style="width: 50px;">
+                <p class="spans">PO No:</p>{{this.poSlno2.pono}}
+            </td>
+            {{#ifprno 'prsNo'}}
+            <td colspan="5">
+                <p class="spans">PRS No:</p>{{this.prsNo}}
+            </td>
+            {{/ifprno}}
+            <td colspan="4">
+                <p class="spans">GRS NO:</p>{{this.grnNo}}
+            </td>
+            <td colspan="2">
+                <p class="spans">Date:</p>{{this.cDate}}
+            </td>
+        </tr>
+
+        <tr style="height: 30px;">
+            {{#ifscno 'suppliercode'}}
+            <td colspan="4" style="width: 50px;">
+                <p class="spans">Supplier Code:</p>{{this.suppliercode}}
+            </td>
+            {{/ifscno}}
+            <td colspan="5">
+                <p class="spans">Supplier Name:</p>{{this.suppliername}}
+            </td>
+            <td colspan="4">
+                <p class="spans">Purchase Invoice No:</p>{{this.purchaseInvoice}}
+            </td>
+            <td colspan="2">
+                <p class="spans">Incoming Inspection No:</p>{{this.incomingNo}}
+            </td>
+        </tr>
+
+        {{/ifgrno}}
+
+        <tr style="height: 30px;">
+            <th colspan="1" class="data">SL: No</th>
+            <th colspan="3" class="data">item code</th>
+            <th colspan="3" class="data">item name</th>
+            <th colspan="3" class="data">Description</th>
+            <th colspan="1" class="data">UOM</th>
+            <th colspan="1" class="data">UnitRate</th>
+            <th colspan="1" class="data">Hsn</th>
+            <th colspan="1" class="data">Quantity</th>
+            <th colspan="2" class="data">TotalAmount</th>
+        </tr>
+        
+    
+        
+        {{#each ../purInvoiceItem}}
+       
+      
+        
+        {{#iforderslno 'itemcode'}}
+        <tr style="height: 30px;">
+           <td colspan="1" class="data">{{this.slNo}}</td>
+           <td colspan="3" class="data">{{this.itemcode}}</td>
+           <td colspan="3" class="data">{{this.itemname}}</td>
+           <td colspan="3" class="data">{{this.descrip}}</td>
+           <td colspan="1" class="data">{{this.uom}}</td>
+           <td colspan="1" class="data">{{this.unitrate}}</td>
+           <td colspan="1" class="data">{{this.hsn}}</td>
+           <td colspan="1" class="data">{{this.qunty}}</td>
+           <td colspan="2" class="data">{{this.totalamount}}</td>
+       </tr>
+       {{/iforderslno}}
+     
+       {{#ifcucode 'cucode'}}
+       <tr style="height: 30px;">
+           <td colspan="1" class="data">{{this.slNo}}</td>
+           <td colspan="3" class="data">{{this.cucode}}</td>
+           <td colspan="3" class="data">{{this.cuname}}</td>
+           <td colspan="3" class="data">{{this.cudescrip}}</td>
+           <td colspan="1" class="data">{{this.cuom}}</td>
+           <td colspan="1" class="data">{{this.cunitrate}}</td>
+           <td colspan="1" class="data">{{this.chsn}}</td>
+           <td colspan="1" class="data">{{this.cuqunty}}</td>
+           <td colspan="2" class="data">{{this.cutotalamount}}</td>
+       </tr>
+       {{/ifcucode}}
+
+        {{#ifcptcode 'cptcode'}}
+        <tr style="height: 30px;">
+            <td colspan="1" class="data">{{this.slNo}}</td>
+            <td colspan="3" class="data">{{this.cptcode}}</td>
+            <td colspan="3" class="data">{{this.cptname}}</td>
+            <td colspan="3" class="data">{{this.cptdescrip}}</td>
+            <td colspan="1" class="data">{{this.cptuom}}</td>
+            <td colspan="1" class="data">{{this.cptunitrate}}</td>  
+            <td colspan="1" class="data">{{this.cpthsn}}</td>
+            <td colspan="1" class="data">{{this.cptqunty}}</td>
+            <td colspan="2" class="data">{{this.cpttotalamount}}</td>
+        </tr>
+        {{/ifcptcode}}
+
+        {{#ifprtcode 'prtcode'}}
+        <tr style="height: 30px;">
+            <td colspan="1" class="data">{{this.slNo}}</td>
+            <td colspan="3" class="data">{{this.prtcode}}</td>
+            <td colspan="3" class="data">{{this.prtmname}}</td>
+            <td colspan="3" class="data">{{this.prtdescrip}}</td>
+            <td colspan="1" class="data">{{this.prtuom}}</td>
+            <td colspan="1" class="data">{{this.prtunitrate}}</td>
+            <td colspan="1" class="data">{{this.prthsn}}</td>
+            <td colspan="1" class="data">{{this.prtqunty}}</td>
+            <td colspan="2" class="data">{{this.prttotalamount}}</td>
+        </tr>
+        {{/ifprtcode}} 
+
+    
+        {{/each}} {{/each}}
+
+        <tr style="height: 30px;">
+            <td colspan="1" class="data"></td>
+            <td colspan="3" class="total"></td>
+            <td colspan="3" class="data"></td>
+            <td colspan="3" class="data"></td>
+            <td colspan="1" class="data"></td>
+            <td colspan="1" class="data"></td>
+            <td colspan="1" class="data"></td>
+            <td colspan="1" class="data">Total</td>
+            <td colspan="2" class="data">{{totalAmount}}</td>
+        </tr>
+
+        <tr style="height: 100px" style="text-align: left !important;">
+            <td colspan="15">Amount Chargeable (in words)<br><br>{{Totalwords}}<br><br>Terms and Conditions:</td>
+        </tr>
+        <tr>           
+            
+            <td colspan="13" style="text-align:left;font-size: 18px;height:30px;">Prepared by: </th>
+            <td colspan="2" style="text-align:left;font-size: 18px;height:30px;">Authorised Signatory: </th>
+        </tr>
+
+        
+    </table>
+</body>
+
+</html>

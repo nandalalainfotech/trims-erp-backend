@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            text-align: center;
+        }
+
+        .table-cell {
+            position: relative;
+        }
+
+        table {
+            border-spacing: 0;
+        }
+
+        /* .table-cell:before {
+            position: absolute;
+            content: "";
+            top: -1px;
+            left: -1px;
+            background-color: transparent;
+            border: solid #ddd 1px;
+            width: calc(100% + 2px);
+            height: calc(100% + 2px);
+        } */
+    </style>
+</head>
+
+<body>
+    <table style="border:1px solid black;width: 100%; margin-top: 10px; font-size: 0.8em;">
+        
+        <tr>
+            <th colspan="1" rowspan="4"
+                style="vertical-align : middle;text-align:center;width: 20px;border-right: 1px solid black;">TRIMS</th>
+
+            <th colspan="4" rowspan="2" style="text-align:center;width: 60%;color:red;">
+                SRINIVASA ENTERPRISES</th>
+
+            <th colspan="2" style="font-size: small;width: 25%;text-align:left;">FormatNo.SE/PRD/D01</th>
+        </tr>
+
+        <tr>
+            <th colspan="2" style="font-size: small;width: 25%;text-align:left;">Issue Date:01.02.2019</th>
+        </tr>
+
+        <tr>
+            <th colspan="4" rowspan="2" style="text-align:center;color:blue;">LIST OF TOOLS , JIGS, FIXTURES & ACCEPTANCE GAUGES</th>
+            <th colspan="2" style="font-size: small;width: 25%;text-align:left;">Rev.No.00</th>
+        </tr>
+        <tr>
+            <th colspan="2" style="font-size: small;width: 25%;text-align:left;">Rev Date:</th>
+        </tr>
+
+        <tr>
+            <th>SL.No.</th>
+            <th>Product No</th>            
+            <th>Fixiture 1</th>
+            <th>Fixiture 2</th>
+            <th>Fixiture 3</th>
+            <th>Fixiture 4</th>
+            <th>Fixiture 5</th>
+
+        </tr>
+
+        {{#each toolcheck}}
+        <tr>
+            <td>{{this.slNo}}</td>
+            <td>{{this.pdno}}</td>
+            <td>{{this.fix1}}</td>
+            <td>{{this.fix2}}</td>
+            <td>{{this.fix3}}</td>
+            <td>{{this.fix4}}</td>
+            <td>{{this.fix5}}</td>
+
+        </tr>
+        {{/each}}
+
+        
+    </table>
+</body>
+
+</html>

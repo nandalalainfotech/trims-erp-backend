@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <style>
+        th {
+            border: 1px solid black;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .pagebreak {
+            page-break-inside: avoid;
+           
+        }
+
+        
+        td {
+            border: 1px solid black;
+            text-align: left !important;
+            font-weight: bold;
+            font-size: 22px;
+        }
+        
+        table {
+            border-spacing: 0;
+        }
+        
+        .total {
+            text-align: right !important;
+            font-size: 16px;
+        }
+        
+        .data {
+            text-align: center !important;
+            font-size: 16px;
+        }
+        
+        p {
+            font-weight: bold;
+            font-size: 22px;
+        }
+    </style>
+</head>
+
+<body>
+    {{#each SalesQuotation}}
+    <table style="width: 100%;padding-top: 120px;" class="pagebreak">
+
+        <tr>
+            <th colspan="15" style="width: 30px;height: 40px;font-size: 24px;font-family: verdana; ">SRINIVASA ENTERPRISES</th>
+        </tr>
+        <tr>
+            <th colspan="15" style="width: 30px;height: 30px;font-size: 20px;font-family: verdana;">SALES QUOTATION</th>
+        </tr>
+       
+     
+        <tr style="height: 50px;">
+           
+            <td colspan="9" style="width: 50px;">
+                <p class="spans">Custemer Code:</p>{{this.custmrSlno2.custemercode}}
+            </td>
+            
+            <td colspan="3">
+                <p class="spans">Date:</p>{{this.cDate}}
+            </td>
+            <td colspan="3">
+                <p class="spans">Consignee No (Ship To)</p>{{this.consignee}}
+            </td>
+        </tr>
+    
+        <tr style="height: 50px;">
+    
+            <td colspan="9" style="width: 50px;">
+                <p class="spans">Customer Name:</p>{{this.custmrSlno2.custemername}}
+            </td>
+    
+            <td colspan="3">
+                <p class="spans">Quotation Date:</p>{{this.date}}
+            </td>
+            <td colspan="3">
+                <p class="spans">Reference No</p>{{this.refno}}
+            </td>
+          
+        </tr>
+    
+        <tr style="height: 50px;">
+    
+          <td colspan="9" style="width: 50px;">
+              <p class="spans">Quotation No:</p>{{this.sInvoice}}
+          </td>
+    
+          <td colspan="3">
+              <p class="spans">Dispached Through:</p>{{this.dispatchThrough}}
+          </td>
+          <td colspan="3">
+              <p class="spans">Other Reference:</p>{{this.otherRef}}
+          </td>
+        
+      </tr>
+    
+      <tr style="height: 50px;">
+    
+        <td colspan="9" style="width: 50px;">
+            <p class="spans">PO NO:</p>{{this.pono}}
+        </td>
+    
+        <td colspan="3">
+            <p class="spans">Terms Of Delivery:</p>{{this.termsDelivery}}
+        </td>
+        <td colspan="3">
+            <p class="spans">Custemer (Bill From):</p>{{this.supplierFrom}}
+        </td>
+      
+    </tr>
+    
+    <tr style="height: 50px;">
+    
+      <td colspan="9" style="width: 50px;">
+          <p class="spans">HSN/SAC:</p>{{this.hsn}}
+      </td>
+    
+      <td colspan="6">
+          <p class="spans">Due On:</p>{{this.dueOn}}
+      </td>
+    
+    
+    </tr>
+       
+        <tr style="height: 30px;">
+            <th colspan="2" class="data">SL: No</th>
+            <th colspan="2" class="data">Part Code</th>
+            <th colspan="2" class="data">Part Name</th>
+            <th colspan="2" class="data">Description</th>
+            <th colspan="2" class="data">UOM</th>
+            <th colspan="1" class="data">HSN?SAC</th>
+            <th colspan="1" class="data">Unit Rate</th>
+            <th colspan="1" class="data">Quantity</th>
+            <th colspan="2" class="data">Total Amount</th>
+        </tr>
+
+   
+        {{#each this.partitem001wbs}}
+
+        <tr style="height: 30px;">
+            <th colspan="2" class="data">{{this.slNo}}</th>
+            {{#ifprtcode 'prtcode'}}
+            <th colspan="2" class="data">{{this.prtcode}}</th>
+            {{/ifprtcode}}
+            <th colspan="2" class="data">{{this.prtmname}}</th>
+            <th colspan="2" class="data">{{this.prtdescrip}}</th>
+            <th colspan="2" class="data">{{this.prtuom}}</th>
+            <th colspan="1" class="data">{{this.prthsn}}</th>
+            <th colspan="1" class="data">{{this.prtunitrate}}</th>
+            <th colspan="1" class="data">{{this.prtqunty}}</th>
+            <th colspan="2" class="data">{{this.prttotalamount}}</th>
+        </tr>
+    
+        {{/each}} 
+
+        {{#iftotalamount 'totalamount'}}
+        <tr style="height: 30px;">
+            <td colspan="2" class="data"></td>
+            <td colspan="2" class="total"></td>
+            <td colspan="2" class="data"></td>
+            <td colspan="2" class="data"></td>
+            <td colspan="2" class="data"></td>
+            <td colspan="1" class="data"></td>
+            <td colspan="1" class="data"></td>
+            <td colspan="1" class="data">Total</td>
+            <td colspan="2" class="data">{{this.tAmount}}</td>
+        </tr>
+  
+        <tr style="height: 100px">
+            <td colspan="15">Amount Chargeable (in words)<br><br>{{this.tWords}} ONLY
+                <br><br>Terms and Conditions:</td>
+        </tr>
+        {{/iftotalamount}}
+
+        <tr style="height: 50px">
+            <td colspan="15" class="total">Authorised Signatory</td>
+        </tr>
+
+    
+        
+    </table>
+    {{/each}}
+</body>
+
+</html>
+
+
