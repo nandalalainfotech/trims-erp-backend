@@ -1,0 +1,1214 @@
+-- MySQL Administrator dump 1.4
+--
+-- ------------------------------------------------------
+-- Server version	5.5.9
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+
+
+--
+-- Create schema trims
+--
+
+CREATE DATABASE IF NOT EXISTS trims;
+USE trims;
+
+--
+-- Definition of table `breakdown001mb`
+--
+
+DROP TABLE IF EXISTS `breakdown001mb`;
+CREATE TABLE `breakdown001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `sslno` int(11) NOT NULL,
+  `name` varchar(250) NOT NULL,
+  `details` varchar(250) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `sslno` (`sslno`),
+  CONSTRAINT `breakdown001mb_ibfk_1` FOREIGN KEY (`sslno`) REFERENCES `status001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `breakdown001mb`
+--
+
+/*!40000 ALTER TABLE `breakdown001mb` DISABLE KEYS */;
+INSERT INTO `breakdown001mb` (`sl_no`,`sslno`,`name`,`details`,`insert_user`,`insert_datetime`,`updated_user`,`updated_datetime`) VALUES 
+ (2,2,'Grinder Belt Cut','Grinder not working','latha','2022-01-06 13:52:22',NULL,NULL),
+ (3,1,'Printer Shorted','shorting problem','latha','2022-01-06 13:53:56',NULL,NULL),
+ (4,2,'Motor Burned','Motor is not working','latha','2022-01-06 13:54:33',NULL,NULL);
+/*!40000 ALTER TABLE `breakdown001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `breakdownreg001wb`
+--
+
+DROP TABLE IF EXISTS `breakdownreg001wb`;
+CREATE TABLE `breakdownreg001wb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `mslno` int(11) NOT NULL,
+  `date` datetime NOT NULL,
+  `bdsl` int(11) NOT NULL,
+  `rcsl` int(11) NOT NULL,
+  `pasl` int(11) NOT NULL,
+  `start_time` time DEFAULT NULL,
+  `end_time` time DEFAULT NULL,
+  `sslno` int(11) NOT NULL,
+  `attendby` varchar(50) NOT NULL,
+  `remarks` varchar(100) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `mslno` (`mslno`),
+  KEY `sslno` (`sslno`),
+  KEY `bdsl` (`bdsl`),
+  KEY `rcsl` (`rcsl`),
+  KEY `pasl` (`pasl`),
+  CONSTRAINT `breakdownreg001wb_ibfk_1` FOREIGN KEY (`mslno`) REFERENCES `machine001mb` (`sl_no`) ON DELETE CASCADE,
+  CONSTRAINT `breakdownreg001wb_ibfk_2` FOREIGN KEY (`sslno`) REFERENCES `spares001mb` (`sl_no`) ON DELETE CASCADE,
+  CONSTRAINT `breakdownreg001wb_ibfk_3` FOREIGN KEY (`bdsl`) REFERENCES `breakdown001mb` (`sl_no`) ON DELETE CASCADE,
+  CONSTRAINT `breakdownreg001wb_ibfk_4` FOREIGN KEY (`rcsl`) REFERENCES `rootcause001mb` (`sl_no`) ON DELETE CASCADE,
+  CONSTRAINT `breakdownreg001wb_ibfk_5` FOREIGN KEY (`pasl`) REFERENCES `preventiveaction001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `breakdownreg001wb`
+--
+
+/*!40000 ALTER TABLE `breakdownreg001wb` DISABLE KEYS */;
+INSERT INTO `breakdownreg001wb` (`sl_no`,`mslno`,`date`,`bdsl`,`rcsl`,`pasl`,`start_time`,`end_time`,`sslno`,`attendby`,`remarks`,`insert_user`,`insert_datetime`,`updated_user`,`updated_datetime`) VALUES 
+ (3,1,'2022-01-10 05:30:00',2,2,2,'05:30:00','18:35:00',3,'sheik','Excellent','Aravinth','2022-01-10 10:01:39','moorthy','2022-01-10 18:34:33'),
+ (4,1,'2022-01-19 05:30:00',4,4,4,'05:30:00',NULL,2,'moorty','ok','Aravinth','2022-01-10 11:39:38',NULL,NULL),
+ (8,1,'2022-01-10 05:30:00',4,4,4,'17:41:00',NULL,2,'segar','ok','Aravinth','2022-01-10 15:41:48',NULL,NULL);
+/*!40000 ALTER TABLE `breakdownreg001wb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `checklist001mb`
+--
+
+DROP TABLE IF EXISTS `checklist001mb`;
+CREATE TABLE `checklist001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `mcslno` int(11) NOT NULL,
+  `sslno` int(11) NOT NULL,
+  `checkpoints` varchar(250) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `mcslno` (`mcslno`),
+  KEY `sslno` (`sslno`),
+  CONSTRAINT `checklist001mb_ibfk_1` FOREIGN KEY (`mcslno`) REFERENCES `machine001mb` (`sl_no`) ON DELETE CASCADE,
+  CONSTRAINT `checklist001mb_ibfk_2` FOREIGN KEY (`sslno`) REFERENCES `status001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `checklist001mb`
+--
+
+/*!40000 ALTER TABLE `checklist001mb` DISABLE KEYS */;
+INSERT INTO `checklist001mb` (`sl_no`,`mcslno`,`sslno`,`checkpoints`,`insert_user`,`insert_datetime`,`updated_user`,`updated_datetime`) VALUES 
+ (1,1,1,'Grinding wheel checked','Moorthy','2021-09-06 13:18:33','aravind','2021-09-06 13:18:33'),
+ (2,2,2,'Machine ON/OFF Switches are Checked','	Moorthy','2021-09-06 13:18:33','aravind','2021-09-06 13:18:33'),
+ (3,9,1,'clean','latha','2022-01-05 11:58:36',NULL,NULL),
+ (4,3,1,'clean','latha','2022-01-05 12:00:01','latha','2022-01-05 12:00:04'),
+ (5,2,1,'machine rested ','latha','2022-01-05 13:31:34',NULL,NULL);
+/*!40000 ALTER TABLE `checklist001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `dailychecklist001wb`
+--
+
+DROP TABLE IF EXISTS `dailychecklist001wb`;
+CREATE TABLE `dailychecklist001wb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `mslno` int(11) NOT NULL,
+  `cpslno` int(11) NOT NULL,
+  `date` datetime NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `mslno` (`mslno`),
+  KEY `cpslno` (`cpslno`),
+  CONSTRAINT `dailychecklist001wb_ibfk_1` FOREIGN KEY (`mslno`) REFERENCES `machine001mb` (`sl_no`) ON DELETE CASCADE,
+  CONSTRAINT `dailychecklist001wb_ibfk_2` FOREIGN KEY (`cpslno`) REFERENCES `checklist001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `dailychecklist001wb`
+--
+
+/*!40000 ALTER TABLE `dailychecklist001wb` DISABLE KEYS */;
+INSERT INTO `dailychecklist001wb` (`sl_no`,`mslno`,`cpslno`,`date`,`insert_user`,`insert_datetime`,`updated_user`,`updated_datetime`) VALUES 
+ (3,2,2,'2022-10-01 00:00:00','Aravinth','2022-01-10 10:20:44','Aravinth','2022-01-10 11:06:46'),
+ (7,3,1,'2022-10-01 00:00:00','Aravinth','2022-01-10 10:43:42',NULL,NULL),
+ (8,3,1,'2022-10-01 00:00:00','Aravinth','2022-01-10 10:44:23',NULL,NULL),
+ (14,1,2,'2022-10-01 00:00:00','Aravinth','2022-01-10 12:44:09',NULL,NULL);
+/*!40000 ALTER TABLE `dailychecklist001wb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `department001mb`
+--
+
+DROP TABLE IF EXISTS `department001mb`;
+CREATE TABLE `department001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `sslno` int(11) NOT NULL,
+  `dept_name` varchar(50) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `sslno` (`sslno`),
+  CONSTRAINT `department001mb_ibfk_1` FOREIGN KEY (`sslno`) REFERENCES `status001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `department001mb`
+--
+
+/*!40000 ALTER TABLE `department001mb` DISABLE KEYS */;
+INSERT INTO `department001mb` (`sl_no`,`sslno`,`dept_name`,`insert_user`,`insert_datetime`,`updated_user`,`updated_datetime`) VALUES 
+ (1,1,'HR','rizwana','2021-09-06 13:18:33','aravind','2021-09-06 13:18:33'),
+ (2,2,'MAINTAINANCE','rizwana','2021-09-06 13:18:33','aravind','2021-09-06 13:18:33'),
+ (3,1,'Machine','latha','2022-01-05 12:00:29','latha','2022-01-05 12:00:32');
+/*!40000 ALTER TABLE `department001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `email001mb`
+--
+
+DROP TABLE IF EXISTS `email001mb`;
+CREATE TABLE `email001mb` (
+  `emailId` int(11) NOT NULL AUTO_INCREMENT,
+  `emailFrom` varchar(50) NOT NULL,
+  `emailTo` varchar(50) NOT NULL,
+  `emailCC` text NOT NULL,
+  `emailBCC` text NOT NULL,
+  `emailDate` datetime DEFAULT NULL,
+  `emailSubject` varchar(100) DEFAULT NULL,
+  `emailBody` text,
+  `emailCurrentPlace` varchar(30) DEFAULT NULL,
+  `isEmailViewed` varchar(30) DEFAULT NULL,
+  `isEmailAttachmentExists` varchar(10) DEFAULT NULL,
+  `multipleEmailId` varchar(255) DEFAULT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`emailId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `email001mb`
+--
+
+/*!40000 ALTER TABLE `email001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `email001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `emailattachment001mb`
+--
+
+DROP TABLE IF EXISTS `emailattachment001mb`;
+CREATE TABLE `emailattachment001mb` (
+  `emailattachmentid` int(11) NOT NULL AUTO_INCREMENT,
+  `content` tinyblob,
+  `contenttype` varchar(255) DEFAULT NULL,
+  `emailId` varchar(225) DEFAULT NULL,
+  `filename` varchar(255) DEFAULT NULL,
+  `filesize` varchar(255) DEFAULT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`emailattachmentid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `emailattachment001mb`
+--
+
+/*!40000 ALTER TABLE `emailattachment001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `emailattachment001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `emailsignature001mb`
+--
+
+DROP TABLE IF EXISTS `emailsignature001mb`;
+CREATE TABLE `emailsignature001mb` (
+  `emailSignatureId` int(11) NOT NULL AUTO_INCREMENT,
+  `companyName` varchar(255) DEFAULT NULL,
+  `companyWebsite` varchar(255) DEFAULT NULL,
+  `country` varchar(255) DEFAULT NULL,
+  `emailAddress` varchar(255) DEFAULT NULL,
+  `employeeDesignation` varchar(255) DEFAULT NULL,
+  `employeeId` int(11) DEFAULT NULL,
+  `employeeName` varchar(255) DEFAULT NULL,
+  `employeeNamePrefix` varchar(255) DEFAULT NULL,
+  `logoLink` varchar(255) DEFAULT NULL,
+  `mobileNumber` int(10) DEFAULT NULL,
+  `phoneNumber` int(10) DEFAULT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`emailSignatureId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `emailsignature001mb`
+--
+
+/*!40000 ALTER TABLE `emailsignature001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `emailsignature001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `login001mb`
+--
+
+DROP TABLE IF EXISTS `login001mb`;
+CREATE TABLE `login001mb` (
+  `loginid` int(11) NOT NULL AUTO_INCREMENT,
+  `firstname` varchar(45) NOT NULL,
+  `lastname` varchar(45) NOT NULL,
+  `domain` varchar(30) NOT NULL,
+  `username` varchar(45) NOT NULL,
+  `password` varchar(60) NOT NULL,
+  `enabled` tinyint(4) NOT NULL DEFAULT '1',
+  `securityanswer` varchar(45) NOT NULL,
+  `message` varchar(200) DEFAULT NULL,
+  `securityquestion` varchar(100) NOT NULL,
+  `status` varchar(45) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  `theme` varchar(10) DEFAULT '#286090',
+  PRIMARY KEY (`loginid`)
+) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `login001mb`
+--
+
+/*!40000 ALTER TABLE `login001mb` DISABLE KEYS */;
+INSERT INTO `login001mb` (`loginid`,`firstname`,`lastname`,`domain`,`username`,`password`,`enabled`,`securityanswer`,`message`,`securityquestion`,`status`,`insert_user`,`insert_datetime`,`updated_user`,`updated_datetime`,`theme`) VALUES 
+ (6,'sivakumar','karunamoorthy','Manufacturing','siva','$2b$10$8xe6b3pcuGvl0jNRxzJlVeetMM96.Y.p4jqEceYHbPnkkVTUYIIGa',0,'tiger123','testing','','A','insertUser','2021-10-20 12:08:13',NULL,NULL,'#1f812c'),
+ (7,'kannan','mathiyalagan','Manufacturing','kannan','$2a$11$2N69AGoLLDfv0p1Hgrx3YeAw/d7phkAXdXMsyH539L9jaQmOFxUV6',0,'testing123','testing','','','','0000-00-00 00:00:00',NULL,NULL,'#286090'),
+ (8,'karya Tech','karya Tech','Manufacturing','karya','$2a$11$IRaX57IBLbMiRpxvd/PYpuqfGGemBg7e4kNKNfpNhPMMMWANi3NYS',0,'testing123','testing','','','','0000-00-00 00:00:00',NULL,NULL,'#286090'),
+ (43,'girija','kumari','School','girija','$2a$11$WL.BLgqXSmaLZ/DmGxKffuuZxOT8xWfgUnG6wDItnn8BKRVydxq8C',0,'testing123456','testing456','','','','0000-00-00 00:00:00',NULL,NULL,'#286090'),
+ (44,'naresh','naresh','Buying House','naresh','$2a$11$Il8WVsibPf8nHuGYplrimuf/uerDdSYIIk4sGZr05BwhvoFjOo.j.',0,'testing123','testing123','','','','0000-00-00 00:00:00',NULL,NULL,'#286090'),
+ (45,'Iswarya','ravikumar','Calibration Labs','iswarya','$2a$11$p59HJTAlHslvqWSIBFG/Pu7yWveJkNjUdyYzCxJWZXRvgDV2l8KJm',0,'testing','test','','','','0000-00-00 00:00:00',NULL,NULL,'#286090'),
+ (46,'fgh','dfh','Manufacturing','sss','',1,'s',NULL,'What was your childhood nickname ?','','','0000-00-00 00:00:00',NULL,NULL,'#286090'),
+ (47,'tamil','k','Buying House','tamil K','',1,'hhhh',NULL,'What is the name of your favorite childhood friend ?','','','0000-00-00 00:00:00',NULL,NULL,'#286090'),
+ (48,'`uyuruyiy8','sdjfhsjkhfjkj','Manufacturing','etdtdd','',1,'fjhsjshg',NULL,'What was your childhood nickname ?','','','0000-00-00 00:00:00',NULL,NULL,'#286090'),
+ (49,'sss','sss','Construction','tamil','',1,'ee',NULL,'What was your childhood nickname ?','','','0000-00-00 00:00:00',NULL,NULL,'#286090'),
+ (50,'abc','cde','Buying House','raj','',1,'aaa',NULL,'In what city did you meet your spouse/significant other ?','','','0000-00-00 00:00:00',NULL,NULL,'#286090'),
+ (51,'selvam S','R','Manufacturing','selvamRaja','$2b$10$CtGEDPZAAxR9eWib0dqsRO4lHAb0yQUAtGlBF0YjQyFqRmmgeWTx.',1,'dfg',NULL,'In what city did you meet your spouse/significant other ?','Authorization','','0000-00-00 00:00:00',NULL,NULL,'#286090'),
+ (52,'latha','b','Manufacturing','latha','$2b$10$90JZq12mqexGDS7qrQluDeyKXdPwnje9cEIINhgJ2j9hxtWOZ3lru',1,'vb',NULL,'What was your childhood nickname ?','In Progress','insertuser','2021-09-03 09:48:21',NULL,NULL,'#286090'),
+ (53,'latha','b','Manufacturing','latha','$2b$10$0vlJ8K0NCepUhCWnd7ECnOCWzNYJQqAiI1R81GPTaqlZg.fN5kinu',1,'vb',NULL,'What was your childhood nickname ?','In Progress','insertuser','2021-09-03 10:00:56',NULL,NULL,'#286090'),
+ (54,'tamil','r','Manufacturing','tamil','$2b$10$NhhJO08gNEhdHrfsgPLs7ucP5d1DmfzspS8nUiIdt6OX.aNYHMmG6',1,'fdg',NULL,'What was your childhood nickname ?','In Progress','insertuser','2021-09-03 10:14:27',NULL,NULL,'#286090'),
+ (55,'selvam','R','Construction','selvam','$2b$10$2atxpqU3FRjN5bLA7B.wHeNZ8ZBwXHWRRnfASs3NgBaM5cymqTNW6',1,'dfg',NULL,'What is the name of your favorite childhood friend ?','Pending','insertuser','2021-09-03 10:20:00',NULL,NULL,'#286090'),
+ (56,'sam','R','Manufacturing','sam','$2b$10$3VFMObQ7Z8xCR2Q2bbNlAeSYAsHxkZQjVoZI/gbZ0POVicxqpiD4y',1,'ljml',NULL,'What was your childhood nickname ?','Pending','insertuser','2021-09-03 10:21:30',NULL,NULL,'#286090'),
+ (57,'tamil','r','Buying House','tamil','$2b$10$o1MzCzF..d3NOHvxnJxs1OitaX1yQ09sShgf6zuEQHNMjh2VyZg4G',1,'fbd',NULL,'In what city did you meet your spouse/significant other ?','In Progress','insertuser','2021-09-03 10:36:59',NULL,NULL,'#286090'),
+ (58,'tamil','R','Manufacturing','tamil','$2b$10$Q/nw./4r.IkHsUHzAO/H3OLTw2z8OXm6hs.kiNVFt1dETnYKWJWuC',1,'dsf',NULL,'What was your childhood nickname ?','In Progress','insertuser','2021-09-03 10:50:16',NULL,NULL,'#286090'),
+ (59,'klh','K','Manufacturing','hl','$2b$10$lQLcLSugTv7VC7aOdTnZNesuPhS9tHOIJiMBXd04iaDc2yUQ8r9Du',1,'gfh',NULL,'In what city did you meet your spouse/significant other ?','In Progress','insertuser','2021-09-03 10:54:32',NULL,NULL,'#286090'),
+ (60,'latha','B','Buying House','latha','$2b$10$WXp9x2KZaSirsj7goZqhC.15ZOXrgswwqRTPxj3igvqeB3DwaVycS',1,'fvb',NULL,'What street did you live on in third grade ?','In Progress','insertuser','2021-09-03 11:00:20',NULL,NULL,'#286090'),
+ (61,'latha','B','Manufacturing','latha','$2b$10$op4Zbo4ldsyytOc6H87QMeXyQcj8t0Ysz9Vxf60bWSG34S34fZrIK',1,'ghn',NULL,'What is your oldest sibling\'s middle name ?','New','insertuser','2021-09-03 11:12:07',NULL,NULL,'#286090'),
+ (62,'aaa','s','Calibration Labs','aaa','$2b$10$HoYS9eXdJVN7OvTd9/At.OX/ZBohlPZlnpNEcinXf0PLLU1.VI0.2',1,'dfs',NULL,'What school did you attend for sixth grade ?','New','insertuser','2021-09-03 11:19:04',NULL,NULL,'#286090'),
+ (63,'latha','B','Construction','latha','$2b$10$AQav7CdSoLBIfotJZomUVuBoP6tJXY1Ffxa0CqASvrreWOFzeoc6O',1,'dfb',NULL,'What was your childhood nickname ?','New','insertuser','2021-09-03 11:20:13',NULL,NULL,'#286090'),
+ (64,'fff','s','Construction','fff','$2b$10$pB0grwAGWaPdhG7afEdVGuy1eTnh9unSbsZbyvm7UUfO38dovU15e',1,'sss',NULL,'What is the name of your favorite childhood friend ?','In Progress','insertuser','2021-09-03 11:46:35','updateuser','2021-09-03 11:46:54','#286090'),
+ (65,'rizwana','s','Manufacturing','rizwana','$2b$10$0PkcfmeJfeUAqoNSawdiq.3mAldU8eWN0CM3MfVL/RVwumpduo0H6',1,'ss',NULL,'What was your childhood nickname ?','In Progress','insertuser','2021-09-06 13:18:33',NULL,NULL,'#a97676ff'),
+ (66,'rizwana','s','Manufacturing','rizwana','$2b$10$otsOkYluUydzKckzfHO1C.UTRAXrft2w4wowpBH8bLyPkMhmhlX36',1,'ss',NULL,'What was your childhood nickname ?','In Progress','insertuser','2021-09-06 13:19:15',NULL,NULL,'#286090'),
+ (67,'rizwana','s','Manufacturing','rizwana','$2b$10$JJB2RQEN2G2lDxpgXPpnTeoumUy.RSgfD3e3TMfhkliI.zlSakwmq',1,'ss',NULL,'What was your childhood nickname ?','In Progress','insertuser','2021-09-06 13:19:28',NULL,NULL,'#286090'),
+ (68,'rizwana','s','Manufacturing','rizwana','$2b$10$CfzP75hE1zphBU4fmldvZeetYoPdKSN3ExYgAqOmRFTEMVrHFGTD6',1,'ss',NULL,'What was your childhood nickname ?','In Progress','insertuser','2021-09-06 13:19:28',NULL,NULL,'#286090'),
+ (69,'rizwana','s','Manufacturing','rizwana','$2b$10$v7TicAN1fYmHJt5qTuvm4edbMcnUmnLo4mq8e8/IR19FNslEK3tey',1,'ss',NULL,'What was your childhood nickname ?','In Progress','insertuser','2021-09-06 13:19:28',NULL,NULL,'#286090'),
+ (70,'rizwana','s','Manufacturing','rizwana','$2b$10$bKpv7nLVfbKUm6UIcU2wq.aGUt5Lj47MXviUrP0eAFg64OoB0Zrxy',1,'ss',NULL,'What was your childhood nickname ?','In Progress','insertuser','2021-09-06 13:19:54',NULL,NULL,'#286090'),
+ (71,'rizwana','s','Manufacturing','rizwana','$2b$10$1mHT42tTp2BCU0j.G6kaxeZv2s9Tpm.lhRhjMmx90oKziDdcw/gde',1,'ss',NULL,'What was your childhood nickname ?','In Progress','insertuser','2021-09-06 13:19:54',NULL,NULL,'#286090'),
+ (72,'rizwana','s','Manufacturing','rizwana','$2b$10$.qfjTO4Nm8Q/gCvmQ3dR2eLGmLqTYmSv7YFfHvx/EppeWzikYBz8e',1,'ss',NULL,'What was your childhood nickname ?','In Progress','insertuser','2021-09-06 13:20:32',NULL,NULL,'#286090'),
+ (73,'rizwana','s','Manufacturing','rizwana','$2b$10$EpK/5WPkw44i91mGmArChea9ZUAD/Te.AeEN6Q2QQrQt3qnV.r35G',1,'ss',NULL,'What was your childhood nickname ?','In Progress','insertuser','2021-09-06 13:21:41',NULL,NULL,'#286090'),
+ (74,'rizwana','s','Manufacturing','rizwana','$2b$10$PMNrFoXl86yk1yqnUP3Qv.0bc5dGEWdmvLZRev7Elc0te0dA/y0oq',1,'ss',NULL,'What was your childhood nickname ?','In Progress','insertuser','2021-09-06 13:21:42',NULL,NULL,'#286090'),
+ (75,'rizwana','s','Manufacturing','rizwana','$2b$10$f2yoB/m.al5kX8vGSsjmDOTfuXaopZJpHNca7B8LfX0l5NsUFpAru',1,'ss',NULL,'What was your childhood nickname ?','In Progress','insertuser','2021-09-06 13:21:53',NULL,NULL,'#286090'),
+ (76,'rizwana','s','Manufacturing','rizwana','$2b$10$..JJUDhnLPCrVp6EBnN0zOx3rRQtrKmzHC..JK3mvX.F5JTsBv.FO',1,'ss',NULL,'What was your childhood nickname ?','In Progress','insertuser','2021-09-06 13:21:53',NULL,NULL,'#286090'),
+ (77,'rizwana','Shahul Hameed','Manufacturing','rizwana','$2b$10$yAvFwaa.TX/HAXFt.oZBcO.slw3VeGy/Tm7Pnlj7kkv/NWgps1EG2',1,'SS',NULL,'What was your childhood nickname ?','In Progress','insertuser','2021-09-06 13:25:01',NULL,NULL,'#286090'),
+ (78,'rizwana','Shahul Hameed','Manufacturing','rizwana','$2b$10$prN4ZVYIrXmf4u4EguISBuG0CMZ.MdIlHaswD9yGZhPfz.2cq6NSy',1,'SS',NULL,'What was your childhood nickname ?','In Progress','insertuser','2021-09-06 13:25:17',NULL,NULL,'#286090'),
+ (79,'chandrasekaran','L','Manufacturing','sekar','$2b$10$75cJf6a/t2pA3s3QLf7lSupbJayScpYGbMpZPonEb436AW5zPJI9O',1,'chandru',NULL,'What was your childhood nickname ?','A','insertUser','2021-12-31 10:36:29',NULL,NULL,'#23d01b'),
+ (80,'Aravinth','A','Manufacturing','Aravinth','$2b$10$hc.SaA.lB1Aor2LgYT/EOuPNsc56.UgqSipget5DtCnt5Y0y8Vrwq',1,'kaka',NULL,'What was your childhood nickname ?','In Progress','sekar','2021-12-23 12:02:13','Aravinth','2021-12-23 12:27:46','#286090'),
+ (81,'Moorthy','P','Manufacturing','moorthy','$2b$10$5xTtAIJc9qirevcs/CgwPu6RHvGmQCo7SHf53SlACbfKgp7jtqLOu',1,'aravinth',NULL,'What is the name of your favorite childhood friend ?','In Progress','Aravinth','2021-12-23 12:32:25',NULL,NULL,'#286090');
+/*!40000 ALTER TABLE `login001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `machine001mb`
+--
+
+DROP TABLE IF EXISTS `machine001mb`;
+CREATE TABLE `machine001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `sslno` int(11) NOT NULL,
+  `mcode` varchar(50) NOT NULL,
+  `mname` varchar(500) NOT NULL,
+  `year` datetime NOT NULL,
+  `capacity` varchar(100) NOT NULL,
+  `mtype` varchar(100) NOT NULL,
+  `make` varchar(100) NOT NULL,
+  `location` varchar(100) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `sslno` (`sslno`),
+  CONSTRAINT `machine001mb_ibfk_1` FOREIGN KEY (`sslno`) REFERENCES `status001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `machine001mb`
+--
+
+/*!40000 ALTER TABLE `machine001mb` DISABLE KEYS */;
+INSERT INTO `machine001mb` (`sl_no`,`sslno`,`mcode`,`mname`,`year`,`capacity`,`mtype`,`make`,`location`,`insert_user`,`insert_datetime`,`updated_user`,`updated_datetime`) VALUES 
+ (1,1,'TS/MC/01','LATHE MACHINE','2021-09-06 13:18:33','5LTR','10mm','Nokia','Shop Floor','Moorthy','2021-09-06 13:18:33','aravind','2021-09-06 13:18:33'),
+ (2,2,'TS/MC/02','JIG BORING MACHINE','2021-09-06 13:18:33','5LTR','10mm','Nokia','Shop Floor','Moorthy','2021-09-06 13:18:33','aravind','2021-09-06 13:18:33'),
+ (3,1,'TS/MC/4','BENCH GRINDING MACHINE','2021-01-09 05:30:00','20LTR','300CM','KOREAN','GROUND-FLOOR','Aravinth','2022-01-04 16:03:50','Aravinth','2022-01-04 16:06:49'),
+ (4,1,'TS/MC/4','BENCH GRINDING MACHINE','2021-01-09 05:30:00','10LTR','300CM','KOREAN','GROUND-FLOOR','Aravinth','2022-01-04 16:07:17',NULL,NULL),
+ (5,1,'TS/MC/5','CNC','2021-01-09 05:30:00','20LTR','300CM','KOREAN','GROUND-FLOOR','Aravinth','2022-01-04 16:09:16',NULL,NULL),
+ (6,1,'TS/MC/6','BENCH GRINDING MACHINE','2021-01-09 05:30:00','10LTR','300CM','KOREAN','GROUND-FLOOR','Aravinth','2022-01-04 16:12:31',NULL,NULL),
+ (7,1,'TS/MC/3','JIG BORING MACHINE','2021-01-09 05:30:00','20LTR','300CM','KOREAN','GROUND-FLOOR','Aravinth','2022-01-04 16:14:59',NULL,NULL),
+ (8,7,'TS/MC/3','JIG BORING MACHINE','2021-01-09 05:30:00','20LTR','300CM','KOREAN','GROUND-FLOOR','Aravinth','2022-01-04 16:22:31','Aravinth','2022-01-04 17:39:31'),
+ (9,1,'TS/MC/9','lathe','2021-12-28 05:30:00','15','10mm','nokia','first floor','latha','2022-01-05 11:56:37','latha','2022-01-05 11:59:11'),
+ (11,2,'TS/MC/10','jig boring','2021-12-29 05:30:00','5','10mm','nokia','first floor','latha','2022-01-05 11:59:37','latha','2022-01-05 11:59:45');
+/*!40000 ALTER TABLE `machine001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `machine001wb`
+--
+
+DROP TABLE IF EXISTS `machine001wb`;
+CREATE TABLE `machine001wb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `mslno` int(11) NOT NULL,
+  `status` char(1) NOT NULL,
+  `date` datetime NOT NULL,
+  `cpslno` int(11) NOT NULL,
+  `checkpointdate` datetime NOT NULL,
+  `observation` varchar(250) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `mslno` (`mslno`),
+  KEY `cpslno` (`cpslno`),
+  CONSTRAINT `machine001wb_ibfk_1` FOREIGN KEY (`mslno`) REFERENCES `machine001mb` (`sl_no`) ON DELETE CASCADE,
+  CONSTRAINT `machine001wb_ibfk_2` FOREIGN KEY (`cpslno`) REFERENCES `checklist001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `machine001wb`
+--
+
+/*!40000 ALTER TABLE `machine001wb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `machine001wb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `preventiveaction001mb`
+--
+
+DROP TABLE IF EXISTS `preventiveaction001mb`;
+CREATE TABLE `preventiveaction001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `sslno` int(11) NOT NULL,
+  `rcslno` int(11) NOT NULL,
+  `name` varchar(250) NOT NULL,
+  `details` varchar(250) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `sslno` (`sslno`),
+  KEY `rcslno` (`rcslno`),
+  CONSTRAINT `preventiveaction001mb_ibfk_1` FOREIGN KEY (`sslno`) REFERENCES `status001mb` (`sl_no`) ON DELETE CASCADE,
+  CONSTRAINT `preventiveaction001mb_ibfk_2` FOREIGN KEY (`rcslno`) REFERENCES `rootcause001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `preventiveaction001mb`
+--
+
+/*!40000 ALTER TABLE `preventiveaction001mb` DISABLE KEYS */;
+INSERT INTO `preventiveaction001mb` (`sl_no`,`sslno`,`rcslno`,`name`,`details`,`insert_user`,`insert_datetime`,`updated_user`,`updated_datetime`) VALUES 
+ (2,2,2,'Change belt in 2 month once','check the life time of belt','latha','2022-01-06 14:30:52',NULL,NULL),
+ (3,1,3,'Don\'t keep near windows','take care of machine','latha','2022-01-06 14:33:15',NULL,NULL),
+ (4,2,4,'Follow Specified Weight before operations','follow the machine rules','latha','2022-01-06 14:35:58',NULL,NULL);
+/*!40000 ALTER TABLE `preventiveaction001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `preventivechecklist001wb`
+--
+
+DROP TABLE IF EXISTS `preventivechecklist001wb`;
+CREATE TABLE `preventivechecklist001wb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `mslno` int(11) NOT NULL,
+  `cpslno` int(11) NOT NULL,
+  `checkpointdate` datetime NOT NULL,
+  `observation` varchar(250) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `mslno` (`mslno`),
+  KEY `cpslno` (`cpslno`),
+  CONSTRAINT `preventivechecklist001wb_ibfk_1` FOREIGN KEY (`mslno`) REFERENCES `machine001mb` (`sl_no`) ON DELETE CASCADE,
+  CONSTRAINT `preventivechecklist001wb_ibfk_2` FOREIGN KEY (`cpslno`) REFERENCES `checklist001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `preventivechecklist001wb`
+--
+
+/*!40000 ALTER TABLE `preventivechecklist001wb` DISABLE KEYS */;
+INSERT INTO `preventivechecklist001wb` (`sl_no`,`mslno`,`cpslno`,`checkpointdate`,`observation`,`insert_user`,`insert_datetime`,`updated_user`,`updated_datetime`) VALUES 
+ (4,1,1,'2022-01-11 05:30:00','xzzx','Aravinth','2022-01-10 12:39:08','Aravinth','2022-01-10 12:41:25');
+/*!40000 ALTER TABLE `preventivechecklist001wb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `preventiveplan001wb`
+--
+
+DROP TABLE IF EXISTS `preventiveplan001wb`;
+CREATE TABLE `preventiveplan001wb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `mslno` int(11) NOT NULL,
+  `status` char(1) NOT NULL,
+  `date` datetime NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `mslno` (`mslno`),
+  CONSTRAINT `preventiveplan001wb_ibfk_1` FOREIGN KEY (`mslno`) REFERENCES `machine001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `preventiveplan001wb`
+--
+
+/*!40000 ALTER TABLE `preventiveplan001wb` DISABLE KEYS */;
+INSERT INTO `preventiveplan001wb` (`sl_no`,`mslno`,`status`,`date`,`insert_user`,`insert_datetime`,`updated_user`,`updated_datetime`) VALUES 
+ (1,1,'P','2022-01-10 05:30:00','latha','2022-01-05 12:21:11',NULL,NULL),
+ (2,8,'P','2022-01-09 05:30:00','latha','2022-01-05 18:13:46',NULL,NULL),
+ (3,1,'P','2022-01-05 05:30:00','latha','2022-01-05 18:14:46',NULL,NULL),
+ (4,1,'P','2022-01-05 05:30:00','latha','2022-01-05 18:17:49',NULL,NULL),
+ (5,1,'P','2022-01-04 05:30:00','latha','2022-01-05 18:19:37',NULL,NULL),
+ (6,1,'P','2022-01-10 05:30:00','Aravinth','2022-01-10 13:50:46',NULL,NULL);
+/*!40000 ALTER TABLE `preventiveplan001wb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `registration001mb`
+--
+
+DROP TABLE IF EXISTS `registration001mb`;
+CREATE TABLE `registration001mb` (
+  `registerid` int(11) NOT NULL AUTO_INCREMENT,
+  `firstname` varchar(45) NOT NULL,
+  `lastname` varchar(45) NOT NULL,
+  `domain` varchar(30) NOT NULL,
+  `username` varchar(45) NOT NULL,
+  `securityquestion` varchar(100) NOT NULL,
+  `securityanswer` varchar(45) NOT NULL,
+  `message` varchar(200) DEFAULT NULL,
+  `status` varchar(45) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`registerid`)
+) ENGINE=InnoDB AUTO_INCREMENT=90 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `registration001mb`
+--
+
+/*!40000 ALTER TABLE `registration001mb` DISABLE KEYS */;
+INSERT INTO `registration001mb` (`registerid`,`firstname`,`lastname`,`domain`,`username`,`securityquestion`,`securityanswer`,`message`,`status`,`email`,`insert_user`,`insert_datetime`,`updated_user`,`updated_datetime`) VALUES 
+ (49,'sss','sss','Construction','tamil','What was your childhood nickname ?','ee','ee','In Progress','','','0000-00-00 00:00:00',NULL,NULL),
+ (50,'abc','cde','Buying House','raj','In what city did you meet your spouse/significant other ?','aaa','aa','In Progress','','','0000-00-00 00:00:00',NULL,NULL),
+ (51,'selvam S','R','Manufacturing','selvamRaja','In what city did you meet your spouse/significant other ?','dfg','sg','Authorization','selvamrsraja@gmail.com','','0000-00-00 00:00:00',NULL,NULL),
+ (69,'latha','B','Manufacturing','latha','What is your oldest sibling\'s middle name ?','ghn','fd','New','latha0707hema@gmail.com','insertuser','2021-09-03 11:12:07',NULL,NULL),
+ (70,'aaa','s','Calibration Labs','aaa','What school did you attend for sixth grade ?','dfs','sdfv','New','latha0707hema@gmail.com','insertuser','2021-09-03 11:19:04',NULL,NULL),
+ (72,'fff','s','Construction','fff','What is the name of your favorite childhood friend ?','sss','xfdv','In Progress','hema0707latha@gmail.com','insertuser','2021-09-03 11:46:35','updateuser','2021-09-03 11:46:54'),
+ (73,'rizwana','s','Manufacturing','rizwana','What was your childhood nickname ?','ss','sss','In Progress','rizwana2622@gmail.com','insertuser','2021-09-06 13:18:33',NULL,NULL),
+ (74,'rizwana','s','Manufacturing','rizwana','What was your childhood nickname ?','ss','sss','In Progress','rizwana2622@gmail.com','insertuser','2021-09-06 13:19:15',NULL,NULL),
+ (75,'rizwana','s','Manufacturing','rizwana','What was your childhood nickname ?','ss','sss','In Progress','rizwana2622@gmail.com','insertuser','2021-09-06 13:19:27',NULL,NULL),
+ (76,'rizwana','s','Manufacturing','rizwana','What was your childhood nickname ?','ss','sss','In Progress','rizwana2622@gmail.com','insertuser','2021-09-06 13:19:28',NULL,NULL),
+ (77,'rizwana','s','Manufacturing','rizwana','What was your childhood nickname ?','ss','sss','In Progress','rizwana2622@gmail.com','insertuser','2021-09-06 13:19:28',NULL,NULL),
+ (78,'rizwana','s','Manufacturing','rizwana','What was your childhood nickname ?','ss','sss','In Progress','rizwana2622@gmail.com','insertuser','2021-09-06 13:19:54',NULL,NULL),
+ (79,'rizwana','s','Manufacturing','rizwana','What was your childhood nickname ?','ss','sss','In Progress','rizwana2622@gmail.com','insertuser','2021-09-06 13:19:54',NULL,NULL),
+ (80,'rizwana','s','Manufacturing','rizwana','What was your childhood nickname ?','ss','sss','In Progress','rizwana2622@gmail.com','insertuser','2021-09-06 13:19:54',NULL,NULL),
+ (81,'rizwana','s','Manufacturing','rizwana','What was your childhood nickname ?','ss','sss','In Progress','rizwana2622@gmail.com','insertuser','2021-09-06 13:21:41',NULL,NULL),
+ (82,'rizwana','s','Manufacturing','rizwana','What was your childhood nickname ?','ss','sss','In Progress','rizwana2622@gmail.com','insertuser','2021-09-06 13:21:42',NULL,NULL),
+ (83,'rizwana','s','Manufacturing','rizwana','What was your childhood nickname ?','ss','sss','In Progress','rizwana2622@gmail.com','insertuser','2021-09-06 13:21:53',NULL,NULL),
+ (84,'rizwana','s','Manufacturing','rizwana','What was your childhood nickname ?','ss','sss','In Progress','rizwana2622@gmail.com','insertuser','2021-09-06 13:21:53',NULL,NULL),
+ (85,'rizwana','Shahul Hameed','Manufacturing','rizwana','What was your childhood nickname ?','SS','ss','In Progress','rizwana2622@gmail.com','insertuser','2021-09-06 13:25:01',NULL,NULL),
+ (86,'rizwana','Shahul Hameed','Manufacturing','rizwana','What was your childhood nickname ?','SS','ss','In Progress','rizwana2622@gmail.com','insertuser','2021-09-06 13:25:17',NULL,NULL),
+ (87,'chandrasekaran','L','Manufacturing','sekar','What was your childhood nickname ?','chandru','good','In Progress','kavichandran877@gmail.com','siva','2021-10-22 16:41:43',NULL,NULL),
+ (88,'Aravinth','A','Manufacturing','Aravinth','What was your childhood nickname ?','kaka','good','In Progress','ajayaravind797@gmail.com','sekar','2021-12-23 12:02:13','Aravinth','2021-12-23 12:27:45'),
+ (89,'Moorthy','P','Manufacturing','moorthy','What is the name of your favorite childhood friend ?','aravinth','excellent','In Progress','moorthyp2096@gmail.com','Aravinth','2021-12-23 12:32:25',NULL,NULL);
+/*!40000 ALTER TABLE `registration001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `role001mb`
+--
+
+DROP TABLE IF EXISTS `role001mb`;
+CREATE TABLE `role001mb` (
+  `roleid` int(11) NOT NULL AUTO_INCREMENT,
+  `rolename` varchar(45) NOT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT '1',
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`roleid`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `role001mb`
+--
+
+/*!40000 ALTER TABLE `role001mb` DISABLE KEYS */;
+INSERT INTO `role001mb` (`roleid`,`rolename`,`status`,`insert_user`,`insert_datetime`,`updated_user`,`updated_datetime`) VALUES 
+ (1,'ROLE_ADMIN',1,'','0000-00-00 00:00:00',NULL,NULL),
+ (2,'ROLE_SUPER_USER',1,'','0000-00-00 00:00:00',NULL,NULL),
+ (3,'ROLE_USER',1,'','0000-00-00 00:00:00',NULL,NULL),
+ (4,'ROLE_GUEST',1,'','0000-00-00 00:00:00',NULL,NULL);
+/*!40000 ALTER TABLE `role001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `rootcause001mb`
+--
+
+DROP TABLE IF EXISTS `rootcause001mb`;
+CREATE TABLE `rootcause001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `sslno` int(11) NOT NULL,
+  `brslno` int(11) NOT NULL,
+  `name` varchar(250) NOT NULL,
+  `details` varchar(250) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `sslno` (`sslno`),
+  KEY `brslno` (`brslno`),
+  CONSTRAINT `rootcause001mb_ibfk_1` FOREIGN KEY (`sslno`) REFERENCES `status001mb` (`sl_no`) ON DELETE CASCADE,
+  CONSTRAINT `rootcause001mb_ibfk_2` FOREIGN KEY (`brslno`) REFERENCES `breakdown001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `rootcause001mb`
+--
+
+/*!40000 ALTER TABLE `rootcause001mb` DISABLE KEYS */;
+INSERT INTO `rootcause001mb` (`sl_no`,`sslno`,`brslno`,`name`,`details`,`insert_user`,`insert_datetime`,`updated_user`,`updated_datetime`) VALUES 
+ (2,2,2,'Self Life Experied','Experied','latha','2022-01-06 13:56:12',NULL,NULL),
+ (3,1,3,'Rain water sprayed in plugs','careless mistake','latha','2022-01-06 14:02:07',NULL,NULL),
+ (4,2,4,'Over loaded operation','careless mistake','latha','2022-01-06 14:05:51',NULL,NULL);
+/*!40000 ALTER TABLE `rootcause001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `spares001mb`
+--
+
+DROP TABLE IF EXISTS `spares001mb`;
+CREATE TABLE `spares001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `msslno` int(11) NOT NULL,
+  `sslno` int(11) NOT NULL,
+  `spares` varchar(50) NOT NULL,
+  `sparescost` int(11) DEFAULT NULL,
+  `specification` varchar(50) NOT NULL,
+  `leadtime` datetime DEFAULT NULL,
+  `minimumstocklevel` int(11) DEFAULT '0',
+  `reorderlevel` int(11) DEFAULT '0',
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `msslno` (`msslno`),
+  KEY `sslno` (`sslno`),
+  CONSTRAINT `spares001mb_ibfk_1` FOREIGN KEY (`msslno`) REFERENCES `machine001mb` (`sl_no`) ON DELETE CASCADE,
+  CONSTRAINT `spares001mb_ibfk_2` FOREIGN KEY (`sslno`) REFERENCES `status001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `spares001mb`
+--
+
+/*!40000 ALTER TABLE `spares001mb` DISABLE KEYS */;
+INSERT INTO `spares001mb` (`sl_no`,`msslno`,`sslno`,`spares`,`sparescost`,`specification`,`leadtime`,`minimumstocklevel`,`reorderlevel`,`insert_user`,`insert_datetime`,`updated_user`,`updated_datetime`) VALUES 
+ (2,2,2,'Nozzle',2000,'8mm','2021-09-06 13:18:33',3,5,'rizwana','2021-09-06 13:18:33','Aravinth','2022-01-10 10:00:57'),
+ (3,2,2,'mvsdjk.bkdjhgfg',1000,'s','2001-04-01 00:00:00',4,5,'Aravinth','2022-01-04 16:48:58','Aravinth','2022-01-10 10:01:07'),
+ (4,4,1,'mvsdjk.bkdjhgfg',NULL,'Pull Based','2021-09-06 13:18:33',4,4,'Aravinth','2022-01-04 16:50:07',NULL,NULL),
+ (5,2,2,'mvsdjk.bkdjhgfg',NULL,'s','2001-04-01 00:00:00',4,5,'Aravinth','2022-01-04 16:51:03',NULL,NULL),
+ (6,1,1,'mvsdjk.bkdjhgfg',NULL,'Pull Based','2021-09-06 13:18:33',4,4,'Aravinth','2022-01-04 16:57:30',NULL,NULL),
+ (7,6,1,'Belt',NULL,'standard','2021-09-06 13:18:33',4,4,'Aravinth','2022-01-04 17:10:37',NULL,NULL),
+ (8,2,1,'mvsdjk.bkdjhgfg',NULL,'medium size','2021-09-06 13:18:33',4,4,'Aravinth','2022-01-04 17:12:22',NULL,NULL),
+ (9,6,1,'mvsdjk.bkdjhgfg',NULL,'medium size','2021-09-06 13:18:33',4,4,'Aravinth','2022-01-04 17:12:52',NULL,NULL),
+ (10,3,2,'Belts',NULL,'standard','2021-09-06 13:18:33',4,4,'Aravinth','2022-01-04 17:14:15',NULL,NULL),
+ (11,5,7,'mvsdjk.bkdjhgfg',NULL,'Pull Based','2021-09-06 13:18:33',4,4,'Aravinth','2022-01-04 17:39:54',NULL,NULL),
+ (12,1,1,'Nozzle',2000,'standard','2001-04-01 00:00:00',4,4,'Aravinth','2022-01-10 09:59:48',NULL,NULL);
+/*!40000 ALTER TABLE `spares001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `status001mb`
+--
+
+DROP TABLE IF EXISTS `status001mb`;
+CREATE TABLE `status001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `code` varchar(50) NOT NULL,
+  `code_group` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `status` char(1) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `status001mb`
+--
+
+/*!40000 ALTER TABLE `status001mb` DISABLE KEYS */;
+INSERT INTO `status001mb` (`sl_no`,`code`,`code_group`,`name`,`status`,`insert_user`,`insert_datetime`,`updated_user`,`updated_datetime`) VALUES 
+ (1,'machine_status',1,'Active','A','Moorthy','2021-09-06 13:18:33','aravind','2021-09-06 13:18:33'),
+ (2,'machine_status',1,'Inactive','A','Moorthy','2021-09-06 13:18:33','aravind','2021-09-06 13:18:33'),
+ (4,'machine_status',2,'ok','A','Aravinth','2022-01-04 17:28:03',NULL,NULL),
+ (5,'machine_status',2,'Not ok','P','Aravinth','2022-01-04 17:29:17',NULL,NULL),
+ (6,'machine_status',3,'Plan','A','Aravinth','2022-01-04 17:29:41',NULL,NULL),
+ (7,'machine_status',3,'Achieved','P','Aravinth','2022-01-04 17:30:07',NULL,NULL),
+ (8,'TS/MC/09',1,'plan','a','latha','2022-01-05 12:02:06',NULL,NULL);
+/*!40000 ALTER TABLE `status001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `systemproperties001mb`
+--
+
+DROP TABLE IF EXISTS `systemproperties001mb`;
+CREATE TABLE `systemproperties001mb` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `description` varchar(60) NOT NULL,
+  `type` varchar(20) NOT NULL,
+  `status` char(1) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=349 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `systemproperties001mb`
+--
+
+/*!40000 ALTER TABLE `systemproperties001mb` DISABLE KEYS */;
+INSERT INTO `systemproperties001mb` (`ID`,`name`,`description`,`type`,`status`) VALUES 
+ (1,'Login.Domain','Manufacturing','Domain','Y'),
+ (2,'Login.Domain','Construction','Domain','Y'),
+ (3,'Login.Domain','Buying House','Domain','Y'),
+ (4,'Login.Domain','Calibration Labs','Domain','Y'),
+ (5,'Login.Domain','School','Domain','Y'),
+ (6,'Registration.SecurityQuestion','What was your childhood nickname ?','SecurityQuestion','Y'),
+ (7,'Registration.SecurityQuestion','In what city did you meet your spouse/significant other ?','SecurityQuestion','Y'),
+ (8,'Registration.SecurityQuestion','What is the name of your favorite childhood friend ?','SecurityQuestion','Y'),
+ (9,'Registration.SecurityQuestion','What street did you live on in third grade ?','SecurityQuestion','Y'),
+ (10,'Registration.SecurityQuestion','What is your oldest sibling\'s middle name ?','SecurityQuestion','Y'),
+ (11,'Registration.SecurityQuestion','What school did you attend for sixth grade ?','SecurityQuestion','Y'),
+ (12,'Item.Status','To Deliver','Status','Y'),
+ (13,'Item.Status','To Bill','Status','Y'),
+ (14,'Item.Status','Draft','Status','Y'),
+ (15,'Item.Status','Completed','Status','Y'),
+ (16,'Item.Status','Closed','Status','Y'),
+ (17,'Item.Status','Cancelled','Status','Y'),
+ (18,'EmpStatus.status','Active','status','Y'),
+ (19,'EmpStatus.status','Inactive','status','Y'),
+ (20,'EmpGender.gender','Male','gender','Y'),
+ (21,'EmpGender.gender','Female','gender','Y'),
+ (22,'Recruit.JobOpening','open','JobOpening','Y'),
+ (23,'Recruit.JobOpening','closed','JobOpening','Y'),
+ (24,'Recruit.JobApplicant','open','JobApplicant','Y'),
+ (25,'Recruit.JobApplicant','replied','JobApplicant','Y'),
+ (26,'Recruit.JobApplicant','rejected','JobApplicant','Y'),
+ (27,'Recruit.JobApplicant','hold','JobApplicant','Y'),
+ (28,'Recruit.OfferLetter','Draft','OfferLetter','Y'),
+ (29,'Recruit.OfferLetter','Submitted','OfferLetter','Y'),
+ (30,'Recruit.OfferLetter','Cancelled','OfferLetter','Y'),
+ (31,'Recruit.OfferLetter','Queued for Saving','OfferLetter','Y'),
+ (32,'Recruit.OfferLetter','Queued for Submission','OfferLetter','Y'),
+ (33,'Recruit.OfferLetter','Queued for Cancellation','OfferLetter','Y'),
+ (34,'Name.Prefix','Mr','Prefix','Y'),
+ (35,'Name.Prefix','Mrs','Prefix','Y'),
+ (36,'Name.Prefix','Ms','Prefix','Y'),
+ (37,'Name.Prefix','Other','Prefix','Y'),
+ (38,'Leave.leaveApp','Open','leaveApp','Y'),
+ (39,'Leave.leaveApp','Approved','leaveApp','Y'),
+ (40,'Leave.leaveApp','Rejected','leaveApp','Y'),
+ (41,'Leave.leaveType','Sick','leaveType','Y'),
+ (42,'Leave.leaveType','Casual','leaveType','Y'),
+ (43,'Leave.leaveType','Vacation','leaveType','Y'),
+ (44,'Leave.leaveType','Paternity','leaveType','Y'),
+ (45,'Leave.leaveType','Maternity','leaveType','Y'),
+ (46,'Leave.leaveType','Privilege','leaveType','Y'),
+ (47,'Leave.leaveType','Compensetory','leaveType','Y'),
+ (48,'Holiday.Week','Monday','Week','Y'),
+ (49,'Holiday.Week','Tuesday','Week','Y'),
+ (50,'Holiday.Week','Wednesday','Week','Y'),
+ (51,'Holiday.Week','Thursday','Week','Y'),
+ (52,'Holiday.Week','Friday','Week','Y'),
+ (53,'Holiday.Week','Saturday','Week','Y'),
+ (54,'Holiday.Week','Sunday','Week','Y'),
+ (55,'processpr.Month','1','Month','Y'),
+ (56,'processpr.Month','2','Month','Y'),
+ (57,'processpr.Month','3','Month','Y'),
+ (58,'processpr.Month','4','Month','Y'),
+ (59,'processpr.Month','5','Month','Y'),
+ (60,'processpr.Month','6','Month','Y'),
+ (61,'processpr.Month','7','Month','Y'),
+ (62,'processpr.Month','8','Month','Y'),
+ (63,'processpr.Month','9','Month','Y'),
+ (64,'processpr.Month','10','Month','Y'),
+ (65,'processpr.Month','11','Month','Y'),
+ (66,'processpr.Month','12','Month','Y'),
+ (67,'Salary.Mode','Yes','Mode','Y'),
+ (68,'Salary.Mode','No','Mode','Y'),
+ (69,'Expense.Type','Food','Type','Y'),
+ (70,'Expense.Type','Medical','Type','Y'),
+ (71,'Expense.Type','Travel','Type','Y'),
+ (72,'Expense.Type','Calls','Type','Y'),
+ (73,'Expense.Type','Others','Type','Y'),
+ (74,'Product.Planning','Sales Order','Planning','Y'),
+ (75,'Product.Planning','Material Request','Planning','Y'),
+ (76,'Product.Planning','Material Delivery','Planning','Y'),
+ (77,'Itembom.status','Enabled','status','Y'),
+ (78,'Itembom.status','Variant','status','Y'),
+ (79,'Itembom.status','Template','status','Y'),
+ (80,'Itembom.status','Disabled','status','Y'),
+ (81,'Item.Group','Products','Group','Y'),
+ (82,'Item.Group','Raw Materials','Group','Y'),
+ (83,'Item.Group','Sub Assemblies','Group','Y'),
+ (84,'Item.Group','All ItemGroups','Group','Y'),
+ (85,'Manufacture.List','Sales-WPL','List','Y'),
+ (86,'Manufacture.List','Supplier-WPL','List','Y'),
+ (87,'Manufacture.List','Work-in Progress-WPL','List','Y'),
+ (88,'Manufacture.List','Finished Goods-WPL','List','Y'),
+ (89,'Manufacture.List','All Warehouses-WPL','List','Y'),
+ (90,'PRMatReq.Type','Purchase','Type','Y'),
+ (91,'PRMatReq.Type','Material Transfer','Type','Y'),
+ (92,'PRMatReq.Type','Material Issue','Type','Y'),
+ (93,'PRMatReq.Type','Manufacture','Type','Y'),
+ (94,'PRSupp.Type','Asiatic Solution','Type','Y'),
+ (95,'PRSupp.Type','Eagle Hardware','Type','Y'),
+ (96,'PRSupp.Type','KSMerchandise','Type','Y'),
+ (97,'PRSupp.Type','New World Reality','Type','Y'),
+ (98,'PRSupp.Type','HomeBase','Type','Y'),
+ (99,'PRSupp.Type','Scotier','Type','Y'),
+ (100,'PRSupp.Type','HeliosAir','Type','Y'),
+ (101,'PRRawmat.List','Yes','List','Y'),
+ (102,'PRRawmat.List','No','List','Y'),
+ (103,'SuAddress.Type','Billing','Type','Y'),
+ (104,'SuAddress.Type','Shipping','Type','Y'),
+ (105,'SuAddress.Type','Office','Type','Y'),
+ (106,'SuAddress.Type','Personal','Type','Y'),
+ (107,'SuAddress.Type','Plant','Type','Y'),
+ (108,'SuAddress.Type','Postal','Type','Y'),
+ (109,'SuAddress.Type','Shop','Type','Y'),
+ (110,'SuAddress.Type','Subsidiary','Type','Y'),
+ (111,'SuAddress.Type','Warehouse','Type','Y'),
+ (112,'SuAddress.Type','Other','Type','Y'),
+ (113,'Supplier.Type','Distributor','Type','Y'),
+ (114,'Supplier.Type','Electrical','Type','Y'),
+ (115,'Supplier.Type','Hardware','Type','Y'),
+ (116,'Supplier.Type','Local','Type','Y'),
+ (117,'Supplier.Type','Pharmaceutical','Type','Y'),
+ (118,'Supplier.Type','Raw Material','Type','Y'),
+ (119,'Supplier.Type','Services','Type','Y'),
+ (120,'Supplier.Status','Open','Status','Y'),
+ (121,'Supplier.Status','Enabled','Status','Y'),
+ (122,'Supplier.Status','Passive','Status','Y'),
+ (123,'Supplier.Status','Replied','Status','Y'),
+ (124,'Putree.type','Supplier Type','type','Y'),
+ (125,'Putree.type','Supplier','type','Y'),
+ (126,'Putree.type','Item Group','type','Y'),
+ (127,'Putree.type','Item','type','Y'),
+ (128,'PuBase.type','Purchase Invoice','type','Y'),
+ (129,'PuBase.type','Purchase Order','type','Y'),
+ (130,'PuBase.type','Purchase Receipt','type','Y'),
+ (131,'valqty.choose','Value','choose','Y'),
+ (132,'valqty.choose','Quantity','choose','Y'),
+ (133,'range.type','Daily','type','Y'),
+ (134,'range.type','Monthly','type','Y'),
+ (135,'range.type','Weekly','type','Y'),
+ (136,'range.type','Quarterly','type','Y'),
+ (137,'range.type','Half-Yearly','type','Y'),
+ (138,'range.type','Yearly','type','Y'),
+ (139,'crms.status','Lead','status','Y'),
+ (140,'crms.status','Replied','status','Y'),
+ (141,'crms.status','Open','status','Y'),
+ (142,'crms.status','Opportunity','status','Y'),
+ (143,'crms.status','Interested','status','Y'),
+ (144,'crms.status','Converted','status','Y'),
+ (145,'crms.status','Do Not Contact','status','Y'),
+ (146,'crmscust.status','Open','status','Y'),
+ (147,'crmscust.status','Dormant','status','Y'),
+ (148,'crmscust.status','Active','status','Y'),
+ (149,'crmcontact.status','Passive','status','Y'),
+ (150,'crmcontact.status','Open','status','Y'),
+ (151,'crmcontact.status','Replied','status','Y'),
+ (152,'crmoppo.type','Sales','type','Y'),
+ (153,'crmoppo.type','Maintainence','type','Y'),
+ (154,'crmoppo.from','Lead','from','Y'),
+ (155,'crmoppo.from','Customer','from','Y'),
+ (156,'crmsoppo.status','Open','status','Y'),
+ (157,'crmsoppo.status','Quotation','status','Y'),
+ (158,'crmsoppo.status','Converted','status','Y'),
+ (159,'crmsoppo.status','Lost','status','Y'),
+ (160,'crmsoppo.status','Replied','status','Y'),
+ (161,'crmsoppo.status','Closed','status','Y'),
+ (162,'crmcommunics.status','Open','status','Y'),
+ (163,'crmcommunics.status','Replied','status','Y'),
+ (164,'crmcommunics.status','Closed','status','Y'),
+ (165,'crmcommunics.status','Linked','status','Y'),
+ (166,'crmcommunics.sentrec','Sent','sentrec','Y'),
+ (167,'crmcommunics.sentrec','Received','sentrec','Y'),
+ (168,'inactivecust.type','Sales Person','type','Y'),
+ (169,'inactivecust.type','Sales Invoice','type','Y'),
+ (170,'stktransent.title','Material issue','title','Y'),
+ (171,'stktransent.title','Material Receipt','title','Y'),
+ (172,'stktransent.title','Material Transfer','title','Y'),
+ (173,'stktransent.title','Material Transfer for Manufacture','title','Y'),
+ (174,'stktransent.title','Manufacture','title','Y'),
+ (175,'stktransent.title','Replace','title','Y'),
+ (176,'stktransent.title','Sub-Contract','title','Y'),
+ (177,'stkvoucher.type','Delivery Note','type','Y'),
+ (178,'stkvoucher.type','Purchase Receipt','type','Y'),
+ (179,'stkvoucher.type','Stock Entry','type','Y'),
+ (180,'stkvoucher.type','Sales inVoice','type','Y'),
+ (181,'shipping.status','Enabled','status','Y'),
+ (182,'shipping.status','Disabled','status','Y'),
+ (183,'receiptdoc.type','Purchase Invoice','type','Y'),
+ (184,'receiptdoc.type','Purchase Receipt','type','Y'),
+ (185,'itemnaming.select','ItemCode','select','Y'),
+ (186,'itemnaming.select','NamingServices','select','Y'),
+ (187,'defvalue.method','FIFO','method','Y'),
+ (188,'defvalue.method','Moving Average','method','Y'),
+ (189,'party.type','Customer','type','Y'),
+ (190,'party.type','Supplier','type','Y'),
+ (191,'letterhead.list','Manager','list','Y'),
+ (192,'letterhead.list','Human Resource','list','Y'),
+ (193,'letterhead.list','Finance head','list','Y'),
+ (194,'account.type','Cost of Goods Sold','type','Y'),
+ (195,'account.type','Sales','type','Y'),
+ (196,'account.type','Debtors','type','Y'),
+ (197,'account.type','National Bank','type','Y'),
+ (198,'account.type','Cash','type','Y'),
+ (199,'account.type','Stores','type','Y'),
+ (200,'account.type','Creditors','type','Y'),
+ (201,'account.type','Freight and Forwarding','type','Y'),
+ (202,'account.type','Changes','type','Y'),
+ (203,'account.type','Stock Received','type','Y'),
+ (204,'account.type','Not Billed','type','Y'),
+ (205,'payment.mode','Cash','mode','Y'),
+ (206,'payment.mode','Wire Transfer','mode','Y'),
+ (207,'payment.mode','Check','mode','Y'),
+ (208,'payment.mode','Credit Card','mode','Y'),
+ (209,'payment.mode','Bank Draft','mode','Y'),
+ (210,'currency.type','INR','type','Y'),
+ (211,'currency.type','USD','type','Y'),
+ (212,'currency.type','EUR','type','Y'),
+ (213,'currency.type','JPN','type','Y'),
+ (214,'payment.type','Receive','type','Y'),
+ (215,'payment.type','Pay','type','Y'),
+ (216,'payment.type','Internal Transfer','type','Y'),
+ (217,'payreq.status','Paid','status','Y'),
+ (218,'payreq.status','Initiated','status','Y'),
+ (219,'payreq.status','Failed','status','Y'),
+ (220,'payreq.status','Cancelled','status','Y'),
+ (221,'payreq.status','Draft','status','Y'),
+ (222,'journal.satus','Bank Entry','satus','Y'),
+ (223,'journal.satus','Cash Entry','satus','Y'),
+ (224,'journal.satus','Credit Card Entry','satus','Y'),
+ (225,'journal.satus','Debit Note','satus','Y'),
+ (226,'journal.satus','Credit Note','satus','Y'),
+ (227,'journal.satus','Centre Entry','satus','Y'),
+ (228,'journal.satus','Excise Entry','satus','Y'),
+ (229,'journal.satus','Wire off Entry','satus','Y'),
+ (230,'journal.satus','Opening Entry','satus','Y'),
+ (231,'journal.satus','Depreciation Entry','satus','Y'),
+ (232,'accounttype.name','Savings','name','Y'),
+ (233,'accounttype.name','Current','name','Y'),
+ (234,'company.domain','Manufacturing','domain','Y'),
+ (235,'company.domain','IT','domain','Y'),
+ (236,'company.domain','BPO','domain','Y'),
+ (237,'chartacc.type','Standard','type','Y'),
+ (238,'chartacc.type','Customized','type','Y'),
+ (239,'task.status','Accepted','status','Y'),
+ (240,'task.status','Approved','status','Y'),
+ (241,'task.status','Assigned','status','Y'),
+ (242,'task.status','AutoReject','status','Y'),
+ (243,'task.status','Closed','status','Y'),
+ (244,'task.status','Completed','status','Y'),
+ (245,'task.status','Failed','status','Y'),
+ (246,'task.status','In Planning','status','Y'),
+ (247,'task.status','In Progress','status','Y'),
+ (248,'task.status','Interrupted','status','Y'),
+ (249,'task.status','Not Started','status','Y'),
+ (250,'task.status','On hold','status','Y'),
+ (251,'task.status','Open','status','Y'),
+ (252,'task.status','Planned','status','Y'),
+ (253,'task.status','Rejected','status','Y'),
+ (254,'task.status','Unassigned','status','Y'),
+ (255,'task.status','Waiting for Approval','status','Y'),
+ (256,'Working','Working','task.status','Y'),
+ (257,'Receivable','Receivable','type.account','Y'),
+ (258,'type.account','Payable','account','Y'),
+ (259,'bc.type','Bank','type','Y'),
+ (260,'bc.type','Cash','type','Y'),
+ (261,'month.name','January','name','Y'),
+ (262,'month.name','February','name','Y'),
+ (263,'month.name','March','name','Y'),
+ (264,'month.name','April','name','Y'),
+ (265,'month.name','May','name','Y'),
+ (266,'month.name','June','name','Y'),
+ (267,'month.name','July','name','Y'),
+ (268,'month.name','August','name','Y'),
+ (269,'month.name','September','name','Y'),
+ (270,'month.name','October','name','Y'),
+ (271,'month.name','November','name','Y'),
+ (272,'month.name','December','name','Y'),
+ (273,'attend.status','Present','status','Y'),
+ (274,'attend.status','Absent','status','Y'),
+ (275,'emp.holiday','Sunday','holiday','Y'),
+ (276,'emp.holiday','Monday','holiday','Y'),
+ (277,'emp.holiday','Tuesday','holiday','Y'),
+ (278,'emp.holiday','Wednesday','holiday','Y'),
+ (279,'emp.holiday','Thursday','holiday','Y'),
+ (280,'emp.holiday','Friday','holiday','Y'),
+ (281,'emp.holiday','Saturday','holiday','Y'),
+ (282,'purchase.taxstatus','Enabled','taxstatus','Y'),
+ (283,'purchase.taxstatus','Disabled','taxstatus','Y'),
+ (284,'exceed.type','Warn','type','Y'),
+ (285,'exceed.type','Stop','type','Y'),
+ (286,'exceed.type','Ignore','type','Y'),
+ (287,'ProdOrder.status','Draft','status','Y'),
+ (288,'ProdOrder.status','Notstarted','status','Y'),
+ (289,'ProdOrder.status','Submitted','status','Y'),
+ (290,'ProdOrder.status','Stopped','status','Y'),
+ (291,'ProdOrder.status','Unstopped','status','Y'),
+ (292,'ProdOrder.status','In-Process','status','Y'),
+ (293,'ProdOrder.status','Completed','status','Y'),
+ (294,'ProdOrder.status','Cancelled','status','Y'),
+ (295,'Dummy.status','Dummy1','dummy','Y'),
+ (296,'Dummy.status','Dummy2','dummy','Y'),
+ (297,'Dummy.status','Dummy3','dummy','Y'),
+ (298,'Year.status','2020','year','Y'),
+ (299,'Year.status','2021','year','Y'),
+ (300,'Year.status','2022','year','Y'),
+ (301,'Year.status','2023','year','Y'),
+ (302,'Year.status','2024','year','Y'),
+ (303,'Year.status','2025','year','Y'),
+ (304,'StartYear.status','2021','startyear','Y'),
+ (305,'StartYear.status','2022','startyear','Y'),
+ (306,'StartYear.status','2023','startyear','Y'),
+ (307,'StartYear.status','2024','startyear','Y'),
+ (308,'StartYear.status','2025','startyear','Y'),
+ (309,'StartYear.status','2026','startyear','Y'),
+ (310,'StartYear.status','2027','startyear','Y'),
+ (311,'StartYear.status','2028','startyear','Y'),
+ (312,'StartYear.status','2029','startyear','Y'),
+ (313,'StartYear.status','2030','startyear','Y'),
+ (314,'StartYear.status','2031','startyear','Y'),
+ (315,'StartYear.status','2032','startyear','Y'),
+ (316,'StartYear.status','2033','startyear','Y'),
+ (317,'StartYear.status','2034','startyear','Y'),
+ (318,'StartYear.status','2035','startyear','Y'),
+ (319,'StartYear.status','2036','startyear','Y'),
+ (320,'StartYear.status','2037','startyear','Y'),
+ (321,'StartYear.status','2038','startyear','Y'),
+ (322,'StartYear.status','2039','startyear','Y'),
+ (323,'StartYear.status','2040','startyear','Y'),
+ (324,'EndYear.status','2021','endyear','Y'),
+ (325,'EndYear.status','2022','endyear','Y'),
+ (326,'EndYear.status','2023','endyear','Y'),
+ (327,'EndYear.status','2024','endyear','Y'),
+ (328,'EndYear.status','2025','endyear','Y'),
+ (329,'EndYear.status','2026','endyear','Y'),
+ (330,'EndYear.status','2027','endyear','Y'),
+ (331,'EndYear.status','2028','endyear','Y'),
+ (332,'EndYear.status','2029','endyear','Y'),
+ (333,'EndYear.status','2030','endyear','Y'),
+ (334,'EndYear.status','2031','endyear','Y'),
+ (335,'EndYear.status','2032','endyear','Y'),
+ (336,'EndYear.status','2033','endyear','Y'),
+ (337,'EndYear.status','2034','endyear','Y'),
+ (338,'EndYear.status','2035','endyear','Y'),
+ (339,'EndYear.status','2036','endyear','Y'),
+ (340,'EndYear.status','2037','endyear','Y'),
+ (341,'EndYear.status','2038','endyear','Y'),
+ (342,'EndYear.status','2039','endyear','Y'),
+ (343,'EndYear.status','2040','endyear','Y'),
+ (344,'Register.status','In Progress','register','Y'),
+ (345,'Register.status','Pending','register','Y'),
+ (346,'Register.status','Cancel','register','Y'),
+ (347,'Register.status','Authorization','register','Y'),
+ (348,'Register.status','New','register','Y');
+/*!40000 ALTER TABLE `systemproperties001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `user001mb`
+--
+
+DROP TABLE IF EXISTS `user001mb`;
+CREATE TABLE `user001mb` (
+  `userid` int(11) NOT NULL AUTO_INCREMENT,
+  `userroleid` int(11) NOT NULL,
+  `firstname` varchar(30) NOT NULL,
+  `lastname` varchar(30) NOT NULL,
+  `zipcode` int(11) DEFAULT NULL,
+  `dob` datetime DEFAULT NULL,
+  `email` varchar(30) NOT NULL,
+  `confirmemail` varchar(30) NOT NULL,
+  `sex` tinyint(4) NOT NULL,
+  `address1` varchar(50) NOT NULL,
+  `address2` varchar(50) NOT NULL,
+  `address3` varchar(50) NOT NULL,
+  `city` varchar(30) NOT NULL,
+  `state` varchar(30) NOT NULL,
+  `country` varchar(30) NOT NULL,
+  `mobile` int(10) NOT NULL,
+  `landline` int(11) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`userid`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user001mb`
+--
+
+/*!40000 ALTER TABLE `user001mb` DISABLE KEYS */;
+INSERT INTO `user001mb` (`userid`,`userroleid`,`firstname`,`lastname`,`zipcode`,`dob`,`email`,`confirmemail`,`sex`,`address1`,`address2`,`address3`,`city`,`state`,`country`,`mobile`,`landline`,`insert_user`,`insert_datetime`,`updated_user`,`updated_datetime`) VALUES 
+ (1,62,'chandrasekaran','L',NULL,NULL,'kavichandran877@gmail.com','',0,'','','','','','',0,0,'siva','2021-10-22 16:41:43',NULL,'2021-10-22 16:41:43'),
+ (2,64,'Moorthy','P',NULL,NULL,'moorthyp2096@gmail.com','',0,'','','','','','',0,0,'Aravinth','2021-12-23 12:32:25',NULL,'2021-12-23 12:32:25');
+/*!40000 ALTER TABLE `user001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `userrole001mb`
+--
+
+DROP TABLE IF EXISTS `userrole001mb`;
+CREATE TABLE `userrole001mb` (
+  `userroleid` int(11) NOT NULL AUTO_INCREMENT,
+  `loginid` int(11) NOT NULL,
+  `role` varchar(45) NOT NULL,
+  `username` varchar(45) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`userroleid`)
+) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `userrole001mb`
+--
+
+/*!40000 ALTER TABLE `userrole001mb` DISABLE KEYS */;
+INSERT INTO `userrole001mb` (`userroleid`,`loginid`,`role`,`username`,`insert_user`,`insert_datetime`,`updated_user`,`updated_datetime`) VALUES 
+ (39,46,'ROLE_ADMIN','sss','','0000-00-00 00:00:00',NULL,NULL),
+ (40,47,'','tamil K','','0000-00-00 00:00:00',NULL,NULL),
+ (41,48,'','etdtdd','','0000-00-00 00:00:00',NULL,NULL),
+ (42,49,'','tamil','','0000-00-00 00:00:00',NULL,NULL),
+ (43,50,'ROLE_USER','raj','','0000-00-00 00:00:00',NULL,NULL),
+ (44,51,'','selvamRaja','','0000-00-00 00:00:00',NULL,NULL),
+ (45,62,'','aaa','insertuser','2021-09-03 11:19:04',NULL,'2021-09-03 11:19:05'),
+ (46,63,'ROLE_USER','latha','insertuser','2021-09-03 11:20:13','updateuser','2021-09-03 11:20:39'),
+ (47,64,'','fff','insertuser','2021-09-03 11:46:35',NULL,'2021-09-03 11:46:35'),
+ (48,65,'','rizwana','insertuser','2021-09-06 13:18:33',NULL,'2021-09-06 13:18:33'),
+ (49,66,'','rizwana','insertuser','2021-09-06 13:19:15',NULL,'2021-09-06 13:19:16'),
+ (50,67,'','rizwana','insertuser','2021-09-06 13:19:27',NULL,'2021-09-06 13:19:28'),
+ (51,68,'','rizwana','insertuser','2021-09-06 13:19:28',NULL,'2021-09-06 13:19:28'),
+ (52,69,'','rizwana','insertuser','2021-09-06 13:19:28',NULL,'2021-09-06 13:19:28'),
+ (53,70,'','rizwana','insertuser','2021-09-06 13:19:54',NULL,'2021-09-06 13:19:54'),
+ (54,71,'','rizwana','insertuser','2021-09-06 13:19:54',NULL,'2021-09-06 13:19:54'),
+ (55,72,'','rizwana','insertuser','2021-09-06 13:19:54',NULL,'2021-09-06 13:20:32'),
+ (56,73,'','rizwana','insertuser','2021-09-06 13:21:41',NULL,'2021-09-06 13:21:42'),
+ (57,74,'','rizwana','insertuser','2021-09-06 13:21:42',NULL,'2021-09-06 13:21:42'),
+ (58,75,'','rizwana','insertuser','2021-09-06 13:21:53',NULL,'2021-09-06 13:21:53'),
+ (59,76,'','rizwana','insertuser','2021-09-06 13:21:53',NULL,'2021-09-06 13:21:53'),
+ (60,77,'','rizwana','insertuser','2021-09-06 13:25:01',NULL,'2021-09-06 13:25:01'),
+ (61,78,'','rizwana','insertuser','2021-09-06 13:25:17',NULL,'2021-09-06 13:25:17'),
+ (62,79,'ROLE_GUEST','sekar','siva','2021-10-22 16:41:43',NULL,'2021-10-22 16:41:43'),
+ (63,80,'ROLE_GUEST','Aravinth','sekar','2021-12-23 12:02:13',NULL,'2021-12-23 12:02:14'),
+ (64,81,'ROLE_GUEST','moorthy','Aravinth','2021-12-23 12:32:25',NULL,'2021-12-23 12:32:25');
+/*!40000 ALTER TABLE `userrole001mb` ENABLE KEYS */;
+
+
+
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
