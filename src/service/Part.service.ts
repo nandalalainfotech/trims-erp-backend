@@ -26,13 +26,13 @@ export class PartService {
 
         let partspecific001wbs: Partspecific001wb[] = [];
 
-        for (let i = 0; i < partDTO.partspecific.length; i++) {
+        for (let i = 0; i < partDTO.partspecific001wbs.length; i++) {
             const partspecific001wb = new Partspecific001wb();
 
-            partspecific001wb.partslno2 = partDTO.partspecific[i].partslno2;
-            partspecific001wb.parameter = partDTO.partspecific[i].parameter;
-            partspecific001wb.specification = partDTO.partspecific[i].specification;
-            partspecific001wb.inspecmethod = partDTO.partspecific[i].inspecmethod;
+            partspecific001wb.partslno2 = partDTO.partspecific001wbs[i].partslno2;
+            partspecific001wb.parameter = partDTO.partspecific001wbs[i].parameter;
+            partspecific001wb.specification = partDTO.partspecific001wbs[i].specification;
+            partspecific001wb.inspecmethod = partDTO.partspecific001wbs[i].inspecmethod;
             partspecific001wb.unitslno = partDTO.unitslno;
             partspecific001wb.insertUser = partDTO.insertUser;
             partspecific001wb.insertDatetime = partDTO.insertDatetime;
@@ -53,6 +53,22 @@ export class PartService {
     }
     
     async update(partDTO: PartDTO): Promise<Part001mb> {
+
+        for (let i = 0; i < partDTO.partspecific001wbs.length; i++) {
+            const partspecific001wb = new Partspecific001wb();
+
+            partspecific001wb.partslno = partDTO.partspecific001wbs[i].partslno;
+            partspecific001wb.parameter = partDTO.partspecific001wbs[i].parameter;
+            partspecific001wb.specification = partDTO.partspecific001wbs[i].specification;
+            partspecific001wb.inspecmethod = partDTO.partspecific001wbs[i].inspecmethod;
+
+            partspecific001wb.unitslno = partDTO.unitslno;
+            partspecific001wb.updatedUser = partDTO.updatedUser;
+            partspecific001wb.updatedDatetime = partDTO.updatedDatetime;
+
+            await this.partspecificRepository.update({slNo: partDTO.partspecific001wbs[i].slNo},partspecific001wb);
+        }
+
         const part001mb = new Part001mb();
         part001mb.setProperties(partDTO);
         await this.PartRepository.update({ slNo: part001mb.slNo }, part001mb);
@@ -60,7 +76,7 @@ export class PartService {
     }
 
     async findAll(unitslno:any): Promise<Part001mb[]> {        
-        return this.PartRepository.find({order: { slNo: "DESC" },where:{unitslno:unitslno}})
+        return this.PartRepository.find({order: { slNo: "DESC" },where:{unitslno:unitslno},relations: ["partspecific001wbs"]})
     }
   
     async getCount(): Promise<string> {

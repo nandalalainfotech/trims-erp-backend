@@ -38,6 +38,25 @@ export class SupplierRegistrationController {
     async downloadExcel(@Param('unitslno') unitslno: number,@Req() request: Request, @Res() response: Response) {
         return await this.supplierRegService.downloadExcel(unitslno,request, response);
     }
+
+    @hasRole(Role.superadmin, Role.admin, Role.user, Role.guest)
+	@UseGuards(JwtAuthGuard, RolesGuard)
+	@Get('pdfId/:id/:unitslno')
+	@Header('Content-Type', 'application/pdf')
+	async downloadIDPdf(@Param('unitslno') unitslno: number,@Param('id') id: number,@Req() request: Request, @Res() response: Response) {
+		return await this.supplierRegService.downloadIDPdf(unitslno,id, request,response);
+	}
+
+    @hasRole(Role.superadmin, Role.admin, Role.user, Role.guest)
+	@UseGuards(JwtAuthGuard, RolesGuard)
+	@Get('excelID/:id/:unitslno')
+	@Header("Content-Type",
+		"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+	@Header("Content-Disposition",
+		"attachment; filename=" + "Attendace Report" + ".xlsx")
+	async downloadIDExcel(@Param('unitslno') unitslno: number,@Param('id') id: number,@Req() request: Request, @Res() response: Response) {
+		return await this.supplierRegService.downloadIDExcel(unitslno,id,request, response);
+	}
     
     @hasRole(Role.superadmin, Role.admin, Role.user)
     @UseGuards(JwtAuthGuard, RolesGuard)

@@ -23,7 +23,7 @@ export class ConsumbleDTO {
     updatedUser: string | null;
     updatedDatetime: Date | null;
 
-    consumerspecification: Consumerspecification001wb[];
+    consumerspecification001wbs: Consumerspecification001wb[];
   
     setProperties(consumble001mb: Consumble001mb) {
         this.slNo = consumble001mb.slNo;

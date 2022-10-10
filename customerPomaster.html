@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <style>
+      th {
+        border: 1px solid black;
+        text-align: center;
+      }
+      td {
+        border: 1px solid black;
+        text-align: center;
+        font-size: 16px;
+      }
+      .pagebreak {
+            page-break-inside: avoid;
+            /* page-break-before: avoid;
+            page-break-after: avoid; */
+        }
+
+        .even {
+            page-break-inside: avoid;
+            /* page-break-before: avoid;
+            page-break-after: avoid; */
+        }
+      table {
+        border-spacing: 0;
+      }
+
+      p {
+      font-weight: bold;
+      font-size: 18px;
+      }
+      
+     
+     
+    </style>
+</head>
+
+<body>
+   
+    <table style="width: 100%;padding-top: 120px;" class="pagebreak">
+        <tr>
+            <th colspan="4" rowspan="4" style="vertical-align : middle;text-align:center;width: 20px;border-right: 1px solid black;">TRIMS</th>
+
+            <th colspan="27" rowspan="2" style="text-align:center;width: 100%;">
+                SRINIVASA ENTERPRISES</th>
+
+            <th colspan="4" style="font-size: small;text-align:left;">FormatNo.SE/MTN/RO</th>
+        </tr>
+
+        <tr>
+            <th colspan="4" style="font-size: small;width: 5%;text-align:left;">Issue Date:</th>
+        </tr>
+
+        <tr>
+            <th colspan="27" rowspan="2" style="text-align:center;">CUSTOMER PO DETAILS</th>
+            <th colspan="4" style="font-size: small;width: 5%;text-align:left;">Rev.No.00</th>
+        </tr>
+
+        <tr>
+            <th colspan="4" style="font-size: small;width: 5%;text-align:left;">Rev Date:</th>
+        </tr>
+        {{#each CustomerPomaster}}
+
+        <tr style="height: 50px">
+           {{#ifcustemercode 'custemercode'}}
+            <td colspan="10"style="width: 50px">
+              <p class="spans">Customer Code:</p>{{this.custemercode}}
+            </td>
+            {{/ifcustemercode}}
+            <td colspan="10">
+              <p class="spans">Customer Name:</p>{{this.custemername}}
+            </td>
+            <td colspan="10">
+              <p class="spans">Custemer PO No:</p>{{this.custemerPONo}}
+            </td>
+            <td colspan="5">
+                <p class="spans">PO Date:</p>{{this.poDate}}
+            </td>
+        </tr>
+
+        <tr style="height: 50px">
+            <td colspan="10"style="width: 50px">
+              <p class="spans">Delivery Date:</p>{{this.deliveryDate}}
+            </td>
+            <td colspan="10">
+              <p class="spans">Packing Condition:</p>{{this.packing}}
+            </td>
+            <td colspan="10">
+              <p class="spans">Logistic Condition:</p>{{this.logistic}}
+            </td>
+            <td colspan="5">
+                <p class="spans">Inspection Condition:</p>{{this.inspection}}
+            </td>
+        </tr>
+
+        <tr>
+            <th colspan="3">Part Code</th>
+            <th colspan="3">Part Name</th>
+            <th colspan="3">Description</th>
+            <th colspan="3">UOM</th>
+            <th colspan="3">HSN/SAC</th>
+            <th colspan="3">Unit Rate</th>
+            <th colspan="3">Quantity</th>
+            <th colspan="3">TotalAmount</th>
+            <th colspan="3">Drawing No</th>
+            <th colspan="3">Revision No</th>
+            <th colspan="2">Revision Date</th>
+            <th colspan="2">HSN/SAC</th>
+            <th colspan="1">GST %</th>
+        </tr>
+    
+        {{#each this.customerpoitem001wbs}}    
+        {{#ifprtcode 'prtcode'}}
+        <tr>
+            <td colspan="3">{{this.prtcode}}</td>
+            <td colspan="3">{{this.prtmname}}</td>
+            <td colspan="3">{{this.prtdescrip}}</td>
+            <td colspan="3">{{this.prtuom}}</td>
+            <td colspan="3">{{this.prthsn}}</td>
+            <td colspan="3">{{this.prtunitrate}}</td>
+            <td colspan="3">{{this.prtqunty}}</td>
+            <th colspan="3">{{this.prttotalamount}}</td>
+            <td colspan="3">{{this.drawingNo}}</td>
+            <td colspan="3">{{this.revisionNo}}</td>
+            <td colspan="2">{{this.revisionDate}}</td>
+            <td colspan="2">{{this.hsn}}</td>
+            <td colspan="1">{{this.gst}}</td>
+        </tr>
+        {{/ifprtcode}}
+        {{/each}} 
+        {{/each}}
+    </table>
+   
+</body>
+
+</html>
+

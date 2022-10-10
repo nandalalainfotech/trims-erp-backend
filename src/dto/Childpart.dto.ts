@@ -22,7 +22,7 @@ export class ChildPartDTO {
   updatedUser: string | null;
   updatedDatetime: Date | null;
 
-  childpartspecification: Childpartspecification001wb[];
+  childpartspecification001wbs: Childpartspecification001wb[];
 
   setProperties(childpart001mb: Childpart001mb) {
     this.slNo = childpart001mb.slNo;

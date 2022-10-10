@@ -1362,7 +1362,7 @@ export class MaterialinwardService {
         richText: [
           { font: { size: 11 }, text: Totalwords + "\n\n" },
           { text: "Only" + "\n\n" },
-          { text: "Terms and Conditions" + "\n\n" },
+          // { text: "Terms and Conditions" + "\n\n" },
         ],
       };
       worksheet.getCell(order).alignment = {
@@ -2283,7 +2283,7 @@ export class MaterialinwardService {
         richText: [
           { font: { size: 11 }, text: Totalwords + "\n\n" },
           { text: "Only" + "\n\n" },
-          { text: "Terms and Conditions" + "\n\n" },
+          // { text: "Terms and Conditions" + "\n\n" },
         ],
       };
       worksheet.getCell(order).alignment = {

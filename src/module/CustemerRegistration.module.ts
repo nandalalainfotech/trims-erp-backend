@@ -1,6 +1,7 @@
 import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { CustemerRegistrationController } from "src/controller/CustemerRegistration.controller";
+import { Consignee001mb } from "src/entity/Consignee001mb";
 import { Custemerregistration001mb } from "src/entity/Custemerregistration001mb";
 import { Customercontact001wb } from "src/entity/customercontact001wb";
 import { Person001mb } from "src/entity/Person001mb";
@@ -9,7 +10,7 @@ import { CustemerRegistrationService } from "src/service/CustemerRegistration.se
 
 
 @Module({
-    imports: [TypeOrmModule.forFeature([Custemerregistration001mb,Customercontact001wb,User001mb,Person001mb])],
+    imports: [TypeOrmModule.forFeature([Custemerregistration001mb,Customercontact001wb,User001mb,Person001mb,Consignee001mb])],
     providers: [CustemerRegistrationService],
     controllers: [CustemerRegistrationController],
 })

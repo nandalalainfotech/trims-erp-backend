@@ -35,8 +35,8 @@ export class Consignee001mb {
   @Column("varchar", { name: "address3", nullable: true, length: 150 })
   address3: string | null;
 
-  @Column("int", { name: "gst_in", nullable: true })
-  gstIn: number | null;
+  @Column("varchar", { name: "gst_in", nullable: true, length: 50 })
+  gstIn: string | null;
 
   @Column("varchar", { name: "city", nullable: true, length: 30 })
   city: string | null;

@@ -6,6 +6,7 @@ import { Partspecific001wb } from "./Partspecific001wb";
 import { Purchasereqitem001wb } from "./Purchasereqitem001wb";
 import { Rawmaterialinspection001wb } from "./Rawmaterialinspection001wb";
 import { Returnstock001wb } from "./Returnstock001wb";
+import { Custemer001wb } from "./Custemer001wb";
 
 @Entity("part001mb", { schema: "trims" })
 export class Part001mb {
@@ -94,6 +95,9 @@ export class Part001mb {
 
   @OneToMany(() => Partitem001wb, (partitem001wb) => partitem001wb.prtcode2)
   partitem001wbs: Partitem001wb[];
+
+  @OneToMany(() => Custemer001wb, (custemer001wb) => custemer001wb.prtcode2)
+  custemer001wbs: Custemer001wb[];
 
   setProperties(partDTO: PartDTO) {
     this.slNo = partDTO.slNo;

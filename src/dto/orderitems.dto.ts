@@ -24,7 +24,7 @@ export class OrderItemMbDTO {
     updatedDatetime: Date | null;
     pslno2:any
 
-    Orderitemspecification:Orderitemspecification001wb[];
+    orderitemspecification001wbs:Orderitemspecification001wb[];
     
 
     setProperties(orderitem001mb: Orderitem001mb) {

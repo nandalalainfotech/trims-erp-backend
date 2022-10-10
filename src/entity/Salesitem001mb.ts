@@ -1,6 +1,5 @@
 import { SalesItemMbDTO } from "src/dto/SalesItem.dto";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Custemer001wb } from "./Custemer001wb";
 
 @Entity("salesitem001mb", { schema: "trims" })
 export class Salesitem001mb {
@@ -43,11 +42,7 @@ export class Salesitem001mb {
   @Column("datetime", { name: "updated_datetime", nullable: true })
   updatedDatetime: Date | null;
 
-  @OneToMany(
-    () => Custemer001wb,
-    (custemer001wb) => custemer001wb.custemerSlno2
-  )
-  custemer001wbs: Custemer001wb[];
+ 
 
   setProperties(salesItemMbDTO: SalesItemMbDTO) {
     this.slNo=salesItemMbDTO.slNo;

@@ -1,269 +1,272 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <style>
-      th {
-        border: 1px solid black;
-        text-align: center;
-      }
-      td {
-        border: 1px solid black;
-        text-align: left !important;
-        font-size: 16px;
-      }
-      .pagebreak {
-            page-break-inside: avoid;
-            /* page-break-before: avoid;
+
+<head>
+  <meta charset="utf-8" />
+  <style>
+    th {
+      border: 1px solid black;
+      text-align: center;
+    }
+
+    td {
+      border: 1px solid black;
+      text-align: left !important;
+      font-size: 16px;
+    }
+
+    .pagebreak {
+      page-break-inside: avoid;
+      /* page-break-before: avoid;
             page-break-after: avoid; */
-        }
+    }
 
-        .even {
-            page-break-inside: avoid;
-            /* page-break-before: avoid;
+    .even {
+      page-break-inside: avoid;
+      /* page-break-before: avoid;
             page-break-after: avoid; */
-        }
-      table {
-        border-spacing: 0;
-      }
-      .total {
-        text-align: right !important;
-        font-size: 16px;
-      }
-      .data {
-        text-align: center !important;
-        font-size: 16px;
-      }
-      p {
-        font-weight: bold;
-        font-size: 22px;
-      }
-    </style>
-  </head>
-  <body>
-    {{#each purchaseOrder}}
+    }
 
-    <table style="width: 100%" class="pagebreak">
-      <tr>
-        <th
-          colspan="15"
-          style="
-            width: 30px;
-            height: 20px;
-            font-size: 20px;
-            font-family: verdana;
-            padding-top: 120px;
-            border: none;
-          "
-        >
-          PURCHASE ORDER
-        </th>
-      </tr>
-      <tr style="height: 50px">
-        <td colspan="9"style="width: 50px">
-          <p class="spans">Supplier Code:</p>{{this.suplierSlno2.supplierSlno2.supplierCode}}
-        </td>
-        <td colspan="3">
-          <p class="spans">Supplier Name:</p>{{this.suplierName}}
-        </td>
-        <td colspan="3">
-          <p class="spans">Consignee No (Ship To):</p>{{this.suplieraddress}}
-        </td>
-      </tr>
-      <tr style="height: 50px">
-        <td colspan="9" style="width: 50px">
-          <p class="spans">PO No:</p>{{this.pono}}
-        </td>
-        <td colspan="3">
-          <p class="spans">PRS No:</p>{{this.suplierSlno2.prsno2.prsNo}}
-        </td>
-        <td colspan="3">
-          <p class="spans">Date:</p>{{this.date}}
-        </td>
-      </tr>
+    table {
+      border-spacing: 0;
+    }
 
-      <tr style="height: 50px">
-        <td colspan="9" style="width: 50px">
-          <p class="spans">Quotation No:</p>{{this.qno}}
-        </td>
-        <td colspan="3">
-          <p class="spans">Dispached Through:</p>{{this.dispatchThrough}}
-        </td>
-        <td colspan="3">
-          <p class="spans">Destination:</p>{{this.destination}}
-        </td>
-      </tr>
+    .total {
+      text-align: right !important;
+      font-size: 16px;
+    }
 
-      <tr style="height: 50px">
-        <td colspan="7">
-          <p class="spans">Consignee No (Ship To):</p>{{this.suplieraddress}}
-        </td>
-        <td colspan="8">
-          <p class="spans">Due On:</p>{{this.dueOn}}
-        </td>
-      </tr>
+    .data {
+      text-align: center !important;
+      font-size: 16px;
+    }
 
-      <tr style="height: 50px">
-        <td colspan="7">
-          <p class="spans">Supplier (Bill From):</p>{{this.supplierFrom}}
-        </td>
-        <td colspan="8">
-          <p class="spans">Terms Of Delivery:</p>{{this.termsDelivery}}
-        </td>
-      </tr>
-      
-     
-      <tr style="height: 30px">
-        <th colspan="1" class="data">SL: No</th>
-            <th colspan="3" class="data">item code</th>
-            <th colspan="3" class="data">item name</th>
-            <th colspan="3" class="data">Description</th>
-            <th colspan="1" class="data">UOM</th>
-            <th colspan="1" class="data">UnitRate</th>
-            <th colspan="1" class="data">Hsn</th>
-            <th colspan="1" class="data">Quantity</th>
-            <th colspan="2" class="data">TotalAmount</th>
-      </tr>
+    p {
+      font-weight: bold;
+      font-size: 22px;
+    }
+  </style>
+</head>
 
-      {{#each this.orderitem001wbs}}
+<body>
+  {{#each purchaseOrder}}
 
-      {{#iforderslno 'orderslno'}}
-        <tr style="height: 30px;">
-           <td colspan="1" class="data">{{this.slNo}}</td>
-           <td colspan="3" class="data">{{this.itemcode}}</td>
-           <td colspan="3" class="data">{{this.itemname}}</td>
-           <td colspan="3" class="data">{{this.descrip}}</td>
-           <td colspan="1" class="data">{{this.uom}}</td>
-           <td colspan="1" class="data">{{this.unitrate}}</td>
-           <td colspan="1" class="data">{{this.hsn}}</td>
-           <td colspan="1" class="data">{{this.qunty}}</td>
-           <td colspan="2" class="data">{{this.totalamount}}</td>
-       </tr>
-       {{/iforderslno}}
-     
-       {{#ifcucode 'cucode'}}
-       <tr style="height: 30px;">
-           <td colspan="1" class="data">{{this.slNo}}</td>
-           <td colspan="3" class="data">{{this.itemcode}}</td>
-           <td colspan="3" class="data">{{this.cuname}}</td>
-           <td colspan="3" class="data">{{this.cudescrip}}</td>
-           <td colspan="1" class="data">{{this.cuom}}</td>
-           <td colspan="1" class="data">{{this.cunitrate}}</td>
-           <td colspan="1" class="data">{{this.chsn}}</td>
-           <td colspan="1" class="data">{{this.cuqunty}}</td>
-           <td colspan="2" class="data">{{this.cutotalamount}}</td>
-       </tr>
-       {{/ifcucode}}
+  <table style="width: 100%" style="width: 100%;padding-top: 120px;">
+    <tr>
+      <th colspan="15" style="width: 30px;height: 40px;font-size: 24px;font-family: verdana;">SRINIVASA ENTERPRISES</th>
+   </tr>
+   <tr>
+    <th colspan="15" style="width: 30px;height: 30px;font-size: 20px;font-family: verdana;">PURCHASE ORDER</th>
+   </tr>
+    <tr style="height: 50px">
+      <td colspan="9" style="width: 50px">
+        <p class="spans">Supplier Code:</p>{{this.suplierSlno2.supplierSlno2.supplierCode}}
+      </td>
+      <td colspan="3">
+        <p class="spans">Supplier Name:</p>{{this.suplierName}}
+      </td>
+      <td colspan="3">
+        <p class="spans">Consignee No (Ship To):</p>{{this.suplieraddress}}
+      </td>
+    </tr>
+    <tr style="height: 50px">
+      <td colspan="9" style="width: 50px">
+        <p class="spans">PO No:</p>{{this.pono}}
+      </td>
+      <td colspan="3">
+        <p class="spans">PRS No:</p>{{this.suplierSlno2.prsno2.prsNo}}
+      </td>
+      <td colspan="3">
+        <p class="spans">Date:</p>{{this.date}}
+      </td>
+    </tr>
 
-        {{#ifcptcode 'cptcode'}}
-        <tr style="height: 30px;">
-            <td colspan="1" class="data">{{this.slNo}}</td>
-            <td colspan="3" class="data">{{this.itemcode}}</td>
-            <td colspan="3" class="data">{{this.cptname}}</td>
-            <td colspan="3" class="data">{{this.cptdescrip}}</td>
-            <td colspan="1" class="data">{{this.cptuom}}</td>
-            <td colspan="1" class="data">{{this.cptunitrate}}</td>  
-            <td colspan="1" class="data">{{this.cpthsn}}</td>
-            <td colspan="1" class="data">{{this.cptqunty}}</td>
-            <td colspan="2" class="data">{{this.cpttotalamount}}</td>
-        </tr>
-        {{/ifcptcode}}
+    <tr style="height: 50px">
+      <td colspan="9" style="width: 50px">
+        <p class="spans">Quotation No:</p>{{this.qno}}
+      </td>
+      <td colspan="3">
+        <p class="spans">Dispached Through:</p>{{this.dispatchThrough}}
+      </td>
+      <td colspan="3">
+        <p class="spans">Destination:</p>{{this.destination}}
+      </td>
+    </tr>
 
-        {{#ifprtcode 'prtcode'}}
-        <tr style="height: 30px;">
-            <td colspan="1" class="data">{{this.slNo}}</td>
-            <td colspan="3" class="data">{{this.itemcode}}</td>
-            <td colspan="3" class="data">{{this.prtmname}}</td>
-            <td colspan="3" class="data">{{this.prtdescrip}}</td>
-            <td colspan="1" class="data">{{this.prtuom}}</td>
-            <td colspan="1" class="data">{{this.prtunitrate}}</td>
-            <td colspan="1" class="data">{{this.prthsn}}</td>
-            <td colspan="1" class="data">{{this.prtqunty}}</td>
-            <td colspan="2" class="data">{{this.prttotalamount}}</td>
-        </tr>
-        {{/ifprtcode}} 
-      {{/each}}
-      
-      {{#iftotalamount 'totalamount'}}
-      <tr style="height: 30px;">
-          <td colspan="1" class="data"></td>
-          <td colspan="3" class="total"></td>
-          <td colspan="3" class="data"></td>
-          <td colspan="3" class="data"></td>
-          <td colspan="1" class="data"></td>
-          <td colspan="1" class="data"></td>
-          <td colspan="1" class="data"></td>
-          <td colspan="1" class="data">Total</td>
-          <td colspan="2" class="data">{{this.tAmount}}</td>
-      </tr>
+    <tr style="height: 50px">
+      <td colspan="7">
+        <p class="spans">Consignee No (Ship To):</p>{{this.suplieraddress}}
+      </td>
+      <td colspan="8">
+        <p class="spans">Due On:</p>{{this.dueOn}}
+      </td>
+    </tr>
 
-      <tr style="height: 100px">
-          <td colspan="15">Amount Chargeable (in words)<br><br>{{this.tWords}} ONLY
-              <br><br>Terms and Conditions:</td>
-      </tr>
-      {{/iftotalamount}}
+    <tr style="height: 50px">
+      <td colspan="7">
+        <p class="spans">Supplier (Bill From):</p>{{this.supplierFrom}}
+      </td>
+      <td colspan="8">
+        <p class="spans">Terms Of Delivery:</p>{{this.termsDelivery}}
+      </td>
+    </tr>
 
-      {{#ifcutotalamount 'cutotalamount'}}
-      <tr style="height: 30px;">
-          <td colspan="1" class="data"></td>
-          <td colspan="3" class="total"></td>
-          <td colspan="3" class="data"></td>
-          <td colspan="3" class="data"></td>
-          <td colspan="1" class="data"></td>
-          <td colspan="1" class="data"></td>
-          <td colspan="1" class="data"></td>
-          <td colspan="1" class="data">Total</td>
-          <td colspan="2" class="data">{{this.tAmount}}</td>
-      </tr>
 
-      <tr style="height: 100px">
-          <td colspan="15">Amount Chargeable (in words)<br><br>{{this.tWords}} ONLY
-              <br><br>Terms and Conditions:</td>
-      </tr>
-      {{/ifcutotalamount}}
+    <tr style="height: 30px">
+      <th colspan="1" class="data">SL: No</th>
+      <th colspan="3" class="data">item code</th>
+      <th colspan="3" class="data">item name</th>
+      <th colspan="3" class="data">Description</th>
+      <th colspan="1" class="data">UOM</th>
+      <th colspan="1" class="data">UnitRate</th>
+      <th colspan="1" class="data">Hsn</th>
+      <th colspan="1" class="data">Quantity</th>
+      <th colspan="2" class="data">TotalAmount</th>
+    </tr>
 
-      {{#ifcpttotalamount 'cpttotalamount'}}
-      <tr style="height: 30px;">
-          <td colspan="1" class="data"></td>
-          <td colspan="3" class="total"></td>
-          <td colspan="3" class="data"></td>
-          <td colspan="3" class="data"></td>
-          <td colspan="1" class="data"></td>
-          <td colspan="1" class="data"></td>
-          <td colspan="1" class="data"></td>
-          <td colspan="1" class="data">Total</td>
-          <td colspan="2" class="data">{{this.tAmount}}</td>
-      </tr>
+    {{#each this.orderitem001wbs}}
 
-      <tr style="height: 100px">
-          <td colspan="15">Amount Chargeable (in words)<br><br>{{this.tWords}} ONLY
-              <br><br>Terms and Conditions:</td>
-      </tr>
-      {{/ifcpttotalamount}}
+    {{#iforderslno 'orderslno'}}
+    <tr style="height: 30px;">
+      <td colspan="1" class="data">{{this.slNo}}</td>
+      <td colspan="3" class="data">{{this.itemcode}}</td>
+      <td colspan="3" class="data">{{this.itemname}}</td>
+      <td colspan="3" class="data">{{this.descrip}}</td>
+      <td colspan="1" class="data">{{this.uom}}</td>
+      <td colspan="1" class="data">{{this.unitrate}}</td>
+      <td colspan="1" class="data">{{this.hsn}}</td>
+      <td colspan="1" class="data">{{this.qunty}}</td>
+      <td colspan="2" class="data">{{this.totalamount}}</td>
+    </tr>
+    {{/iforderslno}}
 
-      {{#ifprttotalamount 'prttotalamount'}}
-      <tr style="height: 30px;">
-          <td colspan="1" class="data"></td>
-          <td colspan="3" class="total"></td>
-          <td colspan="3" class="data"></td>
-          <td colspan="3" class="data"></td>
-          <td colspan="1" class="data"></td>
-          <td colspan="1" class="data"></td>
-          <td colspan="1" class="data"></td>
-          <td colspan="1" class="data">Total</td>
-          <td colspan="2" class="data">{{this.tAmount}}</td>
-      </tr>
+    {{#ifcucode 'cucode'}}
+    <tr style="height: 30px;">
+      <td colspan="1" class="data">{{this.slNo}}</td>
+      <td colspan="3" class="data">{{this.itemcode}}</td>
+      <td colspan="3" class="data">{{this.cuname}}</td>
+      <td colspan="3" class="data">{{this.cudescrip}}</td>
+      <td colspan="1" class="data">{{this.cuom}}</td>
+      <td colspan="1" class="data">{{this.cunitrate}}</td>
+      <td colspan="1" class="data">{{this.chsn}}</td>
+      <td colspan="1" class="data">{{this.cuqunty}}</td>
+      <td colspan="2" class="data">{{this.cutotalamount}}</td>
+    </tr>
+    {{/ifcucode}}
 
-      <tr style="height: 100px">
-          <td colspan="15">Amount Chargeable (in words)<br><br>{{this.tWords}} ONLY
-              <br><br>Terms and Conditions:</td>
-      </tr>
-      {{/ifprttotalamount}}
-      <tr style="height: 50px">
-        <td colspan="15" class="total">Authorised Signatory</td>
-      </tr>
-    </table>
+    {{#ifcptcode 'cptcode'}}
+    <tr style="height: 30px;">
+      <td colspan="1" class="data">{{this.slNo}}</td>
+      <td colspan="3" class="data">{{this.itemcode}}</td>
+      <td colspan="3" class="data">{{this.cptname}}</td>
+      <td colspan="3" class="data">{{this.cptdescrip}}</td>
+      <td colspan="1" class="data">{{this.cptuom}}</td>
+      <td colspan="1" class="data">{{this.cptunitrate}}</td>
+      <td colspan="1" class="data">{{this.cpthsn}}</td>
+      <td colspan="1" class="data">{{this.cptqunty}}</td>
+      <td colspan="2" class="data">{{this.cpttotalamount}}</td>
+    </tr>
+    {{/ifcptcode}}
 
+    {{#ifprtcode 'prtcode'}}
+    <tr style="height: 30px;">
+      <td colspan="1" class="data">{{this.slNo}}</td>
+      <td colspan="3" class="data">{{this.itemcode}}</td>
+      <td colspan="3" class="data">{{this.prtmname}}</td>
+      <td colspan="3" class="data">{{this.prtdescrip}}</td>
+      <td colspan="1" class="data">{{this.prtuom}}</td>
+      <td colspan="1" class="data">{{this.prtunitrate}}</td>
+      <td colspan="1" class="data">{{this.prthsn}}</td>
+      <td colspan="1" class="data">{{this.prtqunty}}</td>
+      <td colspan="2" class="data">{{this.prttotalamount}}</td>
+    </tr>
+    {{/ifprtcode}}
     {{/each}}
-  </body>
+    {{#iftotalamount 'totalamount'}}
+    <tr style="height: 30px;">
+      <td colspan="1" class="data"></td>
+      <td colspan="3" class="total"></td>
+      <td colspan="3" class="data"></td>
+      <td colspan="3" class="data"></td>
+      <td colspan="1" class="data"></td>
+      <td colspan="1" class="data"></td>
+      <td colspan="1" class="data"></td>
+      <td colspan="1" class="data">Total</td>
+      <td colspan="2" class="data">{{this.tAmount}}</td>
+    </tr>
+
+    <tr style="height: 100px">
+      <td colspan="15">Amount Chargeable (in words)<br><br>{{this.tWords}} ONLY
+        <br><br>Terms and Conditions:
+      </td>
+    </tr>
+    {{/iftotalamount}}
+
+    {{#ifcutotalamount 'cutotalamount'}}
+    <tr style="height: 30px;">
+      <td colspan="1" class="data"></td>
+      <td colspan="3" class="total"></td>
+      <td colspan="3" class="data"></td>
+      <td colspan="3" class="data"></td>
+      <td colspan="1" class="data"></td>
+      <td colspan="1" class="data"></td>
+      <td colspan="1" class="data"></td>
+      <td colspan="1" class="data">Total</td>
+      <td colspan="2" class="data">{{this.tAmount}}</td>
+    </tr>
+
+    <tr style="height: 100px">
+      <td colspan="15">Amount Chargeable (in words)<br><br>{{this.tWords}} ONLY
+        <br><br>Terms and Conditions:
+      </td>
+    </tr>
+    {{/ifcutotalamount}}
+
+    {{#ifcpttotalamount 'cpttotalamount'}}
+    <tr style="height: 30px;">
+      <td colspan="1" class="data"></td>
+      <td colspan="3" class="total"></td>
+      <td colspan="3" class="data"></td>
+      <td colspan="3" class="data"></td>
+      <td colspan="1" class="data"></td>
+      <td colspan="1" class="data"></td>
+      <td colspan="1" class="data"></td>
+      <td colspan="1" class="data">Total</td>
+      <td colspan="2" class="data">{{this.tAmount}}</td>
+    </tr>
+
+    <tr style="height: 100px">
+      <td colspan="15">Amount Chargeable (in words)<br><br>{{this.tWords}} ONLY
+        <br><br>Terms and Conditions:
+      </td>
+    </tr>
+    {{/ifcpttotalamount}}
+
+    {{#ifprttotalamount 'prttotalamount'}}
+    <tr style="height: 30px;">
+      <td colspan="1" class="data"></td>
+      <td colspan="3" class="total"></td>
+      <td colspan="3" class="data"></td>
+      <td colspan="3" class="data"></td>
+      <td colspan="1" class="data"></td>
+      <td colspan="1" class="data"></td>
+      <td colspan="1" class="data"></td>
+      <td colspan="1" class="data">Total</td>
+      <td colspan="2" class="data">{{this.tAmount}}</td>
+    </tr>
+
+    <tr style="height: 100px">
+      <td colspan="15">Amount Chargeable (in words)<br><br>{{this.tWords}} ONLY
+        <br><br>Terms and Conditions:
+      </td>
+    </tr>
+    {{/ifprttotalamount}}
+    <tr style="height: 50px">
+      <td colspan="15" class="total">Authorised Signatory</td>
+    </tr>
+  </table>
+
+  {{/each}}
+</body>
+
 </html>
