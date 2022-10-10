@@ -124,6 +124,9 @@
       <th colspan="2" class="data">TotalAmount</th>
     </tr>
 
+    {{#ifitemslno 'orderslno'}}
+    {{/ifitemslno}}
+
     {{#each this.orderitem001wbs}}
 
     {{#iforderslno 'orderslno'}}

@@ -286,11 +286,13 @@ export class PurchasereqslipService {
     var fs = require("fs");
     var pdf = require("dynamic-html-pdf");
     var html = fs.readFileSync("purchaslip.html", "utf8");
+    let orderitemSlno = 0;
 
     pdf.registerHelper("iforderslno", function (orderslno, options) {
       for (let i = 0; i < purchaslip.length; i++) {
         if (purchaslip[i].purchasereqitem001wbs[i].orderslno) {
           purchasereqslipitems = purchaslip[i].purchasereqitem001wbs;
+          this.slNo= ++orderitemSlno;
           return options.fn(this);
         } else {
           return options.inverse(this);
@@ -302,6 +304,7 @@ export class PurchasereqslipService {
       for (let i = 0; i < purchaslip.length; i++) {
         if (purchaslip[i].purchasereqitem001wbs[i].cucode) {
           purchasereqslipitems = purchaslip[i].purchasereqitem001wbs;
+          this.slNo= ++orderitemSlno;
           return options.fn(this);
         } else {
           return options.inverse(this);
@@ -313,6 +316,7 @@ export class PurchasereqslipService {
       for (let i = 0; i < purchaslip.length; i++) {
         if (purchaslip[i].purchasereqitem001wbs[i].cptcode) {
           purchasereqslipitems = purchaslip[i].purchasereqitem001wbs;
+          this.slNo= ++orderitemSlno;
           return options.fn(this);
         } else {
           return options.inverse(this);
@@ -324,6 +328,7 @@ export class PurchasereqslipService {
       for (let i = 0; i < purchaslip.length; i++) {
         if (purchaslip[i].purchasereqitem001wbs[i].prtcode) {
           purchasereqslipitems = purchaslip[i].purchasereqitem001wbs;
+          this.slNo= ++orderitemSlno;
           return options.fn(this);
         } else {
           return options.inverse(this);
@@ -383,13 +388,14 @@ export class PurchasereqslipService {
       where:{unitslno:unitslno},
       order: { slNo: "DESC" }
     });
-
+ 
     
     
 
     var fs = require("fs");
     var pdf = require("dynamic-html-pdf");
     var html = fs.readFileSync("purchasSlips.html", "utf8");
+    let ItemslNo =0
 
     var options = {
       format: "A3",
@@ -407,7 +413,11 @@ export class PurchasereqslipService {
     }
 
     
-     
+    await pdf.registerHelper("ifitemslno", function (orderslno, options) {
+      ItemslNo =0
+      this.slNo =ItemslNo;
+      return options.fn(this,this.slNo);
+    });
 
     await pdf.registerHelper("iforderslno", function (orderslno, options) {
       const value1 = this.orderslno2 ? this.orderslno2.itemcode : undefined;
@@ -415,7 +425,8 @@ export class PurchasereqslipService {
       if (value1 == undefined) {
         return options.inverse(this);
       } else {
-        return options.fn(this);
+        this.slNo =++ItemslNo;
+        return options.fn(this,this.slNo);
       }
     });
 
@@ -424,16 +435,18 @@ export class PurchasereqslipService {
       if (value2 == undefined) {
         return options.inverse(this);
       } else {
-        return options.fn(this);
+        this.slNo =++ItemslNo;
+        return options.fn(this,this.slNo);
       }
     });
 
     await pdf.registerHelper("ifcptcode", function (cptcode, options) {
       const value3 = this.cptcode2 ? this.cptcode2.cpartno : undefined;
       if (value3 == undefined) {
-        return options.inverse(this);
+        return options.inverse(this,this.slNo);
       } else {
-        return options.fn(this);
+        this.slNo =++ItemslNo;
+        return options.fn(this,this.slNo);
       }
     });
 
@@ -442,7 +455,8 @@ export class PurchasereqslipService {
       if (value4 == undefined) {
         return options.inverse(this);
       } else {
-        return options.fn(this);
+        this.slNo =++ItemslNo;
+        return options.fn(this, this.slNo);
       }
     });
 

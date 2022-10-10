@@ -89,7 +89,10 @@
             <th colspan="1" class="data">Quantity</th>
             <th colspan="2" class="data">TotalAmount</th>
         </tr>
-       
+        
+        {{#ifitemslno 'orderslno'}}
+        {{/ifitemslno}}
+
         {{#each this.supplierquotationitems001wbs}}
 
         {{#iforderslno 'itemcode'}}

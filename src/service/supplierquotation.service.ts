@@ -189,6 +189,7 @@ export class SupplierQuotationService {
     var fs = require("fs");
     var pdf = require("dynamic-html-pdf");
     var html = fs.readFileSync("supplierQuotations.html", "utf8");
+    let OrderitemSlno =0;
 
     
     
@@ -201,12 +202,20 @@ export class SupplierQuotationService {
 
     let tAmount=0
 
+       
+    await pdf.registerHelper("ifitemslno", function (orderslno, options) {
+      OrderitemSlno =0
+      this.slNo =OrderitemSlno;
+      return options.fn(this,this.slNo);
+    });
+
     pdf.registerHelper("iforderslno", function (orderslno, options) {
       const value1 = this.itemcode?this.itemcode : undefined;
       this.itemcode=this.itemcode?ordeitem.find(x => x.slNo === value1)?.itemcode : null;
          if (value1 == undefined ) { 
            return options.inverse(this);
          }else{
+          this.slNo = ++OrderitemSlno;
            return options.fn(this, this.itemcode);
          }
          
@@ -218,6 +227,7 @@ export class SupplierQuotationService {
            if (value2 == undefined ) {
              return options.inverse(this);
            }else{
+            this.slNo = ++OrderitemSlno;
              return options.fn(this, this.itemcode);
            }
      })
@@ -228,6 +238,7 @@ export class SupplierQuotationService {
            if (value3 == undefined ) {
              return options.inverse(this);
            }else{
+            this.slNo = ++OrderitemSlno;
              return options.fn(this, this.itemcode);
            }
      })
@@ -238,6 +249,7 @@ export class SupplierQuotationService {
            if (value4 == undefined ) {
              return options.inverse(this);
            }else{
+            this.slNo = ++OrderitemSlno;
              return options.fn(this, this.itemcode);
            }
      })
@@ -381,10 +393,12 @@ export class SupplierQuotationService {
     var fs = require("fs");
     var pdf = require("dynamic-html-pdf");
     var html = fs.readFileSync("supplierQuotation.html", "utf8");
+    let ItemSlno = 0;
 
     pdf.registerHelper('iforderslno', function (itemcode, options ) {
         if (this.itemcode) {
           this.itemcode =  this.itemcode?ordeitem.find(x => x.slNo === this.itemcode)?.itemcode: null;
+          this.slNo = ++ItemSlno;
           return options.fn(this,  this.itemcode);
         }else{
           return options.inverse(this);
@@ -393,7 +407,8 @@ export class SupplierQuotationService {
 
     pdf.registerHelper('ifcucode', function (cucode, options) {
         if (this.cucode) {
-          this.cucode =  this.cucode?consumableitem.find(x => x.slNo === this.cucode)?.consmno: null;          
+          this.cucode =  this.cucode?consumableitem.find(x => x.slNo === this.cucode)?.consmno: null; 
+          this.slNo = ++ItemSlno;         
           return options.fn(this, this.cucode); 
         }else{
           return options.inverse(this);
@@ -403,7 +418,8 @@ export class SupplierQuotationService {
 
     pdf.registerHelper('ifcptcode', function (cptcode, options ) {
         if (this.cptcode) {
-          this.cptcode =  this.cptcode?childpart.find(x => x.slNo === this.cptcode)?.cpartno: null;  
+          this.cptcode =  this.cptcode?childpart.find(x => x.slNo === this.cptcode)?.cpartno: null;
+          this.slNo = ++ItemSlno;  
           return options.fn(this, this.cptcode);
         }else{
           return options.inverse(this);
@@ -413,6 +429,7 @@ export class SupplierQuotationService {
     pdf.registerHelper('ifprtcode', function (prtcode, options ) {
         if (this.prtcode) {
           this.prtcode =  this.prtcode?part.find(x => x.slNo === this.prtcode)?.partno: null;
+          this.slNo = ++ItemSlno;
           return options.fn(this,  this.prtcode);
         }else{
           return options.inverse(this);
@@ -809,7 +826,7 @@ export class SupplierQuotationService {
   
             worksheet.mergeCells("A" + temp);
             worksheet.getCell("A" + temp).value =
-            supplierQuotation[i].supplierquotationitems001wbs[j].slNo;
+            j+1;
             worksheet.getCell("A" + temp).font = {
               size: 12,
               bold: true,
@@ -933,7 +950,7 @@ export class SupplierQuotationService {
   
             worksheet.mergeCells("A" + temp);
             worksheet.getCell("A" + temp).value =
-            supplierQuotation[i].supplierquotationitems001wbs[j].slNo;
+            j+1;
             worksheet.getCell("A" + temp).font = {
               size: 12,
               bold: true,
@@ -1053,7 +1070,7 @@ export class SupplierQuotationService {
   
             worksheet.mergeCells("A" + temp);
             worksheet.getCell("A" + temp).value =
-            supplierQuotation[i].supplierquotationitems001wbs[j].slNo;
+            j+1;
             worksheet.getCell("A" + temp).font = {
               size: 12,
               bold: true,
@@ -1172,7 +1189,7 @@ export class SupplierQuotationService {
   
             worksheet.mergeCells("A" + temp);
             worksheet.getCell("A" + temp).value =
-            supplierQuotation[i].supplierquotationitems001wbs[j].slNo;
+            j+1;
             worksheet.getCell("A" + temp).font = {
               size: 12,
               bold: true,
@@ -1739,7 +1756,7 @@ export class SupplierQuotationService {
       
                 worksheet.mergeCells("A" + temp);
                 worksheet.getCell("A" + temp).value =
-                supplierQuotationItem[j].slNo;
+                j+1;
                 worksheet.getCell("A" + temp).font = {
                   size: 12,
                   bold: true,
@@ -1859,7 +1876,7 @@ export class SupplierQuotationService {
       
                 worksheet.mergeCells("A" + temp);
                 worksheet.getCell("A" + temp).value =
-                supplierQuotationItem[j].slNo;
+                j+1;
                 worksheet.getCell("A" + temp).font = {
                   size: 12,
                   bold: true,
@@ -1978,7 +1995,7 @@ export class SupplierQuotationService {
       
                 worksheet.mergeCells("A" + temp);
                 worksheet.getCell("A" + temp).value =
-                supplierQuotationItem[j].slNo;
+                j+1;
                 worksheet.getCell("A" + temp).font = {
                   size: 12,
                   bold: true,
@@ -2097,7 +2114,7 @@ export class SupplierQuotationService {
       
                 worksheet.mergeCells("A" + temp);
                 worksheet.getCell("A" + temp).value =
-                supplierQuotationItem[j].slNo;
+                j+1;
                 worksheet.getCell("A" + temp).font = {
                   size: 12,
                   bold: true,
