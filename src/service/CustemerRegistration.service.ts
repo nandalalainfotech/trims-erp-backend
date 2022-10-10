@@ -117,25 +117,23 @@ export class CustemerRegistrationService {
         });
 
         let customerContacts = await this.CustomerContactRepository.find({ where: { unitslno: unitslno }, order: { slNo: "DESC" } });
-        // console.log("customerContact==>",customerContacts);
-        for (let customerContact of customerContacts) {
-            console.log("customerContact==>", customerContact.slNo);
-        }
+       
 
         var fs = require('fs');
         var pdf = require('dynamic-html-pdf');
         var html = fs.readFileSync('customerRegistrations.html', 'utf8');
-        let regslno = 0;
+        let ItemslNo = 0;
 
-        pdf.registerHelper("iforderslno", function (orderslno, options) {
-            
-            this.slNo = ++regslno;
-           if (this.slNo == undefined) {
-           return options.inverse(this);
-           } else {
-           return options.fn(this, this.slNo);
-           }
-         });
+        pdf.registerHelper("ifitemslno", function (orderslno, options) {
+            ItemslNo = 0;
+            this.slNo = ItemslNo;
+            return options.fn(this,this.slNo);
+        });
+
+        pdf.registerHelper("ifSlno", function (orderslno, options) {
+            this.slNo = ++ItemslNo;
+            return options.fn(this,this.slNo);
+        });
 
         var options = {
             format: "A3",
