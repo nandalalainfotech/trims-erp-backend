@@ -196,7 +196,7 @@ export class PurchasereqslipService {
       purchasereqitem001wb.updatedUser = purchasereqslipDTO.updatedUser;
       purchasereqitem001wb.updatedDatetime = purchasereqslipDTO.updatedDatetime;
 
-      await this.purchasereqslipitemRepository.update({ prslno: purchasereqslipDTO.purchasereqitem001wbs[i].prslno},purchasereqitem001wb);
+      await this.purchasereqslipitemRepository.update({ slNo: purchasereqslipDTO.purchasereqitem001wbs[i].slNo},purchasereqitem001wb);
 
     }
 

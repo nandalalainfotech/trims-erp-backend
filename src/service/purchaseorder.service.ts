@@ -170,7 +170,6 @@ export class PurchaseOrderService {
     });
   }
   findById(purchseId: any): Promise<Purchaseorder001wb> {
-    console.log("purchseId", purchseId);
     return this.PurchaseorderRepository.findOne({
       where: { slNo: purchseId },
       relations: ["orderitem001wbs"],
