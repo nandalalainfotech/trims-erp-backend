@@ -125,25 +125,17 @@ export class CustemerRegistrationService {
         var fs = require('fs');
         var pdf = require('dynamic-html-pdf');
         var html = fs.readFileSync('customerRegistrations.html', 'utf8');
-        // let customeRegs= customeReg.find((x)=>x.slNo
-        // console.log(customeRegs);
+        let regslno = 0;
 
-        pdf.registerHelper("ifcustomercontact", function (slno, options) {
-
-            //  if(this.slNo){
-            this.slNo = 0;
-            this.slNo++
-            //  } 
-
-            return options.fn(this, this.slNo);
-        });
-
-        // let index = [];
-        //         for (let i = 0; i < customeReg.length; i++) {
-        //           let z = i + 1;
-        //           index.push(z);
-        //         }
-        // console.log("index==>",index);
+        pdf.registerHelper("iforderslno", function (orderslno, options) {
+            
+            this.slNo = ++regslno;
+           if (this.slNo == undefined) {
+           return options.inverse(this);
+           } else {
+           return options.fn(this, this.slNo);
+           }
+         });
 
         var options = {
             format: "A3",
@@ -186,6 +178,17 @@ export class CustemerRegistrationService {
         var fs = require('fs');
         var pdf = require('dynamic-html-pdf');
         var html = fs.readFileSync('customerRegistration.html', 'utf8');
+        let regslno = 0;
+
+        pdf.registerHelper("iforderslno", function (orderslno, options) {
+            
+            this.slNo = ++regslno;
+           if (this.slNo == undefined) {
+           return options.inverse(this);
+           } else {
+           return options.fn(this, this.slNo);
+           }
+         });
 
         var options = {
             format: "A3",

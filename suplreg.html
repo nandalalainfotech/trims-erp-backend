@@ -146,7 +146,9 @@
         </tr>
         {{#each this.suppliercontact001wbs}}
         <tr>
-            <td colspan="3">{{this.slNo}}</td>
+          {{#iforderslno 'orderslno'}}
+          <td colspan="1">{{this.slNo}}</td>
+          {{/iforderslno}}
             <td colspan="4">{{this.pname}}</td>
             <td colspan="4">{{this.designation}}</td>
             <td colspan="4">{{this.department}}</td>

@@ -116,9 +116,9 @@
        
         {{#each this.customercontact001wbs}}
         <tr>
-          {{#ifcustomercontact 'slno'}}
-            <td colspan="4">{{this.slNo}}</td>
-            {{/ifcustomercontact}}
+          {{#iforderslno 'orderslno'}}
+          <td colspan="1">{{this.slNo}}</td>
+          {{/iforderslno}}
             <td colspan="4">{{this.pname}}</td>
             <td colspan="4">{{this.designation}}</td>
             <td colspan="4">{{this.department}}</td>

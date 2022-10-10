@@ -66,7 +66,9 @@
 
         {{#each Suplactivitycheck}}
         <tr>
+            {{#iforderslno 'orderslno'}}
             <td colspan="1">{{this.slNo}}</td>
+            {{/iforderslno}}
             <td colspan="3">{{this.activity}}</td>
             <td colspan="3">{{this.status}}</td>
 
