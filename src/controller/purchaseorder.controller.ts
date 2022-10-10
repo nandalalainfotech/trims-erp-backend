@@ -60,7 +60,6 @@ export class PurchaseOrderController {
     @UseGuards(JwtAuthGuard, RolesGuard)
     @Post("save")
     create(@Body() purchaseorderDTO: PurchaseorderDTO): Promise<Purchaseorder001wb> {
-        // console.log("PurchaseorderDTO",purchaseorderDTO.orderitemSlno2.purchaseorder001wbs);
         return this.purchaseOrderService.create(purchaseorderDTO);
     }
 
@@ -68,7 +67,6 @@ export class PurchaseOrderController {
     @UseGuards(JwtAuthGuard, RolesGuard)
     @Get('UpdatePO/:approvel/:pchaseslno/:remarks')
     UpdatePO(@Param('approvel') approvel: any, @Param('pchaseslno') pchaseslno: any, @Param('remarks') remarks: any): Promise<Purchaseorder001wb> {
-        console.log("approvel", approvel);
         return this.purchaseOrderService.UpdatePO(approvel, pchaseslno, remarks);
     }
 
@@ -93,7 +91,6 @@ export class PurchaseOrderController {
     @UseGuards(JwtAuthGuard, RolesGuard)
     @Put("update")
     update(@Body() purchaseorderDTO: PurchaseorderDTO): Promise<Purchaseorder001wb> {
-        // console.log("PurchaseorderDTO",purchaseorderDTO.orderslno);
         return this.purchaseOrderService.update(purchaseorderDTO);
     }
 

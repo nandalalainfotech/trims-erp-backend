@@ -130,7 +130,7 @@ export class SupplierQuotationService {
       supplierquotationitems001wb.unitslno = supplierQuotationDTO.unitslno;
       supplierquotationitems001wb.updatedUser = supplierQuotationDTO.updatedUser;
       supplierquotationitems001wb.updatedDatetime = supplierQuotationDTO.updatedDatetime;
-      await this.supplierquotationitemsRepository.update({ suplierslno: supplierQuotationDTO.supplierquotationitems001wbs[i].suplierslno }, supplierquotationitems001wb);
+      await this.supplierquotationitemsRepository.update({ slNo: supplierQuotationDTO.supplierquotationitems001wbs[i].slNo }, supplierquotationitems001wb);
 
     }
 
