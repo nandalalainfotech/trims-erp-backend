@@ -65,7 +65,9 @@
         {{#each Item}}
 
         <tr>
+            {{#ifcucode 'cucode'}}
             <th colspan="1">{{this.slNo}}</th>
+            {{/ifcucode}}
             <th colspan="1">{{this.cucode2.consmno}}</th>
             <th colspan="1">{{this.cucode2.consname}}</th>
             <th colspan="1">{{this.cucode2.descrip}}</th>
