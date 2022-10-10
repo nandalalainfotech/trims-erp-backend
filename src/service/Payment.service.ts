@@ -52,6 +52,7 @@ export class PaymentService {
         var fs = require('fs');
         var pdf = require('dynamic-html-pdf');
         var html = fs.readFileSync('payment.html', 'utf8');
+        let OrderslNo= 0;
         
 
 
@@ -69,6 +70,15 @@ export class PaymentService {
             },
             path: "./pdf/payment.pdf"
         };
+
+        pdf.registerHelper("iforderslno", function (orderslno, options) {
+            this.slNo = ++OrderslNo;
+           if (this.slNo == undefined) {
+           return options.inverse(this);
+           } else {
+           return options.fn(this, this.slNo);
+           }
+         });
 
         if (document === null) {
             return null;
@@ -238,7 +248,7 @@ export class PaymentService {
              let temp = i + 6; 
 
              worksheet.mergeCells('A' + temp);
-             worksheet.getCell('A' + temp).value = payment[i].slNo;
+             worksheet.getCell('A' + temp).value =i+1;
 
              worksheet.mergeCells('B' + temp);
              worksheet.getCell('B' + temp).value = payment[i].date;

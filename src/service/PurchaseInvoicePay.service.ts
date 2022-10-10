@@ -181,6 +181,7 @@ async update1(file: any,purchaseInvoicePayDTO: PurchaseInvoicePayDTO): Promise<P
     var fs = require("fs");
     var pdf = require("dynamic-html-pdf");
     var html = fs.readFileSync("purchaseInvoice.html", "utf8");
+    let itemSlno =0;
 
     var options = {
       format: "A3",
@@ -221,6 +222,7 @@ async update1(file: any,purchaseInvoicePayDTO: PurchaseInvoicePayDTO): Promise<P
     pdf.registerHelper('iforderslno', function (itemcode, options ) {
       if (this.itemcode) {
         this.itemcode =  this.itemcode?ordeitem.find(x => x.slNo === this.itemcode)?.itemcode: null;
+        this.slNo=++itemSlno;
         return options.fn(this,  this.itemcode);
       }else{
         return options.inverse(this);
@@ -230,6 +232,7 @@ async update1(file: any,purchaseInvoicePayDTO: PurchaseInvoicePayDTO): Promise<P
   pdf.registerHelper('ifcucode', function (cucode, options) {
       if (this.cucode) {
         this.cucode =  this.cucode?consumableitem.find(x => x.slNo === this.cucode)?.consmno: null;          
+        this.slNo=++itemSlno;
         return options.fn(this, this.cucode); 
       }else{
         return options.inverse(this);
@@ -240,6 +243,7 @@ async update1(file: any,purchaseInvoicePayDTO: PurchaseInvoicePayDTO): Promise<P
   pdf.registerHelper('ifcptcode', function (cptcode, options ) {
       if (this.cptcode) {
         this.cptcode =  this.cptcode?childpart.find(x => x.slNo === this.cptcode)?.cpartno: null;  
+        this.slNo=++itemSlno;
         return options.fn(this, this.cptcode);
       }else{
         return options.inverse(this);
@@ -249,6 +253,7 @@ async update1(file: any,purchaseInvoicePayDTO: PurchaseInvoicePayDTO): Promise<P
   pdf.registerHelper('ifprtcode', function (prtcode, options ) {
       if (this.prtcode) {
         this.prtcode =  this.prtcode?part.find(x => x.slNo === this.prtcode)?.partno: null;
+        this.slNo=++itemSlno;
         return options.fn(this,  this.prtcode);
       }else{
         return options.inverse(this);
@@ -315,6 +320,7 @@ async update1(file: any,purchaseInvoicePayDTO: PurchaseInvoicePayDTO): Promise<P
     var fs = require("fs");
     var pdf = require("dynamic-html-pdf");
     var html = fs.readFileSync("purchaseInvoices.html", "utf8");
+    let itemFullSlno =0;
 
 
   let itemcodes: any;
@@ -362,7 +368,8 @@ async update1(file: any,purchaseInvoicePayDTO: PurchaseInvoicePayDTO): Promise<P
        if (value1 == undefined ) { 
          return options.inverse(this);
        }else{
-         return options.fn(this, this.itemcode);
+        this.slNo = ++itemFullSlno
+         return options.fn(this, this.itemcode,this.slNo);
        }
        
    });
@@ -372,7 +379,8 @@ async update1(file: any,purchaseInvoicePayDTO: PurchaseInvoicePayDTO): Promise<P
          if (value2 == undefined ) {
            return options.inverse(this);
          }else{
-           return options.fn(this, this.itemcode);
+          this.slNo = ++itemFullSlno
+           return options.fn(this, this.itemcode,this.slNo);
          }
    })
 
@@ -382,7 +390,8 @@ async update1(file: any,purchaseInvoicePayDTO: PurchaseInvoicePayDTO): Promise<P
          if (value3 == undefined ) {
            return options.inverse(this);
          }else{
-           return options.fn(this, this.itemcode);
+          this.slNo = ++itemFullSlno
+           return options.fn(this, this.itemcode,this.slNo);
          }
    })
 
@@ -392,7 +401,8 @@ async update1(file: any,purchaseInvoicePayDTO: PurchaseInvoicePayDTO): Promise<P
          if (value4 == undefined ) {
            return options.inverse(this);
          }else{
-           return options.fn(this, this.itemcode);
+          this.slNo = ++itemFullSlno
+           return options.fn(this, this.itemcode,this.slNo);
          }
    })
 
@@ -815,7 +825,7 @@ async update1(file: any,purchaseInvoicePayDTO: PurchaseInvoicePayDTO): Promise<P
 
           worksheet.mergeCells("A" + temp);
           worksheet.getCell("A" + temp).value =
-          pueInvoicePay[i].purchaseinvoiceitems001wbs[j].slNo;
+         j+1;
           worksheet.getCell("A" + temp).font = {
             size: 11,
             bold: true,
@@ -934,7 +944,7 @@ async update1(file: any,purchaseInvoicePayDTO: PurchaseInvoicePayDTO): Promise<P
 
           worksheet.mergeCells("A" + temp);
           worksheet.getCell("A" + temp).value =
-          pueInvoicePay[i].purchaseinvoiceitems001wbs[j].slNo;
+          j+1;
           worksheet.getCell("A" + temp).font = {
             size: 11,
             bold: true,
@@ -1052,7 +1062,7 @@ async update1(file: any,purchaseInvoicePayDTO: PurchaseInvoicePayDTO): Promise<P
 
           worksheet.mergeCells("A" + temp);
           worksheet.getCell("A" + temp).value =
-          pueInvoicePay[i].purchaseinvoiceitems001wbs[j].slNo;
+          j+1;
           worksheet.getCell("A" + temp).font = {
             size: 11,
             bold: true,
@@ -1170,7 +1180,7 @@ async update1(file: any,purchaseInvoicePayDTO: PurchaseInvoicePayDTO): Promise<P
 
           worksheet.mergeCells("A" + temp);
           worksheet.getCell("A" + temp).value =
-          pueInvoicePay[i].purchaseinvoiceitems001wbs[j].slNo;
+          j+1;
           worksheet.getCell("A" + temp).font = {
             size: 11,
             bold: true,
@@ -1708,7 +1718,7 @@ async update1(file: any,purchaseInvoicePayDTO: PurchaseInvoicePayDTO): Promise<P
 
           worksheet.mergeCells("A" + temp);
           worksheet.getCell("A" + temp).value =
-          purchaseinInvitem[j].slNo;
+         j+1;
           worksheet.getCell("A" + temp).font = {
             size: 11,
             bold: true,
@@ -1827,7 +1837,7 @@ async update1(file: any,purchaseInvoicePayDTO: PurchaseInvoicePayDTO): Promise<P
 
           worksheet.mergeCells("A" + temp);
           worksheet.getCell("A" + temp).value =
-          purchaseinInvitem[j].slNo;
+          j+1;
           worksheet.getCell("A" + temp).font = {
             size: 11,
             bold: true,
@@ -1945,7 +1955,7 @@ async update1(file: any,purchaseInvoicePayDTO: PurchaseInvoicePayDTO): Promise<P
 
           worksheet.mergeCells("A" + temp);
           worksheet.getCell("A" + temp).value =
-          purchaseinInvitem[j].slNo;
+          j+1;
           worksheet.getCell("A" + temp).font = {
             size: 11,
             bold: true,
@@ -2063,7 +2073,7 @@ async update1(file: any,purchaseInvoicePayDTO: PurchaseInvoicePayDTO): Promise<P
 
           worksheet.mergeCells("A" + temp);
           worksheet.getCell("A" + temp).value =
-          purchaseinInvitem[j].slNo;
+          j+1;
           worksheet.getCell("A" + temp).font = {
             size: 11,
             bold: true,

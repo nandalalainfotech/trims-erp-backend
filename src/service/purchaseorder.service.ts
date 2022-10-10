@@ -45,7 +45,7 @@ export class PurchaseOrderService {
     private readonly PurchasereqslipRepository: Repository<Purchasereqslip001wb>,
     @InjectRepository(Supplierquotation001wb)
     private readonly supplierAuditRepository: Repository<Supplierquotation001wb>
-  ) {}
+  ) { }
 
   async create(
     purchaseorderpDTO: PurchaseorderDTO
@@ -97,7 +97,7 @@ export class PurchaseOrderService {
       orderitem001wb.prthsn = purchaseorderpDTO.orderitemSlno2[i].prthsn;
       orderitem001wb.prtdescrip =
         purchaseorderpDTO.orderitemSlno2[i].prtdescrip;
-        orderitem001wb.unitslno = purchaseorderpDTO.unitslno;
+      orderitem001wb.unitslno = purchaseorderpDTO.unitslno;
       orderitem001wb.insertUser = purchaseorderpDTO.insertUser;
       orderitem001wb.insertDatetime = purchaseorderpDTO.insertDatetime;
       let orderitem = await this.orderItemRepository.save(orderitem001wb);
@@ -110,9 +110,9 @@ export class PurchaseOrderService {
       purchaseorder001wb.orderitem001wbs = orderitem001wbs;
       await this.PurchaseorderRepository.save(purchaseorder001wb);
       return purchaseorder001wb;
-    }else{
+    } else {
       throw new HttpException('Please Add Item Details', HttpStatus.INTERNAL_SERVER_ERROR);
-  }
+    }
   }
 
   async update(
@@ -156,14 +156,16 @@ export class PurchaseOrderService {
     return string;
   }
 
-  async findAll(unitslno:any): Promise<Purchaseorder001wb[]> {
-    return await this.PurchaseorderRepository.find({ order: { slNo: "DESC" },  relations: ["suplierSlno2"],
-  where:{unitslno:unitslno}});
+  async findAll(unitslno: any): Promise<Purchaseorder001wb[]> {
+    return await this.PurchaseorderRepository.find({
+      order: { slNo: "DESC" }, relations: ["suplierSlno2"],
+      where: { unitslno: unitslno }
+    });
   }
 
   findOne(id: number): Promise<Purchaseorder001wb> {
     return this.PurchaseorderRepository.findOne({
-      relations: ["orderitem001wbs","suplierSlno2"],
+      relations: ["orderitem001wbs", "suplierSlno2"],
       where: { slNo: id },
     });
   }
@@ -179,15 +181,15 @@ export class PurchaseOrderService {
     await this.PurchaseorderRepository.delete(id);
   }
 
-  async downloadParamsPdf(unitslno:any,id: any, response: Response) {
+  async downloadParamsPdf(unitslno: any, id: any, response: Response) {
     let purOrders = await this.PurchaseorderRepository.find({
-      relations: ["orderitem001wbs","suplierSlno2","suplierSlno2.supplierSlno2","suplierSlno2.prsno2"],
-      where: { slNo: id ,unitslno:unitslno},
+      relations: ["orderitem001wbs", "suplierSlno2", "suplierSlno2.supplierSlno2", "suplierSlno2.prsno2"],
+      where: { slNo: id, unitslno: unitslno },
     });
 
     let purslip = await this.PurchasereqslipRepository.find();
 
-    let orderitems: Orderitem001wb [] = [];
+    let orderitems: Orderitem001wb[] = [];
 
     let ordeitem = await this.orderItemsRepository.find();
 
@@ -196,25 +198,25 @@ export class PurchaseOrderService {
     let childpart = await this.childPartRepository.find();
 
     let part = await this.PartRepository.find();
-    
+
 
     let totalAmount = 0;
 
     for (let i = 0; i < purOrders.length; i++) {
       for (let j = 0; j < purOrders[i].orderitem001wbs.length; j++) {
         orderitems.push(purOrders[i].orderitem001wbs[j]);
-         totalAmount += purOrders[i].orderitem001wbs[j].totalamount;
-         totalAmount += purOrders[i].orderitem001wbs[j].cutotalamount;
-         totalAmount += purOrders[i].orderitem001wbs[j].cpttotalamount;
-         totalAmount += purOrders[i].orderitem001wbs[j].prttotalamount;
-         
-    }
+        totalAmount += purOrders[i].orderitem001wbs[j].totalamount;
+        totalAmount += purOrders[i].orderitem001wbs[j].cutotalamount;
+        totalAmount += purOrders[i].orderitem001wbs[j].cpttotalamount;
+        totalAmount += purOrders[i].orderitem001wbs[j].prttotalamount;
+
+      }
     }
 
-    
 
- 
-    
+
+
+
 
     let totalwords = converter.toWords(totalAmount);
     let Totalwords = totalwords.toUpperCase();
@@ -222,46 +224,51 @@ export class PurchaseOrderService {
     var fs = require("fs");
     var pdf = require("dynamic-html-pdf");
     var html = fs.readFileSync("purchaseOrder.html", "utf8");
+    let orderitemSlno = 0;
 
-    
 
 
-    pdf.registerHelper('iforderslno', function (itemcode, options ) {
+
+    pdf.registerHelper('iforderslno', function (itemcode, options) {
       if (this.itemcode) {
-        this.itemcode =  this.itemcode?ordeitem.find(x => x.slNo === this.itemcode)?.itemcode: null;
-        return options.fn(this,  this.itemcode);
-      }else{
+        this.itemcode = this.itemcode ? ordeitem.find(x => x.slNo === this.itemcode)?.itemcode : null;
+        this.slNo = ++orderitemSlno;
+        return options.fn(this, this.itemcode);
+      } else {
         return options.inverse(this);
       }
-  })
+    })
 
-  pdf.registerHelper('ifcucode', function (cucode, options) {
+    pdf.registerHelper('ifcucode', function (cucode, options) {
       if (this.cucode) {
-        this.cucode =  this.cucode?consumableitem.find(x => x.slNo === this.cucode)?.consmno: null;          
-        return options.fn(this, this.cucode); 
-      }else{
+        this.cucode = this.cucode ? consumableitem.find(x => x.slNo === this.cucode)?.consmno : null;
+        this.slNo = ++orderitemSlno;
+        return options.fn(this, this.cucode);
+      } else {
         return options.inverse(this);
-      } 
-    
-  })
+      }
 
-  pdf.registerHelper('ifcptcode', function (cptcode, options ) {
+    })
+
+    pdf.registerHelper('ifcptcode', function (cptcode, options) {
       if (this.cptcode) {
-        this.cptcode =  this.cptcode?childpart.find(x => x.slNo === this.cptcode)?.cpartno: null;  
+        this.cptcode = this.cptcode ? childpart.find(x => x.slNo === this.cptcode)?.cpartno : null;
+        this.slNo = ++orderitemSlno;
         return options.fn(this, this.cptcode);
-      }else{
+      } else {
         return options.inverse(this);
       }
-  })
+    })
 
-  pdf.registerHelper('ifprtcode', function (prtcode, options ) {
+    pdf.registerHelper('ifprtcode', function (prtcode, options) {
       if (this.prtcode) {
-        this.prtcode =  this.prtcode?part.find(x => x.slNo === this.prtcode)?.partno: null;
-        return options.fn(this,  this.prtcode);
-      }else{
+        this.prtcode = this.prtcode ? part.find(x => x.slNo === this.prtcode)?.partno : null;
+        this.slNo = ++orderitemSlno;
+        return options.fn(this, this.prtcode);
+      } else {
         return options.inverse(this);
       }
-  })
+    })
 
     var options = {
       format: "A3",
@@ -300,10 +307,10 @@ export class PurchaseOrderService {
     }
   }
 
-  async downloadPdf(unitslno:any,@Req() request: Request, @Res() response: Response) {
+  async downloadPdf(unitslno: any, @Req() request: Request, @Res() response: Response) {
     let purOrders = await this.PurchaseorderRepository.find({
-      relations: ["orderitem001wbs","suplierSlno2","suplierSlno2.supplierSlno2","suplierSlno2.prsno2"],
-      where:{unitslno:unitslno},
+      relations: ["orderitem001wbs", "suplierSlno2", "suplierSlno2.supplierSlno2", "suplierSlno2.prsno2"],
+      where: { unitslno: unitslno },
       order: { slNo: "DESC" }
     });
 
@@ -316,8 +323,8 @@ export class PurchaseOrderService {
     let childpart = await this.childPartRepository.find();
 
     let part = await this.PartRepository.find();
+    let itemSlno = 0
 
-   
 
     var fs = require("fs");
     var pdf = require("dynamic-html-pdf");
@@ -325,61 +332,70 @@ export class PurchaseOrderService {
 
     let tAmount = 0;
 
-  let itemcodes: any;
-  let conscodes: any;
-  let cpartcodes: any;
-  let partcodes: any;
+    let itemcodes: any;
+    let conscodes: any;
+    let cpartcodes: any;
+    let partcodes: any;
 
- 
-  
+
+    await pdf.registerHelper("ifitemslno", function (orderslno, options) {
+      itemSlno =0
+      this.slNo =itemSlno;
+      return options.fn(this,this.slNo);
+    });
+
 
     pdf.registerHelper("iforderslno", function (orderslno, options) {
-      const value1 = this.itemcode?this.itemcode : undefined;
-      this.itemcode=this.itemcode?ordeitem.find(x => x.slNo === value1)?.itemcode : null;
-         if (value1 == undefined ) { 
-           return options.inverse(this);
-         }else{
-           return options.fn(this, this.itemcode);
-         }
-         
-     });
-    pdf.registerHelper('ifcucode', function (cucode, options) {
-       const value2 = this.cucode?this.cucode : undefined;
-       this.itemcode=this.cucode?consumableitem.find(x => x.slNo === value2)?.consmno : null;
-           if (value2 == undefined ) {
-             return options.inverse(this);
-           }else{
-             return options.fn(this, this.itemcode);
-           }
-     })
- 
-    pdf.registerHelper('ifcptcode', function (cptcode, options ) {
-       const value3 = this.cptcode?this.cptcode : undefined;
-       this.itemcode=this.cptcode?childpart.find(x => x.slNo === value3)?.cpartno : null;
-           if (value3 == undefined ) {
-             return options.inverse(this);
-           }else{
-             return options.fn(this, this.itemcode);
-           }
-     })
- 
-     pdf.registerHelper('ifprtcode', function (prtcode, options ) {
-       const value4 = this.prtcode?this.prtcode : undefined;
-       this.itemcode=this.prtcode?part.find(x => x.slNo === value4)?.partno : null;
-           if (value4 == undefined ) {
-             return options.inverse(this);
-           }else{
-             return options.fn(this, this.itemcode);
-           }
-     })
+      const value1 = this.itemcode ? this.itemcode : undefined;
+      this.itemcode = this.itemcode ? ordeitem.find(x => x.slNo === value1)?.itemcode : null;
+      if (value1 == undefined) {
+        return options.inverse(this);
+      } else {
+        this.slNo=++itemSlno;
+        return options.fn(this, this.itemcode);
+      }
 
-     pdf.registerHelper("iftotalamount", function (totalamount, options) {
+    });
+    pdf.registerHelper('ifcucode', function (cucode, options) {
+      const value2 = this.cucode ? this.cucode : undefined;
+      this.itemcode = this.cucode ? consumableitem.find(x => x.slNo === value2)?.consmno : null;
+      if (value2 == undefined) {
+        return options.inverse(this);
+      } else {
+        this.slNo=++itemSlno;
+        return options.fn(this, this.itemcode);
+      }
+    })
+
+    pdf.registerHelper('ifcptcode', function (cptcode, options) {
+      const value3 = this.cptcode ? this.cptcode : undefined;
+      this.itemcode = this.cptcode ? childpart.find(x => x.slNo === value3)?.cpartno : null;
+      if (value3 == undefined) {
+        return options.inverse(this);
+      } else {
+        this.slNo=++itemSlno;
+        return options.fn(this, this.itemcode);
+      }
+    })
+
+    pdf.registerHelper('ifprtcode', function (prtcode, options) {
+      const value4 = this.prtcode ? this.prtcode : undefined;
+      this.itemcode = this.prtcode ? part.find(x => x.slNo === value4)?.partno : null;
+      if (value4 == undefined) {
+        return options.inverse(this);
+      } else {
+        this.slNo=++itemSlno;
+        return options.fn(this, this.itemcode);
+      }
+    })
+
+    pdf.registerHelper("iftotalamount", function (totalamount, options) {
       this.tAmount = 0;
       let value1 = 0;
       this.tWords = "";
       for (let i = 0; i < this.orderitem001wbs.length; i++) {
         this.tAmount += this.orderitem001wbs[i].totalamount
-        value1 = this.orderitem001wbs[i].totalamount;   
+        value1 = this.orderitem001wbs[i].totalamount;
       }
       let totalwords = converter.toWords(this.tAmount);
       this.tWords = totalwords.toUpperCase();
@@ -387,7 +403,7 @@ export class PurchaseOrderService {
       if (value1 == undefined) {
         return options.inverse(this);
       } else {
-        return options.fn(this,this.tAmount,this.tWords);
+        return options.fn(this, this.tAmount, this.tWords);
       }
     });
 
@@ -400,18 +416,18 @@ export class PurchaseOrderService {
         value1 = this.orderitem001wbs[i].cpttotalamount;
       }
       let totalwords = converter.toWords(this.tAmount);
-        this.tWords = totalwords.toUpperCase();
+      this.tWords = totalwords.toUpperCase();
       value1 = value1 ? value1 : undefined;
       if (value1 == undefined) {
         return options.inverse(this);
       } else {
-        return options.fn(this,this.tAmount,this.tWords);
+        return options.fn(this, this.tAmount, this.tWords);
       }
     });
 
     pdf.registerHelper("ifcutotalamount", function (cutotalamount, options) {
-      this.tAmount=0;
-      let value1=0;
+      this.tAmount = 0;
+      let value1 = 0;
       this.tWords = "";
       for (let i = 0; i < this.orderitem001wbs.length; i++) {
         this.tAmount += this.orderitem001wbs[i].cutotalamount
@@ -423,17 +439,17 @@ export class PurchaseOrderService {
       if (value1 == undefined) {
         return options.inverse(this);
       } else {
-        return options.fn(this,this.tAmount,this.tWords);
+        return options.fn(this, this.tAmount, this.tWords);
       }
     });
 
     pdf.registerHelper("ifprttotalamount", function (prttotalamount, options) {
-      this.tAmount=0;
-      let value1=0;
+      this.tAmount = 0;
+      let value1 = 0;
       this.tWords = "";
       for (let i = 0; i < this.orderitem001wbs.length; i++) {
         this.tAmount += this.orderitem001wbs[i].prttotalamount
-        value1 = this.orderitem001wbs[i].prttotalamount;  
+        value1 = this.orderitem001wbs[i].prttotalamount;
       }
       let totalwords = converter.toWords(this.tAmount);
       this.tWords = totalwords.toUpperCase();
@@ -441,11 +457,11 @@ export class PurchaseOrderService {
       if (value1 == undefined) {
         return options.inverse(this);
       } else {
-        return options.fn(this,this.tAmount,this.tWords);
+        return options.fn(this, this.tAmount, this.tWords);
       }
     });
 
-    
+
 
     var options = {
       format: "A3",
@@ -453,21 +469,21 @@ export class PurchaseOrderService {
       border: "10mm",
     };
 
-   
 
-      var document = {
-        type: "file",
-        template: html,
-        context: {
-         purchaseOrder: purOrders,
-         itemcodes: itemcodes,
-         conscodes: conscodes,
-         cpartcodes: cpartcodes,
-         partcodes: partcodes,
+
+    var document = {
+      type: "file",
+      template: html,
+      context: {
+        purchaseOrder: purOrders,
+        itemcodes: itemcodes,
+        conscodes: conscodes,
+        cpartcodes: cpartcodes,
+        partcodes: partcodes,
         //  puroder: puroder,
-        },
-        path: "./pdf/purchaseOreders.pdf",
-      };
+      },
+      path: "./pdf/purchaseOreders.pdf",
+    };
 
 
     if (document === null) {
@@ -489,10 +505,10 @@ export class PurchaseOrderService {
     }
   }
 
-  async downloadExcel(unitslno:any,@Req() request: Request, @Res() response: Response) {
+  async downloadExcel(unitslno: any, @Req() request: Request, @Res() response: Response) {
     let purOrders = await this.PurchaseorderRepository.find({
-      relations: ["orderitem001wbs","suplierSlno2","suplierSlno2.supplierSlno2","suplierSlno2.prsno2"],
-      where: {unitslno:unitslno},
+      relations: ["orderitem001wbs", "suplierSlno2", "suplierSlno2.supplierSlno2", "suplierSlno2.prsno2"],
+      where: { unitslno: unitslno },
       order: { slNo: "DESC" }
     });
 
@@ -581,11 +597,11 @@ export class PurchaseOrderService {
         vertical: "middle",
         horizontal: "center",
       };
-       
 
-  
 
-     worksheet.mergeCells("A2:E2");
+
+
+      worksheet.mergeCells("A2:E2");
       worksheet.getCell("A2:E2").value = {
         richText: [
           { text: "Supplier Code:" + "\n\n" },
@@ -674,14 +690,14 @@ export class PurchaseOrderService {
         horizontal: "left",
       };
 
-     
+
 
 
       worksheet.mergeCells("F3:G3");
       worksheet.getCell("F3:G3").value = {
         richText: [
           { text: "PRS No:" + "\n\n" },
-          { font: { size: 11 }, text: "\n\n" +  purOrders[i].suplierSlno2.prsno2.prsNo },
+          { font: { size: 11 }, text: "\n\n" + purOrders[i].suplierSlno2.prsno2.prsNo },
         ],
       };
       worksheet.getCell("F3:G3").font = {
@@ -989,7 +1005,7 @@ export class PurchaseOrderService {
 
           worksheet.mergeCells("A" + temp);
           worksheet.getCell("A" + temp).value =
-            purOrders[i].orderitem001wbs[j].slNo;
+          j+1;
           worksheet.getCell("A" + temp).font = {
             size: 12,
             bold: true,
@@ -1000,18 +1016,18 @@ export class PurchaseOrderService {
             wraptext: true,
           };
 
-         
-            worksheet.mergeCells("B" + temp);
-            worksheet.getCell("B" + temp).value =  purOrders[i].orderitem001wbs[j].cucode ? consumableitem.find(x => x.slNo ===   purOrders[i].orderitem001wbs[j].cucode)?.consmno : "";
-            worksheet.getCell("B" + temp).font = {
-              size: 12,
-              bold: true,
-            };
-            worksheet.getCell("B" + temp).alignment = {
-              vertical: "middle",
-              horizontal: "center",
-              wraptext: true,
-            };
+
+          worksheet.mergeCells("B" + temp);
+          worksheet.getCell("B" + temp).value = purOrders[i].orderitem001wbs[j].cucode ? consumableitem.find(x => x.slNo === purOrders[i].orderitem001wbs[j].cucode)?.consmno : "";
+          worksheet.getCell("B" + temp).font = {
+            size: 12,
+            bold: true,
+          };
+          worksheet.getCell("B" + temp).alignment = {
+            vertical: "middle",
+            horizontal: "center",
+            wraptext: true,
+          };
 
           worksheet.mergeCells("C" + temp);
           worksheet.getCell("C" + temp).value =
@@ -1108,7 +1124,7 @@ export class PurchaseOrderService {
 
           worksheet.mergeCells("A" + temp);
           worksheet.getCell("A" + temp).value =
-            purOrders[i].orderitem001wbs[j].slNo;
+            j+1;
           worksheet.getCell("A" + temp).font = {
             size: 12,
             bold: true,
@@ -1119,17 +1135,17 @@ export class PurchaseOrderService {
             wraptext: true,
           };
 
-            worksheet.mergeCells("B" + temp);
-            worksheet.getCell("B" + temp).value = purOrders[i].orderitem001wbs[j].cptcode ? childpart.find(x => x.slNo ===   purOrders[i].orderitem001wbs[j].cptcode)?.cpartno : "";
-            worksheet.getCell("B" + temp).font = {
-              size: 12,
-              bold: true,
-            };
-            worksheet.getCell("B" + temp).alignment = {
-              vertical: "middle",
-              horizontal: "center",
-              wraptext: true,
-            };
+          worksheet.mergeCells("B" + temp);
+          worksheet.getCell("B" + temp).value = purOrders[i].orderitem001wbs[j].cptcode ? childpart.find(x => x.slNo === purOrders[i].orderitem001wbs[j].cptcode)?.cpartno : "";
+          worksheet.getCell("B" + temp).font = {
+            size: 12,
+            bold: true,
+          };
+          worksheet.getCell("B" + temp).alignment = {
+            vertical: "middle",
+            horizontal: "center",
+            wraptext: true,
+          };
 
           worksheet.mergeCells("C" + temp);
           worksheet.getCell("C" + temp).value =
@@ -1226,7 +1242,7 @@ export class PurchaseOrderService {
 
           worksheet.mergeCells("A" + temp);
           worksheet.getCell("A" + temp).value =
-            purOrders[i].orderitem001wbs[j].slNo;
+          j+1;
           worksheet.getCell("A" + temp).font = {
             size: 12,
             bold: true,
@@ -1237,17 +1253,17 @@ export class PurchaseOrderService {
             wraptext: true,
           };
 
-            worksheet.mergeCells("B" + temp);
-            worksheet.getCell("B" + temp).value = purOrders[i].orderitem001wbs[j].prtcode ? part.find(x => x.slNo ===   purOrders[i].orderitem001wbs[j].prtcode)?.partno : "";
-            worksheet.getCell("B" + temp).font = {
-              size: 12,
-              bold: true,
-            };
-            worksheet.getCell("B" + temp).alignment = {
-              vertical: "middle",
-              horizontal: "center",
-              wraptext: true,
-            };
+          worksheet.mergeCells("B" + temp);
+          worksheet.getCell("B" + temp).value = purOrders[i].orderitem001wbs[j].prtcode ? part.find(x => x.slNo === purOrders[i].orderitem001wbs[j].prtcode)?.partno : "";
+          worksheet.getCell("B" + temp).font = {
+            size: 12,
+            bold: true,
+          };
+          worksheet.getCell("B" + temp).alignment = {
+            vertical: "middle",
+            horizontal: "center",
+            wraptext: true,
+          };
 
           worksheet.mergeCells("C" + temp);
           worksheet.getCell("C" + temp).value =
@@ -1344,7 +1360,7 @@ export class PurchaseOrderService {
 
           worksheet.mergeCells("A" + temp);
           worksheet.getCell("A" + temp).value =
-            purOrders[i].orderitem001wbs[j].slNo;
+          j+1;
           worksheet.getCell("A" + temp).font = {
             size: 12,
             bold: true,
@@ -1355,17 +1371,17 @@ export class PurchaseOrderService {
             wraptext: true,
           };
 
-            worksheet.mergeCells("B" + temp);
-            worksheet.getCell("B" + temp).value = purOrders[i].orderitem001wbs[j].itemcode ? orderitem.find(x => x.slNo ===   purOrders[i].orderitem001wbs[j].itemcode)?.itemcode : "";
-            worksheet.getCell("B" + temp).font = {
-              size: 12,
-              bold: true,
-            };
-            worksheet.getCell("B" + temp).alignment = {
-              vertical: "middle",
-              horizontal: "center",
-              wraptext: true,
-            };
+          worksheet.mergeCells("B" + temp);
+          worksheet.getCell("B" + temp).value = purOrders[i].orderitem001wbs[j].itemcode ? orderitem.find(x => x.slNo === purOrders[i].orderitem001wbs[j].itemcode)?.itemcode : "";
+          worksheet.getCell("B" + temp).font = {
+            size: 12,
+            bold: true,
+          };
+          worksheet.getCell("B" + temp).alignment = {
+            vertical: "middle",
+            horizontal: "center",
+            wraptext: true,
+          };
 
           worksheet.mergeCells("C" + temp);
           worksheet.getCell("C" + temp).value =
@@ -1569,11 +1585,11 @@ export class PurchaseOrderService {
 
   // ----------------------------individual-excel---------------------------
 
-  async downloadExcel1(unitslno:any,id, response: Response) {
+  async downloadExcel1(unitslno: any, id, response: Response) {
     let purOrders = await this.PurchaseorderRepository.find({
-      relations: ["orderitem001wbs","suplierSlno2","suplierSlno2.supplierSlno2","suplierSlno2.prsno2"],
-      where: { slNo: id ,unitslno:unitslno},
-    });    
+      relations: ["orderitem001wbs", "suplierSlno2", "suplierSlno2.supplierSlno2", "suplierSlno2.prsno2"],
+      where: { slNo: id, unitslno: unitslno },
+    });
 
     let orderitems = await this.orderItemRepository.find();
 
@@ -1654,7 +1670,7 @@ export class PurchaseOrderService {
         horizontal: "center",
       };
 
-     
+
 
       worksheet.mergeCells("A2:E2");
       worksheet.getCell("A2:E2").value = {
@@ -1745,13 +1761,13 @@ export class PurchaseOrderService {
       };
 
 
-      
+
 
       worksheet.mergeCells("F3:G3");
       worksheet.getCell("F3:G3").value = {
         richText: [
           { text: "PRS No:" + "\n\n" },
-          { font: { size: 11 }, text: "\n\n" +  purOrders[i].suplierSlno2.prsno2.prsNo},
+          { font: { size: 11 }, text: "\n\n" + purOrders[i].suplierSlno2.prsno2.prsNo },
         ],
       };
       worksheet.getCell("F3:G3").font = {
@@ -2058,7 +2074,7 @@ export class PurchaseOrderService {
           let temp = j + 8;
 
           worksheet.mergeCells("A" + temp);
-          worksheet.getCell("A" + temp).value = orderitems[j].slNo;
+          worksheet.getCell("A" + temp).value =  j+1;
           worksheet.getCell("A" + temp).font = {
             size: 12,
             bold: true,
@@ -2069,17 +2085,17 @@ export class PurchaseOrderService {
             wraptext: true,
           };
 
-            worksheet.mergeCells("B" + temp);
-            worksheet.getCell("B" + temp).value = orderitems[j].cucode ? consumableitem.find(x => x.slNo ===   orderitems[j].cucode)?.consmno : "";
-            worksheet.getCell("B" + temp).font = {
-              size: 12,
-              bold: true,
-            };
-            worksheet.getCell("B" + temp).alignment = {
-              vertical: "middle",
-              horizontal: "center",
-              wraptext: true,
-            };
+          worksheet.mergeCells("B" + temp);
+          worksheet.getCell("B" + temp).value = orderitems[j].cucode ? consumableitem.find(x => x.slNo === orderitems[j].cucode)?.consmno : "";
+          worksheet.getCell("B" + temp).font = {
+            size: 12,
+            bold: true,
+          };
+          worksheet.getCell("B" + temp).alignment = {
+            vertical: "middle",
+            horizontal: "center",
+            wraptext: true,
+          };
 
           worksheet.mergeCells("C" + temp);
           worksheet.getCell("C" + temp).value = orderitems[j].cuname;
@@ -2168,7 +2184,7 @@ export class PurchaseOrderService {
           let temp = j + 8;
 
           worksheet.mergeCells("A" + temp);
-          worksheet.getCell("A" + temp).value = orderitems[j].slNo;
+          worksheet.getCell("A" + temp).value =  j+1;
           worksheet.getCell("A" + temp).font = {
             size: 12,
             bold: true,
@@ -2179,17 +2195,17 @@ export class PurchaseOrderService {
             wraptext: true,
           };
 
-            worksheet.mergeCells("B" + temp);
-            worksheet.getCell("B" + temp).value = orderitems[j].cptcode ? childpart.find(x => x.slNo ===   orderitems[j].cptcode)?.cpartno : "";
-            worksheet.getCell("B" + temp).font = {
-              size: 12,
-              bold: true,
-            };
-            worksheet.getCell("B" + temp).alignment = {
-              vertical: "middle",
-              horizontal: "center",
-              wraptext: true,
-            };
+          worksheet.mergeCells("B" + temp);
+          worksheet.getCell("B" + temp).value = orderitems[j].cptcode ? childpart.find(x => x.slNo === orderitems[j].cptcode)?.cpartno : "";
+          worksheet.getCell("B" + temp).font = {
+            size: 12,
+            bold: true,
+          };
+          worksheet.getCell("B" + temp).alignment = {
+            vertical: "middle",
+            horizontal: "center",
+            wraptext: true,
+          };
 
           worksheet.mergeCells("C" + temp);
           worksheet.getCell("C" + temp).value = orderitems[j].cptname;
@@ -2278,7 +2294,7 @@ export class PurchaseOrderService {
           let temp = j + 8;
 
           worksheet.mergeCells("A" + temp);
-          worksheet.getCell("A" + temp).value = orderitems[j].slNo;
+          worksheet.getCell("A" + temp).value =  j+1;
           worksheet.getCell("A" + temp).font = {
             size: 12,
             bold: true,
@@ -2289,17 +2305,17 @@ export class PurchaseOrderService {
             wraptext: true,
           };
 
-            worksheet.mergeCells("B" + temp);
-            worksheet.getCell("B" + temp).value = orderitems[j].prtcode ? part.find(x => x.slNo ===   orderitems[j].prtcode)?.partno : "";
-            worksheet.getCell("B" + temp).font = {
-              size: 12,
-              bold: true,
-            };
-            worksheet.getCell("B" + temp).alignment = {
-              vertical: "middle",
-              horizontal: "center",
-              wraptext: true,
-            };
+          worksheet.mergeCells("B" + temp);
+          worksheet.getCell("B" + temp).value = orderitems[j].prtcode ? part.find(x => x.slNo === orderitems[j].prtcode)?.partno : "";
+          worksheet.getCell("B" + temp).font = {
+            size: 12,
+            bold: true,
+          };
+          worksheet.getCell("B" + temp).alignment = {
+            vertical: "middle",
+            horizontal: "center",
+            wraptext: true,
+          };
 
           worksheet.mergeCells("C" + temp);
           worksheet.getCell("C" + temp).value = orderitems[j].prtmname;
@@ -2388,7 +2404,7 @@ export class PurchaseOrderService {
           let temp = j + 8;
 
           worksheet.mergeCells("A" + temp);
-          worksheet.getCell("A" + temp).value = orderitems[j].slNo;
+          worksheet.getCell("A" + temp).value =  j+1;
           worksheet.getCell("A" + temp).font = {
             size: 12,
             bold: true,
@@ -2399,17 +2415,17 @@ export class PurchaseOrderService {
             wraptext: true,
           };
 
-            worksheet.mergeCells("B" + temp);
-            worksheet.getCell("B" + temp).value = orderitems[j].itemcode ? orderitem.find(x => x.slNo ===   orderitems[j].itemcode)?.itemcode : "";
-            worksheet.getCell("B" + temp).font = {
-              size: 12,
-              bold: true,
-            };
-            worksheet.getCell("B" + temp).alignment = {
-              vertical: "middle",
-              horizontal: "center",
-              wraptext: true,
-            };
+          worksheet.mergeCells("B" + temp);
+          worksheet.getCell("B" + temp).value = orderitems[j].itemcode ? orderitem.find(x => x.slNo === orderitems[j].itemcode)?.itemcode : "";
+          worksheet.getCell("B" + temp).font = {
+            size: 12,
+            bold: true,
+          };
+          worksheet.getCell("B" + temp).alignment = {
+            vertical: "middle",
+            horizontal: "center",
+            wraptext: true,
+          };
 
           worksheet.mergeCells("C" + temp);
           worksheet.getCell("C" + temp).value = orderitems[j].itemname;
