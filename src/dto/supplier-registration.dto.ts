@@ -21,7 +21,7 @@ export class SupplierRegistrationDTO {
     acName: string | null;
     bankName: string | null;
     branch: string | null;
-    acNo: number | null;
+    acNo: string | null;
     ifscCode: string | null;
     filename: string | null;
     originalfilename: string | null;
@@ -29,7 +29,7 @@ export class SupplierRegistrationDTO {
     insertDatetime: Date;
     updatedUser: string | null;
     updatedDatetime: Date | null;
-    suppliercontacts2?: Suppliercontact001wb[] = [];
+    suppliercontact001wbs?: Suppliercontact001wb[] = [];
 
     setProperties(supplierReg001mb: Supplierregistration001mb) {
         this.slNo = supplierReg001mb.slNo;

@@ -17,21 +17,44 @@ const fs = require('fs');
 export class CustemerRegistrationController {
     constructor(private readonly CustemerRegiService: CustemerRegistrationService) { }
 
-    // @Get('pdf')
-    // @Header('Content-Type', 'application/pdf')
-    // async downloadPdf(@Req() request: Request, @Res() response: Response) {
-    // 	return await this.supplierRegService.downloadPdf(request, response);
-    // }
+    @hasRole(Role.superadmin, Role.admin, Role.user, Role.guest)
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Get('pdf/:unitslno')
+    @Header('Content-Type', 'application/pdf')
+    async downloadPdf(@Param('unitslno') unitslno: number,@Req() request: Request, @Res() response: Response) {
+        return await this.CustemerRegiService.downloadPdf(unitslno,request, response);
+    }
 
 
-    // @Get('excel')
-    // @Header("Content-Type",
-    // 	"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
-    // @Header("Content-Disposition",
-    // 	"attachment; filename=" + "Attendace Report" + ".xlsx")
-    // async downloadExcel(@Req() request: Request, @Res() response: Response) {
-    //     return await this.supplierRegService.downloadExcel(request, response);
-    // }
+    @hasRole(Role.superadmin, Role.admin, Role.user, Role.guest)
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Get('excel/:unitslno')
+    @Header("Content-Type",
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+    @Header("Content-Disposition",
+        "attachment; filename=" + "Attendace Report" + ".xlsx")
+    async downloadExcel(@Param('unitslno') unitslno: number,@Req() request: Request, @Res() response: Response) {
+        return await this.CustemerRegiService.downloadExcel(unitslno,request, response);
+    }
+
+    @hasRole(Role.superadmin, Role.admin, Role.user, Role.guest)
+	@UseGuards(JwtAuthGuard, RolesGuard)
+	@Get('pdfId/:id/:unitslno')
+	@Header('Content-Type', 'application/pdf')
+	async downloadIDPdf(@Param('unitslno') unitslno: number,@Param('id') id: number,@Req() request: Request, @Res() response: Response) {
+		return await this.CustemerRegiService.downloadIDPdf(unitslno,id, request,response);
+	}
+
+    @hasRole(Role.superadmin, Role.admin, Role.user, Role.guest)
+	@UseGuards(JwtAuthGuard, RolesGuard)
+	@Get('excelID/:id/:unitslno')
+	@Header("Content-Type",
+		"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+	@Header("Content-Disposition",
+		"attachment; filename=" + "Attendace Report" + ".xlsx")
+	async downloadIDExcel(@Param('unitslno') unitslno: number,@Param('id') id: number,@Req() request: Request, @Res() response: Response) {
+		return await this.CustemerRegiService.downloadIDExcel(unitslno,id,request, response);
+	}
 
     @hasRole(Role.superadmin, Role.admin, Role.user, Role.guest)
     @UseGuards(JwtAuthGuard, RolesGuard)

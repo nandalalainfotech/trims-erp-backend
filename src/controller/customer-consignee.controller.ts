@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Header, Param, Post, Put, Req, Res, UseGuards } from "@nestjs/common";
 import { JwtAuthGuard } from "src/auth/jwt-auth.guard";
 import { CustomerConsigneeDTO } from "src/dto/customer-consignee.dto";
 import { Customerconsignee001mb } from "src/entity/Customerconsignee001mb";
@@ -7,12 +7,37 @@ import { Role } from "src/role/role.enum";
 import { RolesGuard } from "src/role/role.guard";
 import { CustomerConsigneeService } from "src/service/customer-consignee.service";
 
+var path = require('path');
+const fs = require('fs');
+import { Response } from "express";
+import { Request } from "supertest";
+
 @Controller('/testandreportstudio/api/customerConsignee')
 
 export class CustomerConsigneeController {
 	constructor(private readonly customerConsigneeService: CustomerConsigneeService) {
 
 	}
+
+	@hasRole(Role.superadmin, Role.admin, Role.user, Role.guest)
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Get('pdf/:unitslno')
+    @Header('Content-Type', 'application/pdf')
+    async downloadPdf(@Param('unitslno') unitslno: number,@Req() request: Request, @Res() response: Response) {
+        return await this.customerConsigneeService.downloadPdf(unitslno,request, response);
+    }
+
+
+    @hasRole(Role.superadmin, Role.admin, Role.user, Role.guest)
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Get('excel/:unitslno')
+    @Header("Content-Type",
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+    @Header("Content-Disposition",
+        "attachment; filename=" + "Attendace Report" + ".xlsx")
+    async downloadExcel(@Param('unitslno') unitslno: number,@Req() request: Request, @Res() response: Response) {
+        return await this.customerConsigneeService.downloadExcel(unitslno,request, response);
+    }
 
 	@hasRole(Role.superadmin, Role.admin, Role.user)
 	@UseGuards(JwtAuthGuard, RolesGuard)

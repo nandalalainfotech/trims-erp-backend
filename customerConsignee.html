@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            /* border-collapse: collapse; */
+            text-align: center;
+        }
+
+        table {
+            border-spacing: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <table style="border:1px solid black;width: 100%; margin-top: 10px; font-size: 0.8em;">
+        <tr>
+            <th colspan="4" rowspan="4"
+                style="vertical-align : middle;text-align:center;width: 20px;border-right: 1px solid black;">TRIMS</th>
+
+            <th colspan="27" rowspan="2" style="text-align:center;width: 100%;">
+                SRINIVASA ENTERPRISES</th>
+
+            <th colspan="4" style="font-size: small;text-align:left;">FormatNo.SE/MTN/RO</th>
+        </tr>
+
+        <tr>
+            <th colspan="4" style="font-size: small;width: 5%;text-align:left;">Issue Date:</th>
+        </tr>
+
+        <tr>
+            <th colspan="27" rowspan="2" style="text-align:center;">CUSTOMER CONSIGNEE DETAILS</th>
+            <th colspan="4" style="font-size: small;width: 5%;text-align:left;">Rev.No.00</th>
+        </tr>
+
+        <tr>
+            <th colspan="4" style="font-size: small;width: 5%;text-align:left;">Rev Date:</th>
+        </tr>
+
+        <tr>
+            
+            <th colspan="1">SL:NO</th>
+            <th colspan="3">Customer Code</th>
+            <th colspan="4">Company Name</th>
+            <th colspan="3">Consignee</th>
+            <th colspan="3">Address 1</th>
+            <th colspan="3">Address 2</th>
+            <th colspan="3">Address 3</th>
+            <th colspan="3">GST IN</th>
+            <th colspan="3">City</th>
+            <th colspan="3">State</th>
+            <th colspan="3">Country</th>
+            <th colspan="1">Pin code</th>
+            <th colspan="1">Email ID</th>
+            <th colspan="1">Contact No</th>
+            
+
+        </tr>
+        {{#each customerconsignee}}
+        <tr>
+            <td colspan="1">{{this.slNo}}</td>            
+            <td colspan="3">{{this.consigneeSlno2.custemercode}}</td>
+            <td colspan="4">{{this.consigneeSlno2.custemername}}</td>
+            <td colspan="3">{{this.consignee}}</td>
+            <td colspan="3">{{this.address1}}</td>
+            <td colspan="3">{{this.address2}}</td>
+            <td colspan="3">{{this.address3}}</td>
+            <td colspan="3">{{this.gstIn}}</td>
+            <td colspan="3">{{this.city}}</td>
+            <td colspan="3">{{this.state}}</td>
+            <td colspan="3">{{this.country}}</td>
+            <td colspan="1">{{this.pinCode}}</td>
+            <td colspan="1">{{this.emailId}}</td>
+            <td colspan="1">{{this.contactNo}}</td>
+
+        </tr>
+        {{/each}}
+
+    </table>
+</body>
+
+</html>
+

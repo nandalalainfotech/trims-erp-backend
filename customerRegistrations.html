@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <style>
+         th {
+        border: 1px solid black;
+        text-align: center;
+      }
+      td {
+        border: 1px solid black;
+        text-align: center;
+        font-size: 16px;
+      }
+      .pagebreak {
+            page-break-inside: avoid;
+            /* page-break-before: avoid;
+            page-break-after: avoid; */
+        }
+
+        .even {
+            page-break-inside: avoid;
+            /* page-break-before: avoid;
+            page-break-after: avoid; */
+        }
+      table {
+        border-spacing: 0;
+      }
+
+      p {
+      font-weight: bold;
+      font-size: 18px;
+      }
+      
+     
+     
+    </style>
+</head>
+
+<body>
+    {{#each CustomeReg}}
+    <table style="width: 100%;padding-top: 120px;" class="pagebreak">
+        <tr>
+            <th colspan="4" rowspan="4" style="vertical-align : middle;text-align:center;width: 20px;border-right: 1px solid black;">TRIMS</th>
+
+            <th colspan="27" rowspan="2" style="text-align:center;width: 100%;">
+                SRINIVASA ENTERPRISES</th>
+
+            <th colspan="4" style="font-size: small;text-align:left;">FormatNo.SE/MTN/RO</th>
+        </tr>
+
+        <tr>
+            <th colspan="4" style="font-size: small;width: 5%;text-align:left;">Issue Date:</th>
+        </tr>
+
+        <tr>
+            <th colspan="27" rowspan="2" style="text-align:center;">CUSTOMER REGISTRATION DETAILS</th>
+            <th colspan="4" style="font-size: small;width: 5%;text-align:left;">Rev.No.00</th>
+        </tr>
+
+        <tr>
+            <th colspan="4" style="font-size: small;width: 5%;text-align:left;">Rev Date:</th>
+        </tr>
+
+        <tr style="height: 50px">
+            <td colspan="10"style="width: 50px">
+              <p class="spans">Customer Code:</p>{{this.custemercode}}
+            </td>
+            <td colspan="10">
+              <p class="spans">Customer Name:</p>{{this.custemername}}
+            </td>
+            <td colspan="10">
+              <p class="spans">Customer Address:</p>{{this.address}}
+            </td>
+            <td colspan="5">
+                <p class="spans">GSTIN:</p>{{this.gstin}}
+            </td>
+        </tr>
+
+        <tr style="height: 50px">
+            <td colspan="10"style="width: 50px">
+              <p class="spans">If any Certifications:</p>{{this.certification}}
+            </td>
+            <td colspan="10">
+              <p class="spans">Product Description:</p>{{this.productDesc}}
+            </td>
+            <td colspan="10">
+              <p class="spans">Details of Present Reputed Customers:</p>{{this.reputedCust}}
+            </td>
+            <td colspan="5">
+                <p class="spans">Sister Concerns if Any:</p>{{this.concern}}
+            </td>
+        </tr>
+
+        <tr style="height: 50px">
+            <td colspan="20"style="width: 50px">
+              <p class="spans">Web Site:</p>{{this.website}}
+            </td>
+            <td colspan="15">
+              <p class="spans">Other Informations:</p>{{this.otherInfo}}
+            </td>
+        </tr>
+
+          
+        <tr>
+            <th colspan="4">SlNo</th>
+            <th colspan="4">Person Name</th>
+            <th colspan="4">Designation</th>
+            <th colspan="4">Department</th>
+            <th colspan="4">Level</th>
+            <th colspan="5">Contact No1</th>
+            <th colspan="5">Contact No2</th>
+            <th colspan="5">Mail Id</th>
+        </tr>
+       
+        {{#each this.customercontact001wbs}}
+        <tr>
+          {{#ifcustomercontact 'slno'}}
+            <td colspan="4">{{this.slNo}}</td>
+            {{/ifcustomercontact}}
+            <td colspan="4">{{this.pname}}</td>
+            <td colspan="4">{{this.designation}}</td>
+            <td colspan="4">{{this.department}}</td>
+            <td colspan="4">{{this.level}}</td>
+            <td colspan="5">{{this.mnumber}}</td>
+            <td colspan="5">{{this.altmnumber}}</td>
+            <td colspan="5">{{this.mailid}}</td>
+        </tr>
+        {{/each}} 
+
+    </table>
+    {{/each}}
+</body>
+
+</html>
+

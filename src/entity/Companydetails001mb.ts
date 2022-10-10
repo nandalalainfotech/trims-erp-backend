@@ -23,8 +23,8 @@ export class Companydetails001mb {
   @Column("varchar", { name: "address3", length: 150 })
   address3: string;
 
-  @Column("int", { name: "gst_in" })
-  gstIn: number;
+  @Column("varchar", { name: "gst_in", nullable: true, length: 50 })
+  gstIn: string | null;
 
   @Column("varchar", { name: "city", length: 30 })
   city: string;

@@ -22,7 +22,7 @@ export class PartDTO {
     updatedUser: string | null;
     updatedDatetime: Date | null;
 
-    partspecific :Partspecific001wb[];
+    partspecific001wbs :Partspecific001wb[];
   
     setProperties(part001mb: Part001mb) {
       this.slNo = part001mb.slNo;
