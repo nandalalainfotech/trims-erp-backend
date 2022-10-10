@@ -806,8 +806,7 @@ export class PurchasereqslipService {
           let temp = j + 6;
 
           worksheet.mergeCells("A" + temp);
-          worksheet.getCell("A" + temp).value =
-            purchaslip[i].purchasereqitem001wbs[j].slNo;
+          worksheet.getCell("A" + temp).value = j + 1;
           worksheet.getCell("A" + temp).font = {
             size: 12,
             bold: true,
@@ -926,7 +925,7 @@ export class PurchasereqslipService {
 
           worksheet.mergeCells("A" + temp);
           worksheet.getCell("A" + temp).value =
-            purchaslip[i].purchasereqitem001wbs[j].slNo;
+          j + 1;
           worksheet.getCell("A" + temp).font = {
             size: 12,
             bold: true,
@@ -1044,8 +1043,7 @@ export class PurchasereqslipService {
           let temp = j + 6;
 
           worksheet.mergeCells("A" + temp);
-          worksheet.getCell("A" + temp).value =
-            purchaslip[i].purchasereqitem001wbs[j].slNo;
+          worksheet.getCell("A" + temp).value = j + 1;
           worksheet.getCell("A" + temp).font = {
             size: 12,
             bold: true,
@@ -1163,8 +1161,7 @@ export class PurchasereqslipService {
           let temp = j + 6;
 
           worksheet.mergeCells("A" + temp);
-          worksheet.getCell("A" + temp).value =
-            purchaslip[i].purchasereqitem001wbs[j].slNo;
+          worksheet.getCell("A" + temp).value = j + 1;
           worksheet.getCell("A" + temp).font = {
             size: 12,
             bold: true,
@@ -1640,7 +1637,7 @@ export class PurchasereqslipService {
           let temp = j + 6;
 
           worksheet.mergeCells("A" + temp);
-          worksheet.getCell("A" + temp).value = purchasereqslipitems[j].slNo;
+          worksheet.getCell("A" + temp).value = j + 1;
           worksheet.getCell("A" + temp).font = {
             size: 12,
             bold: true,
@@ -1754,7 +1751,7 @@ export class PurchasereqslipService {
           let temp = j + 6;
 
           worksheet.mergeCells("A" + temp);
-          worksheet.getCell("A" + temp).value = purchasereqslipitems[j].slNo;
+          worksheet.getCell("A" + temp).value = j + 1;
           worksheet.getCell("A" + temp).font = {
             size: 12,
             bold: true,
@@ -1869,7 +1866,7 @@ export class PurchasereqslipService {
           let temp = j + 6;
 
           worksheet.mergeCells("A" + temp);
-          worksheet.getCell("A" + temp).value = purchasereqslipitems[j].slNo;
+          worksheet.getCell("A" + temp).value = j + 1;
           worksheet.getCell("A" + temp).font = {
             size: 12,
             bold: true,
@@ -1986,7 +1983,7 @@ export class PurchasereqslipService {
           let temp = j + 6;
 
           worksheet.mergeCells("A" + temp);
-          worksheet.getCell("A" + temp).value = purchasereqslipitems[j].slNo;
+          worksheet.getCell("A" + temp).value = j + 1;
           worksheet.getCell("A" + temp).font = {
             size: 12,
             bold: true,

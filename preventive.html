@@ -58,7 +58,9 @@
        
         {{#each preventivecheck}}
         <tr>
+            {{#iforderslno 'orderslno'}}
             <td colspan="1">{{this.slNo}}</td>
+            {{/iforderslno}}
             <td colspan="1">{{this.rcslno2.name}}</td>
             <td colspan="2">{{this.name}}</td>
             <td colspan="1">{{this.details}}</td>

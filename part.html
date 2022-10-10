@@ -68,7 +68,9 @@
 
         {{#each Part}}
         <tr>
+            {{#iforderslno 'orderslno'}}
             <th colspan="1">{{this.slNo}}</th>
+            {{/iforderslno}}
             <th colspan="1">{{this.partno}}</th>
             <th colspan="1">{{this.partname}}</th>
             <th colspan="1">{{this.descrip}}</th>

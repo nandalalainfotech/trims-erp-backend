@@ -54,7 +54,9 @@
         
         {{#each deportmentcheck}}
         <tr>
-            <td colspan="1">{{this.slNo}}</td>
+            {{#iforderslno 'orderslno'}}
+            <th colspan="1">{{this.slNo}}</th>
+            {{/iforderslno}}
             <td colspan="3">{{this.department}}</td>
             <td colspan="3">{{this.sslno2.name}}</td>
 
