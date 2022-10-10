@@ -39,7 +39,7 @@ export class CustomerConsigneeService {
     
 
     findOne(id: number): Promise<Customerconsignee001mb> {
-        return this.CustomerConsigneeRepository.findOne(id);
+        return this.CustomerConsigneeRepository.findOne({where :{consigneeSlno : id} });
     }
 
     async remove(slNo: number): Promise<void> {
