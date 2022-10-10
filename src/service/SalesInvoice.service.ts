@@ -139,6 +139,7 @@ export class SalesInvoiceService {
     let totalwords = converter.toWords(totalAmount);
     let Totalwords = totalwords.toUpperCase();
 
+    let orderitemSlno = 0;
     var fs = require("fs");
     var pdf = require("dynamic-html-pdf");
     var html = fs.readFileSync("SalesInvoicesInd.html", "utf8");
@@ -148,6 +149,7 @@ export class SalesInvoiceService {
       if (this.prtcode == undefined) {
         return options.inverse(this);
       } else {
+        this.slNo= ++orderitemSlno;
         return options.fn(this, this.prtcode);
       }
     });
@@ -205,10 +207,17 @@ export class SalesInvoiceService {
     });
 
     let part = await this.PartRepository.find();
-
+    let ItemslNo = 0 ;
     var fs = require("fs");
     var pdf = require("dynamic-html-pdf");
     var html = fs.readFileSync("SalesInvoices.html", "utf8");
+    
+
+    await pdf.registerHelper("ifitemslno", function (orderslno, options) {
+      ItemslNo =0
+      this.slNo =ItemslNo;
+      return options.fn(this,this.slNo);
+    });
 
     pdf.registerHelper("iftotalamount", function (totalamount, options) {
       this.tAmount = 0;
@@ -232,6 +241,7 @@ export class SalesInvoiceService {
       if (this.prtcode == undefined) {
         return options.inverse(this);
       } else {
+        this.slNo =++ItemslNo;
         return options.fn(this, this.prtcode);
       }
     });
@@ -774,7 +784,7 @@ export class SalesInvoiceService {
       for (let j = 0; j < salesInvoice[i].custemer001wbs.length; j++) {
         let temp = j + 9;
         worksheet.mergeCells("A" + temp);
-        worksheet.getCell("A" + temp).value = salesInvoice[i].custemer001wbs[j].slNo;
+        worksheet.getCell("A" + temp).value = j + 1;
         worksheet.getCell("A" + temp).font = {
           size: 12,
           bold: true,
@@ -1514,7 +1524,7 @@ export class SalesInvoiceService {
       for (let j = 0; j < salesInvoice[i].custemer001wbs.length; j++) {
         let temp = j + 9;
         worksheet.mergeCells("A" + temp);
-        worksheet.getCell("A" + temp).value = salesInvoice[i].custemer001wbs[j].slNo;
+        worksheet.getCell("A" + temp).value = j + 1;
         worksheet.getCell("A" + temp).font = {
           size: 12,
           bold: true,

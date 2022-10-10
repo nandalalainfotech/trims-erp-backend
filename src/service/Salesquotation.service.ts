@@ -117,6 +117,7 @@ export class SalesQuotationService {
     let totalwords = converter.toWords(totalAmount);
     let Totalwords = totalwords.toUpperCase();
 
+    let orderitemSlno = 0;
     var fs = require("fs");
     var pdf = require("dynamic-html-pdf");
     var html = fs.readFileSync("SalesQuotation.html", "utf8");
@@ -127,6 +128,7 @@ export class SalesQuotationService {
          if (this.prtcode == undefined ) { 
            return options.inverse(this);
          }else{
+          this.slNo= ++orderitemSlno;
            return options.fn(this, this.prtcode);   
          }
      });
@@ -183,9 +185,16 @@ export class SalesQuotationService {
 
     let part = await this.PartRepository.find();
 
+    let ItemslNo = 0 ;
     var fs = require("fs");
     var pdf = require("dynamic-html-pdf");
     var html = fs.readFileSync("SalesQuotations.html", "utf8");
+
+    await pdf.registerHelper("ifitemslno", function (orderslno, options) {
+      ItemslNo =0
+      this.slNo =ItemslNo;
+      return options.fn(this,this.slNo);
+    });
 
     pdf.registerHelper("iftotalamount", function (totalamount, options) {
       this.tAmount = 0;
@@ -210,6 +219,7 @@ export class SalesQuotationService {
          if (this.prtcode == undefined ) { 
            return options.inverse(this);
          }else{
+          this.slNo =++ItemslNo;
            return options.fn(this, this.prtcode);   
          }
      });
@@ -765,7 +775,7 @@ export class SalesQuotationService {
         let temp = j + 9;
   
         worksheet.mergeCells("A" + temp);
-        worksheet.getCell("A" + temp).value = salesQuotation[i].partitem001wbs[j].slNo;
+        worksheet.getCell("A" + temp).value = j + 1;
         worksheet.getCell("A" + temp).font = {
           size: 12,
           bold: true,
@@ -1551,7 +1561,7 @@ export class SalesQuotationService {
       let temp = j + 9;
 
       worksheet.mergeCells("A" + temp);
-      worksheet.getCell("A" + temp).value = partitem[j].slNo;
+      worksheet.getCell("A" + temp).value = j + 1;
       worksheet.getCell("A" + temp).font = {
         size: 12,
         bold: true,
