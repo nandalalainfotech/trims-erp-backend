@@ -4,8 +4,8 @@ import {
   Entity,
   Index,
   JoinColumn,
-  ManyToMany,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
 import { Custemer001wb } from "./Custemer001wb";
@@ -18,11 +18,11 @@ export class Salesinvoice001wb {
   @PrimaryGeneratedColumn({ type: "smallint", name: "sl_no", unsigned: true })
   slNo: number;
   
-   @Column("int", { name: "unitslno" })
+  @Column("int", { name: "unitslno" })
   unitslno: number;
 
-  @Column("varchar", { name: "custemer_code", length: 100 })
-  custemerCode: string;
+  @Column("int", { name: "custmr_slno" })
+  custmrSlno: number;
 
   @Column("varchar", { name: "sInvoice", length: 100 })
   sInvoice: string;
@@ -30,8 +30,8 @@ export class Salesinvoice001wb {
   @Column({ name: "cDate", type:"date" })
   cDate: Date;
 
-  @Column("int", { name: "custmr_slno" })
-  custmrSlno: number;
+  @Column("varchar", { name: "custemer_code", length: 100 })
+  custemerCode: string;
 
   @Column("varchar", { name: "consignee", length: 50 })
   consignee: string;
@@ -72,6 +72,12 @@ export class Salesinvoice001wb {
   @Column("varchar", { name: "remarks", nullable: true, length: 200 })
   remarks: string | null;
 
+  @Column("int", { name: "tAmount", nullable: true })
+  tAmount: number | null;
+
+  @Column("varchar", { name: "tWords", length: 200 })
+  tWords: string;
+
   @Column("varchar", { name: "insert_user", length: 40 })
   insertUser: string;
 
@@ -84,9 +90,9 @@ export class Salesinvoice001wb {
   @Column("datetime", { name: "updated_datetime", nullable: true })
   updatedDatetime: Date | null;
 
-  @ManyToMany(
+  @OneToMany(
     () => Custemer001wb,
-    (custemer001wb) => custemer001wb.salesinvoice001wbs
+    (custemer001wb) => custemer001wb.salespartSlno2
   )
   custemer001wbs: Custemer001wb[];
 
@@ -118,6 +124,8 @@ export class Salesinvoice001wb {
     this.termsDelivery = salesInvoiceDTO.termsDelivery;
     this.supplierFrom = salesInvoiceDTO.supplierFrom;
     this.hsn = salesInvoiceDTO.hsn;
+    this.tAmount = salesInvoiceDTO.tAmount;
+    this.tWords = salesInvoiceDTO.tWords;
     this.dueOn = new Date(salesInvoiceDTO.dueOn);
     this.insertUser = salesInvoiceDTO.insertUser;
     this.insertDatetime = salesInvoiceDTO.insertDatetime;

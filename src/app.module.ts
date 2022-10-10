@@ -21,6 +21,8 @@ import { CustemerRegistrationModule } from './module/CustemerRegistration.module
 import { CustomerConsigneeModule } from './module/customer-consignee.module';
 import { CustomerContactModule } from './module/customer-contact.module';
 import { CustomerModule } from './module/customer.module';
+import { CustomerpoitemModule } from './module/Customerpoitem.module';
+import { CustomerpomasterModule } from './module/Customerpomaster.module';
 import { DailyCheckListModule } from './module/dailychecklist.module';
 import { DepartmentModule } from './module/Department.module';
 import { EmployeeDetailsModule } from './module/employeedetails.module';
@@ -253,7 +255,9 @@ import { UserModule } from './module/user.module';
         ReturnstockModule,
         MateriealrequestitemModule,
 	SalesquotationModule,
-        PartSitemMbModule
+        PartSitemMbModule,
+        CustomerpomasterModule,
+        CustomerpoitemModule
 
     ]
 })

@@ -23,11 +23,13 @@ export class SalesInvoiceDTO {
     supplierFrom: string;
     hsn: string;
     dueOn: Date;
+    tAmount: number | null;
+    tWords: string | null;
     insertUser: string;
     insertDatetime: Date;
     updatedUser: string | null;
     updatedDatetime: Date | null;
-    custemerSlno2?: Custemer001wb[];
+    custemer001wbs: Custemer001wb[];
    
    
     
@@ -50,7 +52,9 @@ export class SalesInvoiceDTO {
     this.termsDelivery = salesinvoice001wb.termsDelivery;
     this.supplierFrom = salesinvoice001wb.supplierFrom;
     this.hsn = salesinvoice001wb.hsn;
-    this.dueOn = salesinvoice001wb.dueOn;
+    this.dueOn = new Date(salesinvoice001wb.dueOn);
+    this.tAmount = salesinvoice001wb.tAmount;
+    this.tWords = salesinvoice001wb.tWords;
     this.insertUser = salesinvoice001wb.insertUser;
     this.insertDatetime = salesinvoice001wb.insertDatetime;
     this.updatedUser = salesinvoice001wb.updatedUser;

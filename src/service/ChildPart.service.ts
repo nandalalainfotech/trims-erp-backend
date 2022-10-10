@@ -26,13 +26,13 @@ export class ChildPartService {
 
         let childpartspecification001wbs: Childpartspecification001wb[] = [];
 
-        for (let i = 0; i < childPartDTO.childpartspecification.length; i++) {
+        for (let i = 0; i < childPartDTO.childpartspecification001wbs.length; i++) {
             const childpartspecification001wb = new Childpartspecification001wb();
 
-            childpartspecification001wb.cprtslno2 = childPartDTO.childpartspecification[i].cprtslno2;
-            childpartspecification001wb.parameter = childPartDTO.childpartspecification[i].parameter;
-            childpartspecification001wb.specification = childPartDTO.childpartspecification[i].specification;
-            childpartspecification001wb.inspecmethod = childPartDTO.childpartspecification[i].inspecmethod;
+            childpartspecification001wb.cprtslno2 = childPartDTO.childpartspecification001wbs[i].cprtslno2;
+            childpartspecification001wb.parameter = childPartDTO.childpartspecification001wbs[i].parameter;
+            childpartspecification001wb.specification = childPartDTO.childpartspecification001wbs[i].specification;
+            childpartspecification001wb.inspecmethod = childPartDTO.childpartspecification001wbs[i].inspecmethod;
             childpartspecification001wb.unitslno = childPartDTO.unitslno;
             childpartspecification001wb.insertUser = childPartDTO.insertUser;
             childpartspecification001wb.insertDatetime = childPartDTO.insertDatetime;
@@ -52,6 +52,20 @@ export class ChildPartService {
         }
     }
     async update(childPartDTO: ChildPartDTO): Promise<Childpart001mb> {
+
+        for (let i = 0; i < childPartDTO.childpartspecification001wbs.length; i++) {
+            const childpartspecification001wb = new Childpartspecification001wb();
+
+            childpartspecification001wb.cprtslno = childPartDTO.childpartspecification001wbs[i].cprtslno;
+            childpartspecification001wb.parameter = childPartDTO.childpartspecification001wbs[i].parameter;
+            childpartspecification001wb.specification = childPartDTO.childpartspecification001wbs[i].specification;
+            childpartspecification001wb.inspecmethod = childPartDTO.childpartspecification001wbs[i].inspecmethod;
+            childpartspecification001wb.unitslno = childPartDTO.unitslno;
+            childpartspecification001wb.updatedUser = childPartDTO.updatedUser;
+            childpartspecification001wb.updatedDatetime = childPartDTO.updatedDatetime;
+            await this.childpartspecificationRepository.update({ slNo: childPartDTO.childpartspecification001wbs[i].slNo }, childpartspecification001wb);
+        }
+        
         const childpart001mb = new Childpart001mb();
         childpart001mb.setProperties(childPartDTO);
         await this.childPartRepository.update({ slNo: childpart001mb.slNo }, childpart001mb);
@@ -59,7 +73,7 @@ export class ChildPartService {
     }
 
     async findAll(unitslno:any): Promise<Childpart001mb[]> {        
-        return await this.childPartRepository.find({order: { slNo: "DESC" },where:{unitslno:unitslno}})
+        return await this.childPartRepository.find({order: { slNo: "DESC" },where:{unitslno:unitslno} ,relations: ["childpartspecification001wbs"],})
     }
   
     async getCount(): Promise<string> {

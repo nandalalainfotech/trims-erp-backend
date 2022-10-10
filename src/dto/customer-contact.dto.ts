@@ -8,8 +8,8 @@ export class CustomerContactDTO {
     designation: string;
     department: string;
     level: string;
-    mnumber: number;
-    altmnumber: number;
+    mnumber: string;
+    altmnumber: string;
     mailid: string;
     insertUser: string;
     insertDatetime: Date;

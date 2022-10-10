@@ -28,15 +28,15 @@ export class OrderItemMbService {
     }
     async create(orderItemMbDTO: OrderItemMbDTO): Promise<Orderitem001mb> {
         let orderitemspecification001wbs: Orderitemspecification001wb[] = [];
-        for (let i = 0; i < orderItemMbDTO.Orderitemspecification.length; i++) {
+        for (let i = 0; i < orderItemMbDTO.orderitemspecification001wbs.length; i++) {
             const orderitemspecification001wb = new Orderitemspecification001wb();
 
-            orderitemspecification001wb.itemslno2 = orderItemMbDTO.Orderitemspecification[i].itemslno2;
-            orderitemspecification001wb.parameter = orderItemMbDTO.Orderitemspecification[i].parameter;
-            orderitemspecification001wb.specification = orderItemMbDTO.Orderitemspecification[i].specification;
-            orderitemspecification001wb.inspecmethod = orderItemMbDTO.Orderitemspecification[i].inspecmethod;
+            orderitemspecification001wb.itemslno2 = orderItemMbDTO.orderitemspecification001wbs[i].itemslno2;
+            orderitemspecification001wb.parameter = orderItemMbDTO.orderitemspecification001wbs[i].parameter;
+            orderitemspecification001wb.specification = orderItemMbDTO.orderitemspecification001wbs[i].specification;
+            orderitemspecification001wb.inspecmethod = orderItemMbDTO.orderitemspecification001wbs[i].inspecmethod;
             orderitemspecification001wb.unitslno = orderItemMbDTO.unitslno;
-             orderitemspecification001wb.insertUser = orderItemMbDTO.insertUser;orderitemspecification001wb.insertUser = orderItemMbDTO.insertUser;
+            orderitemspecification001wb.insertUser = orderItemMbDTO.insertUser;
             orderitemspecification001wb.insertDatetime = orderItemMbDTO.insertDatetime;
             let supcontact = await this.orderitemspecificationRepository.save(orderitemspecification001wb);
             orderitemspecification001wbs.push(supcontact);
@@ -52,6 +52,21 @@ export class OrderItemMbService {
         }
     }
     async update(orderItemMbDTO: OrderItemMbDTO): Promise<Orderitem001mb> {
+
+        for (let i = 0; i < orderItemMbDTO.orderitemspecification001wbs.length; i++) {
+            const orderitemspecification001wb = new Orderitemspecification001wb();
+
+            orderitemspecification001wb.itemslno = orderItemMbDTO.orderitemspecification001wbs[i].itemslno;
+            orderitemspecification001wb.parameter = orderItemMbDTO.orderitemspecification001wbs[i].parameter;
+            orderitemspecification001wb.specification = orderItemMbDTO.orderitemspecification001wbs[i].specification;
+            orderitemspecification001wb.inspecmethod = orderItemMbDTO.orderitemspecification001wbs[i].inspecmethod;
+            orderitemspecification001wb.unitslno = orderItemMbDTO.unitslno;
+            orderitemspecification001wb.updatedUser = orderItemMbDTO.updatedUser;
+            orderitemspecification001wb.updatedDatetime = orderItemMbDTO.updatedDatetime;
+
+            await this.orderitemspecificationRepository.update({ slNo: orderItemMbDTO.orderitemspecification001wbs[i].slNo }, orderitemspecification001wb);
+        }
+
         const orderitem001mb = new Orderitem001mb();
         orderitem001mb.setProperties(orderItemMbDTO);
         await this.orderItemsRepository.update({ slNo: orderitem001mb.slNo }, orderitem001mb);

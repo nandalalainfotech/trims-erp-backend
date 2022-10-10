@@ -62,8 +62,8 @@ export class Supplierregistration001mb {
   @Column("varchar", { name: "branch", nullable: true, length: 100 })
   branch: string | null;
 
-  @Column("int", { name: "ac_no", nullable: true })
-  acNo: number | null;
+  @Column("varchar", { name: "ac_no", length: 20})
+  acNo: string | null;
 
   @Column("varchar", { name: "ifsc_code", nullable: true, length: 100 })
   ifscCode: string | null;

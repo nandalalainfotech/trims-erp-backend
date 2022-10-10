@@ -22,24 +22,24 @@ export class ConsumbleService {
         @InjectRepository(Consumerspecification001wb) private readonly consumerspecificationRepository: Repository<Consumerspecification001wb>) {
     }
     async findAll(unitslno: any): Promise<Consumble001mb[]> {
-        return await this.consumbleRepository.find({ order: { slNo: "DESC" }, where: { unitslno: unitslno } })
+        return await this.consumbleRepository.find({ order: { slNo: "DESC" }, where: { unitslno: unitslno }, relations: ["consumerspecification001wbs"], })
     }
 
     async create(consumbleDTO: ConsumbleDTO): Promise<Consumble001mb> {
 
         let consumerspecification001wbs: Consumerspecification001wb[] = [];
 
-        for (let i = 0; i < consumbleDTO.consumerspecification.length; i++) {
-            const orderitemspecification001wb = new Consumerspecification001wb();
+        for (let i = 0; i < consumbleDTO.consumerspecification001wbs.length; i++) {
+            const consumerspecification001wb = new Consumerspecification001wb();
 
-            orderitemspecification001wb.consumslno2 = consumbleDTO.consumerspecification[i].consumslno2;
-            orderitemspecification001wb.parameter = consumbleDTO.consumerspecification[i].parameter;
-            orderitemspecification001wb.specification = consumbleDTO.consumerspecification[i].specification;
-            orderitemspecification001wb.inspecmethod = consumbleDTO.consumerspecification[i].inspecmethod;
-            orderitemspecification001wb.unitslno = consumbleDTO.unitslno;
-            orderitemspecification001wb.insertUser = consumbleDTO.insertUser;
-            orderitemspecification001wb.insertDatetime = consumbleDTO.insertDatetime;
-            let supcontact = await this.consumerspecificationRepository.save(orderitemspecification001wb);
+            consumerspecification001wb.consumslno2 = consumbleDTO.consumerspecification001wbs[i].consumslno2;
+            consumerspecification001wb.parameter = consumbleDTO.consumerspecification001wbs[i].parameter;
+            consumerspecification001wb.specification = consumbleDTO.consumerspecification001wbs[i].specification;
+            consumerspecification001wb.inspecmethod = consumbleDTO.consumerspecification001wbs[i].inspecmethod;
+            consumerspecification001wb.unitslno = consumbleDTO.unitslno;
+            consumerspecification001wb.insertUser = consumbleDTO.insertUser;
+            consumerspecification001wb.insertDatetime = consumbleDTO.insertDatetime;
+            let supcontact = await this.consumerspecificationRepository.save(consumerspecification001wb);
             consumerspecification001wbs.push(supcontact);
         }
 
@@ -55,6 +55,20 @@ export class ConsumbleService {
         }
     }
     async update(consumbleDTO: ConsumbleDTO): Promise<Consumble001mb> {
+
+        for (let i = 0; i < consumbleDTO.consumerspecification001wbs.length; i++) {
+            const consumerspecification001wb = new Consumerspecification001wb();
+
+            consumerspecification001wb.consumslno = consumbleDTO.consumerspecification001wbs[i].consumslno;
+            consumerspecification001wb.parameter = consumbleDTO.consumerspecification001wbs[i].parameter;
+            consumerspecification001wb.specification = consumbleDTO.consumerspecification001wbs[i].specification;
+            consumerspecification001wb.inspecmethod = consumbleDTO.consumerspecification001wbs[i].inspecmethod;
+            consumerspecification001wb.unitslno = consumbleDTO.unitslno;
+            consumerspecification001wb.updatedUser = consumbleDTO.updatedUser;
+            consumerspecification001wb.updatedDatetime = consumbleDTO.updatedDatetime;
+            await this.consumerspecificationRepository.update({ slNo: consumbleDTO.consumerspecification001wbs[i].slNo }, consumerspecification001wb);
+        }
+
         const consumble001mb = new Consumble001mb();
         consumble001mb.setProperties(consumbleDTO);
         await this.consumbleRepository.update({ slNo: consumble001mb.slNo }, consumble001mb);

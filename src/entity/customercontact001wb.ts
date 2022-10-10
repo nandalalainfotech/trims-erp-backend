@@ -33,11 +33,11 @@ import {
     @Column("varchar", { name: "level", length: 200 })
     level: string;
   
-    @Column("int", { name: "mnumber" })
-    mnumber: number;
+    @Column("varchar", { name: "mnumber", length: 20,nullable: true })
+    mnumber: string | null;
   
-    @Column("int", { name: "altmnumber" })
-    altmnumber: number;
+    @Column("varchar", { name: "altmnumber",length: 20,nullable: true })
+    altmnumber: string | null;
   
     @Column("varchar", { name: "mailid", length: 200 })
     mailid: string;

@@ -22,7 +22,7 @@ export class CustemerRegistrationDTO {
     updatedUser: string | null;
     updatedDatetime: Date | null;
 
-    customercontacts2?: Customercontact001wb[] = [];
+    customercontact001wbs?: Customercontact001wb[] = [];
     
     setProperties(custemerregistration001mb:  Custemerregistration001mb) {
         this.slNo = custemerregistration001mb.slNo;

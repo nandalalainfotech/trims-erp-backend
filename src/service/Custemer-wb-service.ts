@@ -32,7 +32,7 @@ export class CustemerService {
     }
 
     async findAll(unitslno:any): Promise<Custemer001wb[]> {
-        return this.custemerRepository.find({order: { slNo: "DESC" }, relations: ["custemerSlno2",], 
+        return this.custemerRepository.find({order: { slNo: "DESC" }, relations: ["salespartSlno2","prtcode2"], 
     where:{unitslno:unitslno}})
     }
     
