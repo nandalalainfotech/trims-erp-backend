@@ -61,7 +61,9 @@
 
         {{#each sparescheck}}
         <tr>
-            <td  colspan="1">{{this.slNo}}</td>
+            {{#iforderslno 'orderslno'}}
+            <td colspan="1">{{this.slNo}}</td>
+            {{/iforderslno}}
             <td  colspan="2">{{this.msslno2.mcode}}</td>
             <td  colspan="1">{{this.spares}}</td>
             <td  colspan="1">{{this.sparescost}}</td>

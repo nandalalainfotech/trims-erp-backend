@@ -54,7 +54,16 @@ export class MachineSettingService {
         var fs = require('fs');
         var pdf = require('dynamic-html-pdf');
         var html = fs.readFileSync('machine.html', 'utf8');
+        let regslno = 0;
 
+        pdf.registerHelper("iforderslno", function (orderslno, options) {
+            this.slNo = ++regslno;
+            if (this.slNo == undefined) {
+              return options.inverse(this);
+            } else {
+              return options.fn(this, this.slNo);
+            }
+        });
         
         var options = {
             format: "A3",
