@@ -67,7 +67,9 @@
 
         {{#each suplchecklcheck}}
         <tr>
+            {{#iforderslno 'orderslno'}}
             <td colspan="1">{{this.slNo}}</td>
+            {{/iforderslno}}
             <td colspan="3">{{this.activityslNo2.activity}}</td>
             <td colspan="3">{{this.checkpointsName}}</td>
             <td colspan="3">{{this.status}}</td>

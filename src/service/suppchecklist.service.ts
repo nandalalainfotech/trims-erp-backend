@@ -56,7 +56,17 @@ export class SuppchecklistService {
         var fs = require('fs');
         var pdf = require('dynamic-html-pdf');
         var html = fs.readFileSync('suppchecklist.html', 'utf8');
+        let regslno = 0;
 
+        pdf.registerHelper("iforderslno", function (orderslno, options) {
+            
+            this.slNo = ++regslno;
+           if (this.slNo == undefined) {
+           return options.inverse(this);
+           } else {
+           return options.fn(this, this.slNo);
+           }
+         });
         
         var options = {
             format: "A3",

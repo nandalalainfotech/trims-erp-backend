@@ -132,6 +132,17 @@ export class SupplierRegistrationService {
         var fs = require('fs');
         var pdf = require('dynamic-html-pdf');
         var html = fs.readFileSync('suplregs.html', 'utf8');
+        let regslno = 0;
+
+        pdf.registerHelper("iforderslno", function (orderslno, options) {
+            
+            this.slNo = ++regslno;
+           if (this.slNo == undefined) {
+           return options.inverse(this);
+           } else {
+           return options.fn(this, this.slNo);
+           }
+         });
 
         var options = {
             format: "A3",
@@ -174,6 +185,16 @@ export class SupplierRegistrationService {
         var fs = require('fs');
         var pdf = require('dynamic-html-pdf');
         var html = fs.readFileSync('suplreg.html', 'utf8');
+        let regslno = 0;
+
+        pdf.registerHelper("iforderslno", function (orderslno, options) {
+            this.slNo = ++regslno;
+           if (this.slNo == undefined) {
+           return options.inverse(this);
+           } else {
+           return options.fn(this, this.slNo);
+           }
+         });
 
         var options = {
             format: "A3",
@@ -593,7 +614,7 @@ export class SupplierRegistrationService {
                 let temp = j + 11;
 
                 worksheet.mergeCells("A" + temp);
-                worksheet.getCell("A" + temp).value = suplreg[i].suppliercontact001wbs[j].slNo,
+                worksheet.getCell("A" + temp).value = j + 1,
                     worksheet.getCell("A" + temp).font = {
                         size: 12,
                         bold: true,
@@ -1087,7 +1108,7 @@ export class SupplierRegistrationService {
                 let temp = j + 11;
 
                 worksheet.mergeCells("A" + temp);
-                worksheet.getCell("A" + temp).value = supContact[j].slNo,
+                worksheet.getCell("A" + temp).value = j + 1,
                     worksheet.getCell("A" + temp).font = {
                         size: 12,
                         bold: true,

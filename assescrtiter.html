@@ -68,7 +68,9 @@
 
         {{#each assescrtitercheck}}
         <tr>
+            {{#iforderslno 'orderslno'}}
             <td colspan="1">{{this.slNo}}</td>
+            {{/iforderslno}}
             <td colspan="2">{{this.criteria}}</td>
             <td colspan="2">{{this.details}}</td>
             <td colspan="1">{{this.max}}</td>

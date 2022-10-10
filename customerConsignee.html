@@ -64,7 +64,9 @@
         </tr>
         {{#each customerconsignee}}
         <tr>
-            <td colspan="1">{{this.slNo}}</td>            
+            {{#iforderslno 'orderslno'}}
+            <td colspan="1">{{this.slNo}}</td>
+            {{/iforderslno}}           
             <td colspan="3">{{this.consigneeSlno2.custemercode}}</td>
             <td colspan="4">{{this.consigneeSlno2.custemername}}</td>
             <td colspan="3">{{this.consignee}}</td>
