@@ -84,7 +84,9 @@
             <th colspan="1" class="data">Outstanding Quantity</th>
             <th colspan="2" class="data">TotalAmount</th>
         </tr>
-       
+        {{#ifitemslno 'orderslno'}}
+        {{/ifitemslno}}
+
         {{#each this.materialreceiveditem001wbs}}
         {{#iforderslno 'orderslno'}}
         <tr style="height: 30px;">
