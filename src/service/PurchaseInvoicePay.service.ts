@@ -361,6 +361,12 @@ async update1(file: any,purchaseInvoicePayDTO: PurchaseInvoicePayDTO): Promise<P
    });
 
 
+   await pdf.registerHelper("ifitemslno", function (orderslno, options) {
+    itemFullSlno =0
+    this.slNo =itemFullSlno;
+    return options.fn(this,this.slNo);
+  });
+
 
   pdf.registerHelper("iforderslno", function (orderslno, options) {
     const value1 = this.itemcode?this.itemcode : undefined;
@@ -369,7 +375,7 @@ async update1(file: any,purchaseInvoicePayDTO: PurchaseInvoicePayDTO): Promise<P
          return options.inverse(this);
        }else{
         this.slNo = ++itemFullSlno
-         return options.fn(this, this.itemcode,this.slNo);
+         return options.fn(this, this.itemcode);
        }
        
    });
@@ -380,7 +386,7 @@ async update1(file: any,purchaseInvoicePayDTO: PurchaseInvoicePayDTO): Promise<P
            return options.inverse(this);
          }else{
           this.slNo = ++itemFullSlno
-           return options.fn(this, this.itemcode,this.slNo);
+           return options.fn(this, this.itemcode);
          }
    })
 
@@ -391,7 +397,7 @@ async update1(file: any,purchaseInvoicePayDTO: PurchaseInvoicePayDTO): Promise<P
            return options.inverse(this);
          }else{
           this.slNo = ++itemFullSlno
-           return options.fn(this, this.itemcode,this.slNo);
+           return options.fn(this, this.itemcode);
          }
    })
 
@@ -402,7 +408,7 @@ async update1(file: any,purchaseInvoicePayDTO: PurchaseInvoicePayDTO): Promise<P
            return options.inverse(this);
          }else{
           this.slNo = ++itemFullSlno
-           return options.fn(this, this.itemcode,this.slNo);
+           return options.fn(this, this.itemcode);
          }
    })
 

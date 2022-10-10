@@ -196,9 +196,7 @@ export class MaterialinwardService {
 
     let part = await this.PartRepository.find();
    
-    // 
-    // let childslno = 0;
-    // let partlno = 0;
+    let itemslno = 0;
     var fs = require("fs");
     var pdf = require("dynamic-html-pdf");
     var html = fs.readFileSync("materialinwards.html", "utf8");
@@ -210,19 +208,21 @@ export class MaterialinwardService {
       border: "10mm",
     };
 
-
+    await pdf.registerHelper("ifitemslno", function (orderslno, options) {
+      itemslno =0
+      this.slNo =itemslno;
+      return options.fn(this,this.slNo);
+    });
 
     pdf.registerHelper("iforderslno", function (orderslno, options) {
      
       const value1 = this.itemcode ? this.itemcode : undefined;
       this.itemcode = this.itemcode ? ordeitem.find(x => x.slNo === value1)?.itemcode : null;
-      let itemslno = 0;
-      if (value1 == undefined) {
-
+     if (value1 == undefined) {
         return options.inverse(this);
       } else {
         this.slNo = ++itemslno
-        return options.fn(this, this.itemcode,this.slNo);
+        return options.fn(this, this.itemcode);
       }
     });
     pdf.registerHelper("ifcucode", function (cucode, options) {
@@ -232,8 +232,8 @@ export class MaterialinwardService {
       if (value2 == undefined) {
         return options.inverse(this);
       } else {
-        this.slNo = ++consumslno;
-        return options.fn(this, this.itemcode,this.slNo);
+        this.slNo = ++itemslno;
+        return options.fn(this, this.itemcode);
       }
     });
 
@@ -242,11 +242,11 @@ export class MaterialinwardService {
       this.itemcode = this.cptcode ? childpart.find(x => x.slNo === value3)?.cpartno : null;
       let childslno = 0;
       if (value3 == undefined) {
-        return options.fn(this);
+        
+        return options.inverse(this);
       } else {
-
-        this.slNo = ++childslno
-        return options.inverse(this, this.itemcode,this.slNo);
+        this.slNo = ++itemslno
+      return options.fn(this, this.itemcode);
       }
     });
 
@@ -257,8 +257,8 @@ export class MaterialinwardService {
       if (value4 == undefined) {
         return options.inverse(this);
       } else {
-        this.slNo = ++partlno
-        return options.fn(this, this.itemcode,this.slNo);
+        this.slNo = ++itemslno
+        return options.fn(this, this.itemcode);
       }
     });
 
