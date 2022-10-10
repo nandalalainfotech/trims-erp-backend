@@ -110,40 +110,40 @@ export class MaterialinwardService {
   }
 
   async update(materialinwardDTO: MaterialinwardDTO): Promise<Materialinward001wb> {
-      for (let i = 0; i < materialinwardDTO.materialreceiveditem001wbs.length; i++) {
-        let materialreceiveditem001wb = new Materialreceiveditem001wb();
+    for (let i = 0; i < materialinwardDTO.materialreceiveditem001wbs.length; i++) {
+      let materialreceiveditem001wb = new Materialreceiveditem001wb();
 
-        materialreceiveditem001wb.acceptedQty = materialinwardDTO.materialreceiveditem001wbs[i].acceptedQty;
-        materialreceiveditem001wb.receivedQty = materialinwardDTO.materialreceiveditem001wbs[i].receivedQty;
-        materialreceiveditem001wb.rejectedQty = materialinwardDTO.materialreceiveditem001wbs[i].rejectedQty;
-        materialreceiveditem001wb.outstanding = materialinwardDTO.materialreceiveditem001wbs[i].outstanding;
+      materialreceiveditem001wb.acceptedQty = materialinwardDTO.materialreceiveditem001wbs[i].acceptedQty;
+      materialreceiveditem001wb.receivedQty = materialinwardDTO.materialreceiveditem001wbs[i].receivedQty;
+      materialreceiveditem001wb.rejectedQty = materialinwardDTO.materialreceiveditem001wbs[i].rejectedQty;
+      materialreceiveditem001wb.outstanding = materialinwardDTO.materialreceiveditem001wbs[i].outstanding;
 
-        materialreceiveditem001wb.cureceivedQty = materialinwardDTO.materialreceiveditem001wbs[i].cureceivedQty;
-        materialreceiveditem001wb.cuacceptedQty = materialinwardDTO.materialreceiveditem001wbs[i].cuacceptedQty;
-        materialreceiveditem001wb.curejectedQty = materialinwardDTO.materialreceiveditem001wbs[i].curejectedQty;
-        materialreceiveditem001wb.cuoutstanding = materialinwardDTO.materialreceiveditem001wbs[i].cuoutstanding;
+      materialreceiveditem001wb.cureceivedQty = materialinwardDTO.materialreceiveditem001wbs[i].cureceivedQty;
+      materialreceiveditem001wb.cuacceptedQty = materialinwardDTO.materialreceiveditem001wbs[i].cuacceptedQty;
+      materialreceiveditem001wb.curejectedQty = materialinwardDTO.materialreceiveditem001wbs[i].curejectedQty;
+      materialreceiveditem001wb.cuoutstanding = materialinwardDTO.materialreceiveditem001wbs[i].cuoutstanding;
 
-        materialreceiveditem001wb.cptreceivedQty = materialinwardDTO.materialreceiveditem001wbs[i].cptreceivedQty;
-        materialreceiveditem001wb.cptacceptedQty = materialinwardDTO.materialreceiveditem001wbs[i].cptacceptedQty;
-        materialreceiveditem001wb.cptrejectedQty = materialinwardDTO.materialreceiveditem001wbs[i].cptrejectedQty;
-        materialreceiveditem001wb.cptoutstanding = materialinwardDTO.materialreceiveditem001wbs[i].cptoutstanding;
+      materialreceiveditem001wb.cptreceivedQty = materialinwardDTO.materialreceiveditem001wbs[i].cptreceivedQty;
+      materialreceiveditem001wb.cptacceptedQty = materialinwardDTO.materialreceiveditem001wbs[i].cptacceptedQty;
+      materialreceiveditem001wb.cptrejectedQty = materialinwardDTO.materialreceiveditem001wbs[i].cptrejectedQty;
+      materialreceiveditem001wb.cptoutstanding = materialinwardDTO.materialreceiveditem001wbs[i].cptoutstanding;
 
-        materialreceiveditem001wb.prtreceivedQty = materialinwardDTO.materialreceiveditem001wbs[i].prtreceivedQty;
-        materialreceiveditem001wb.prtacceptedQty = materialinwardDTO.materialreceiveditem001wbs[i].prtacceptedQty;
-        materialreceiveditem001wb.prtrejectedQty = materialinwardDTO.materialreceiveditem001wbs[i].prtrejectedQty;
-        materialreceiveditem001wb.prtoutstanding = materialinwardDTO.materialreceiveditem001wbs[i].prtoutstanding;
+      materialreceiveditem001wb.prtreceivedQty = materialinwardDTO.materialreceiveditem001wbs[i].prtreceivedQty;
+      materialreceiveditem001wb.prtacceptedQty = materialinwardDTO.materialreceiveditem001wbs[i].prtacceptedQty;
+      materialreceiveditem001wb.prtrejectedQty = materialinwardDTO.materialreceiveditem001wbs[i].prtrejectedQty;
+      materialreceiveditem001wb.prtoutstanding = materialinwardDTO.materialreceiveditem001wbs[i].prtoutstanding;
 
-        materialreceiveditem001wb.unitslno = materialinwardDTO.unitslno;
-        materialreceiveditem001wb.updatedUser = materialinwardDTO.updatedUser;
-        materialreceiveditem001wb.updatedDatetime = materialinwardDTO.updatedDatetime;
-        await this.materialreceiveditemRepository.update({ materialSlno: materialinwardDTO.materialreceiveditem001wbs[i].materialSlno }, materialreceiveditem001wb);
+      materialreceiveditem001wb.unitslno = materialinwardDTO.unitslno;
+      materialreceiveditem001wb.updatedUser = materialinwardDTO.updatedUser;
+      materialreceiveditem001wb.updatedDatetime = materialinwardDTO.updatedDatetime;
+      await this.materialreceiveditemRepository.update({ materialSlno: materialinwardDTO.materialreceiveditem001wbs[i].materialSlno }, materialreceiveditem001wb);
 
-      }
-      const materialinward001wb = new Materialinward001wb();
-      materialinward001wb.setProperties(materialinwardDTO);
-      await this.MaterialinwardRepository.update({ slNo: materialinward001wb.slNo }, materialinward001wb);
-      return materialinward001wb;
-  
+    }
+    const materialinward001wb = new Materialinward001wb();
+    materialinward001wb.setProperties(materialinwardDTO);
+    await this.MaterialinwardRepository.update({ slNo: materialinward001wb.slNo }, materialinward001wb);
+    return materialinward001wb;
+
   }
 
   async UpdateMaterialinward(approvel: any, materialSlno: any, remarks: any): Promise<Materialinward001wb> {
@@ -156,7 +156,8 @@ export class MaterialinwardService {
   }
 
   async findAll(unitslno: any): Promise<Materialinward001wb[]> {
-    return this.MaterialinwardRepository.find({ relations: ["materialreceiveditem001wbs","purchseSlno2"],
+    return this.MaterialinwardRepository.find({
+      relations: ["materialreceiveditem001wbs", "purchseSlno2"],
       order: { slNo: "DESC" },
       where: { unitslno: unitslno },
     });
@@ -194,10 +195,14 @@ export class MaterialinwardService {
     let childpart = await this.childPartRepository.find();
 
     let part = await this.PartRepository.find();
-
+   
+    // 
+    // let childslno = 0;
+    // let partlno = 0;
     var fs = require("fs");
     var pdf = require("dynamic-html-pdf");
     var html = fs.readFileSync("materialinwards.html", "utf8");
+  
 
     var options = {
       format: "A3",
@@ -208,41 +213,52 @@ export class MaterialinwardService {
 
 
     pdf.registerHelper("iforderslno", function (orderslno, options) {
+     
       const value1 = this.itemcode ? this.itemcode : undefined;
       this.itemcode = this.itemcode ? ordeitem.find(x => x.slNo === value1)?.itemcode : null;
+      let itemslno = 0;
       if (value1 == undefined) {
+
         return options.inverse(this);
       } else {
-        return options.fn(this, this.itemcode);
+        this.slNo = ++itemslno
+        return options.fn(this, this.itemcode,this.slNo);
       }
     });
     pdf.registerHelper("ifcucode", function (cucode, options) {
       const value2 = this.cucode ? this.cucode : undefined;
       this.itemcode = this.cucode ? consumableitem.find(x => x.slNo === value2)?.consmno : null;
+      let consumslno = 0;
       if (value2 == undefined) {
         return options.inverse(this);
       } else {
-        return options.fn(this, this.itemcode);
+        this.slNo = ++consumslno;
+        return options.fn(this, this.itemcode,this.slNo);
       }
     });
 
     pdf.registerHelper("ifcptcode", function (cptcode, options) {
       const value3 = this.cptcode ? this.cptcode : undefined;
       this.itemcode = this.cptcode ? childpart.find(x => x.slNo === value3)?.cpartno : null;
+      let childslno = 0;
       if (value3 == undefined) {
-        return options.inverse(this, this.itemcode);
-      } else {
         return options.fn(this);
+      } else {
+
+        this.slNo = ++childslno
+        return options.inverse(this, this.itemcode,this.slNo);
       }
     });
 
     pdf.registerHelper("ifprtcode", function (prtcode, options) {
       const value4 = this.prtcode ? this.prtcode : undefined;
       this.itemcode = this.prtcode ? part.find(x => x.slNo === value4)?.partno : null;
+      let partlno = 0;
       if (value4 == undefined) {
         return options.inverse(this);
       } else {
-        return options.fn(this, this.itemcode);
+        this.slNo = ++partlno
+        return options.fn(this, this.itemcode,this.slNo);
       }
     });
 
@@ -312,6 +328,7 @@ export class MaterialinwardService {
       this.tWords = totalwords.toUpperCase();
       value1 = value1 ? value1 : undefined;
       if (value1 == undefined) {
+
         return options.inverse(this);
       } else {
         return options.fn(this, this.tAmount, this.tWords);
@@ -394,10 +411,11 @@ export class MaterialinwardService {
     var fs = require("fs");
     var pdf = require("dynamic-html-pdf");
     var html = fs.readFileSync("materialinward.html", "utf8");
-
+    let regslno = 0;
     pdf.registerHelper('iforderslno', function (itemcode, options) {
       if (this.itemcode) {
         this.itemcode = this.itemcode ? ordeitem.find(x => x.slNo === this.itemcode)?.itemcode : null;
+        this.slNo = ++regslno
         return options.fn(this, this.itemcode);
       } else {
         return options.inverse(this);
@@ -407,6 +425,7 @@ export class MaterialinwardService {
     pdf.registerHelper('ifcucode', function (cucode, options) {
       if (this.cucode) {
         this.cucode = this.cucode ? consumableitem.find(x => x.slNo === this.cucode)?.consmno : null;
+        this.slNo = ++regslno
         return options.fn(this, this.cucode);
       } else {
         return options.inverse(this);
@@ -417,6 +436,7 @@ export class MaterialinwardService {
     pdf.registerHelper('ifcptcode', function (cptcode, options) {
       if (this.cptcode) {
         this.cptcode = this.cptcode ? childpart.find(x => x.slNo === this.cptcode)?.cpartno : null;
+        this.slNo = ++regslno
         return options.fn(this, this.cptcode);
       } else {
         return options.inverse(this);
@@ -426,6 +446,7 @@ export class MaterialinwardService {
     pdf.registerHelper('ifprtcode', function (prtcode, options) {
       if (this.prtcode) {
         this.prtcode = this.prtcode ? part.find(x => x.slNo === this.prtcode)?.partno : null;
+        this.slNo = ++regslno
         return options.fn(this, this.prtcode);
       } else {
         return options.inverse(this);
@@ -774,7 +795,7 @@ export class MaterialinwardService {
 
           worksheet.mergeCells("A" + temp);
           worksheet.getCell("A" + temp).value =
-            materialinward[i].materialreceiveditem001wbs[j].slNo;
+            j + 1;
           worksheet.getCell("A" + temp).font = {
             size: 12,
             bold: true,
@@ -906,7 +927,7 @@ export class MaterialinwardService {
 
           worksheet.mergeCells("A" + temp);
           worksheet.getCell("A" + temp).value =
-            materialinward[i].materialreceiveditem001wbs[j].slNo;
+            j + 1;
           worksheet.getCell("A" + temp).font = {
             size: 12,
             bold: true,
@@ -1038,7 +1059,7 @@ export class MaterialinwardService {
 
           worksheet.mergeCells("A" + temp);
           worksheet.getCell("A" + temp).value =
-            materialinward[i].materialreceiveditem001wbs[j].slNo;
+            j + 1;
           worksheet.getCell("A" + temp).font = {
             size: 12,
             bold: true,
@@ -1170,7 +1191,7 @@ export class MaterialinwardService {
 
           worksheet.mergeCells("A" + temp);
           worksheet.getCell("A" + temp).value =
-            materialinward[i].materialreceiveditem001wbs[j].slNo;
+            j + 1;
           worksheet.getCell("A" + temp).font = {
             size: 12,
             bold: true,
@@ -1707,7 +1728,7 @@ export class MaterialinwardService {
           let temp = j + 6;
 
           worksheet.mergeCells("A" + temp);
-          worksheet.getCell("A" + temp).value = materialinwarditem[j].slNo;
+          worksheet.getCell("A" + temp).value = j + 1;
           worksheet.getCell("A" + temp).font = {
             size: 12,
             bold: true,
@@ -1835,7 +1856,7 @@ export class MaterialinwardService {
 
           worksheet.mergeCells("A" + temp);
           worksheet.getCell("A" + temp).value =
-            materialinward[i].materialreceiveditem001wbs[j].slNo;
+            j + 1;
           worksheet.getCell("A" + temp).font = {
             size: 12,
             bold: true,
@@ -1963,7 +1984,7 @@ export class MaterialinwardService {
           let temp = j + 6;
 
           worksheet.mergeCells("A" + temp);
-          worksheet.getCell("A" + temp).value = materialinwarditem[j].slNo;
+          worksheet.getCell("A" + temp).value = j + 1;
           worksheet.getCell("A" + temp).font = {
             size: 12,
             bold: true,
@@ -2091,7 +2112,7 @@ export class MaterialinwardService {
           let temp = j + 6;
 
           worksheet.mergeCells("A" + temp);
-          worksheet.getCell("A" + temp).value = materialinwarditem[j].slNo;
+          worksheet.getCell("A" + temp).value = j + 1;
           worksheet.getCell("A" + temp).font = {
             size: 12,
             bold: true,

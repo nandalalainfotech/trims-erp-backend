@@ -65,7 +65,9 @@
         {{#each Item}}
 
         <tr>
+            {{#ifcptcode 'cptcode'}}
             <th colspan="1">{{this.slNo}}</th>
+            {{/ifcptcode}}
             <th colspan="1">{{this.cptcode2.cpartno}}</th>
             <th colspan="1">{{this.cptcode2.cpartname}}</th>
             <th colspan="1">{{this.cptcode2.descrip}}</th>

@@ -101,8 +101,8 @@ export class RawmaterialinspectionService {
         return rawmaterialinspection001wb;
     }
 
-   
-    
+
+
     findOne(id: number): Promise<Rawmaterialinspection001wb> {
         return this.rawmaterialinspectionRepository.findOne(id);
     }
@@ -135,14 +135,16 @@ export class RawmaterialinspectionService {
         var fs = require('fs');
         var pdf = require('dynamic-html-pdf');
         var html = fs.readFileSync('items.html', 'utf8');
+        let itemslno = 0
+        pdf.registerHelper('iforderslno', function (itemcode, options) {
+            this.slNo = ++itemslno
+            if (this.slNo == undefined) {
+                return options.inverse(this);
+            } else {
+                return options.fn(this, this.slNo);
 
-        // pdf.registerHelper('iforderslno', function (itemcode, options) {
-        //     if (this.itemcode) {
-        //         return options.fn(this);
-        //     } else {
-        //         return options.inverse(this);
-        //     }
-        // })
+            }
+        })
 
         var options = {
             format: "A3",
@@ -178,7 +180,7 @@ export class RawmaterialinspectionService {
 
     }
 
-    
+
 
     async downloadconsumablePdf(unitslno: any, @Req() request: Request, @Res() response: Response) {
         let ordeitem = await this.rawmaterialinspectionRepository.find({
@@ -195,18 +197,20 @@ export class RawmaterialinspectionService {
         }
 
         Consumablecodes = Consumablecodes.filter((e, i) => Consumablecodes.findIndex(a => a["cucode"] === e["cucode"]) === i);
-
+        let consumbleSlno = 0
         var fs = require('fs');
         var pdf = require('dynamic-html-pdf');
         var html = fs.readFileSync('Consumables.html', 'utf8');
 
-        // pdf.registerHelper('ifcucode', function (cucode, options) {
-        //     if (this.cucode) {
-        //         return options.fn(this);
-        //     } else {
-        //         return options.inverse(this);
-        //     }
-        // })
+        pdf.registerHelper('ifcucode', function (cucode, options) {
+            this.slNo = ++consumbleSlno
+            if (this.slNo == undefined) {
+                return options.inverse(this);
+
+            } else {
+                return options.fn(this, this.slNo);
+            }
+        })
 
         var options = {
             format: "A3",
@@ -242,7 +246,7 @@ export class RawmaterialinspectionService {
 
     }
 
-    async downloadchildPartPdf(unitslno:any,@Req() request: Request, @Res() response: Response) {
+    async downloadchildPartPdf(unitslno: any, @Req() request: Request, @Res() response: Response) {
 
         let ordeitem = await this.rawmaterialinspectionRepository.find({
             relations: ["itemcode2", "cucode2", "cptcode2", "prtcode2"],
@@ -260,18 +264,19 @@ export class RawmaterialinspectionService {
 
         ChildPartcodes = ChildPartcodes.filter((e, i) => ChildPartcodes.findIndex(a => a["cptcode"] === e["cptcode"]) === i);
 
-
+        let childSlno = 0
         var fs = require('fs');
         var pdf = require('dynamic-html-pdf');
         var html = fs.readFileSync('childParts.html', 'utf8');
 
-        // pdf.registerHelper('ifcptcode', function (cptcode, options) {
-        //     if (this.cptcode) {
-        //         return options.fn(this);
-        //     } else {
-        //         return options.inverse(this);
-        //     }
-        // })
+        pdf.registerHelper('ifcptcode', function (cptcode, options) {
+            this.slNo = ++childSlno
+            if (this.slNo == undefined) {
+                return options.inverse(this);
+            } else {
+                return options.fn(this, this.slNo);
+            }
+        })
 
         var options = {
             format: "A3",
@@ -307,7 +312,7 @@ export class RawmaterialinspectionService {
 
     }
 
-    async downloadPartPdf(unitslno:any,@Req() request: Request, @Res() response: Response) {
+    async downloadPartPdf(unitslno: any, @Req() request: Request, @Res() response: Response) {
 
 
         let ordeitem = await this.rawmaterialinspectionRepository.find({
@@ -326,18 +331,20 @@ export class RawmaterialinspectionService {
 
         Partcodes = Partcodes.filter((e, i) => Partcodes.findIndex(a => a["prtcode"] === e["prtcode"]) === i);
 
-
+        let partSlno = 0;
         var fs = require('fs');
         var pdf = require('dynamic-html-pdf');
         var html = fs.readFileSync('parts.html', 'utf8');
 
-        // pdf.registerHelper('ifprtcode', function (prtcode, options) {
-        //     if (this.prtcode) {
-        //         return options.fn(this);
-        //     } else {
-        //         return options.inverse(this);
-        //     }
-        // })
+        pdf.registerHelper('ifprtcode', function (prtcode, options) {
+            this.slNo =++partSlno;
+            if (this.slNo == undefined) {
+                return options.inverse(this);
+                } else {
+                    return options.fn(this, this.slNo);
+               
+            }
+        })
 
         var options = {
             format: "A3",
@@ -379,7 +386,7 @@ export class RawmaterialinspectionService {
 
 
 
-// ----------------------Item-Excel------------------------
+    // ----------------------Item-Excel------------------------
 
     async downloaditemExcel(unitslno: any, @Req() request: Request, @Res() response: Response) {
 
@@ -408,16 +415,16 @@ export class RawmaterialinspectionService {
         let worksheet = workbook.addWorksheet('Child Part Details_report'); // creating worksheet
         worksheet.views = [{ showGridLines: false }];
 
-            worksheet.getRow(5).height = 15;
-            worksheet.getRow(6).height = 15;
-            worksheet.getRow(7).height = 15;
-            worksheet.getRow(8).height = 15;
-            worksheet.getRow(9).height = 15;
-            worksheet.getRow(10).height = 15;
-            worksheet.getRow(11).height = 15;
-            worksheet.getRow(12).height = 15;
-            worksheet.getRow(13).height = 15;
-            worksheet.getRow(14).height = 15;
+        worksheet.getRow(5).height = 15;
+        worksheet.getRow(6).height = 15;
+        worksheet.getRow(7).height = 15;
+        worksheet.getRow(8).height = 15;
+        worksheet.getRow(9).height = 15;
+        worksheet.getRow(10).height = 15;
+        worksheet.getRow(11).height = 15;
+        worksheet.getRow(12).height = 15;
+        worksheet.getRow(13).height = 15;
+        worksheet.getRow(14).height = 15;
 
         worksheet.columns = [
             { key: 'A', width: 15.0 },
@@ -432,24 +439,24 @@ export class RawmaterialinspectionService {
             { key: 'J', width: 25.0 },
 
 
-            ];
+        ];
 
-            worksheet.columns.forEach((col) => {
+        worksheet.columns.forEach((col) => {
 
-                col.style.font = {
-                    size: 7,
-                    bold: true
-                };
-                col.style.alignment = { vertical: 'middle', horizontal: 'center' };
-                col.style.border = { top: { style: 'thin' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } };
-            })
-            worksheet.mergeCells('A1:A4');
-            worksheet.getCell('A1:A4').value = "TRIMS";
-            worksheet.getCell('A1:A4').font = {
-                size: 11,
+            col.style.font = {
+                size: 7,
                 bold: true
             };
-            worksheet.getCell('A1:A4').alignment = { vertical: 'middle', horizontal: 'center' };
+            col.style.alignment = { vertical: 'middle', horizontal: 'center' };
+            col.style.border = { top: { style: 'thin' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } };
+        })
+        worksheet.mergeCells('A1:A4');
+        worksheet.getCell('A1:A4').value = "TRIMS";
+        worksheet.getCell('A1:A4').font = {
+            size: 11,
+            bold: true
+        };
+        worksheet.getCell('A1:A4').alignment = { vertical: 'middle', horizontal: 'center' };
 
 
         worksheet.mergeCells('B1:I2');
@@ -484,30 +491,30 @@ export class RawmaterialinspectionService {
         worksheet.getCell('J4').value = "Rev Date :";
         worksheet.getCell('J4').alignment = { vertical: 'left', horizontal: 'left' };
 
-            worksheet.mergeCells('A5');
-            worksheet.getCell('A5').value = "Sl. No";
-            worksheet.getCell('A5').font = {
-                size: 11,
-                bold: true
-            };
-            worksheet.mergeCells('B5');
-            worksheet.getCell('B5').value = "Item Code";
-            worksheet.getCell('B5').font = {
-                size: 11,
-                bold: true
-            };
-            worksheet.mergeCells('C5');
-            worksheet.getCell('C5').value = "Item Name";
-            worksheet.getCell('C5').font = {
-                size: 11,
-                bold: true
-            };
-            worksheet.mergeCells('D5');
-            worksheet.getCell('D5').value = "Item Description";
-            worksheet.getCell('D5').font = {
-                size: 11,
-                bold: true
-            };
+        worksheet.mergeCells('A5');
+        worksheet.getCell('A5').value = "Sl. No";
+        worksheet.getCell('A5').font = {
+            size: 11,
+            bold: true
+        };
+        worksheet.mergeCells('B5');
+        worksheet.getCell('B5').value = "Item Code";
+        worksheet.getCell('B5').font = {
+            size: 11,
+            bold: true
+        };
+        worksheet.mergeCells('C5');
+        worksheet.getCell('C5').value = "Item Name";
+        worksheet.getCell('C5').font = {
+            size: 11,
+            bold: true
+        };
+        worksheet.mergeCells('D5');
+        worksheet.getCell('D5').value = "Item Description";
+        worksheet.getCell('D5').font = {
+            size: 11,
+            bold: true
+        };
 
 
         worksheet.mergeCells('E5');
@@ -577,7 +584,7 @@ export class RawmaterialinspectionService {
             let temp = i + 6;
 
             worksheet.mergeCells('A' + temp);
-            worksheet.getCell('A' + temp).value = rawmetriealcodes[i].slNo;
+            worksheet.getCell('A' + temp).value = i+1;
 
             worksheet.mergeCells('B' + temp);
             worksheet.getCell('B' + temp).value = rawmetriealcodes[i].itemcode2.itemcode
@@ -606,10 +613,10 @@ export class RawmaterialinspectionService {
             worksheet.mergeCells('J' + temp);
             worksheet.getCell('J' + temp).value = rawmetriealcodes[i].itemcode2.orderlevel;
 
-            }
+        }
         return workbook.xlsx.write(response).then(function () {
             response['status'](200).end();
-        });    
+        });
 
 
     }
@@ -651,7 +658,7 @@ export class RawmaterialinspectionService {
             { key: 'H', width: 15.0 },
             { key: 'I', width: 15.0 },
             { key: 'I', width: 20.0 },
-          
+
 
         ];
 
@@ -730,7 +737,7 @@ export class RawmaterialinspectionService {
             bold: true
         };
 
-       
+
         worksheet.mergeCells('E5');
         worksheet.getCell('E5').value = "Opening Balance";
         worksheet.getCell('E5').font = {
@@ -793,7 +800,7 @@ export class RawmaterialinspectionService {
             let temp = i + 6;
 
             worksheet.mergeCells('A' + temp);
-            worksheet.getCell('A' + temp).value = Consumablecodes[i].slNo;
+            worksheet.getCell('A' + temp).value =i+1;
 
             worksheet.mergeCells('B' + temp);
             worksheet.getCell('B' + temp).value = Consumablecodes[i].cucode2.consmno;
@@ -845,106 +852,106 @@ export class RawmaterialinspectionService {
         let worksheet = workbook.addWorksheet('Child Part Details_report'); // creating worksheet
         worksheet.views = [{ showGridLines: false }];
 
-    worksheet.getRow(5).height = 15;
-    worksheet.getRow(6).height = 15;
-    worksheet.getRow(7).height = 15;
-    worksheet.getRow(8).height = 15;
-    worksheet.getRow(9).height = 15;
-    worksheet.getRow(10).height = 15;
-    worksheet.getRow(11).height = 15;
-    worksheet.getRow(12).height = 15;
-    worksheet.getRow(13).height = 15;
-    worksheet.getRow(14).height = 15;
+        worksheet.getRow(5).height = 15;
+        worksheet.getRow(6).height = 15;
+        worksheet.getRow(7).height = 15;
+        worksheet.getRow(8).height = 15;
+        worksheet.getRow(9).height = 15;
+        worksheet.getRow(10).height = 15;
+        worksheet.getRow(11).height = 15;
+        worksheet.getRow(12).height = 15;
+        worksheet.getRow(13).height = 15;
+        worksheet.getRow(14).height = 15;
 
-    worksheet.columns = [
-        { key: 'A', width: 15.0 },
-        { key: 'B', width: 20.0 },
-        { key: 'C', width: 20.0 },
-        { key: 'D', width: 22.0 },
-        { key: 'E', width: 22.0 },
-        { key: 'F', width: 15.0 },
-        { key: 'G', width: 15.0 },
-        { key: 'H', width: 15.0 },
-        { key: 'I', width: 15.0 },
-        { key: 'I', width: 20.0 },
-      
+        worksheet.columns = [
+            { key: 'A', width: 15.0 },
+            { key: 'B', width: 20.0 },
+            { key: 'C', width: 20.0 },
+            { key: 'D', width: 22.0 },
+            { key: 'E', width: 22.0 },
+            { key: 'F', width: 15.0 },
+            { key: 'G', width: 15.0 },
+            { key: 'H', width: 15.0 },
+            { key: 'I', width: 15.0 },
+            { key: 'I', width: 20.0 },
 
-    ];
 
-    worksheet.columns.forEach((col) => {
+        ];
 
-        col.style.font = {
-            size: 7,
+        worksheet.columns.forEach((col) => {
+
+            col.style.font = {
+                size: 7,
+                bold: true
+            };
+            col.style.alignment = { vertical: 'middle', horizontal: 'center' };
+            col.style.border = { top: { style: 'thin' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } };
+        })
+        worksheet.mergeCells('A1:A4');
+        worksheet.getCell('A1:A4').value = "TRIMS";
+        worksheet.getCell('A1:A4').font = {
+            size: 11,
             bold: true
         };
-        col.style.alignment = { vertical: 'middle', horizontal: 'center' };
-        col.style.border = { top: { style: 'thin' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } };
-    })
-    worksheet.mergeCells('A1:A4');
-    worksheet.getCell('A1:A4').value = "TRIMS";
-    worksheet.getCell('A1:A4').font = {
-        size: 11,
-        bold: true
-    };
-    worksheet.getCell('A1:A4').alignment = { vertical: 'middle', horizontal: 'center' };
+        worksheet.getCell('A1:A4').alignment = { vertical: 'middle', horizontal: 'center' };
 
 
-    worksheet.mergeCells('B1:I2');
-    worksheet.getCell('B1:I2').value = "SRINIVASA ENTERPRISES";
-    worksheet.getCell('B1:I2').fgColor = { argb: 'b03600' };
-    worksheet.getCell('B1:I2').font = {
-        size: 11,
-        bold: true
-    };
-    worksheet.getCell('B1:I2').alignment = { vertical: 'middle', horizontal: 'center' };
+        worksheet.mergeCells('B1:I2');
+        worksheet.getCell('B1:I2').value = "SRINIVASA ENTERPRISES";
+        worksheet.getCell('B1:I2').fgColor = { argb: 'b03600' };
+        worksheet.getCell('B1:I2').font = {
+            size: 11,
+            bold: true
+        };
+        worksheet.getCell('B1:I2').alignment = { vertical: 'middle', horizontal: 'center' };
 
-    worksheet.mergeCells('B3:I4');
-    worksheet.getCell('B3:I4').value = "CHILD PART DETAILS";
-    worksheet.getCell('B3:I4').fgColor = { argb: '00b050' };
+        worksheet.mergeCells('B3:I4');
+        worksheet.getCell('B3:I4').value = "CHILD PART DETAILS";
+        worksheet.getCell('B3:I4').fgColor = { argb: '00b050' };
 
-    worksheet.getCell('B3:I4').font = {
-        size: 11,
-        bold: true
-    };
-    worksheet.getCell('B3:I4').alignment = { vertical: 'middle', horizontal: 'center' };
+        worksheet.getCell('B3:I4').font = {
+            size: 11,
+            bold: true
+        };
+        worksheet.getCell('B3:I4').alignment = { vertical: 'middle', horizontal: 'center' };
 
-    worksheet.mergeCells('J1');
-    worksheet.getCell('J1').value = "Format No.SE/MTN/R05";
-    worksheet.getCell('J1').alignment = { vertical: 'left', horizontal: 'left' };
-    worksheet.mergeCells('J2');
-    worksheet.getCell('J2').value = "Issue Date : ";
-    worksheet.getCell('J2').alignment = { vertical: 'left', horizontal: 'left' };
-    worksheet.mergeCells('J3');
-    worksheet.getCell('J3').value = "Rev. No. 00	";
-    worksheet.getCell('J3').alignment = { vertical: 'left', horizontal: 'left' };
-    worksheet.mergeCells('J4');
-    worksheet.getCell('J4').value = "Rev Date :";
-    worksheet.getCell('J4').alignment = { vertical: 'left', horizontal: 'left' };
+        worksheet.mergeCells('J1');
+        worksheet.getCell('J1').value = "Format No.SE/MTN/R05";
+        worksheet.getCell('J1').alignment = { vertical: 'left', horizontal: 'left' };
+        worksheet.mergeCells('J2');
+        worksheet.getCell('J2').value = "Issue Date : ";
+        worksheet.getCell('J2').alignment = { vertical: 'left', horizontal: 'left' };
+        worksheet.mergeCells('J3');
+        worksheet.getCell('J3').value = "Rev. No. 00	";
+        worksheet.getCell('J3').alignment = { vertical: 'left', horizontal: 'left' };
+        worksheet.mergeCells('J4');
+        worksheet.getCell('J4').value = "Rev Date :";
+        worksheet.getCell('J4').alignment = { vertical: 'left', horizontal: 'left' };
 
-    worksheet.mergeCells('A5');
-    worksheet.getCell('A5').value = "Sl. No";
-    worksheet.getCell('A5').font = {
-        size: 11,
-        bold: true
-    };
-    worksheet.mergeCells('B5');
-    worksheet.getCell('B5').value = "ChildPart Code";
-    worksheet.getCell('B5').font = {
-        size: 11,
-        bold: true
-    };
-    worksheet.mergeCells('C5');
-    worksheet.getCell('C5').value = "ChildPart Name";
-    worksheet.getCell('C5').font = {
-        size: 11,
-        bold: true
-    };
-    worksheet.mergeCells('D5');
-    worksheet.getCell('D5').value = "ChildPart Description";
-    worksheet.getCell('D5').font = {
-        size: 11,
-        bold: true
-    };
+        worksheet.mergeCells('A5');
+        worksheet.getCell('A5').value = "Sl. No";
+        worksheet.getCell('A5').font = {
+            size: 11,
+            bold: true
+        };
+        worksheet.mergeCells('B5');
+        worksheet.getCell('B5').value = "ChildPart Code";
+        worksheet.getCell('B5').font = {
+            size: 11,
+            bold: true
+        };
+        worksheet.mergeCells('C5');
+        worksheet.getCell('C5').value = "ChildPart Name";
+        worksheet.getCell('C5').font = {
+            size: 11,
+            bold: true
+        };
+        worksheet.mergeCells('D5');
+        worksheet.getCell('D5').value = "ChildPart Description";
+        worksheet.getCell('D5').font = {
+            size: 11,
+            bold: true
+        };
 
 
         worksheet.mergeCells('E5');
@@ -966,26 +973,26 @@ export class RawmaterialinspectionService {
             bold: true
         };
 
-    worksheet.mergeCells('H5');
-    worksheet.getCell('H5').value = "Min Stock Level";
-    worksheet.getCell('H5').font = {
-        size: 11,
-        bold: true
-    };
+        worksheet.mergeCells('H5');
+        worksheet.getCell('H5').value = "Min Stock Level";
+        worksheet.getCell('H5').font = {
+            size: 11,
+            bold: true
+        };
 
-    worksheet.mergeCells('I5');
-    worksheet.getCell('I5').value = "Lead Time";
-    worksheet.getCell('I5').font = {
-        size: 11,
-        bold: true
-    };
+        worksheet.mergeCells('I5');
+        worksheet.getCell('I5').value = "Lead Time";
+        worksheet.getCell('I5').font = {
+            size: 11,
+            bold: true
+        };
 
-    worksheet.mergeCells('J5');
-    worksheet.getCell('J5').value = "Re-Oreder Level";
-    worksheet.getCell('J5').font = {
-        size: 11,
-        bold: true
-    };
+        worksheet.mergeCells('J5');
+        worksheet.getCell('J5').value = "Re-Oreder Level";
+        worksheet.getCell('J5').font = {
+            size: 11,
+            bold: true
+        };
 
         // let orderitemarray = [];
 
@@ -1010,7 +1017,7 @@ export class RawmaterialinspectionService {
             let temp = i + 6;
 
             worksheet.mergeCells('A' + temp);
-            worksheet.getCell('A' + temp).value = ChildPartcodes[i].slNo;
+            worksheet.getCell('A' + temp).value = i+1;
 
             worksheet.mergeCells('B' + temp);
             worksheet.getCell('B' + temp).value = ChildPartcodes[i].cptcode2.cpartno;
@@ -1045,7 +1052,7 @@ export class RawmaterialinspectionService {
         });
 
 
-}
+    }
 
     // -----------------------------Part-Excel----------------------
 
@@ -1061,106 +1068,106 @@ export class RawmaterialinspectionService {
         let worksheet = workbook.addWorksheet('Child Part Details_report'); // creating worksheet
         worksheet.views = [{ showGridLines: false }];
 
-    worksheet.getRow(5).height = 15;
-    worksheet.getRow(6).height = 15;
-    worksheet.getRow(7).height = 15;
-    worksheet.getRow(8).height = 15;
-    worksheet.getRow(9).height = 15;
-    worksheet.getRow(10).height = 15;
-    worksheet.getRow(11).height = 15;
-    worksheet.getRow(12).height = 15;
-    worksheet.getRow(13).height = 15;
-    worksheet.getRow(14).height = 15;
+        worksheet.getRow(5).height = 15;
+        worksheet.getRow(6).height = 15;
+        worksheet.getRow(7).height = 15;
+        worksheet.getRow(8).height = 15;
+        worksheet.getRow(9).height = 15;
+        worksheet.getRow(10).height = 15;
+        worksheet.getRow(11).height = 15;
+        worksheet.getRow(12).height = 15;
+        worksheet.getRow(13).height = 15;
+        worksheet.getRow(14).height = 15;
 
-    worksheet.columns = [
-        { key: 'A', width: 15.0 },
-        { key: 'B', width: 20.0 },
-        { key: 'C', width: 20.0 },
-        { key: 'D', width: 22.0 },
-        { key: 'E', width: 22.0 },
-        { key: 'F', width: 15.0 },
-        { key: 'G', width: 15.0 },
-        { key: 'H', width: 15.0 },
-        { key: 'I', width: 15.0 },
-        { key: 'I', width: 20.0 },
-      
+        worksheet.columns = [
+            { key: 'A', width: 15.0 },
+            { key: 'B', width: 20.0 },
+            { key: 'C', width: 20.0 },
+            { key: 'D', width: 22.0 },
+            { key: 'E', width: 22.0 },
+            { key: 'F', width: 15.0 },
+            { key: 'G', width: 15.0 },
+            { key: 'H', width: 15.0 },
+            { key: 'I', width: 15.0 },
+            { key: 'I', width: 20.0 },
 
-    ];
 
-    worksheet.columns.forEach((col) => {
+        ];
 
-        col.style.font = {
-            size: 7,
+        worksheet.columns.forEach((col) => {
+
+            col.style.font = {
+                size: 7,
+                bold: true
+            };
+            col.style.alignment = { vertical: 'middle', horizontal: 'center' };
+            col.style.border = { top: { style: 'thin' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } };
+        })
+        worksheet.mergeCells('A1:A4');
+        worksheet.getCell('A1:A4').value = "TRIMS";
+        worksheet.getCell('A1:A4').font = {
+            size: 11,
             bold: true
         };
-        col.style.alignment = { vertical: 'middle', horizontal: 'center' };
-        col.style.border = { top: { style: 'thin' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } };
-    })
-    worksheet.mergeCells('A1:A4');
-    worksheet.getCell('A1:A4').value = "TRIMS";
-    worksheet.getCell('A1:A4').font = {
-        size: 11,
-        bold: true
-    };
-    worksheet.getCell('A1:A4').alignment = { vertical: 'middle', horizontal: 'center' };
+        worksheet.getCell('A1:A4').alignment = { vertical: 'middle', horizontal: 'center' };
 
 
-    worksheet.mergeCells('B1:I2');
-    worksheet.getCell('B1:I2').value = "SRINIVASA ENTERPRISES";
-    worksheet.getCell('B1:I2').fgColor = { argb: 'b03600' };
-    worksheet.getCell('B1:I2').font = {
-        size: 11,
-        bold: true
-    };
-    worksheet.getCell('B1:I2').alignment = { vertical: 'middle', horizontal: 'center' };
+        worksheet.mergeCells('B1:I2');
+        worksheet.getCell('B1:I2').value = "SRINIVASA ENTERPRISES";
+        worksheet.getCell('B1:I2').fgColor = { argb: 'b03600' };
+        worksheet.getCell('B1:I2').font = {
+            size: 11,
+            bold: true
+        };
+        worksheet.getCell('B1:I2').alignment = { vertical: 'middle', horizontal: 'center' };
 
-    worksheet.mergeCells('B3:I4');
-    worksheet.getCell('B3:I4').value = "PART DETAILS";
-    worksheet.getCell('B3:I4').fgColor = { argb: '00b050' };
+        worksheet.mergeCells('B3:I4');
+        worksheet.getCell('B3:I4').value = "PART DETAILS";
+        worksheet.getCell('B3:I4').fgColor = { argb: '00b050' };
 
-    worksheet.getCell('B3:I4').font = {
-        size: 11,
-        bold: true
-    };
-    worksheet.getCell('B3:I4').alignment = { vertical: 'middle', horizontal: 'center' };
+        worksheet.getCell('B3:I4').font = {
+            size: 11,
+            bold: true
+        };
+        worksheet.getCell('B3:I4').alignment = { vertical: 'middle', horizontal: 'center' };
 
-    worksheet.mergeCells('J1');
-    worksheet.getCell('J1').value = "Format No.SE/MTN/R05";
-    worksheet.getCell('J1').alignment = { vertical: 'left', horizontal: 'left' };
-    worksheet.mergeCells('J2');
-    worksheet.getCell('J2').value = "Issue Date : ";
-    worksheet.getCell('J2').alignment = { vertical: 'left', horizontal: 'left' };
-    worksheet.mergeCells('J3');
-    worksheet.getCell('J3').value = "Rev. No. 00	";
-    worksheet.getCell('J3').alignment = { vertical: 'left', horizontal: 'left' };
-    worksheet.mergeCells('J4');
-    worksheet.getCell('J4').value = "Rev Date :";
-    worksheet.getCell('J4').alignment = { vertical: 'left', horizontal: 'left' };
+        worksheet.mergeCells('J1');
+        worksheet.getCell('J1').value = "Format No.SE/MTN/R05";
+        worksheet.getCell('J1').alignment = { vertical: 'left', horizontal: 'left' };
+        worksheet.mergeCells('J2');
+        worksheet.getCell('J2').value = "Issue Date : ";
+        worksheet.getCell('J2').alignment = { vertical: 'left', horizontal: 'left' };
+        worksheet.mergeCells('J3');
+        worksheet.getCell('J3').value = "Rev. No. 00	";
+        worksheet.getCell('J3').alignment = { vertical: 'left', horizontal: 'left' };
+        worksheet.mergeCells('J4');
+        worksheet.getCell('J4').value = "Rev Date :";
+        worksheet.getCell('J4').alignment = { vertical: 'left', horizontal: 'left' };
 
-    worksheet.mergeCells('A5');
-    worksheet.getCell('A5').value = "Sl. No";
-    worksheet.getCell('A5').font = {
-        size: 11,
-        bold: true
-    };
-    worksheet.mergeCells('B5');
-    worksheet.getCell('B5').value = "Part Code";
-    worksheet.getCell('B5').font = {
-        size: 11,
-        bold: true
-    };
-    worksheet.mergeCells('C5');
-    worksheet.getCell('C5').value = "Part Name";
-    worksheet.getCell('C5').font = {
-        size: 11,
-        bold: true
-    };
-    worksheet.mergeCells('D5');
-    worksheet.getCell('D5').value = "Part Description";
-    worksheet.getCell('D5').font = {
-        size: 11,
-        bold: true
-    };
+        worksheet.mergeCells('A5');
+        worksheet.getCell('A5').value = "Sl. No";
+        worksheet.getCell('A5').font = {
+            size: 11,
+            bold: true
+        };
+        worksheet.mergeCells('B5');
+        worksheet.getCell('B5').value = "Part Code";
+        worksheet.getCell('B5').font = {
+            size: 11,
+            bold: true
+        };
+        worksheet.mergeCells('C5');
+        worksheet.getCell('C5').value = "Part Name";
+        worksheet.getCell('C5').font = {
+            size: 11,
+            bold: true
+        };
+        worksheet.mergeCells('D5');
+        worksheet.getCell('D5').value = "Part Description";
+        worksheet.getCell('D5').font = {
+            size: 11,
+            bold: true
+        };
 
 
         worksheet.mergeCells('E5');
@@ -1182,26 +1189,26 @@ export class RawmaterialinspectionService {
             bold: true
         };
 
-    worksheet.mergeCells('H5');
-    worksheet.getCell('H5').value = "Min Stock Level";
-    worksheet.getCell('H5').font = {
-        size: 11,
-        bold: true
-    };
+        worksheet.mergeCells('H5');
+        worksheet.getCell('H5').value = "Min Stock Level";
+        worksheet.getCell('H5').font = {
+            size: 11,
+            bold: true
+        };
 
-    worksheet.mergeCells('I5');
-    worksheet.getCell('I5').value = "Lead Time";
-    worksheet.getCell('I5').font = {
-        size: 11,
-        bold: true
-    };
+        worksheet.mergeCells('I5');
+        worksheet.getCell('I5').value = "Lead Time";
+        worksheet.getCell('I5').font = {
+            size: 11,
+            bold: true
+        };
 
-    worksheet.mergeCells('J5');
-    worksheet.getCell('J5').value = "Re-Oreder Level";
-    worksheet.getCell('J5').font = {
-        size: 11,
-        bold: true
-    };
+        worksheet.mergeCells('J5');
+        worksheet.getCell('J5').value = "Re-Oreder Level";
+        worksheet.getCell('J5').font = {
+            size: 11,
+            bold: true
+        };
 
         // let orderitemarray = [];
 
@@ -1225,7 +1232,7 @@ export class RawmaterialinspectionService {
             let temp = i + 6;
 
             worksheet.mergeCells('A' + temp);
-            worksheet.getCell('A' + temp).value = Partcodes[i].slNo;
+            worksheet.getCell('A' + temp).value = i+1;
 
             worksheet.mergeCells('B' + temp);
             worksheet.getCell('B' + temp).value = Partcodes[i].prtcode2.partno;
@@ -2221,14 +2228,14 @@ export class RawmaterialinspectionService {
             worksheet.mergeCells('A' + temp);
             worksheet.getCell('A' + temp).value = orderitemarray[i].rawmaterialslno ? incoming.find(x => x.slNo == orderitemarray[i].rawmaterialslno)?.iirno : null;
 
-        worksheet.mergeCells('B' + temp);
-        worksheet.getCell('B' + temp).value = orderitemarray[i].prtcode2.partno;
+            worksheet.mergeCells('B' + temp);
+            worksheet.getCell('B' + temp).value = orderitemarray[i].prtcode2.partno;
 
-        worksheet.mergeCells('C' + temp);
-        worksheet.getCell('C' + temp).value = orderitemarray[i].prtcode2.partname;
+            worksheet.mergeCells('C' + temp);
+            worksheet.getCell('C' + temp).value = orderitemarray[i].prtcode2.partname;
 
-        worksheet.mergeCells('D' + temp);
-        worksheet.getCell('D' + temp).value = orderitemarray[i].prtcode2.descrip;
+            worksheet.mergeCells('D' + temp);
+            worksheet.getCell('D' + temp).value = orderitemarray[i].prtcode2.descrip;
 
             worksheet.mergeCells('E' + temp);
             worksheet.getCell('E' + temp).value = orderitemarray[i].prtacceptedQty;
@@ -2242,7 +2249,7 @@ export class RawmaterialinspectionService {
         });
 
 
-}
+    }
 
 }
 

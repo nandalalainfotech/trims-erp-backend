@@ -65,7 +65,9 @@
         {{#each Item}}
 
         <tr>
+            {{#ifprtcode 'prtcode'}}
             <th colspan="1">{{this.slNo}}</th>
+            {{/ifprtcode}}
             <th colspan="1">{{this.prtcode2.partno}}</th>
             <th colspan="1">{{this.prtcode2.partname}}</th>
             <th colspan="1">{{this.prtcode2.descrip}}</th>
