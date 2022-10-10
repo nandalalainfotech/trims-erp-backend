@@ -97,7 +97,8 @@
         </tr>
 
         <tr>
-            <th colspan="3">Part Code</th>
+            <th colspan="1">Sl No</th>
+            <th colspan="2">Part Code</th>
             <th colspan="3">Part Name</th>
             <th colspan="3">Description</th>
             <th colspan="3">UOM</th>
@@ -115,7 +116,8 @@
         {{#each this.customerpoitem001wbs}}    
         {{#ifprtcode 'prtcode'}}
         <tr>
-            <td colspan="3">{{this.prtcode}}</td>
+            <td colspan="1">{{this.slNo}}</td>
+            <td colspan="2">{{this.prtcode}}</td>
             <td colspan="3">{{this.prtmname}}</td>
             <td colspan="3">{{this.prtdescrip}}</td>
             <td colspan="3">{{this.prtuom}}</td>

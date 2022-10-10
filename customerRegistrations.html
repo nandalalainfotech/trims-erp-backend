@@ -114,11 +114,14 @@
             <th colspan="5">Mail Id</th>
         </tr>
        
+        {{#ifitemslno 'orderslno'}}
+        {{/ifitemslno}}
+        
         {{#each this.customercontact001wbs}}
         <tr>
-          {{#iforderslno 'orderslno'}}
-          <td colspan="1">{{this.slNo}}</td>
-          {{/iforderslno}}
+          {{#ifSlno 'orderslno'}}
+          <td colspan="1">{{this.slNo}}</td>    
+          {{/ifSlno}}
             <td colspan="4">{{this.pname}}</td>
             <td colspan="4">{{this.designation}}</td>
             <td colspan="4">{{this.department}}</td>
