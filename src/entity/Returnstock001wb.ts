@@ -192,7 +192,7 @@ export class Returnstock001wb {
     this.cptpersonname = returnstockDTO.cptpersonname;
     this.cptmobilenumber = returnstockDTO.cptmobilenumber;
     this.cptstatus = returnstockDTO.cptstatus;
-    this.cptreferenceid = returnstockDTO.referenceid;
+    this.cptreferenceid = returnstockDTO.cptreferenceid;
     this.childpartnumber = returnstockDTO.childpartnumber;
     this.cptrejectitems = returnstockDTO.cptrejectitems;
 

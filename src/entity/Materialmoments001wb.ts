@@ -21,7 +21,7 @@ export class Materialmoments001wb {
   @Column("varchar", { name: "shift", nullable: true, length: 50 })
   shift: string | null;
 
-  @Column( { name: "date", type:"date" })
+  @Column( { name: "date",type:'date', nullable: true })
   date: Date | null;
 
   @Column("varchar", { name: "time", nullable: true, length: 50 })
@@ -39,7 +39,7 @@ export class Materialmoments001wb {
   @Column("varchar", { name: "cushift", nullable: true, length: 50 })
   cushift: string | null;
 
-  @Column( { name: "cudate", type:"date" })
+  @Column({ name: "cudate", type:'date', nullable: true })
   cudate: Date | null;
 
   @Column("varchar", { name: "cutime", nullable: true, length: 50 })
@@ -57,7 +57,7 @@ export class Materialmoments001wb {
   @Column("varchar", { name: "cptshift", nullable: true, length: 50 })
   cptshift: string | null;
 
-  @Column( { name: "cptdate", type:"date" })
+  @Column( { name: "cptdate", type:'date',nullable: true })
   cptdate: Date | null;
 
   @Column("varchar", { name: "cpttime", nullable: true, length: 50 })
@@ -75,7 +75,7 @@ export class Materialmoments001wb {
   @Column("varchar", { name: "prtshift", nullable: true, length: 50 })
   prtshift: string | null;
 
-  @Column( { name: "prtdate", type:"date" })
+  @Column( { name: "prtdate", type:'date', nullable: true })
   prtdate: Date | null;
 
   @Column("varchar", { name: "prttime", nullable: true, length: 50 })
@@ -93,6 +93,7 @@ export class Materialmoments001wb {
   @Column("datetime", { name: "updated_datetime", nullable: true })
   updatedDatetime: Date | null;
 
+
   setProperties( materialmomentsDTO:  MaterialmomentsDTO) {
     this.slNo = materialmomentsDTO.slNo;
     this.unitslno = materialmomentsDTO.unitslno;
@@ -102,8 +103,8 @@ export class Materialmoments001wb {
     this.prtslno = materialmomentsDTO.prtslno;
     this.consumslno = materialmomentsDTO.consumslno;
     this.date = new Date( materialmomentsDTO.date);
-    this.cudate = new Date( materialmomentsDTO.cptdate);
-    this.cptdate = new Date( materialmomentsDTO.prtdate);
+    this.cudate = new Date( materialmomentsDTO.cudate);
+    this.cptdate = new Date( materialmomentsDTO.cptdate);
     this.prtdate = new Date( materialmomentsDTO.prtdate);
     this.qunty = materialmomentsDTO.qunty;
     this.cuqunty = materialmomentsDTO.cuqunty;
