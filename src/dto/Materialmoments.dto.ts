@@ -43,8 +43,8 @@ export class MaterialmomentsDTO {
         this.prtslno = materialmoments001wb.prtslno;
         this.consumslno = materialmoments001wb.consumslno;
         this.date = new Date( materialmoments001wb.date);
-        this.cudate = new Date( materialmoments001wb.cptdate);
-        this.cptdate = new Date( materialmoments001wb.prtdate);
+        this.cudate = new Date( materialmoments001wb.cudate);
+        this.cptdate = new Date( materialmoments001wb.cptdate);
         this.prtdate = new Date( materialmoments001wb.prtdate);
         this.qunty = materialmoments001wb.qunty;
         this.cuqunty = materialmoments001wb.cuqunty;

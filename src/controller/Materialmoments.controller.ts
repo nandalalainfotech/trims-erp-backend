@@ -9,12 +9,18 @@ import { RolesGuard } from "src/role/role.guard";
 import { MaterialmomentsService } from "src/service/Materialmoments.service";
 import { Request } from "supertest";
 
-var path = require('path');
+var path = require('path'); 
 const fs = require('fs');
 
 @Controller('/testandreportstudio/api/materialmoments')
 export class MaterialmomentsController {
 	constructor(private readonly materialmomentsService: MaterialmomentsService) { }
+	@hasRole(Role.superadmin, Role.admin, Role.user, Role.guest)
+	@UseGuards(JwtAuthGuard, RolesGuard)
+	@Get('findAll/:unitslno')
+	findAll(@Param('unitslno') unitslno: number): Promise<Materialmoments001wb[]> {
+		return this.materialmomentsService.findAll(unitslno);
+	}
 
 	@hasRole(Role.superadmin, Role.admin, Role.user, Role.guest)
 	@UseGuards(JwtAuthGuard, RolesGuard)
@@ -106,12 +112,7 @@ export class MaterialmomentsController {
 		return this.materialmomentsService.update(materialmomentsDTO);
 	}
 
-	@hasRole(Role.superadmin, Role.admin, Role.user, Role.guest)
-	@UseGuards(JwtAuthGuard, RolesGuard)
-	@Get('findAll/:unitslno')
-	findAll(@Param('unitslno') unitslno: number): Promise<Materialmoments001wb[]> {
-		return this.materialmomentsService.findAll(unitslno);
-	}
+	
 
 	@hasRole(Role.superadmin, Role.admin, Role.user, Role.guest)
 	@UseGuards(JwtAuthGuard, RolesGuard)

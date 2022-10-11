@@ -41,9 +41,6 @@ export class MaterialmomentsService {
 
         const materialmoments001wb = new Materialmoments001wb();
         materialmoments001wb.setProperties(materialmomentsDTO);
-        console.log("materialmoments001wb", materialmoments001wb);
-
-
         let consumableitem = new Rawmaterialinspection001wb();
         let Rawmaterial = new Rawmaterialinspection001wb();
         let childpart = new Rawmaterialinspection001wb();

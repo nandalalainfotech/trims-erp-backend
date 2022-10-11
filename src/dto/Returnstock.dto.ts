@@ -93,7 +93,7 @@ export class ReturnstockDTO {
         this.cptpersonname = returnstock001wb.cptpersonname;
         this.cptmobilenumber = returnstock001wb.cptmobilenumber;
         this.cptstatus = returnstock001wb.cptstatus;
-        this.cptreferenceid = returnstock001wb.referenceid;
+        this.cptreferenceid = returnstock001wb.cptreferenceid;
         this.childpartnumber = returnstock001wb.childpartnumber;
         this.cptrejectitems = returnstock001wb.cptrejectitems;
 

@@ -41,7 +41,6 @@ export class ReturnstockService {
     async create(returnstockDTO: ReturnstockDTO): Promise<Returnstock001wb> {
         const returnstock001wb = new Returnstock001wb();
         returnstock001wb.setProperties(returnstockDTO);
-        console.log("returnstock001wb=========>>>",returnstock001wb);
         
         let RawmaterialItems = new Rawmaterialinspection001wb();
         let ConsumableItems = new Rawmaterialinspection001wb();
@@ -49,7 +48,6 @@ export class ReturnstockService {
         let PartItems = new Rawmaterialinspection001wb();
         let rawmaterialinspection001wb = new Rawmaterialinspection001wb();
         RawmaterialItems = await this.rawmaterialinspectionRepository.findOne({ where: { slNo: returnstockDTO.ordernumber } });
-        console.log("RawmaterialItems",RawmaterialItems);
         ConsumableItems = await this.rawmaterialinspectionRepository.findOne({ where: { slNo: returnstockDTO.cuordernumber } });
         ChildpartItems = await this.rawmaterialinspectionRepository.findOne({ where: { slNo: returnstockDTO.childpartnumber } });
         PartItems = await this.rawmaterialinspectionRepository.findOne({ where: { slNo: returnstockDTO.partnumber } });
