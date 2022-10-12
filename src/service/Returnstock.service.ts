@@ -370,7 +370,7 @@ export class ReturnstockService {
 
     for (let i = 0; i < returnRawmaterial.length; i++) {
       for (let j = 0; j < returnStock.length; j++) {
-        if (returnStock[j].ordernumber == returnRawmaterial[i].itemcode) {
+        if (returnStock[j].partnumber == returnRawmaterial[i].slNo) {
           stockarray.push(returnStock[j])
         }
       }
@@ -1411,7 +1411,7 @@ export class ReturnstockService {
         worksheet.mergeCells('A5:C5');
         worksheet.getCell('A5:C5').value = {
           richText: [
-            { font: { size: 12 }, text: "Consumable Code:" + "\n\n" },
+            { font: { size: 12 }, text: "Child Part Code:" + "\n\n" },
             { font: { size: 12 }, text: "\n\n" +  returnRawmaterial[i].cptcode2.cpartno},
           ],
         };
@@ -1420,7 +1420,7 @@ export class ReturnstockService {
         worksheet.mergeCells('D5:F5');
         worksheet.getCell('D5:F5').value = {
           richText: [
-            { font: { size: 12 }, text: "Consumable Name:" + "\n\n" },
+            { font: { size: 12 }, text: "Child Part Name:" + "\n\n" },
             { font: { size: 12 }, text: "\n\n" +  returnRawmaterial[i].cptcode2.cpartname},
           ],
         };
@@ -1429,7 +1429,7 @@ export class ReturnstockService {
         worksheet.mergeCells('G5:I5');
         worksheet.getCell('G5:I5').value = {
           richText: [
-            { font: { size: 12 }, text: "Consumable Description:" + "\n\n" },
+            { font: { size: 12 }, text: "Child Part Description:" + "\n\n" },
             { font: { size: 12 }, text: "\n\n" +  returnRawmaterial[i].cptcode2.descrip},
           ],
         };
