@@ -93,6 +93,18 @@ export class ReturnstockController {
     }
 
 
+    @hasRole(Role.superadmin, Role.admin, Role.user, Role.guest)
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Get('partexcel/:id/:unitslno')
+    @Header("Content-Type",
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+    @Header("Content-Disposition",
+        "attachment; filename=" + "Attendace Report" + ".xlsx")
+    async downloadpartExcel(@Param('unitslno') unitslno: number,@Param('id') id: number, request: Request, @Res() response: Response) {
+        return await this.returnstockService.downloadpartExcel(unitslno,id, response);
+    }
+
+
      // --------Item-Pdf---------------
 	@hasRole(Role.superadmin, Role.admin, Role.user, Role.guest)
     @UseGuards(JwtAuthGuard, RolesGuard)
