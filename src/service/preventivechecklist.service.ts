@@ -66,7 +66,6 @@ export class PreventiveCheckListService {
 
         let i = 0;
         let preChecklists = preventivechecks[i];
-        let OrderslNo= 0;
 
         var document = {
             html: html,
@@ -76,16 +75,6 @@ export class PreventiveCheckListService {
             path: path.join(`./pdf/preCheck.pdf`),
             type: "",
         };
-
-        pdf.registerHelper("ifpreCheck", function (orderslno, options) {
-            this.slNo = ++OrderslNo;
-           if (this.slNo == undefined) {
-           return options.inverse(this);
-           } else {
-           return options.fn(this, this.slNo);
-           }
-         });
-
         var options = {
             format: "A3",
             orientation: "portrait",
@@ -155,7 +144,7 @@ export class PreventiveCheckListService {
                            size: 10,
                            bold: true
                        };
-                       col.style.alignment = { vertical: 'middle', horizontal: 'center' };
+                       col.style.alignment = { vertical: 'middle', horizontal: 'center', wrapText : true };
                        col.style.border = { top: { style: 'thin' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } };
                    })
        
@@ -236,19 +225,8 @@ export class PreventiveCheckListService {
                        bold: true
                    };
        
-                 
-                 
-                 
-                  
-                  
-       
-       
-       
-       
                    for (let i = 0; i < preventivechecks.length; i++) {
        
-       
-                       
                        let temp = i + 6;
        
                        worksheet.mergeCells('A' + temp);
