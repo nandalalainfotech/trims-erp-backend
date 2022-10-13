@@ -628,7 +628,7 @@ export class MaterialinspectionService {
       let workbook = new excel.Workbook();
 
       for (let i = 0; i < materialInspection.length; i++) {
-      let worksheet = workbook.addWorksheet("Material-Inspection-Reports" + i + 1); // creating worksheet
+      let worksheet = workbook.addWorksheet("Material-Inspection-Reports" + i); // creating worksheet
       worksheet.getRow(1).height = 25;
       worksheet.getRow(2).height = 25;
       worksheet.getRow(3).height = 25;
@@ -745,11 +745,11 @@ export class MaterialinspectionService {
     worksheet.getCell("A5:D6").value = {
       richText: [
         { text: "Incoming Inspection Report NO:" + "\n\n" },
-        { font: { size: 11 }, text: "\n\n" + materialInspection[i].iirno },
+        { font: { size: 16 }, text: "\n\n" + materialInspection[i].iirno },
       ],
     };
     worksheet.getCell("A5:D6").font = {
-      size: 14,
+      size: 16,
       bold: true,
     };
     worksheet.getCell("A5:D6").alignment = {
@@ -761,7 +761,7 @@ export class MaterialinspectionService {
     worksheet.getCell("E5:H6").value = {
       richText: [
         { text: "Supplier/Customer Name:" + "\n\n" },
-        { font: { size: 11 }, text: "\n\n" + materialInspection[i].scname },
+        { font: { size: 16 }, text: "\n\n" + materialInspection[i].scname },
       ],
     };
     worksheet.getCell("E5:H6").font = {
@@ -777,7 +777,7 @@ export class MaterialinspectionService {
     worksheet.getCell("I5:L6").value = {
       richText: [
         { text: "DC or Inv.No:" + "\n\n" },
-        { font: { size: 11 }, text: "\n\n" + materialInspection[i].dcno },
+        { font: { size: 16 }, text: "\n\n" + materialInspection[i].dcno },
       ],
     };
     worksheet.getCell("I5:L6").font = {
@@ -793,7 +793,7 @@ export class MaterialinspectionService {
     worksheet.getCell("M5:O6").value = {
       richText: [
         { text: "DC or Inv.Date:" + "\n\n" },
-        { font: { size: 11 }, text: "\n\n" + materialInspection[i].pdate },
+        { font: { size: 16 }, text: "\n\n" + materialInspection[i].pdate },
       ],
     };
     worksheet.getCell("M5:O6").font = {
@@ -809,7 +809,7 @@ export class MaterialinspectionService {
     worksheet.getCell("A7:D8").value = {
       richText: [
         { text: "Goods Recived No:" + "\n\n" },
-        { font: { size: 11 }, text: "\n\n" + materialInspection[i].grnumber ? materialInward.find(x => x.slNo === materialInspection[i].grnumber)?.grn : ""},
+        { font: { size: 16 }, text: "\n\n" + materialInspection[i].grnumber ? materialInward.find(x => x.slNo === materialInspection[i].grnumber)?.grn : ""},
       ],
     };
     worksheet.getCell("A7:D8").font = {
@@ -825,7 +825,7 @@ export class MaterialinspectionService {
     worksheet.getCell("E7:H8").value = {
       richText: [
         { text: "Customer PO Number:" + "\n\n" },
-        { font: { size: 11 }, text: "\n\n" + materialInspection[i].cponumber },
+        { font: { size: 16 }, text: "\n\n" + materialInspection[i].cponumber },
       ],
     };
     worksheet.getCell("E7:H8").font = {
@@ -841,7 +841,7 @@ export class MaterialinspectionService {
     worksheet.getCell("I7:L8").value = {
       richText: [
         { text: "Self PO Number:" + "\n\n" },
-        { font: { size: 11 }, text: "\n\n" + materialInspection[i].sponumber },
+        { font: { size: 16 }, text: "\n\n" + materialInspection[i].sponumber },
       ],
     };
     worksheet.getCell("I7:L8").font = {
@@ -857,7 +857,7 @@ export class MaterialinspectionService {
     worksheet.getCell("M7:O8").value = {
       richText: [
         { text: "Other Reference No:" + "\n\n" },
-        { font: { size: 11 }, text: "\n\n" + materialInspection[i].refno },
+        { font: { size: 16 }, text: "\n\n" + materialInspection[i].refno },
       ],
     };
     worksheet.getCell("M7:O8").font = {
@@ -1064,8 +1064,7 @@ export class MaterialinspectionService {
            worksheet.mergeCells("A" + temp);
            worksheet.getCell("A" + temp).value = observationarray[x].ordernumber;
            worksheet.getCell("A" + temp).font = {
-             size: 16,
-             bold: true,
+             size: 16
            };
            worksheet.getCell("A" + temp).alignment = {
              vertical: "middle",
@@ -1075,8 +1074,7 @@ export class MaterialinspectionService {
            worksheet.mergeCells("B" + temp);
            worksheet.getCell("B" + temp).value = observationarray[x].orderparameter;
            worksheet.getCell("B" + temp).font = {
-             size: 16,
-             bold: true,
+             size: 16
            };
            worksheet.getCell("B" + temp).alignment = {
              vertical: "middle",
@@ -1086,8 +1084,7 @@ export class MaterialinspectionService {
            worksheet.mergeCells("C" + temp);
            worksheet.getCell("C" + temp).value = observationarray[x].orderspecification;
            worksheet.getCell("C" + temp).font = {
-             size: 16,
-             bold: true,
+             size: 16
            };
            worksheet.getCell("C" + temp).alignment = {
              vertical: "middle",
@@ -1097,8 +1094,7 @@ export class MaterialinspectionService {
            worksheet.mergeCells("D" + temp);
            worksheet.getCell("D" + temp).value = observationarray[x].orderinspection;
            worksheet.getCell("D" + temp).font = {
-             size: 16,
-             bold: true,
+             size: 16
            };
            worksheet.getCell("D" + temp).alignment = {
              vertical: "middle",
@@ -1108,8 +1104,7 @@ export class MaterialinspectionService {
            worksheet.mergeCells("E" + temp);
            worksheet.getCell("E" + temp).value = observationarray[x].orderobservartion;
            worksheet.getCell("E" + temp).font = {
-             size: 16,
-             bold: true,
+             size: 16
            };
            worksheet.getCell("E" + temp).alignment = {
              vertical: "middle",
@@ -1119,8 +1114,7 @@ export class MaterialinspectionService {
            worksheet.mergeCells("F" + temp);
            worksheet.getCell("F" + temp).value = observationarray[x].orderobservartion1;
            worksheet.getCell("F" + temp).font = {
-             size: 16,
-             bold: true,
+             size: 16
            };
            worksheet.getCell("F" + temp).alignment = {
              vertical: "middle",
@@ -1130,8 +1124,7 @@ export class MaterialinspectionService {
            worksheet.mergeCells("G" + temp);
            worksheet.getCell("G" + temp).value = observationarray[x].orderobservartion2;
            worksheet.getCell("G" + temp).font = {
-             size: 16,
-             bold: true,
+             size: 16
            };
            worksheet.getCell("G" + temp).alignment = {
              vertical: "middle",
@@ -1141,8 +1134,7 @@ export class MaterialinspectionService {
            worksheet.mergeCells("H" + temp);
            worksheet.getCell("H" + temp).value = observationarray[x].orderobservartion3;
            worksheet.getCell("H" + temp).font = {
-             size: 16,
-             bold: true,
+             size: 16
            };
            worksheet.getCell("H" + temp).alignment = {
              vertical: "middle",
@@ -1152,8 +1144,7 @@ export class MaterialinspectionService {
            worksheet.mergeCells("I" + temp);
            worksheet.getCell("I" + temp).value = observationarray[x].orderobservartion4;
            worksheet.getCell("I" + temp).font = {
-             size: 16,
-             bold: true,
+             size: 16
            };
            worksheet.getCell("I" + temp).alignment = {
              vertical: "middle",
@@ -1163,8 +1154,7 @@ export class MaterialinspectionService {
            worksheet.mergeCells("J" + temp);
            worksheet.getCell("J" + temp).value = observationarray[x].orderobservartion5;
            worksheet.getCell("J" + temp).font = {
-             size: 16,
-             bold: true,
+             size: 16
            };
            worksheet.getCell("J" + temp).alignment = {
              vertical: "middle",
@@ -1174,8 +1164,7 @@ export class MaterialinspectionService {
            worksheet.mergeCells("K" + temp);
            worksheet.getCell("K" + temp).value = observationarray[x].orderobservartion6;
            worksheet.getCell("K" + temp).font = {
-             size: 16,
-             bold: true,
+             size: 16
            };
            worksheet.getCell("K" + temp).alignment = {
              vertical: "middle",
@@ -1185,8 +1174,7 @@ export class MaterialinspectionService {
            worksheet.mergeCells("L" + temp);
            worksheet.getCell("L" + temp).value = observationarray[x].orderobservartion7;
            worksheet.getCell("L" + temp).font = {
-             size: 16,
-             bold: true,
+             size: 16
            };
            worksheet.getCell("L" + temp).alignment = {
              vertical: "middle",
@@ -1196,8 +1184,7 @@ export class MaterialinspectionService {
            worksheet.mergeCells("M" + temp);
            worksheet.getCell("M" + temp).value = observationarray[x].orderobservartion8;
            worksheet.getCell("M" + temp).font = {
-             size: 16,
-             bold: true,
+             size: 16
            };
            worksheet.getCell("M" + temp).alignment = {
              vertical: "middle",
@@ -1207,8 +1194,7 @@ export class MaterialinspectionService {
            worksheet.mergeCells("N" + temp);
            worksheet.getCell("N" + temp).value = observationarray[x].orderobservartion9;
            worksheet.getCell("N" + temp).font = {
-             size: 16,
-             bold: true,
+             size: 16
            };
            worksheet.getCell("N" + temp).alignment = {
              vertical: "middle",
@@ -1222,8 +1208,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("A" + temp);
           worksheet.getCell("A" + temp).value = observationarray[x].consumnumber;
           worksheet.getCell("A" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("A" + temp).alignment = {
             vertical: "middle",
@@ -1233,8 +1218,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("B" + temp);
           worksheet.getCell("B" + temp).value = observationarray[x].consumparameter;
           worksheet.getCell("B" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("B" + temp).alignment = {
             vertical: "middle",
@@ -1244,8 +1228,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("C" + temp);
           worksheet.getCell("C" + temp).value = observationarray[x].consumspecification;
           worksheet.getCell("C" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("C" + temp).alignment = {
             vertical: "middle",
@@ -1255,8 +1238,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("D" + temp);
           worksheet.getCell("D" + temp).value = observationarray[x].consuminspection;
           worksheet.getCell("D" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("D" + temp).alignment = {
             vertical: "middle",
@@ -1266,8 +1248,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("E" + temp);
           worksheet.getCell("E" + temp).value =observationarray[x].consumobservartion;
           worksheet.getCell("E" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("E" + temp).alignment = {
             vertical: "middle",
@@ -1277,8 +1258,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("F" + temp);
           worksheet.getCell("F" + temp).value = observationarray[x].consumobservartion1;
           worksheet.getCell("F" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("F" + temp).alignment = {
             vertical: "middle",
@@ -1288,8 +1268,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("G" + temp);
           worksheet.getCell("G" + temp).value = observationarray[x].consumobservartion2;
           worksheet.getCell("G" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("G" + temp).alignment = {
             vertical: "middle",
@@ -1299,8 +1278,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("H" + temp);
           worksheet.getCell("H" + temp).value = observationarray[x].consumobservartion3;
           worksheet.getCell("H" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("H" + temp).alignment = {
             vertical: "middle",
@@ -1310,8 +1288,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("I" + temp);
           worksheet.getCell("I" + temp).value = observationarray[x].consumobservartion4;
           worksheet.getCell("I" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("I" + temp).alignment = {
             vertical: "middle",
@@ -1321,8 +1298,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("J" + temp);
           worksheet.getCell("J" + temp).value = observationarray[x].consumobservartion5;
           worksheet.getCell("J" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("J" + temp).alignment = {
             vertical: "middle",
@@ -1332,8 +1308,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("K" + temp);
           worksheet.getCell("K" + temp).value = observationarray[x].consumobservartion6;
           worksheet.getCell("K" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("K" + temp).alignment = {
             vertical: "middle",
@@ -1343,8 +1318,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("L" + temp);
           worksheet.getCell("L" + temp).value = observationarray[x].consumobservartion7;
           worksheet.getCell("L" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("L" + temp).alignment = {
             vertical: "middle",
@@ -1354,8 +1328,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("M" + temp);
           worksheet.getCell("M" + temp).value = observationarray[x].consumobservartion8;
           worksheet.getCell("M" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("M" + temp).alignment = {
             vertical: "middle",
@@ -1365,8 +1338,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("N" + temp);
           worksheet.getCell("N" + temp).value = observationarray[x].consumobservartion9;
           worksheet.getCell("N" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("N" + temp).alignment = {
             vertical: "middle",
@@ -1379,8 +1351,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("A" + temp);
           worksheet.getCell("A" + temp).value = observationarray[x].childnumber;
           worksheet.getCell("A" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("A" + temp).alignment = {
             vertical: "middle",
@@ -1390,8 +1361,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("B" + temp);
           worksheet.getCell("B" + temp).value = observationarray[x].childparameter;
           worksheet.getCell("B" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("B" + temp).alignment = {
             vertical: "middle",
@@ -1401,8 +1371,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("C" + temp);
           worksheet.getCell("C" + temp).value = observationarray[x].childspecification;
           worksheet.getCell("C" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("C" + temp).alignment = {
             vertical: "middle",
@@ -1412,8 +1381,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("D" + temp);
           worksheet.getCell("D" + temp).value = observationarray[x].childinspection;
           worksheet.getCell("D" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("D" + temp).alignment = {
             vertical: "middle",
@@ -1423,8 +1391,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("E" + temp);
           worksheet.getCell("E" + temp).value = observationarray[x].childobservartion;
           worksheet.getCell("E" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("E" + temp).alignment = {
             vertical: "middle",
@@ -1434,8 +1401,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("F" + temp);
           worksheet.getCell("F" + temp).value = observationarray[x].childobservartion1;
           worksheet.getCell("F" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("F" + temp).alignment = {
             vertical: "middle",
@@ -1445,8 +1411,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("G" + temp);
           worksheet.getCell("G" + temp).value = observationarray[x].childobservartion2;
           worksheet.getCell("G" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("G" + temp).alignment = {
             vertical: "middle",
@@ -1456,8 +1421,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("H" + temp);
           worksheet.getCell("H" + temp).value = observationarray[x].childobservartion3;
           worksheet.getCell("H" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("H" + temp).alignment = {
             vertical: "middle",
@@ -1467,8 +1431,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("I" + temp);
           worksheet.getCell("I" + temp).value = observationarray[x].childobservartion4;
           worksheet.getCell("I" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("I" + temp).alignment = {
             vertical: "middle",
@@ -1478,8 +1441,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("J" + temp);
           worksheet.getCell("J" + temp).value = observationarray[x].childobservartion5;
           worksheet.getCell("J" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("J" + temp).alignment = {
             vertical: "middle",
@@ -1489,8 +1451,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("K" + temp);
           worksheet.getCell("K" + temp).value = observationarray[x].childobservartion6;
           worksheet.getCell("K" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("K" + temp).alignment = {
             vertical: "middle",
@@ -1500,8 +1461,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("L" + temp);
           worksheet.getCell("L" + temp).value = observationarray[x].childobservartion7;
           worksheet.getCell("L" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("L" + temp).alignment = {
             vertical: "middle",
@@ -1511,8 +1471,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("M" + temp);
           worksheet.getCell("M" + temp).value = observationarray[x].childobservartion8;
           worksheet.getCell("M" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("M" + temp).alignment = {
             vertical: "middle",
@@ -1522,8 +1481,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("N" + temp);
           worksheet.getCell("N" + temp).value = observationarray[x].childobservartion9;
           worksheet.getCell("N" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("N" + temp).alignment = {
             vertical: "middle",
@@ -1535,8 +1493,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("A" + temp);
           worksheet.getCell("A" + temp).value = observationarray[x].partnumber;
           worksheet.getCell("A" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("A" + temp).alignment = {
             vertical: "middle",
@@ -1546,8 +1503,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("B" + temp);
           worksheet.getCell("B" + temp).value = observationarray[x].partparameter;
           worksheet.getCell("B" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("B" + temp).alignment = {
             vertical: "middle",
@@ -1557,8 +1513,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("C" + temp);
           worksheet.getCell("C" + temp).value = observationarray[x].partspecification;
           worksheet.getCell("C" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("C" + temp).alignment = {
             vertical: "middle",
@@ -1568,8 +1523,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("D" + temp);
           worksheet.getCell("D" + temp).value = observationarray[x].partinspection;
           worksheet.getCell("D" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("D" + temp).alignment = {
             vertical: "middle",
@@ -1579,8 +1533,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("E" + temp);
           worksheet.getCell("E" + temp).value = observationarray[x].partobservartion;
           worksheet.getCell("E" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("E" + temp).alignment = {
             vertical: "middle",
@@ -1590,8 +1543,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("F" + temp);
           worksheet.getCell("F" + temp).value = observationarray[x].partobservartion1;
           worksheet.getCell("F" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("F" + temp).alignment = {
             vertical: "middle",
@@ -1601,8 +1553,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("G" + temp);
           worksheet.getCell("G" + temp).value = observationarray[x].partobservartion2;
           worksheet.getCell("G" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("G" + temp).alignment = {
             vertical: "middle",
@@ -1612,8 +1563,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("H" + temp);
           worksheet.getCell("H" + temp).value = observationarray[x].partobservartion3;
           worksheet.getCell("H" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("H" + temp).alignment = {
             vertical: "middle",
@@ -1623,8 +1573,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("I" + temp);
           worksheet.getCell("I" + temp).value = observationarray[x].partobservartion4;
           worksheet.getCell("I" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("I" + temp).alignment = {
             vertical: "middle",
@@ -1634,8 +1583,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("J" + temp);
           worksheet.getCell("J" + temp).value = observationarray[x].partobservartion5;
           worksheet.getCell("J" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("J" + temp).alignment = {
             vertical: "middle",
@@ -1645,8 +1593,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("K" + temp);
           worksheet.getCell("K" + temp).value = observationarray[x].partobservartion6;
           worksheet.getCell("K" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("K" + temp).alignment = {
             vertical: "middle",
@@ -1656,8 +1603,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("L" + temp);
           worksheet.getCell("L" + temp).value = observationarray[x].partobservartion7;
           worksheet.getCell("L" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("L" + temp).alignment = {
             vertical: "middle",
@@ -1667,8 +1613,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("M" + temp);
           worksheet.getCell("M" + temp).value = observationarray[x].partobservartion8;
           worksheet.getCell("M" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("M" + temp).alignment = {
             vertical: "middle",
@@ -1678,8 +1623,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("N" + temp);
           worksheet.getCell("N" + temp).value = observationarray[x].partobservartion9;
           worksheet.getCell("N" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("N" + temp).alignment = {
             vertical: "middle",
@@ -1776,7 +1720,7 @@ export class MaterialinspectionService {
       rawmaterialinspection = materialInspection[i].rawmaterialinspection001wbs;
 
       let workbook = new excel.Workbook();
-      let worksheet = workbook.addWorksheet("Material-Inspection-Reports" + i + 1); // creating worksheet
+      let worksheet = workbook.addWorksheet("Material-Inspection-Reports"); // creating worksheet
       worksheet.getRow(1).height = 25;
       worksheet.getRow(2).height = 25;
       worksheet.getRow(3).height = 25;
@@ -1899,7 +1843,7 @@ export class MaterialinspectionService {
     worksheet.getCell("A5:D6").value = {
       richText: [
         { text: "Incoming Inspection Report NO:" + "\n\n" },
-        { font: { size: 11 }, text: "\n\n" + materialInspection[i].iirno },
+        { font: { size: 16 }, text: "\n\n" + materialInspection[i].iirno },
       ],
     };
     worksheet.getCell("A5:D6").font = {
@@ -1915,7 +1859,7 @@ export class MaterialinspectionService {
     worksheet.getCell("E5:H6").value = {
       richText: [
         { text: "Supplier/Customer Name:" + "\n\n" },
-        { font: { size: 11 }, text: "\n\n" + materialInspection[i].scname },
+        { font: { size: 16 }, text: "\n\n" + materialInspection[i].scname },
       ],
     };
     worksheet.getCell("E5:H6").font = {
@@ -1931,7 +1875,7 @@ export class MaterialinspectionService {
     worksheet.getCell("I5:L6").value = {
       richText: [
         { text: "DC or Inv.No:" + "\n\n" },
-        { font: { size: 11 }, text: "\n\n" + materialInspection[i].dcno },
+        { font: { size: 16 }, text: "\n\n" + materialInspection[i].dcno },
       ],
     };
     worksheet.getCell("I5:L6").font = {
@@ -1947,7 +1891,7 @@ export class MaterialinspectionService {
     worksheet.getCell("M5:O6").value = {
       richText: [
         { text: "DC or Inv.Date:" + "\n\n" },
-        { font: { size: 11 }, text: "\n\n" + materialInspection[i].pdate },
+        { font: { size: 16 }, text: "\n\n" + materialInspection[i].pdate },
       ],
     };
     worksheet.getCell("M5:O6").font = {
@@ -1963,7 +1907,7 @@ export class MaterialinspectionService {
     worksheet.getCell("A7:D8").value = {
       richText: [
         { text: "Goods Recived No:" + "\n\n" },
-        { font: { size: 11 }, text: "\n\n" + materialInspection[i].grnumber ? materialInward.find(x => x.slNo === materialInspection[i].grnumber)?.grn : ""},
+        { font: { size: 16 }, text: "\n\n" + materialInspection[i].grnumber ? materialInward.find(x => x.slNo === materialInspection[i].grnumber)?.grn : ""},
       ],
     };
     worksheet.getCell("A7:D8").font = {
@@ -1979,7 +1923,7 @@ export class MaterialinspectionService {
     worksheet.getCell("E7:H8").value = {
       richText: [
         { text: "Customer PO Number:" + "\n\n" },
-        { font: { size: 11 }, text: "\n\n" + materialInspection[i].cponumber },
+        { font: { size: 16 }, text: "\n\n" + materialInspection[i].cponumber },
       ],
     };
     worksheet.getCell("E7:H8").font = {
@@ -1995,7 +1939,7 @@ export class MaterialinspectionService {
     worksheet.getCell("I7:L8").value = {
       richText: [
         { text: "Self PO Number:" + "\n\n" },
-        { font: { size: 11 }, text: "\n\n" + materialInspection[i].sponumber },
+        { font: { size: 16 }, text: "\n\n" + materialInspection[i].sponumber },
       ],
     };
     worksheet.getCell("I7:L8").font = {
@@ -2011,7 +1955,7 @@ export class MaterialinspectionService {
     worksheet.getCell("M7:O8").value = {
       richText: [
         { text: "Other Reference Number:" + "\n\n" },
-        { font: { size: 11 }, text: "\n\n" + materialInspection[i].refno },
+        { font: { size: 16 }, text: "\n\n" + materialInspection[i].refno },
       ],
     };
     worksheet.getCell("M7:O8").font = {
@@ -2218,8 +2162,7 @@ export class MaterialinspectionService {
            worksheet.mergeCells("A" + temp);
            worksheet.getCell("A" + temp).value = observationarray[x].ordernumber;
            worksheet.getCell("A" + temp).font = {
-             size: 16,
-             bold: true,
+             size: 16
            };
            worksheet.getCell("A" + temp).alignment = {
              vertical: "middle",
@@ -2229,8 +2172,7 @@ export class MaterialinspectionService {
            worksheet.mergeCells("B" + temp);
            worksheet.getCell("B" + temp).value = observationarray[x].orderparameter;
            worksheet.getCell("B" + temp).font = {
-             size: 16,
-             bold: true,
+             size: 16
            };
            worksheet.getCell("B" + temp).alignment = {
              vertical: "middle",
@@ -2240,8 +2182,7 @@ export class MaterialinspectionService {
            worksheet.mergeCells("C" + temp);
            worksheet.getCell("C" + temp).value = observationarray[x].orderspecification;
            worksheet.getCell("C" + temp).font = {
-             size: 16,
-             bold: true,
+             size: 16
            };
            worksheet.getCell("C" + temp).alignment = {
              vertical: "middle",
@@ -2251,8 +2192,7 @@ export class MaterialinspectionService {
            worksheet.mergeCells("D" + temp);
            worksheet.getCell("D" + temp).value = observationarray[x].orderinspection;
            worksheet.getCell("D" + temp).font = {
-             size: 16,
-             bold: true,
+             size: 16
            };
            worksheet.getCell("D" + temp).alignment = {
              vertical: "middle",
@@ -2262,8 +2202,7 @@ export class MaterialinspectionService {
            worksheet.mergeCells("E" + temp);
            worksheet.getCell("E" + temp).value = observationarray[x].orderobservartion;
            worksheet.getCell("E" + temp).font = {
-             size: 16,
-             bold: true,
+             size: 16
            };
            worksheet.getCell("E" + temp).alignment = {
              vertical: "middle",
@@ -2273,8 +2212,7 @@ export class MaterialinspectionService {
            worksheet.mergeCells("F" + temp);
            worksheet.getCell("F" + temp).value = observationarray[x].orderobservartion1;
            worksheet.getCell("F" + temp).font = {
-             size: 16,
-             bold: true,
+             size: 16
            };
            worksheet.getCell("F" + temp).alignment = {
              vertical: "middle",
@@ -2284,8 +2222,7 @@ export class MaterialinspectionService {
            worksheet.mergeCells("G" + temp);
            worksheet.getCell("G" + temp).value = observationarray[x].orderobservartion2;
            worksheet.getCell("G" + temp).font = {
-             size: 16,
-             bold: true,
+             size: 16
            };
            worksheet.getCell("G" + temp).alignment = {
              vertical: "middle",
@@ -2295,8 +2232,7 @@ export class MaterialinspectionService {
            worksheet.mergeCells("H" + temp);
            worksheet.getCell("H" + temp).value = observationarray[x].orderobservartion3;
            worksheet.getCell("H" + temp).font = {
-             size: 16,
-             bold: true,
+             size: 16
            };
            worksheet.getCell("H" + temp).alignment = {
              vertical: "middle",
@@ -2306,8 +2242,7 @@ export class MaterialinspectionService {
            worksheet.mergeCells("I" + temp);
            worksheet.getCell("I" + temp).value = observationarray[x].orderobservartion4;
            worksheet.getCell("I" + temp).font = {
-             size: 16,
-             bold: true,
+             size: 16
            };
            worksheet.getCell("I" + temp).alignment = {
              vertical: "middle",
@@ -2317,8 +2252,7 @@ export class MaterialinspectionService {
            worksheet.mergeCells("J" + temp);
            worksheet.getCell("J" + temp).value = observationarray[x].orderobservartion5;
            worksheet.getCell("J" + temp).font = {
-             size: 16,
-             bold: true,
+             size: 16
            };
            worksheet.getCell("J" + temp).alignment = {
              vertical: "middle",
@@ -2328,8 +2262,7 @@ export class MaterialinspectionService {
            worksheet.mergeCells("K" + temp);
            worksheet.getCell("K" + temp).value = observationarray[x].orderobservartion6;
            worksheet.getCell("K" + temp).font = {
-             size: 16,
-             bold: true,
+             size: 16
            };
            worksheet.getCell("K" + temp).alignment = {
              vertical: "middle",
@@ -2339,8 +2272,7 @@ export class MaterialinspectionService {
            worksheet.mergeCells("L" + temp);
            worksheet.getCell("L" + temp).value = observationarray[x].orderobservartion7;
            worksheet.getCell("L" + temp).font = {
-             size: 16,
-             bold: true,
+             size: 16
            };
            worksheet.getCell("L" + temp).alignment = {
              vertical: "middle",
@@ -2350,8 +2282,7 @@ export class MaterialinspectionService {
            worksheet.mergeCells("M" + temp);
            worksheet.getCell("M" + temp).value = observationarray[x].orderobservartion8;
            worksheet.getCell("M" + temp).font = {
-             size: 16,
-             bold: true,
+             size: 16
            };
            worksheet.getCell("M" + temp).alignment = {
              vertical: "middle",
@@ -2361,8 +2292,7 @@ export class MaterialinspectionService {
            worksheet.mergeCells("N" + temp);
            worksheet.getCell("N" + temp).value = observationarray[x].orderobservartion9;
            worksheet.getCell("N" + temp).font = {
-             size: 16,
-             bold: true,
+             size: 16
            };
            worksheet.getCell("N" + temp).alignment = {
              vertical: "middle",
@@ -2376,8 +2306,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("A" + temp);
           worksheet.getCell("A" + temp).value = observationarray[x].consumnumber;
           worksheet.getCell("A" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("A" + temp).alignment = {
             vertical: "middle",
@@ -2387,8 +2316,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("B" + temp);
           worksheet.getCell("B" + temp).value = observationarray[x].consumparameter;
           worksheet.getCell("B" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("B" + temp).alignment = {
             vertical: "middle",
@@ -2398,8 +2326,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("C" + temp);
           worksheet.getCell("C" + temp).value = observationarray[x].consumspecification;
           worksheet.getCell("C" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("C" + temp).alignment = {
             vertical: "middle",
@@ -2409,8 +2336,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("D" + temp);
           worksheet.getCell("D" + temp).value = observationarray[x].consuminspection;
           worksheet.getCell("D" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("D" + temp).alignment = {
             vertical: "middle",
@@ -2420,8 +2346,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("E" + temp);
           worksheet.getCell("E" + temp).value =observationarray[x].consumobservartion;
           worksheet.getCell("E" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("E" + temp).alignment = {
             vertical: "middle",
@@ -2431,8 +2356,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("F" + temp);
           worksheet.getCell("F" + temp).value = observationarray[x].consumobservartion1;
           worksheet.getCell("F" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("F" + temp).alignment = {
             vertical: "middle",
@@ -2442,8 +2366,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("G" + temp);
           worksheet.getCell("G" + temp).value = observationarray[x].consumobservartion2;
           worksheet.getCell("G" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("G" + temp).alignment = {
             vertical: "middle",
@@ -2453,8 +2376,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("H" + temp);
           worksheet.getCell("H" + temp).value = observationarray[x].consumobservartion3;
           worksheet.getCell("H" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("H" + temp).alignment = {
             vertical: "middle",
@@ -2464,8 +2386,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("I" + temp);
           worksheet.getCell("I" + temp).value = observationarray[x].consumobservartion4;
           worksheet.getCell("I" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("I" + temp).alignment = {
             vertical: "middle",
@@ -2475,8 +2396,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("J" + temp);
           worksheet.getCell("J" + temp).value = observationarray[x].consumobservartion5;
           worksheet.getCell("J" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("J" + temp).alignment = {
             vertical: "middle",
@@ -2486,8 +2406,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("K" + temp);
           worksheet.getCell("K" + temp).value = observationarray[x].consumobservartion6;
           worksheet.getCell("K" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("K" + temp).alignment = {
             vertical: "middle",
@@ -2497,8 +2416,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("L" + temp);
           worksheet.getCell("L" + temp).value = observationarray[x].consumobservartion7;
           worksheet.getCell("L" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("L" + temp).alignment = {
             vertical: "middle",
@@ -2508,8 +2426,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("M" + temp);
           worksheet.getCell("M" + temp).value = observationarray[x].consumobservartion8;
           worksheet.getCell("M" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("M" + temp).alignment = {
             vertical: "middle",
@@ -2519,8 +2436,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("N" + temp);
           worksheet.getCell("N" + temp).value = observationarray[x].consumobservartion9;
           worksheet.getCell("N" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("N" + temp).alignment = {
             vertical: "middle",
@@ -2533,8 +2449,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("A" + temp);
           worksheet.getCell("A" + temp).value = observationarray[x].childnumber;
           worksheet.getCell("A" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("A" + temp).alignment = {
             vertical: "middle",
@@ -2544,8 +2459,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("B" + temp);
           worksheet.getCell("B" + temp).value = observationarray[x].childparameter;
           worksheet.getCell("B" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("B" + temp).alignment = {
             vertical: "middle",
@@ -2555,8 +2469,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("C" + temp);
           worksheet.getCell("C" + temp).value = observationarray[x].childspecification;
           worksheet.getCell("C" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("C" + temp).alignment = {
             vertical: "middle",
@@ -2566,8 +2479,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("D" + temp);
           worksheet.getCell("D" + temp).value = observationarray[x].childinspection;
           worksheet.getCell("D" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("D" + temp).alignment = {
             vertical: "middle",
@@ -2577,8 +2489,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("E" + temp);
           worksheet.getCell("E" + temp).value = observationarray[x].childobservartion;
           worksheet.getCell("E" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("E" + temp).alignment = {
             vertical: "middle",
@@ -2588,8 +2499,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("F" + temp);
           worksheet.getCell("F" + temp).value = observationarray[x].childobservartion1;
           worksheet.getCell("F" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("F" + temp).alignment = {
             vertical: "middle",
@@ -2599,8 +2509,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("G" + temp);
           worksheet.getCell("G" + temp).value = observationarray[x].childobservartion2;
           worksheet.getCell("G" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("G" + temp).alignment = {
             vertical: "middle",
@@ -2610,8 +2519,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("H" + temp);
           worksheet.getCell("H" + temp).value = observationarray[x].childobservartion3;
           worksheet.getCell("H" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("H" + temp).alignment = {
             vertical: "middle",
@@ -2621,8 +2529,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("I" + temp);
           worksheet.getCell("I" + temp).value = observationarray[x].childobservartion4;
           worksheet.getCell("I" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("I" + temp).alignment = {
             vertical: "middle",
@@ -2632,8 +2539,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("J" + temp);
           worksheet.getCell("J" + temp).value = observationarray[x].childobservartion5;
           worksheet.getCell("J" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("J" + temp).alignment = {
             vertical: "middle",
@@ -2643,8 +2549,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("K" + temp);
           worksheet.getCell("K" + temp).value = observationarray[x].childobservartion6;
           worksheet.getCell("K" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("K" + temp).alignment = {
             vertical: "middle",
@@ -2654,8 +2559,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("L" + temp);
           worksheet.getCell("L" + temp).value = observationarray[x].childobservartion7;
           worksheet.getCell("L" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("L" + temp).alignment = {
             vertical: "middle",
@@ -2665,8 +2569,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("M" + temp);
           worksheet.getCell("M" + temp).value = observationarray[x].childobservartion8;
           worksheet.getCell("M" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("M" + temp).alignment = {
             vertical: "middle",
@@ -2676,8 +2579,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("N" + temp);
           worksheet.getCell("N" + temp).value = observationarray[x].childobservartion9;
           worksheet.getCell("N" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("N" + temp).alignment = {
             vertical: "middle",
@@ -2689,8 +2591,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("A" + temp);
           worksheet.getCell("A" + temp).value = observationarray[x].partnumber;
           worksheet.getCell("A" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("A" + temp).alignment = {
             vertical: "middle",
@@ -2700,8 +2601,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("B" + temp);
           worksheet.getCell("B" + temp).value = observationarray[x].partparameter;
           worksheet.getCell("B" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("B" + temp).alignment = {
             vertical: "middle",
@@ -2711,8 +2611,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("C" + temp);
           worksheet.getCell("C" + temp).value = observationarray[x].partspecification;
           worksheet.getCell("C" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("C" + temp).alignment = {
             vertical: "middle",
@@ -2722,8 +2621,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("D" + temp);
           worksheet.getCell("D" + temp).value = observationarray[x].partinspection;
           worksheet.getCell("D" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("D" + temp).alignment = {
             vertical: "middle",
@@ -2733,8 +2631,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("E" + temp);
           worksheet.getCell("E" + temp).value = observationarray[x].partobservartion;
           worksheet.getCell("E" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("E" + temp).alignment = {
             vertical: "middle",
@@ -2744,8 +2641,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("F" + temp);
           worksheet.getCell("F" + temp).value = observationarray[x].partobservartion1;
           worksheet.getCell("F" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("F" + temp).alignment = {
             vertical: "middle",
@@ -2755,8 +2651,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("G" + temp);
           worksheet.getCell("G" + temp).value = observationarray[x].partobservartion2;
           worksheet.getCell("G" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("G" + temp).alignment = {
             vertical: "middle",
@@ -2766,8 +2661,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("H" + temp);
           worksheet.getCell("H" + temp).value = observationarray[x].partobservartion3;
           worksheet.getCell("H" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("H" + temp).alignment = {
             vertical: "middle",
@@ -2777,8 +2671,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("I" + temp);
           worksheet.getCell("I" + temp).value = observationarray[x].partobservartion4;
           worksheet.getCell("I" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("I" + temp).alignment = {
             vertical: "middle",
@@ -2788,8 +2681,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("J" + temp);
           worksheet.getCell("J" + temp).value = observationarray[x].partobservartion5;
           worksheet.getCell("J" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("J" + temp).alignment = {
             vertical: "middle",
@@ -2799,8 +2691,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("K" + temp);
           worksheet.getCell("K" + temp).value = observationarray[x].partobservartion6;
           worksheet.getCell("K" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("K" + temp).alignment = {
             vertical: "middle",
@@ -2810,8 +2701,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("L" + temp);
           worksheet.getCell("L" + temp).value = observationarray[x].partobservartion7;
           worksheet.getCell("L" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("L" + temp).alignment = {
             vertical: "middle",
@@ -2821,8 +2711,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("M" + temp);
           worksheet.getCell("M" + temp).value = observationarray[x].partobservartion8;
           worksheet.getCell("M" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("M" + temp).alignment = {
             vertical: "middle",
@@ -2832,8 +2721,7 @@ export class MaterialinspectionService {
           worksheet.mergeCells("N" + temp);
           worksheet.getCell("N" + temp).value = observationarray[x].partobservartion9;
           worksheet.getCell("N" + temp).font = {
-            size: 16,
-            bold: true,
+            size: 16
           };
           worksheet.getCell("N" + temp).alignment = {
             vertical: "middle",
