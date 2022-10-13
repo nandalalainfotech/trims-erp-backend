@@ -238,7 +238,7 @@ export class SupplierRegistrationService {
         let workbook = new excel.Workbook();
 
         for (let i = 0; i < suplreg.length; i++) {
-            let worksheet = workbook.addWorksheet(''); // creating worksheet
+            let worksheet = workbook.addWorksheet('Supplier-Registration-Reports' + i); // creating worksheet
             worksheet.getRow(5).height = 20;
             worksheet.getRow(6).height = 20;
             worksheet.getRow(7).height = 20;
@@ -732,7 +732,7 @@ export class SupplierRegistrationService {
             supContact = suplreg[i].suppliercontact001wbs;
 
             let workbook = new excel.Workbook();
-            let worksheet = workbook.addWorksheet(''); // creating worksheet
+            let worksheet = workbook.addWorksheet('Supplier-Registration-Reports'); // creating worksheet
             worksheet.getRow(5).height = 20;
             worksheet.getRow(6).height = 20;
             worksheet.getRow(7).height = 20;
@@ -753,11 +753,12 @@ export class SupplierRegistrationService {
             { key: 'H', width: 30.0 },
             ];
             worksheet.columns.forEach((col) => {
+
                 col.style.font = {
-                    size: 10,
+                    size: 7,
                     bold: true
                 };
-                col.style.alignment = { vertical: 'middle', horizontal: 'center' };
+                col.style.alignment = { vertical: 'middle', horizontal: 'center',wrapText: true};
                 col.style.border = { top: { style: 'thin' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } };
             })
 

@@ -529,7 +529,7 @@ export class PurchaseOrderService {
 
     let workbook = new excel.Workbook();
     for (let i = 0; i < purOrders.length; i++) {
-      let worksheet = workbook.addWorksheet("Purchase-Order-Reports" + i + 1);
+      let worksheet = workbook.addWorksheet("Purchase-Order-Reports" + i);
       worksheet.getRow(1).height = 30;
       worksheet.getRow(2).height = 30;
       worksheet.getRow(3).height = 30;
@@ -1610,7 +1610,7 @@ export class PurchaseOrderService {
       orderitems = purOrders[i].orderitem001wbs;
 
       let workbook = new excel.Workbook();
-      let worksheet = workbook.addWorksheet("Purchase-Order-Reports" + i + 1);
+      let worksheet = workbook.addWorksheet("Purchase-Order-Reports");
 
       worksheet.getRow(1).height = 40;
       worksheet.getRow(2).height = 40;

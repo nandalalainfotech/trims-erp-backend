@@ -555,7 +555,7 @@ async update1(file: any,purchaseInvoicePayDTO: PurchaseInvoicePayDTO): Promise<P
 
     let workbook = new excel.Workbook();
     for (let i = 0; i < pueInvoicePay.length; i++) {
-      let worksheet = workbook.addWorksheet("Statutory_Reports" + i);
+      let worksheet = workbook.addWorksheet("Purchase-Invoice-Pay-Reports" + i);
       worksheet.getRow(1).height = 40;
       worksheet.getRow(2).height = 40;
       worksheet.getRow(3).height = 40;
@@ -1447,7 +1447,7 @@ async update1(file: any,purchaseInvoicePayDTO: PurchaseInvoicePayDTO): Promise<P
       purchaseinInvitem = pueInvoicePay[i].purchaseinvoiceitems001wbs;
 
       let workbook = new excel.Workbook();
-      let worksheet = workbook.addWorksheet("Statutory_Reports");
+      let worksheet = workbook.addWorksheet("Purchase-Invoice-Pay-Reports");
 
       worksheet.getRow(1).height = 40;
       worksheet.getRow(2).height = 40;

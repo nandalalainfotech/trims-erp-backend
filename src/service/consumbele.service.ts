@@ -156,7 +156,7 @@ export class ConsumbleService {
         }
         else {
             let workbook = new excel.Workbook();
-            let worksheet = workbook.addWorksheet('Child Part Details_report'); // creating worksheet
+            let worksheet = workbook.addWorksheet('Consumable-Part-Report'); // creating worksheet
             worksheet.views = [{ showGridLines: false }];
 
             worksheet.getRow(5).height = 15;
@@ -195,7 +195,7 @@ export class ConsumbleService {
                     size: 7,
                     bold: true
                 };
-                col.style.alignment = { vertical: 'middle', horizontal: 'center' };
+                col.style.alignment = { vertical: 'middle', horizontal: 'center',wrapText: true};
                 col.style.border = { top: { style: 'thin' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } };
             })
 
