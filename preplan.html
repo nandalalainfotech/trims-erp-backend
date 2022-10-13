@@ -69,7 +69,9 @@
         {{#each preplanscheck}}
 
         <tr>
-            <td colspan="2 ">{{this.slNo}}</td>
+            {{#ifpreCheck 'check'}}
+            <td colspan="2">{{this.slNo}}</td>
+            {{/ifpreCheck}}
             <td colspan="2 ">{{this.mslno2.mcode}}</td>
             <td colspan="2 ">{{this.mslno2.mname}}</td>
             <td colspan="1 ">{{this.status}}</td>
