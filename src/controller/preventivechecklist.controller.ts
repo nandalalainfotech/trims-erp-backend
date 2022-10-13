@@ -15,6 +15,25 @@ const fs = require('fs')
 export class PreventiveCheckListController {
 	constructor(private readonly preventiveCheckListService: PreventiveCheckListService) { }
 
+	@hasRole(Role.superadmin, Role.admin, Role.user, Role.guest)
+	@UseGuards(JwtAuthGuard, RolesGuard)
+	@Get('pdf/:mslno/:unitslno')
+	@Header('Content-Type', 'application/pdf')
+	async downloadPdf(@Param('mslno') mslno: any, @Param('unitslno') unitslno: any, @Req() request: Request, @Res() response: Response) {
+		return await this.preventiveCheckListService.downloadPdf(mslno, unitslno, request, response);
+	}
+
+	@hasRole(Role.superadmin, Role.admin, Role.user, Role.guest)
+	@UseGuards(JwtAuthGuard, RolesGuard)
+	@Get('excel/:mslno/:unitslno')
+	@Header("Content-Type",
+		"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+	@Header("Content-Disposition",
+		"attachment; filename=" + "Attendace Report" + ".xlsx")
+	async downloadExcel(@Param('mslno') mslno: any, @Param('unitslno') unitslno: any,@Req() request: Request, @Res() response: Response) {
+		return await this.preventiveCheckListService.downloadExcel(mslno, unitslno, request, response);
+	}
+
 	@hasRole(Role.superadmin, Role.admin, Role.user)
 	@UseGuards(JwtAuthGuard, RolesGuard)
 	@Post("save")
@@ -58,22 +77,5 @@ export class PreventiveCheckListController {
 	}
 
 
-	@hasRole(Role.superadmin, Role.admin, Role.user, Role.guest)
-	@UseGuards(JwtAuthGuard, RolesGuard)
-	@Get('pdf/:mslno/:unitslno')
-	@Header('Content-Type', 'application/pdf')
-	async downloadPdf(@Param('mslno') mslno: any, @Param('unitslno') unitslno: any, @Req() request: Request, @Res() response: Response) {
-		return await this.preventiveCheckListService.downloadPdf(mslno, unitslno, request, response);
-	}
-
-	@hasRole(Role.superadmin, Role.admin, Role.user, Role.guest)
-	@UseGuards(JwtAuthGuard, RolesGuard)
-	@Get('excel/:mslno/:unitslno')
-	@Header("Content-Type",
-		"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
-	@Header("Content-Disposition",
-		"attachment; filename=" + "Attendace Report" + ".xlsx")
-	async downloadExcel(@Param('mslno') mslno: any, @Param('unitslno') unitslno: any,@Req() request: Request, @Res() response: Response) {
-		return await this.preventiveCheckListService.downloadExcel(mslno, unitslno, request, response);
-	}
+	
 }
