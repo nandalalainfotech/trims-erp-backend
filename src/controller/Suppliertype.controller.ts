@@ -16,6 +16,25 @@ import { RolesGuard } from "src/role/role.guard";
 export class SuppliertypeController {
 	constructor(private readonly suppliertypeService: SuppliertypeService) { }
 
+	@hasRole(Role.superadmin, Role.admin, Role.user, Role.guest)
+	@UseGuards(JwtAuthGuard, RolesGuard)
+	@Get('pdf/:unitslno')
+	@Header('Content-Type', 'application/pdf')
+	async downloadPdf(@Param('unitslno') unitslno: number,@Req() request: Request, @Res() response: Response) {
+		return await this.suppliertypeService.downloadPdf(unitslno,request, response);
+	}
+
+	@hasRole(Role.superadmin, Role.admin, Role.user, Role.guest)
+	@UseGuards(JwtAuthGuard, RolesGuard)
+	@Get('excel/:unitslno')
+	@Header("Content-Type",
+		"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+	@Header("Content-Disposition",
+		"attachment; filename=" + "Attendace Report" + ".xlsx")
+	async downloadExcel(@Param('unitslno') unitslno: number,@Req() request: Request, @Res() response: Response) {
+		return await this.suppliertypeService.downloadExcel(unitslno,request, response);
+	}
+
 	@hasRole(Role.superadmin, Role.admin, Role.user)
 	@UseGuards(JwtAuthGuard, RolesGuard)
 	@Post("save")
