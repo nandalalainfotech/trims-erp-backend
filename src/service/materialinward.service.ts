@@ -506,7 +506,7 @@ export class MaterialinwardService {
     let workbook = new excel.Workbook();
 
     for (let i = 0; i < materialinward.length; i++) {
-      let worksheet = workbook.addWorksheet(""); // creating worksheet
+      let worksheet = workbook.addWorksheet("Material-Inward-Reports" + i + 1); // creating worksheet
       worksheet.getRow(1).height = 25;
       worksheet.getRow(2).height = 25;
       worksheet.getRow(3).height = 25;
@@ -1442,7 +1442,7 @@ export class MaterialinwardService {
       materialinwarditem = materialinward[i].materialreceiveditem001wbs;
 
       let workbook = new excel.Workbook();
-      let worksheet = workbook.addWorksheet("purchaslip_reports"); // creating worksheet
+      let worksheet = workbook.addWorksheet("Material-Inward-Reports" + i + 1); // creating worksheet
       worksheet.getRow(3).height = 50;
       worksheet.getRow(4).height = 30;
       worksheet.getRow(5).height = 30;

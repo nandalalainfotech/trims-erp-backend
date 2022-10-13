@@ -529,21 +529,21 @@ export class PurchaseOrderService {
 
     let workbook = new excel.Workbook();
     for (let i = 0; i < purOrders.length; i++) {
-      let worksheet = workbook.addWorksheet("Statutory_Reports" + i);
-      worksheet.getRow(1).height = 40;
-      worksheet.getRow(2).height = 40;
-      worksheet.getRow(3).height = 40;
-      worksheet.getRow(4).height = 40;
-      worksheet.getRow(5).height = 60;
-      worksheet.getRow(6).height = 60;
-      worksheet.getRow(7).height = 60;
-      worksheet.getRow(8).height = 60;
-      worksheet.getRow(9).height = 60;
-      worksheet.getRow(10).height = 60;
-      worksheet.getRow(11).height = 60;
-      worksheet.getRow(12).height = 60;
-      worksheet.getRow(13).height = 60;
-      worksheet.getRow(14).height = 80;
+      let worksheet = workbook.addWorksheet("Purchase-Order-Reports" + i + 1);
+      worksheet.getRow(1).height = 30;
+      worksheet.getRow(2).height = 30;
+      worksheet.getRow(3).height = 30;
+      worksheet.getRow(4).height = 30;
+      worksheet.getRow(5).height = 30;
+      worksheet.getRow(6).height = 30;
+      worksheet.getRow(7).height = 30;
+      worksheet.getRow(8).height = 30;
+      worksheet.getRow(9).height = 30;
+      worksheet.getRow(10).height = 30;
+      worksheet.getRow(11).height = 30;
+      worksheet.getRow(12).height = 30;
+      worksheet.getRow(13).height = 30;
+      worksheet.getRow(14).height = 30;
       worksheet.columns = [
         { key: "A", width: 20.0 },
         { key: "B", width: 20.0 },
@@ -1610,7 +1610,7 @@ export class PurchaseOrderService {
       orderitems = purOrders[i].orderitem001wbs;
 
       let workbook = new excel.Workbook();
-      let worksheet = workbook.addWorksheet("Statutory_Reports");
+      let worksheet = workbook.addWorksheet("Purchase-Order-Reports" + i + 1);
 
       worksheet.getRow(1).height = 40;
       worksheet.getRow(2).height = 40;
@@ -1627,15 +1627,15 @@ export class PurchaseOrderService {
       worksheet.getRow(13).height = 20;
       worksheet.getRow(14).height = 20;
       worksheet.columns = [
-        { key: "A", width: 30.0 },
+        { key: "A", width: 20.0 },
         { key: "B", width: 20.0 },
-        { key: "C", width: 15.0 },
-        { key: "D", width: 15.0 },
-        { key: "E", width: 15.0 },
-        { key: "F", width: 15.0 },
+        { key: "C", width: 20.0 },
+        { key: "D", width: 20.0 },
+        { key: "E", width: 20.0 },
+        { key: "F", width: 20.0 },
         { key: "G", width: 20.0 },
-        { key: "H", width: 15.0 },
-        { key: "I", width: 15.0 },
+        { key: "H", width: 20.0 },
+        { key: "I", width: 20.0 },
       ];
 
       worksheet.columns.forEach((col) => {

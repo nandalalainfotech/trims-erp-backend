@@ -66,6 +66,7 @@ export class PreventiveCheckListService {
 
         let i = 0;
         let preChecklists = preventivechecks[i];
+        let OrderslNo= 0;
 
         var document = {
             html: html,
@@ -75,6 +76,16 @@ export class PreventiveCheckListService {
             path: path.join(`./pdf/preCheck.pdf`),
             type: "",
         };
+
+        pdf.registerHelper("ifpreCheck", function (orderslno, options) {
+            this.slNo = ++OrderslNo;
+           if (this.slNo == undefined) {
+           return options.inverse(this);
+           } else {
+           return options.fn(this, this.slNo);
+           }
+         });
+
         var options = {
             format: "A3",
             orientation: "portrait",

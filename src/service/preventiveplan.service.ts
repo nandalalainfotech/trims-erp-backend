@@ -82,7 +82,7 @@ export class PreventivePlanService {
             relations: ["mslno2"],
             where: { mslno:mslno,unitslno:unitslno },
         });
-      
+        let OrderslNo= 0;
            var fs = require('fs');
            var pdf = require('dynamic-html-pdf');
            var html = fs.readFileSync('preplan.html', 'utf8');
@@ -104,6 +104,15 @@ export class PreventivePlanService {
                 },
                path: "./pdf/preplans.pdf"    // it is not required if type is buffer
            };
+
+           pdf.registerHelper("ifpreCheck", function (orderslno, options) {
+            this.slNo = ++OrderslNo;
+           if (this.slNo == undefined) {
+           return options.inverse(this);
+           } else {
+           return options.fn(this, this.slNo);
+           }
+         });
    
            if (document === null) {
                return null;

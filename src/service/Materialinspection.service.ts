@@ -628,7 +628,7 @@ export class MaterialinspectionService {
       let workbook = new excel.Workbook();
 
       for (let i = 0; i < materialInspection.length; i++) {
-      let worksheet = workbook.addWorksheet(""); // creating worksheet
+      let worksheet = workbook.addWorksheet("Material-Inspection-Reports" + i + 1); // creating worksheet
       worksheet.getRow(1).height = 25;
       worksheet.getRow(2).height = 25;
       worksheet.getRow(3).height = 25;
@@ -1776,7 +1776,7 @@ export class MaterialinspectionService {
       rawmaterialinspection = materialInspection[i].rawmaterialinspection001wbs;
 
       let workbook = new excel.Workbook();
-      let worksheet = workbook.addWorksheet(""); // creating worksheet
+      let worksheet = workbook.addWorksheet("Material-Inspection-Reports" + i + 1); // creating worksheet
       worksheet.getRow(1).height = 25;
       worksheet.getRow(2).height = 25;
       worksheet.getRow(3).height = 25;
