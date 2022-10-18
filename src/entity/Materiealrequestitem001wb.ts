@@ -9,8 +9,8 @@ export class Materiealrequestitem001wb {
   @Column("int", { name: "unitslno" })
   unitslno: number;
 
-  @Column("int", { name: "itemcode", nullable: true })
-  itemcode: number | null;
+  @Column("varchar", { name: "itemcode", nullable: true,length: 50 })
+  itemcode: string | null;
 
   @Column("varchar", { name: "itemname", nullable: true, length: 250 })
   itemname: string | null;
@@ -21,8 +21,10 @@ export class Materiealrequestitem001wb {
   @Column("int", { name: "qunty", nullable: true })
   qunty: number | null;
 
-  @Column("int", { name: "cucode", nullable: true })
-  cucode: number | null;
+  @Column("varchar", { name: "cucode", nullable: true,length: 50 })
+  cucode: string | null;
+
+
 
   @Column("varchar", { name: "cuname", nullable: true, length: 250 })
   cuname: string | null;
@@ -32,9 +34,9 @@ export class Materiealrequestitem001wb {
 
   @Column("int", { name: "cuqunty", nullable: true })
   cuqunty: number | null;
-
-  @Column("int", { name: "cptcode", nullable: true })
-  cptcode: number | null;
+  
+  @Column("varchar", { name: "cptcode", nullable: true,length: 50 })
+  cptcode: string | null
 
   @Column("varchar", { name: "cptname", nullable: true, length: 250 })
   cptname: string | null;
@@ -45,8 +47,8 @@ export class Materiealrequestitem001wb {
   @Column("int", { name: "cptqunty", nullable: true })
   cptqunty: number | null;
 
-  @Column("int", { name: "prtcode", nullable: true })
-  prtcode: number | null;
+  @Column("varchar", { name: "prtcode", nullable: true,length: 50 })
+  prtcode: string | null
 
   @Column("varchar", { name: "prtname", nullable: true, length: 250 })
   prtname: string | null;
