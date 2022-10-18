@@ -1,0 +1,4320 @@
+-- MySQL Administrator dump 1.4
+--
+-- ------------------------------------------------------
+-- Server version	5.5.9
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+
+
+--
+-- Create schema trims
+--
+
+CREATE DATABASE IF NOT EXISTS trims;
+USE trims;
+
+--
+-- Definition of table ` fixturebreakdown001mb`
+--
+
+DROP TABLE IF EXISTS ` fixturebreakdown001mb`;
+CREATE TABLE ` fixturebreakdown001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitdepartsl_no` int(11) NOT NULL,
+  `sslno` int(11) NOT NULL,
+  `fbname` varchar(250) NOT NULL,
+  `fbdetails` varchar(250) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `sslno` (`sslno`),
+  CONSTRAINT `@0020fixturebreakdown001mb_ibfk_1` FOREIGN KEY (`sslno`) REFERENCES `fixturestatus001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table ` fixturebreakdown001mb`
+--
+
+/*!40000 ALTER TABLE ` fixturebreakdown001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE ` fixturebreakdown001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `activity001mb`
+--
+
+DROP TABLE IF EXISTS `activity001mb`;
+CREATE TABLE `activity001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `activity` varchar(200) NOT NULL,
+  `status` char(1) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `activity001mb`
+--
+
+/*!40000 ALTER TABLE `activity001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `activity001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `assessmentcriteria001mb`
+--
+
+DROP TABLE IF EXISTS `assessmentcriteria001mb`;
+CREATE TABLE `assessmentcriteria001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `criteria` varchar(40) NOT NULL,
+  `details` varchar(250) NOT NULL,
+  `max` int(20) NOT NULL,
+  `status` char(1) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `assessmentcriteria001mb`
+--
+
+/*!40000 ALTER TABLE `assessmentcriteria001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `assessmentcriteria001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `bank001mb`
+--
+
+DROP TABLE IF EXISTS `bank001mb`;
+CREATE TABLE `bank001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `bankname` varchar(100) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `bank001mb`
+--
+
+/*!40000 ALTER TABLE `bank001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `bank001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `breakdown001mb`
+--
+
+DROP TABLE IF EXISTS `breakdown001mb`;
+CREATE TABLE `breakdown001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `sslno` int(11) NOT NULL,
+  `name` varchar(250) NOT NULL,
+  `details` varchar(250) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `sslno` (`sslno`),
+  CONSTRAINT `breakdown001mb_ibfk_1` FOREIGN KEY (`sslno`) REFERENCES `status001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `breakdown001mb`
+--
+
+/*!40000 ALTER TABLE `breakdown001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `breakdown001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `breakdownreg001wb`
+--
+
+DROP TABLE IF EXISTS `breakdownreg001wb`;
+CREATE TABLE `breakdownreg001wb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `mslno` int(11) NOT NULL,
+  `date` datetime NOT NULL,
+  `bdsl` int(11) NOT NULL,
+  `rcsl` int(11) NOT NULL,
+  `pasl` int(11) NOT NULL,
+  `sslno` int(11) NOT NULL,
+  `spareCost` int(11) NOT NULL,
+  `sparesQty` int(11) NOT NULL,
+  `attendby` varchar(50) NOT NULL,
+  `remarks` varchar(100) NOT NULL,
+  `startTime` varchar(50) DEFAULT NULL,
+  `endTime` varchar(50) DEFAULT NULL,
+  `filename` varchar(50) NOT NULL,
+  `filepath` varchar(50) NOT NULL,
+  `originalfilename` varchar(50) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `mslno` (`mslno`),
+  KEY `sslno` (`sslno`),
+  KEY `bdsl` (`bdsl`),
+  KEY `rcsl` (`rcsl`),
+  KEY `pasl` (`pasl`),
+  CONSTRAINT `breakdownreg001wb_ibfk_1` FOREIGN KEY (`mslno`) REFERENCES `machine001mb` (`sl_no`) ON DELETE CASCADE,
+  CONSTRAINT `breakdownreg001wb_ibfk_2` FOREIGN KEY (`sslno`) REFERENCES `spares001mb` (`sl_no`) ON DELETE CASCADE,
+  CONSTRAINT `breakdownreg001wb_ibfk_3` FOREIGN KEY (`bdsl`) REFERENCES `breakdown001mb` (`sl_no`) ON DELETE CASCADE,
+  CONSTRAINT `breakdownreg001wb_ibfk_4` FOREIGN KEY (`rcsl`) REFERENCES `rootcause001mb` (`sl_no`) ON DELETE CASCADE,
+  CONSTRAINT `breakdownreg001wb_ibfk_5` FOREIGN KEY (`pasl`) REFERENCES `preventiveaction001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `breakdownreg001wb`
+--
+
+/*!40000 ALTER TABLE `breakdownreg001wb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `breakdownreg001wb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `checklist001mb`
+--
+
+DROP TABLE IF EXISTS `checklist001mb`;
+CREATE TABLE `checklist001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `mcslno` int(11) NOT NULL,
+  `sslno` int(11) NOT NULL,
+  `checkpoints` varchar(250) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `mcslno` (`mcslno`),
+  KEY `sslno` (`sslno`),
+  CONSTRAINT `checklist001mb_ibfk_1` FOREIGN KEY (`mcslno`) REFERENCES `machine001mb` (`sl_no`) ON DELETE CASCADE,
+  CONSTRAINT `checklist001mb_ibfk_2` FOREIGN KEY (`sslno`) REFERENCES `status001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `checklist001mb`
+--
+
+/*!40000 ALTER TABLE `checklist001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `checklist001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `childpart001mb`
+--
+
+DROP TABLE IF EXISTS `childpart001mb`;
+CREATE TABLE `childpart001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `cpartno` varchar(200) NOT NULL,
+  `cpartname` varchar(200) NOT NULL,
+  `splan` varchar(200) NOT NULL,
+  `descrip` varchar(250) NOT NULL,
+  `qunty` varchar(250) NOT NULL,
+  `unitamount` int(50) NOT NULL,
+  `uom` varchar(250) NOT NULL,
+  `gst` int(50) NOT NULL,
+  `hsn` varchar(250) NOT NULL,
+  `location` varchar(250) NOT NULL,
+  `mslevel` varchar(250) NOT NULL,
+  `orderlevel` varchar(250) NOT NULL,
+  `leadtime` varchar(250) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `childpart001mb`
+--
+
+/*!40000 ALTER TABLE `childpart001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `childpart001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `childpartspecification001wb`
+--
+
+DROP TABLE IF EXISTS `childpartspecification001wb`;
+CREATE TABLE `childpartspecification001wb` (
+  `sl_no` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `cprtslno` int(11) DEFAULT NULL,
+  `parameter` varchar(200) NOT NULL,
+  `specification` varchar(200) NOT NULL,
+  `inspecmethod` varchar(200) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `cprtslno` (`cprtslno`),
+  CONSTRAINT `childpartspecification001wb_ibfk_1` FOREIGN KEY (`cprtslno`) REFERENCES `childpart001mb` (`sl_no`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `childpartspecification001wb`
+--
+
+/*!40000 ALTER TABLE `childpartspecification001wb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `childpartspecification001wb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `companydetails001mb`
+--
+
+DROP TABLE IF EXISTS `companydetails001mb`;
+CREATE TABLE `companydetails001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `company` varchar(150) NOT NULL,
+  `address1` varchar(150) NOT NULL,
+  `address2` varchar(150) NOT NULL,
+  `address3` varchar(150) NOT NULL,
+  `gst_in` varchar(50) DEFAULT NULL,
+  `city` varchar(30) NOT NULL,
+  `state` varchar(30) NOT NULL,
+  `country` varchar(30) NOT NULL,
+  `pin_code` int(20) NOT NULL,
+  `email_id` varchar(30) NOT NULL,
+  `contact_no` bigint(20) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `companydetails001mb`
+--
+
+/*!40000 ALTER TABLE `companydetails001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `companydetails001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `consignee001mb`
+--
+
+DROP TABLE IF EXISTS `consignee001mb`;
+CREATE TABLE `consignee001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `company_slno` int(11) NOT NULL,
+  `consignee` varchar(150) NOT NULL,
+  `address1` varchar(150) DEFAULT NULL,
+  `address2` varchar(150) DEFAULT NULL,
+  `address3` varchar(150) DEFAULT NULL,
+  `gst_in` varchar(50) DEFAULT NULL,
+  `city` varchar(30) DEFAULT NULL,
+  `state` varchar(30) DEFAULT NULL,
+  `country` varchar(30) DEFAULT NULL,
+  `pin_code` int(20) DEFAULT NULL,
+  `email_id` varchar(30) DEFAULT NULL,
+  `contact_no` bigint(20) DEFAULT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `company_slno` (`company_slno`),
+  CONSTRAINT `consignee001mb_ibfk_1` FOREIGN KEY (`company_slno`) REFERENCES `companydetails001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `consignee001mb`
+--
+
+/*!40000 ALTER TABLE `consignee001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `consignee001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `consumble001mb`
+--
+
+DROP TABLE IF EXISTS `consumble001mb`;
+CREATE TABLE `consumble001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `consmno` varchar(200) NOT NULL,
+  `consname` varchar(200) NOT NULL,
+  `splan` varchar(200) NOT NULL,
+  `descrip` varchar(250) NOT NULL,
+  `qunty` varchar(250) NOT NULL,
+  `unitamount` int(50) NOT NULL,
+  `uom` varchar(250) NOT NULL,
+  `gst` int(50) NOT NULL,
+  `hsn` varchar(250) NOT NULL,
+  `location` varchar(250) NOT NULL,
+  `mslevel` varchar(250) NOT NULL,
+  `orderlevel` varchar(250) NOT NULL,
+  `leadtime` varchar(250) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `consumble001mb`
+--
+
+/*!40000 ALTER TABLE `consumble001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `consumble001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `consumerspecification001wb`
+--
+
+DROP TABLE IF EXISTS `consumerspecification001wb`;
+CREATE TABLE `consumerspecification001wb` (
+  `sl_no` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `consumslno` int(11) DEFAULT NULL,
+  `parameter` varchar(200) NOT NULL,
+  `specification` varchar(200) NOT NULL,
+  `inspecmethod` varchar(200) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `consumslno` (`consumslno`),
+  CONSTRAINT `consumerspecification001wb_ibfk_1` FOREIGN KEY (`consumslno`) REFERENCES `consumble001mb` (`sl_no`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `consumerspecification001wb`
+--
+
+/*!40000 ALTER TABLE `consumerspecification001wb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `consumerspecification001wb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `course`
+--
+
+DROP TABLE IF EXISTS `course`;
+CREATE TABLE `course` (
+  `CourseID` smallint(5) unsigned NOT NULL,
+  `Code` varchar(10) CHARACTER SET ascii NOT NULL,
+  `Name` varchar(100) NOT NULL,
+  PRIMARY KEY (`CourseID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `course`
+--
+
+/*!40000 ALTER TABLE `course` DISABLE KEYS */;
+/*!40000 ALTER TABLE `course` ENABLE KEYS */;
+
+
+--
+-- Definition of table `coursemembership`
+--
+
+DROP TABLE IF EXISTS `coursemembership`;
+CREATE TABLE `coursemembership` (
+  `Student` int(10) unsigned NOT NULL,
+  `Course` smallint(5) unsigned NOT NULL,
+  PRIMARY KEY (`Student`,`Course`),
+  KEY `Course` (`Course`),
+  CONSTRAINT `coursemembership_ibfk_1` FOREIGN KEY (`Student`) REFERENCES `student` (`StudentID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `coursemembership_ibfk_2` FOREIGN KEY (`Course`) REFERENCES `course` (`CourseID`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `coursemembership`
+--
+
+/*!40000 ALTER TABLE `coursemembership` DISABLE KEYS */;
+/*!40000 ALTER TABLE `coursemembership` ENABLE KEYS */;
+
+
+--
+-- Definition of table `custemer001wb`
+--
+
+DROP TABLE IF EXISTS `custemer001wb`;
+CREATE TABLE `custemer001wb` (
+  `sl_no` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `salespart_slno` smallint(5) unsigned DEFAULT NULL,
+  `prtcode` int(11) DEFAULT NULL,
+  `prtmname` varchar(250) DEFAULT NULL,
+  `prtdescrip` varchar(250) DEFAULT NULL,
+  `prtqunty` varchar(250) DEFAULT NULL,
+  `prtuom` varchar(250) DEFAULT NULL,
+  `prthsn` varchar(250) DEFAULT NULL,
+  `prtunitrate` varchar(250) DEFAULT NULL,
+  `prttotalamount` int(50) DEFAULT NULL,
+  `insert_user` varchar(40) DEFAULT NULL,
+  `insert_datetime` datetime DEFAULT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `salespart_slno` (`salespart_slno`),
+  KEY `prtcode` (`prtcode`),
+  CONSTRAINT `custemer001wb_ibfk_1` FOREIGN KEY (`salespart_slno`) REFERENCES `salesinvoice001wb` (`sl_no`) ON DELETE CASCADE,
+  CONSTRAINT `custemer001wb_ibfk_2` FOREIGN KEY (`prtcode`) REFERENCES `part001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `custemer001wb`
+--
+
+/*!40000 ALTER TABLE `custemer001wb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `custemer001wb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `custemerregistration001mb`
+--
+
+DROP TABLE IF EXISTS `custemerregistration001mb`;
+CREATE TABLE `custemerregistration001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `custemername` varchar(40) NOT NULL,
+  `custemercode` varchar(40) NOT NULL,
+  `address` varchar(200) NOT NULL,
+  `gstin` varchar(30) NOT NULL,
+  `certification` varchar(50) NOT NULL,
+  `product_desc` varchar(100) NOT NULL,
+  `reputed_cust` varchar(50) NOT NULL,
+  `concern` varchar(100) NOT NULL,
+  `other_Info` varchar(100) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  `website` varchar(250) DEFAULT NULL,
+  PRIMARY KEY (`sl_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `custemerregistration001mb`
+--
+
+/*!40000 ALTER TABLE `custemerregistration001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `custemerregistration001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `custemersalesinvoice001mb`
+--
+
+DROP TABLE IF EXISTS `custemersalesinvoice001mb`;
+CREATE TABLE `custemersalesinvoice001mb` (
+  `custemer001wb` int(10) unsigned NOT NULL,
+  `salesinvoice001wb` smallint(5) unsigned NOT NULL,
+  PRIMARY KEY (`custemer001wb`,`salesinvoice001wb`),
+  KEY `salesinvoice001wb` (`salesinvoice001wb`),
+  CONSTRAINT `custemersalesinvoice001mb_ibfk_1` FOREIGN KEY (`custemer001wb`) REFERENCES `custemer001wb` (`sl_no`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `custemersalesinvoice001mb_ibfk_2` FOREIGN KEY (`salesinvoice001wb`) REFERENCES `salesinvoice001wb` (`sl_no`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `custemersalesinvoice001mb`
+--
+
+/*!40000 ALTER TABLE `custemersalesinvoice001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `custemersalesinvoice001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `customer001mb`
+--
+
+DROP TABLE IF EXISTS `customer001mb`;
+CREATE TABLE `customer001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `customer_name` varchar(200) NOT NULL,
+  `major_product` varchar(200) NOT NULL,
+  `vendor_code` varchar(50) NOT NULL,
+  `address` varchar(200) NOT NULL,
+  `gstin` varchar(50) NOT NULL,
+  `customer_phone` bigint(20) NOT NULL,
+  `customer_email` varchar(50) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  `contact_person_name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`sl_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `customer001mb`
+--
+
+/*!40000 ALTER TABLE `customer001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `customer001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `customerconsignee001mb`
+--
+
+DROP TABLE IF EXISTS `customerconsignee001mb`;
+CREATE TABLE `customerconsignee001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `consignee_slno` int(11) NOT NULL,
+  `companyName` varchar(150) NOT NULL,
+  `consignee` varchar(150) NOT NULL,
+  `address1` varchar(150) DEFAULT NULL,
+  `address2` varchar(150) DEFAULT NULL,
+  `address3` varchar(150) DEFAULT NULL,
+  `gst_in` varchar(50) DEFAULT NULL,
+  `city` varchar(30) DEFAULT NULL,
+  `state` varchar(30) DEFAULT NULL,
+  `country` varchar(30) DEFAULT NULL,
+  `pin_code` int(20) DEFAULT NULL,
+  `email_id` varchar(30) DEFAULT NULL,
+  `contact_no` bigint(20) DEFAULT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `consignee_slno` (`consignee_slno`),
+  CONSTRAINT `customerconsignee001mb_ibfk_1` FOREIGN KEY (`consignee_slno`) REFERENCES `custemerregistration001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `customerconsignee001mb`
+--
+
+/*!40000 ALTER TABLE `customerconsignee001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `customerconsignee001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `customercontact001wb`
+--
+
+DROP TABLE IF EXISTS `customercontact001wb`;
+CREATE TABLE `customercontact001wb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `customersl_no` int(50) DEFAULT NULL,
+  `pname` varchar(200) NOT NULL,
+  `designation` varchar(200) NOT NULL,
+  `department` varchar(200) NOT NULL,
+  `level` varchar(200) NOT NULL,
+  `altmnumber` varchar(20) DEFAULT NULL,
+  `mnumber` varchar(20) DEFAULT NULL,
+  `mailid` varchar(200) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `customersl_no` (`customersl_no`),
+  CONSTRAINT `customercontact001wb_ibfk_1` FOREIGN KEY (`customersl_no`) REFERENCES `custemerregistration001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `customercontact001wb`
+--
+
+/*!40000 ALTER TABLE `customercontact001wb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `customercontact001wb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `customerpoitem001wb`
+--
+
+DROP TABLE IF EXISTS `customerpoitem001wb`;
+CREATE TABLE `customerpoitem001wb` (
+  `sl_no` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `customerpoSlno` int(11) DEFAULT NULL,
+  `prtcode` int(11) DEFAULT NULL,
+  `prtmname` varchar(250) DEFAULT NULL,
+  `prtdescrip` varchar(250) DEFAULT NULL,
+  `prtqunty` varchar(250) DEFAULT NULL,
+  `prtuom` varchar(250) DEFAULT NULL,
+  `prthsn` varchar(250) DEFAULT NULL,
+  `prtunitrate` varchar(250) DEFAULT NULL,
+  `prttotalamount` int(50) DEFAULT NULL,
+  `drawingNo` varchar(250) DEFAULT NULL,
+  `revisionNo` varchar(250) DEFAULT NULL,
+  `revisionDate` datetime NOT NULL,
+  `hsn` varchar(250) DEFAULT NULL,
+  `gst` varchar(250) DEFAULT NULL,
+  `insert_user` varchar(40) DEFAULT NULL,
+  `insert_datetime` datetime DEFAULT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `customerpoSlno` (`customerpoSlno`),
+  CONSTRAINT `customerpoitem001wb_ibfk_1` FOREIGN KEY (`customerpoSlno`) REFERENCES `customerpomaster001mb` (`sl_no`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `customerpoitem001wb`
+--
+
+/*!40000 ALTER TABLE `customerpoitem001wb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `customerpoitem001wb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `customerpomaster001mb`
+--
+
+DROP TABLE IF EXISTS `customerpomaster001mb`;
+CREATE TABLE `customerpomaster001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `custemercode` int(11) NOT NULL,
+  `custemername` varchar(40) NOT NULL,
+  `custemerPONo` varchar(200) NOT NULL,
+  `poDate` datetime NOT NULL,
+  `deliveryDate` datetime NOT NULL,
+  `packing` varchar(100) NOT NULL,
+  `logistic` varchar(50) NOT NULL,
+  `inspection` varchar(100) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `customerpomaster001mb`
+--
+
+/*!40000 ALTER TABLE `customerpomaster001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `customerpomaster001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `dailychecklist001wb`
+--
+
+DROP TABLE IF EXISTS `dailychecklist001wb`;
+CREATE TABLE `dailychecklist001wb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `mslno` int(11) NOT NULL,
+  `cpslno` int(11) NOT NULL,
+  `date` datetime NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `mslno` (`mslno`),
+  KEY `cpslno` (`cpslno`),
+  CONSTRAINT `dailychecklist001wb_ibfk_1` FOREIGN KEY (`mslno`) REFERENCES `machine001mb` (`sl_no`) ON DELETE CASCADE,
+  CONSTRAINT `dailychecklist001wb_ibfk_2` FOREIGN KEY (`cpslno`) REFERENCES `checklist001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `dailychecklist001wb`
+--
+
+/*!40000 ALTER TABLE `dailychecklist001wb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `dailychecklist001wb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `department001mb`
+--
+
+DROP TABLE IF EXISTS `department001mb`;
+CREATE TABLE `department001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `sslno` int(11) NOT NULL,
+  `department` varchar(50) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `sslno` (`sslno`),
+  CONSTRAINT `department001mb_ibfk_1` FOREIGN KEY (`sslno`) REFERENCES `status001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `department001mb`
+--
+
+/*!40000 ALTER TABLE `department001mb` DISABLE KEYS */;
+INSERT INTO `department001mb` (`sl_no`,`sslno`,`department`,`insert_user`,`insert_datetime`,`updated_user`,`updated_datetime`) VALUES 
+ (1,1,'Top Management','rizwana','2021-09-06 13:18:33','aravind','2021-09-06 13:18:33'),
+ (2,2,'Marketing','rizwana','2021-09-06 13:18:33','aravind','2021-09-06 13:18:33'),
+ (3,1,'NPD','latha','2022-01-05 12:00:29','latha','2022-01-05 12:00:32'),
+ (4,1,'Purchase','sekar','2022-01-20 00:03:18','sekar','2022-01-20 00:03:21'),
+ (5,1,'Store','sekar','2022-01-20 00:03:18','sekar','2022-01-20 00:03:21'),
+ (6,1,'HR','sekar','2022-01-20 00:03:18','sekar','2022-01-20 00:03:21'),
+ (7,1,'Production','sekar','2022-01-20 00:03:18','sekar','2022-01-20 00:03:21'),
+ (8,1,'Quality','sekar','2022-01-20 00:03:18','sekar','2022-01-20 00:03:21'),
+ (9,1,'Maintenance','sekar','2022-01-20 00:03:18','sekar','2022-01-20 00:03:21'),
+ (10,1,'Despatch','sekar','2022-01-20 00:03:18','sekar','2022-01-20 00:03:21'),
+ (11,1,'Sales','setmt1','2022-08-03 15:35:47',NULL,NULL),
+ (13,1,'TopManagement','setmt1','2022-09-01 11:23:54',NULL,NULL),
+ (14,2,'dfgd','setmt1','2022-09-01 11:27:21',NULL,NULL);
+/*!40000 ALTER TABLE `department001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `email001mb`
+--
+
+DROP TABLE IF EXISTS `email001mb`;
+CREATE TABLE `email001mb` (
+  `emailId` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `emailFrom` varchar(50) NOT NULL,
+  `emailTo` varchar(50) NOT NULL,
+  `emailCC` text NOT NULL,
+  `emailBCC` text NOT NULL,
+  `emailDate` datetime DEFAULT NULL,
+  `emailSubject` varchar(100) DEFAULT NULL,
+  `emailBody` text,
+  `emailCurrentPlace` varchar(30) DEFAULT NULL,
+  `isEmailViewed` varchar(30) DEFAULT NULL,
+  `isEmailAttachmentExists` varchar(10) DEFAULT NULL,
+  `multipleEmailId` varchar(255) DEFAULT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`emailId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `email001mb`
+--
+
+/*!40000 ALTER TABLE `email001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `email001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `emailattachment001mb`
+--
+
+DROP TABLE IF EXISTS `emailattachment001mb`;
+CREATE TABLE `emailattachment001mb` (
+  `emailattachmentid` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `content` tinyblob,
+  `contenttype` varchar(255) DEFAULT NULL,
+  `emailId` varchar(225) DEFAULT NULL,
+  `filename` varchar(255) DEFAULT NULL,
+  `filesize` varchar(255) DEFAULT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`emailattachmentid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `emailattachment001mb`
+--
+
+/*!40000 ALTER TABLE `emailattachment001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `emailattachment001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `emailsignature001mb`
+--
+
+DROP TABLE IF EXISTS `emailsignature001mb`;
+CREATE TABLE `emailsignature001mb` (
+  `emailSignatureId` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `companyName` varchar(255) DEFAULT NULL,
+  `companyWebsite` varchar(255) DEFAULT NULL,
+  `country` varchar(255) DEFAULT NULL,
+  `emailAddress` varchar(255) DEFAULT NULL,
+  `employeeDesignation` varchar(255) DEFAULT NULL,
+  `employeeId` int(11) DEFAULT NULL,
+  `employeeName` varchar(255) DEFAULT NULL,
+  `employeeNamePrefix` varchar(255) DEFAULT NULL,
+  `logoLink` varchar(255) DEFAULT NULL,
+  `mobileNumber` int(10) DEFAULT NULL,
+  `phoneNumber` int(10) DEFAULT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`emailSignatureId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `emailsignature001mb`
+--
+
+/*!40000 ALTER TABLE `emailsignature001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `emailsignature001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `emp001mb`
+--
+
+DROP TABLE IF EXISTS `emp001mb`;
+CREATE TABLE `emp001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `empcode` varchar(10) NOT NULL,
+  `empname` varchar(200) NOT NULL,
+  `des` varchar(200) NOT NULL,
+  `age` int(20) NOT NULL,
+  `doj` datetime NOT NULL,
+  `dob` datetime NOT NULL,
+  `fname` varchar(200) NOT NULL,
+  `bgroup` varchar(200) NOT NULL,
+  `female` varchar(200) NOT NULL,
+  `married` varchar(200) NOT NULL,
+  `child` varchar(200) DEFAULT NULL,
+  `dep` varchar(200) NOT NULL,
+  `add1` varchar(200) NOT NULL,
+  `add2` varchar(200) NOT NULL,
+  `edu` varchar(200) NOT NULL,
+  `exp` varchar(200) NOT NULL,
+  `det` varchar(200) NOT NULL,
+  `filename` varchar(200) NOT NULL,
+  `filepath` varchar(50) NOT NULL,
+  `originalfilename` varchar(50) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `emp001mb`
+--
+
+/*!40000 ALTER TABLE `emp001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `emp001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `employe001mb`
+--
+
+DROP TABLE IF EXISTS `employe001mb`;
+CREATE TABLE `employe001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `sslno` int(11) NOT NULL,
+  `ecode` varchar(50) NOT NULL,
+  `ename` varchar(500) NOT NULL,
+  `year` datetime NOT NULL,
+  `capacity` varchar(100) NOT NULL,
+  `mtype` varchar(100) NOT NULL,
+  `location` varchar(100) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `sslno` (`sslno`),
+  CONSTRAINT `employe001mb_ibfk_1` FOREIGN KEY (`sslno`) REFERENCES `status001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `employe001mb`
+--
+
+/*!40000 ALTER TABLE `employe001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `employe001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `employef001mb`
+--
+
+DROP TABLE IF EXISTS `employef001mb`;
+CREATE TABLE `employef001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `fa_no` varchar(50) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `employef001mb`
+--
+
+/*!40000 ALTER TABLE `employef001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `employef001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `employeregistration001mb`
+--
+
+DROP TABLE IF EXISTS `employeregistration001mb`;
+CREATE TABLE `employeregistration001mb` (
+  `registerid` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `firstname` varchar(45) NOT NULL,
+  `lastname` varchar(45) NOT NULL,
+  `domain` varchar(30) NOT NULL,
+  `username` varchar(45) NOT NULL,
+  `securityquestion` varchar(100) NOT NULL,
+  `securityanswer` varchar(45) NOT NULL,
+  `message` varchar(200) DEFAULT NULL,
+  `status` varchar(45) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`registerid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `employeregistration001mb`
+--
+
+/*!40000 ALTER TABLE `employeregistration001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `employeregistration001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `employework001wb`
+--
+
+DROP TABLE IF EXISTS `employework001wb`;
+CREATE TABLE `employework001wb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `eslno` int(11) NOT NULL,
+  `status` varchar(100) NOT NULL,
+  `date` datetime NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `eslno` (`eslno`),
+  CONSTRAINT `employework001wb_ibfk_1` FOREIGN KEY (`eslno`) REFERENCES `employe001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `employework001wb`
+--
+
+/*!40000 ALTER TABLE `employework001wb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `employework001wb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `file001mb`
+--
+
+DROP TABLE IF EXISTS `file001mb`;
+CREATE TABLE `file001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `ftype` varchar(500) NOT NULL,
+  `status` varchar(500) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `file001mb`
+--
+
+/*!40000 ALTER TABLE `file001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `file001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `filedet001wb`
+--
+
+DROP TABLE IF EXISTS `filedet001wb`;
+CREATE TABLE `filedet001wb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `fslno` int(20) NOT NULL,
+  `fname` varchar(500) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `fslno` (`fslno`),
+  CONSTRAINT `filedet001wb_ibfk_1` FOREIGN KEY (`fslno`) REFERENCES `file001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `filedet001wb`
+--
+
+/*!40000 ALTER TABLE `filedet001wb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `filedet001wb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `filemanager001mb`
+--
+
+DROP TABLE IF EXISTS `filemanager001mb`;
+CREATE TABLE `filemanager001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `filename` varchar(50) NOT NULL,
+  `originalfilename` varchar(50) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `filemanager001mb`
+--
+
+/*!40000 ALTER TABLE `filemanager001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `filemanager001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `fireplan001wb`
+--
+
+DROP TABLE IF EXISTS `fireplan001wb`;
+CREATE TABLE `fireplan001wb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `fire` varchar(200) NOT NULL,
+  `app` varchar(100) NOT NULL,
+  `loc` varchar(100) NOT NULL,
+  `date` datetime NOT NULL,
+  `date1` datetime NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `fireplan001wb`
+--
+
+/*!40000 ALTER TABLE `fireplan001wb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `fireplan001wb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `firstaid001hb`
+--
+
+DROP TABLE IF EXISTS `firstaid001hb`;
+CREATE TABLE `firstaid001hb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `fabxno` int(50) NOT NULL,
+  `mname` varchar(100) NOT NULL,
+  `date` datetime DEFAULT NULL,
+  `app` varchar(100) NOT NULL,
+  `loc` varchar(100) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `firstaid001hb`
+--
+
+/*!40000 ALTER TABLE `firstaid001hb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `firstaid001hb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `firstaidwb001`
+--
+
+DROP TABLE IF EXISTS `firstaidwb001`;
+CREATE TABLE `firstaidwb001` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `fabxno` int(50) NOT NULL,
+  `mname` varchar(100) NOT NULL,
+  `date` datetime DEFAULT NULL,
+  `app` varchar(100) NOT NULL,
+  `loc` varchar(100) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `firstaidwb001`
+--
+
+/*!40000 ALTER TABLE `firstaidwb001` DISABLE KEYS */;
+/*!40000 ALTER TABLE `firstaidwb001` ENABLE KEYS */;
+
+
+--
+-- Definition of table `fixture001mb`
+--
+
+DROP TABLE IF EXISTS `fixture001mb`;
+CREATE TABLE `fixture001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `sslno` int(11) NOT NULL,
+  `fcode` varchar(50) NOT NULL,
+  `fname` varchar(500) NOT NULL,
+  `fyear` datetime NOT NULL,
+  `fcapacity` varchar(100) NOT NULL,
+  `ftype` varchar(100) NOT NULL,
+  `fmake` varchar(100) NOT NULL,
+  `flocation` varchar(100) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `sslno` (`sslno`),
+  CONSTRAINT `fixture001mb_ibfk_1` FOREIGN KEY (`sslno`) REFERENCES `fixturestatus001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `fixture001mb`
+--
+
+/*!40000 ALTER TABLE `fixture001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `fixture001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `fixturechecklist001mb`
+--
+
+DROP TABLE IF EXISTS `fixturechecklist001mb`;
+CREATE TABLE `fixturechecklist001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `fcslno` int(11) NOT NULL,
+  `fstatus` int(11) NOT NULL,
+  `fcheckpoints` varchar(250) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `fcslno` (`fcslno`),
+  KEY `fstatus` (`fstatus`),
+  CONSTRAINT `fixturechecklist001mb_ibfk_1` FOREIGN KEY (`fcslno`) REFERENCES `fixture001mb` (`sl_no`) ON DELETE CASCADE,
+  CONSTRAINT `fixturechecklist001mb_ibfk_2` FOREIGN KEY (`fstatus`) REFERENCES `fixturestatus001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `fixturechecklist001mb`
+--
+
+/*!40000 ALTER TABLE `fixturechecklist001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `fixturechecklist001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `fixturedailychecklist001wb`
+--
+
+DROP TABLE IF EXISTS `fixturedailychecklist001wb`;
+CREATE TABLE `fixturedailychecklist001wb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `mslno` int(11) NOT NULL,
+  `cpslno` int(11) NOT NULL,
+  `date` datetime NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `mslno` (`mslno`),
+  KEY `cpslno` (`cpslno`),
+  CONSTRAINT `fixturedailychecklist001wb_ibfk_1` FOREIGN KEY (`mslno`) REFERENCES `fixture001mb` (`sl_no`) ON DELETE CASCADE,
+  CONSTRAINT `fixturedailychecklist001wb_ibfk_2` FOREIGN KEY (`cpslno`) REFERENCES `fixturechecklist001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `fixturedailychecklist001wb`
+--
+
+/*!40000 ALTER TABLE `fixturedailychecklist001wb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `fixturedailychecklist001wb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `fixturepreventiveaction001mb`
+--
+
+DROP TABLE IF EXISTS `fixturepreventiveaction001mb`;
+CREATE TABLE `fixturepreventiveaction001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `sslno` int(11) NOT NULL,
+  `rcslno` int(11) NOT NULL,
+  `name` varchar(250) NOT NULL,
+  `details` varchar(250) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `sslno` (`sslno`),
+  CONSTRAINT `fixturepreventiveaction001mb_ibfk_1` FOREIGN KEY (`sslno`) REFERENCES `fixturestatus001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `fixturepreventiveaction001mb`
+--
+
+/*!40000 ALTER TABLE `fixturepreventiveaction001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `fixturepreventiveaction001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `fixturepreventivechecklist001wb`
+--
+
+DROP TABLE IF EXISTS `fixturepreventivechecklist001wb`;
+CREATE TABLE `fixturepreventivechecklist001wb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `mslno` int(11) NOT NULL,
+  `cpslno` int(11) NOT NULL,
+  `checkpointdate` datetime NOT NULL,
+  `observation` varchar(250) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `mslno` (`mslno`),
+  KEY `cpslno` (`cpslno`),
+  CONSTRAINT `fixturepreventivechecklist001wb_ibfk_1` FOREIGN KEY (`mslno`) REFERENCES `fixture001mb` (`sl_no`) ON DELETE CASCADE,
+  CONSTRAINT `fixturepreventivechecklist001wb_ibfk_2` FOREIGN KEY (`cpslno`) REFERENCES `fixturechecklist001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `fixturepreventivechecklist001wb`
+--
+
+/*!40000 ALTER TABLE `fixturepreventivechecklist001wb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `fixturepreventivechecklist001wb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `fixturepreventiveplan001wb`
+--
+
+DROP TABLE IF EXISTS `fixturepreventiveplan001wb`;
+CREATE TABLE `fixturepreventiveplan001wb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `mslno` int(11) NOT NULL,
+  `status` char(1) NOT NULL,
+  `date` datetime NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `mslno` (`mslno`),
+  CONSTRAINT `fixturepreventiveplan001wb_ibfk_1` FOREIGN KEY (`mslno`) REFERENCES `machine001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `fixturepreventiveplan001wb`
+--
+
+/*!40000 ALTER TABLE `fixturepreventiveplan001wb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `fixturepreventiveplan001wb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `fixturerootcause001mb`
+--
+
+DROP TABLE IF EXISTS `fixturerootcause001mb`;
+CREATE TABLE `fixturerootcause001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `sslno` int(11) NOT NULL,
+  `fbrslno` int(11) NOT NULL,
+  `fname` varchar(250) NOT NULL,
+  `fdetails` varchar(250) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `sslno` (`sslno`),
+  CONSTRAINT `fixturerootcause001mb_ibfk_1` FOREIGN KEY (`sslno`) REFERENCES `fixturestatus001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `fixturerootcause001mb`
+--
+
+/*!40000 ALTER TABLE `fixturerootcause001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `fixturerootcause001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `fixturespares001mb`
+--
+
+DROP TABLE IF EXISTS `fixturespares001mb`;
+CREATE TABLE `fixturespares001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `msslno` int(11) NOT NULL,
+  `sslno` int(11) NOT NULL,
+  `fspares` varchar(50) NOT NULL,
+  `fsparescost` int(11) DEFAULT NULL,
+  `fspecification` varchar(50) NOT NULL,
+  `fleadtime` datetime DEFAULT NULL,
+  `fminimumstocklevel` int(11) DEFAULT '0',
+  `freorderlevel` int(11) DEFAULT '0',
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `msslno` (`msslno`),
+  KEY `sslno` (`sslno`),
+  CONSTRAINT `fixturespares001mb_ibfk_1` FOREIGN KEY (`msslno`) REFERENCES `fixture001mb` (`sl_no`) ON DELETE CASCADE,
+  CONSTRAINT `fixturespares001mb_ibfk_2` FOREIGN KEY (`sslno`) REFERENCES `fixturestatus001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `fixturespares001mb`
+--
+
+/*!40000 ALTER TABLE `fixturespares001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `fixturespares001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `fixturestatus001mb`
+--
+
+DROP TABLE IF EXISTS `fixturestatus001mb`;
+CREATE TABLE `fixturestatus001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `code_group` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `status` char(100) DEFAULT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `fixturestatus001mb`
+--
+
+/*!40000 ALTER TABLE `fixturestatus001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `fixturestatus001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `item001mb`
+--
+
+DROP TABLE IF EXISTS `item001mb`;
+CREATE TABLE `item001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `itemcode` varchar(250) NOT NULL,
+  `itemname` varchar(250) NOT NULL,
+  `descrip` varchar(250) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `item001mb`
+--
+
+/*!40000 ALTER TABLE `item001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `item001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `legal001hb`
+--
+
+DROP TABLE IF EXISTS `legal001hb`;
+CREATE TABLE `legal001hb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `cslno` int(11) NOT NULL,
+  `fslno` int(11) NOT NULL,
+  `cno` int(11) NOT NULL,
+  `date` datetime NOT NULL,
+  `date1` datetime NOT NULL,
+  `filename` varchar(200) NOT NULL,
+  `filepath` varchar(50) NOT NULL,
+  `originalfilename` varchar(50) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `cslno` (`cslno`),
+  KEY `fslno` (`fslno`),
+  CONSTRAINT `legal001hb_ibfk_1` FOREIGN KEY (`cslno`) REFERENCES `legal001mb` (`sl_no`) ON DELETE CASCADE,
+  CONSTRAINT `legal001hb_ibfk_2` FOREIGN KEY (`fslno`) REFERENCES `file001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `legal001hb`
+--
+
+/*!40000 ALTER TABLE `legal001hb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `legal001hb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `legal001mb`
+--
+
+DROP TABLE IF EXISTS `legal001mb`;
+CREATE TABLE `legal001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `dname` varchar(200) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `legal001mb`
+--
+
+/*!40000 ALTER TABLE `legal001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `legal001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `legal001wb`
+--
+
+DROP TABLE IF EXISTS `legal001wb`;
+CREATE TABLE `legal001wb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `cslno` int(11) NOT NULL,
+  `fslno` int(11) NOT NULL,
+  `cno` int(11) NOT NULL,
+  `date` datetime NOT NULL,
+  `date1` datetime NOT NULL,
+  `filename` varchar(200) NOT NULL,
+  `filepath` varchar(50) NOT NULL,
+  `originalfilename` varchar(50) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `cslno` (`cslno`),
+  KEY `fslno` (`fslno`),
+  CONSTRAINT `legal001wb_ibfk_1` FOREIGN KEY (`cslno`) REFERENCES `legal001mb` (`sl_no`) ON DELETE CASCADE,
+  CONSTRAINT `legal001wb_ibfk_2` FOREIGN KEY (`fslno`) REFERENCES `file001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `legal001wb`
+--
+
+/*!40000 ALTER TABLE `legal001wb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `legal001wb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `login001mb`
+--
+
+DROP TABLE IF EXISTS `login001mb`;
+CREATE TABLE `login001mb` (
+  `loginid` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `firstname` varchar(45) NOT NULL,
+  `lastname` varchar(45) NOT NULL,
+  `domain` varchar(30) NOT NULL,
+  `username` varchar(45) NOT NULL,
+  `password` varchar(60) NOT NULL,
+  `enabled` tinyint(4) NOT NULL DEFAULT '1',
+  `securityanswer` varchar(45) NOT NULL,
+  `message` varchar(200) DEFAULT NULL,
+  `securityquestion` varchar(100) NOT NULL,
+  `status` varchar(45) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  `theme` varchar(10) DEFAULT '#286090',
+  PRIMARY KEY (`loginid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `login001mb`
+--
+
+/*!40000 ALTER TABLE `login001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `login001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `machine001mb`
+--
+
+DROP TABLE IF EXISTS `machine001mb`;
+CREATE TABLE `machine001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `sslno` int(11) NOT NULL,
+  `mcode` varchar(50) NOT NULL,
+  `mname` varchar(500) NOT NULL,
+  `year` datetime NOT NULL,
+  `capacity` varchar(100) NOT NULL,
+  `mtype` varchar(100) NOT NULL,
+  `make` varchar(100) NOT NULL,
+  `location` varchar(100) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `sslno` (`sslno`),
+  CONSTRAINT `machine001mb_ibfk_1` FOREIGN KEY (`sslno`) REFERENCES `status001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `machine001mb`
+--
+
+/*!40000 ALTER TABLE `machine001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `machine001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `machine001wb`
+--
+
+DROP TABLE IF EXISTS `machine001wb`;
+CREATE TABLE `machine001wb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `mslno` int(11) NOT NULL,
+  `status` char(1) NOT NULL,
+  `date` datetime NOT NULL,
+  `cpslno` int(11) NOT NULL,
+  `checkpointdate` datetime NOT NULL,
+  `observation` varchar(250) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `mslno` (`mslno`),
+  KEY `cpslno` (`cpslno`),
+  CONSTRAINT `machine001wb_ibfk_1` FOREIGN KEY (`mslno`) REFERENCES `machine001mb` (`sl_no`) ON DELETE CASCADE,
+  CONSTRAINT `machine001wb_ibfk_2` FOREIGN KEY (`cpslno`) REFERENCES `checklist001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `machine001wb`
+--
+
+/*!40000 ALTER TABLE `machine001wb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `machine001wb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `materialinspection001wb`
+--
+
+DROP TABLE IF EXISTS `materialinspection001wb`;
+CREATE TABLE `materialinspection001wb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `iirno` varchar(250) NOT NULL,
+  `cdate` datetime DEFAULT NULL,
+  `scname` varchar(250) NOT NULL,
+  `dcno` varchar(250) NOT NULL,
+  `refno` varchar(250) NOT NULL,
+  `pdate` datetime DEFAULT NULL,
+  `cponumber` varchar(250) NOT NULL,
+  `sponumber` varchar(250) NOT NULL,
+  `grnumber` int(11) DEFAULT NULL,
+  `remark` varchar(150) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `materialinspection001wb`
+--
+
+/*!40000 ALTER TABLE `materialinspection001wb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `materialinspection001wb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `materialinward001wb`
+--
+
+DROP TABLE IF EXISTS `materialinward001wb`;
+CREATE TABLE `materialinward001wb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `purchse_slno` int(11) NOT NULL,
+  `date` datetime NOT NULL,
+  `dc_no` varchar(30) NOT NULL,
+  `invoiceno` varchar(100) NOT NULL,
+  `dc_date` datetime NOT NULL,
+  `supliername` varchar(100) NOT NULL,
+  `grn` varchar(100) NOT NULL,
+  `vehicleno` varchar(100) NOT NULL,
+  `drivername` varchar(100) NOT NULL,
+  `driverno` varchar(10) DEFAULT NULL,
+  `remark` varchar(100) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  `status` varchar(200) DEFAULT NULL,
+  `remarks` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `purchse_slno` (`purchse_slno`),
+  CONSTRAINT `materialinward001wb_ibfk_1` FOREIGN KEY (`purchse_slno`) REFERENCES `purchaseorder001wb` (`sl_no`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `materialinward001wb`
+--
+
+/*!40000 ALTER TABLE `materialinward001wb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `materialinward001wb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `materialmoments001wb`
+--
+
+DROP TABLE IF EXISTS `materialmoments001wb`;
+CREATE TABLE `materialmoments001wb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `itemslno` int(15) DEFAULT NULL,
+  `qunty` int(50) DEFAULT NULL,
+  `department` varchar(50) DEFAULT NULL,
+  `shift` varchar(50) DEFAULT NULL,
+  `date` datetime DEFAULT NULL,
+  `time` varchar(50) DEFAULT NULL,
+  `consumslno` int(15) DEFAULT NULL,
+  `cuqunty` int(50) DEFAULT NULL,
+  `cudepartment` varchar(50) DEFAULT NULL,
+  `cushift` varchar(50) DEFAULT NULL,
+  `cudate` datetime DEFAULT NULL,
+  `cutime` varchar(50) DEFAULT NULL,
+  `childslno` int(15) DEFAULT NULL,
+  `cptqunty` int(50) DEFAULT NULL,
+  `cptdepartment` varchar(50) DEFAULT NULL,
+  `cptshift` varchar(50) DEFAULT NULL,
+  `cptdate` datetime DEFAULT NULL,
+  `cpttime` varchar(50) DEFAULT NULL,
+  `prtslno` int(15) DEFAULT NULL,
+  `prtqunty` int(50) DEFAULT NULL,
+  `prtdepartment` varchar(50) DEFAULT NULL,
+  `prtshift` varchar(50) DEFAULT NULL,
+  `prtdate` datetime DEFAULT NULL,
+  `prttime` varchar(50) DEFAULT NULL,
+  `insert_user` varchar(40) DEFAULT NULL,
+  `insert_datetime` datetime DEFAULT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `materialmoments001wb`
+--
+
+/*!40000 ALTER TABLE `materialmoments001wb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `materialmoments001wb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `materialreceiveditem001wb`
+--
+
+DROP TABLE IF EXISTS `materialreceiveditem001wb`;
+CREATE TABLE `materialreceiveditem001wb` (
+  `sl_no` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `material_slno` int(11) DEFAULT NULL,
+  `itemcode` int(11) DEFAULT NULL,
+  `itemname` varchar(250) DEFAULT NULL,
+  `descrip` varchar(250) DEFAULT NULL,
+  `qunty` int(50) DEFAULT NULL,
+  `unitrate` varchar(250) DEFAULT NULL,
+  `totalamount` int(50) DEFAULT NULL,
+  `received_qty` int(30) DEFAULT NULL,
+  `accepted_qty` int(30) DEFAULT NULL,
+  `rejected_qty` int(30) DEFAULT NULL,
+  `outstanding` int(30) DEFAULT NULL,
+  `cucode` int(11) DEFAULT NULL,
+  `cuname` varchar(250) DEFAULT NULL,
+  `cudescrip` varchar(250) DEFAULT NULL,
+  `cuqunty` int(50) DEFAULT NULL,
+  `cunitrate` varchar(250) DEFAULT NULL,
+  `cutotalamount` int(50) DEFAULT NULL,
+  `cureceived_qty` int(30) DEFAULT NULL,
+  `cuaccepted_qty` int(30) DEFAULT NULL,
+  `curejected_qty` int(30) DEFAULT NULL,
+  `cuoutstanding` int(30) DEFAULT NULL,
+  `cptcode` int(11) DEFAULT NULL,
+  `cptname` varchar(250) DEFAULT NULL,
+  `cptdescrip` varchar(250) DEFAULT NULL,
+  `cptqunty` int(50) DEFAULT NULL,
+  `cptunitrate` varchar(250) DEFAULT NULL,
+  `cpttotalamount` int(50) DEFAULT NULL,
+  `cptreceived_qty` int(30) DEFAULT NULL,
+  `cptaccepted_qty` int(30) DEFAULT NULL,
+  `cptrejected_qty` int(30) DEFAULT NULL,
+  `cptoutstanding` int(30) DEFAULT NULL,
+  `prtcode` int(11) DEFAULT NULL,
+  `prtmname` varchar(250) DEFAULT NULL,
+  `prtdescrip` varchar(250) DEFAULT NULL,
+  `prtqunty` int(50) DEFAULT NULL,
+  `prtunitrate` varchar(250) DEFAULT NULL,
+  `prttotalamount` int(50) DEFAULT NULL,
+  `prtreceived_qty` int(30) DEFAULT NULL,
+  `prtaccepted_qty` int(30) DEFAULT NULL,
+  `prtrejected_qty` int(30) DEFAULT NULL,
+  `prtoutstanding` int(30) DEFAULT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `material_slno` (`material_slno`),
+  KEY `itemcode` (`itemcode`),
+  KEY `cucode` (`cucode`),
+  KEY `cptcode` (`cptcode`),
+  KEY `prtcode` (`prtcode`),
+  CONSTRAINT `materialreceiveditem001wb_ibfk_1` FOREIGN KEY (`material_slno`) REFERENCES `materialinward001wb` (`sl_no`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `materialreceiveditem001wb_ibfk_2` FOREIGN KEY (`itemcode`) REFERENCES `orderitem001mb` (`sl_no`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `materialreceiveditem001wb_ibfk_3` FOREIGN KEY (`cucode`) REFERENCES `consumble001mb` (`sl_no`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `materialreceiveditem001wb_ibfk_4` FOREIGN KEY (`cptcode`) REFERENCES `childpart001mb` (`sl_no`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `materialreceiveditem001wb_ibfk_5` FOREIGN KEY (`prtcode`) REFERENCES `part001mb` (`sl_no`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `materialreceiveditem001wb`
+--
+
+/*!40000 ALTER TABLE `materialreceiveditem001wb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `materialreceiveditem001wb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `materialreqslip001wb`
+--
+
+DROP TABLE IF EXISTS `materialreqslip001wb`;
+CREATE TABLE `materialreqslip001wb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `spare_slno` int(15) NOT NULL,
+  `mrs_no` varchar(100) NOT NULL,
+  `date` datetime NOT NULL,
+  `requestor_name` varchar(50) NOT NULL,
+  `department` varchar(50) NOT NULL,
+  `description` varchar(100) NOT NULL,
+  `qty` int(15) NOT NULL,
+  `remarks` varchar(100) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `spare_slno` (`spare_slno`),
+  CONSTRAINT `materialreqslip001wb_ibfk_1` FOREIGN KEY (`spare_slno`) REFERENCES `spares001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `materialreqslip001wb`
+--
+
+/*!40000 ALTER TABLE `materialreqslip001wb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `materialreqslip001wb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `materiealrequestitem001wb`
+--
+
+DROP TABLE IF EXISTS `materiealrequestitem001wb`;
+CREATE TABLE `materiealrequestitem001wb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `itemcode` varchar(50) DEFAULT NULL,
+  `itemname` varchar(250) DEFAULT NULL,
+  `descrip` varchar(250) DEFAULT NULL,
+  `qunty` int(50) DEFAULT NULL,
+  `cucode` varchar(50) DEFAULT NULL,
+  `cuname` varchar(250) DEFAULT NULL,
+  `cudescrip` varchar(250) DEFAULT NULL,
+  `cuqunty` int(50) DEFAULT NULL,
+  `cptcode` varchar(50) DEFAULT NULL,
+  `cptname` varchar(250) DEFAULT NULL,
+  `cptdescrip` varchar(250) DEFAULT NULL,
+  `cptqunty` int(50) DEFAULT NULL,
+  `prtcode` varchar(50) DEFAULT NULL,
+  `prtname` varchar(250) DEFAULT NULL,
+  `prtdescrip` varchar(250) DEFAULT NULL,
+  `prtqunty` int(50) DEFAULT NULL,
+  `insert_user` varchar(40) DEFAULT NULL,
+  `insert_datetime` datetime DEFAULT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `materiealrequestitem001wb`
+--
+
+/*!40000 ALTER TABLE `materiealrequestitem001wb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `materiealrequestitem001wb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `observationsitems001wb`
+--
+
+DROP TABLE IF EXISTS `observationsitems001wb`;
+CREATE TABLE `observationsitems001wb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `observationslno` int(11) unsigned DEFAULT NULL,
+  `ordernumber` varchar(200) DEFAULT NULL,
+  `orderparameter` varchar(200) DEFAULT NULL,
+  `orderspecification` varchar(200) DEFAULT NULL,
+  `orderinspection` varchar(200) DEFAULT NULL,
+  `orderobservartion` varchar(200) DEFAULT NULL,
+  `orderobservartion1` varchar(200) DEFAULT NULL,
+  `orderobservartion2` varchar(200) DEFAULT NULL,
+  `orderobservartion3` varchar(200) DEFAULT NULL,
+  `orderobservartion4` varchar(200) DEFAULT NULL,
+  `orderobservartion5` varchar(200) DEFAULT NULL,
+  `orderobservartion6` varchar(200) DEFAULT NULL,
+  `orderobservartion7` varchar(200) DEFAULT NULL,
+  `orderobservartion8` varchar(200) DEFAULT NULL,
+  `orderobservartion9` varchar(200) DEFAULT NULL,
+  `consumnumber` varchar(200) DEFAULT NULL,
+  `consumparameter` varchar(200) DEFAULT NULL,
+  `consumspecification` varchar(200) DEFAULT NULL,
+  `consuminspection` varchar(200) DEFAULT NULL,
+  `consumobservartion` varchar(200) DEFAULT NULL,
+  `consumobservartion1` varchar(200) DEFAULT NULL,
+  `consumobservartion2` varchar(200) DEFAULT NULL,
+  `consumobservartion3` varchar(200) DEFAULT NULL,
+  `consumobservartion4` varchar(200) DEFAULT NULL,
+  `consumobservartion5` varchar(200) DEFAULT NULL,
+  `consumobservartion6` varchar(200) DEFAULT NULL,
+  `consumobservartion7` varchar(200) DEFAULT NULL,
+  `consumobservartion8` varchar(200) DEFAULT NULL,
+  `consumobservartion9` varchar(200) DEFAULT NULL,
+  `childnumber` varchar(200) DEFAULT NULL,
+  `childparameter` varchar(200) DEFAULT NULL,
+  `childspecification` varchar(200) DEFAULT NULL,
+  `childinspection` varchar(200) DEFAULT NULL,
+  `childobservartion` varchar(200) DEFAULT NULL,
+  `childobservartion1` varchar(200) DEFAULT NULL,
+  `childobservartion2` varchar(200) DEFAULT NULL,
+  `childobservartion3` varchar(200) DEFAULT NULL,
+  `childobservartion4` varchar(200) DEFAULT NULL,
+  `childobservartion5` varchar(200) DEFAULT NULL,
+  `childobservartion6` varchar(200) DEFAULT NULL,
+  `childobservartion7` varchar(200) DEFAULT NULL,
+  `childobservartion8` varchar(200) DEFAULT NULL,
+  `childobservartion9` varchar(200) DEFAULT NULL,
+  `partnumber` varchar(200) DEFAULT NULL,
+  `partparameter` varchar(200) DEFAULT NULL,
+  `partspecification` varchar(200) DEFAULT NULL,
+  `partinspection` varchar(200) DEFAULT NULL,
+  `partobservartion` varchar(200) DEFAULT NULL,
+  `partobservartion1` varchar(200) DEFAULT NULL,
+  `partobservartion2` varchar(200) DEFAULT NULL,
+  `partobservartion3` varchar(200) DEFAULT NULL,
+  `partobservartion4` varchar(200) DEFAULT NULL,
+  `partobservartion5` varchar(200) DEFAULT NULL,
+  `partobservartion6` varchar(200) DEFAULT NULL,
+  `partobservartion7` varchar(200) DEFAULT NULL,
+  `partobservartion8` varchar(200) DEFAULT NULL,
+  `partobservartion9` varchar(200) DEFAULT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `observationslno` (`observationslno`),
+  CONSTRAINT `observationsitems001wb_ibfk_1` FOREIGN KEY (`observationslno`) REFERENCES `rawmaterialinspection001wb` (`sl_no`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `observationsitems001wb`
+--
+
+/*!40000 ALTER TABLE `observationsitems001wb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `observationsitems001wb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `orderitem001mb`
+--
+
+DROP TABLE IF EXISTS `orderitem001mb`;
+CREATE TABLE `orderitem001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `itemcode` varchar(250) NOT NULL,
+  `itemname` varchar(250) NOT NULL,
+  `descrip` varchar(250) NOT NULL,
+  `qunty` varchar(250) NOT NULL,
+  `unitamount` int(50) NOT NULL,
+  `uom` varchar(250) NOT NULL,
+  `gst` int(50) NOT NULL,
+  `hsn` varchar(250) NOT NULL,
+  `location` varchar(250) NOT NULL,
+  `mslevel` varchar(250) NOT NULL,
+  `orderlevel` varchar(250) NOT NULL,
+  `leadtime` varchar(250) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `orderitem001mb`
+--
+
+/*!40000 ALTER TABLE `orderitem001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `orderitem001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `orderitem001wb`
+--
+
+DROP TABLE IF EXISTS `orderitem001wb`;
+CREATE TABLE `orderitem001wb` (
+  `sl_no` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `purchaseslno` int(11) DEFAULT NULL,
+  `itemcode` int(11) DEFAULT NULL,
+  `itemname` varchar(250) DEFAULT NULL,
+  `descrip` varchar(250) DEFAULT NULL,
+  `qunty` varchar(250) DEFAULT NULL,
+  `uom` varchar(250) DEFAULT NULL,
+  `unitrate` varchar(250) DEFAULT NULL,
+  `totalamount` int(50) DEFAULT NULL,
+  `hsn` varchar(250) DEFAULT NULL,
+  `cucode` int(11) DEFAULT NULL,
+  `cuname` varchar(250) DEFAULT NULL,
+  `cudescrip` varchar(250) DEFAULT NULL,
+  `cuqunty` varchar(250) DEFAULT NULL,
+  `cuom` varchar(250) DEFAULT NULL,
+  `cunitrate` varchar(250) DEFAULT NULL,
+  `cutotalamount` int(50) DEFAULT NULL,
+  `chsn` varchar(250) DEFAULT NULL,
+  `cptcode` int(11) DEFAULT NULL,
+  `cptname` varchar(250) DEFAULT NULL,
+  `cptdescrip` varchar(250) DEFAULT NULL,
+  `cptqunty` varchar(250) DEFAULT NULL,
+  `cptuom` varchar(250) DEFAULT NULL,
+  `cptunitrate` varchar(250) DEFAULT NULL,
+  `cpttotalamount` int(50) DEFAULT NULL,
+  `cpthsn` varchar(250) DEFAULT NULL,
+  `prtcode` int(11) DEFAULT NULL,
+  `prtmname` varchar(250) DEFAULT NULL,
+  `prtdescrip` varchar(250) DEFAULT NULL,
+  `prtqunty` varchar(250) DEFAULT NULL,
+  `prtuom` varchar(250) DEFAULT NULL,
+  `prtunitrate` varchar(250) DEFAULT NULL,
+  `prttotalamount` int(50) DEFAULT NULL,
+  `prthsn` varchar(250) DEFAULT NULL,
+  `insert_user` varchar(40) DEFAULT NULL,
+  `insert_datetime` datetime DEFAULT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `purchaseslno` (`purchaseslno`),
+  CONSTRAINT `orderitem001wb_ibfk_1` FOREIGN KEY (`purchaseslno`) REFERENCES `purchaseorder001wb` (`sl_no`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `orderitem001wb`
+--
+
+/*!40000 ALTER TABLE `orderitem001wb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `orderitem001wb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `orderitemspecification001wb`
+--
+
+DROP TABLE IF EXISTS `orderitemspecification001wb`;
+CREATE TABLE `orderitemspecification001wb` (
+  `sl_no` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `itemslno` int(11) DEFAULT NULL,
+  `parameter` varchar(200) NOT NULL,
+  `specification` varchar(200) NOT NULL,
+  `inspecmethod` varchar(200) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `itemslno` (`itemslno`),
+  CONSTRAINT `orderitemspecification001wb_ibfk_1` FOREIGN KEY (`itemslno`) REFERENCES `orderitem001mb` (`sl_no`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `orderitemspecification001wb`
+--
+
+/*!40000 ALTER TABLE `orderitemspecification001wb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `orderitemspecification001wb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `part001mb`
+--
+
+DROP TABLE IF EXISTS `part001mb`;
+CREATE TABLE `part001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `partno` varchar(200) NOT NULL,
+  `partname` varchar(200) NOT NULL,
+  `splan` varchar(200) NOT NULL,
+  `descrip` varchar(250) NOT NULL,
+  `qunty` varchar(250) NOT NULL,
+  `unitamount` int(50) NOT NULL,
+  `uom` varchar(250) NOT NULL,
+  `gst` int(50) NOT NULL,
+  `hsn` varchar(250) NOT NULL,
+  `location` varchar(250) NOT NULL,
+  `mslevel` varchar(250) NOT NULL,
+  `orderlevel` varchar(250) NOT NULL,
+  `leadtime` varchar(250) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `part001mb`
+--
+
+/*!40000 ALTER TABLE `part001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `part001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `partitem001wb`
+--
+
+DROP TABLE IF EXISTS `partitem001wb`;
+CREATE TABLE `partitem001wb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `partitemsl_no` smallint(5) unsigned DEFAULT NULL,
+  `prtcode` int(11) DEFAULT NULL,
+  `prtmname` varchar(250) DEFAULT NULL,
+  `prtdescrip` varchar(250) DEFAULT NULL,
+  `prtqunty` varchar(250) DEFAULT NULL,
+  `prthsn` varchar(250) DEFAULT NULL,
+  `prtuom` varchar(250) DEFAULT NULL,
+  `prtunitrate` varchar(250) DEFAULT NULL,
+  `prttotalamount` int(50) DEFAULT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `partitemsl_no` (`partitemsl_no`),
+  KEY `prtcode` (`prtcode`),
+  CONSTRAINT `partitem001wb_ibfk_1` FOREIGN KEY (`partitemsl_no`) REFERENCES `salesquotation001wb` (`sl_no`) ON DELETE CASCADE,
+  CONSTRAINT `partitem001wb_ibfk_2` FOREIGN KEY (`prtcode`) REFERENCES `part001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `partitem001wb`
+--
+
+/*!40000 ALTER TABLE `partitem001wb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `partitem001wb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `partspecific001wb`
+--
+
+DROP TABLE IF EXISTS `partspecific001wb`;
+CREATE TABLE `partspecific001wb` (
+  `sl_no` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `partslno` int(11) DEFAULT NULL,
+  `parameter` varchar(200) NOT NULL,
+  `specification` varchar(200) NOT NULL,
+  `inspecmethod` varchar(200) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `partslno` (`partslno`),
+  CONSTRAINT `partspecific001wb_ibfk_1` FOREIGN KEY (`partslno`) REFERENCES `part001mb` (`sl_no`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `partspecific001wb`
+--
+
+/*!40000 ALTER TABLE `partspecific001wb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `partspecific001wb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `payment001wb`
+--
+
+DROP TABLE IF EXISTS `payment001wb`;
+CREATE TABLE `payment001wb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `date` datetime NOT NULL,
+  `tAmount` int(100) NOT NULL,
+  `paidAmount` int(200) NOT NULL,
+  `outAmount` int(200) NOT NULL,
+  `modeofPay` varchar(200) NOT NULL,
+  `chequeNo` varchar(200) NOT NULL,
+  `payIdno` varchar(200) NOT NULL,
+  `status` varchar(200) NOT NULL,
+  `dueDate` datetime NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `payment001wb`
+--
+
+/*!40000 ALTER TABLE `payment001wb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `payment001wb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `person001mb`
+--
+
+DROP TABLE IF EXISTS `person001mb`;
+CREATE TABLE `person001mb` (
+  `person_id` int(11) NOT NULL AUTO_INCREMENT,
+  `firstname` varchar(45) NOT NULL,
+  `lastname` varchar(45) NOT NULL,
+  `age` int(11) DEFAULT NULL,
+  `dob` datetime DEFAULT NULL,
+  `sex` varchar(30) DEFAULT NULL,
+  `maritalstatus` varchar(30) DEFAULT NULL,
+  `bloodgroup` varchar(30) DEFAULT NULL,
+  `address1` varchar(50) DEFAULT NULL,
+  `address2` varchar(50) DEFAULT NULL,
+  `address3` varchar(50) DEFAULT NULL,
+  `religion` varchar(30) DEFAULT NULL,
+  `city` varchar(30) DEFAULT NULL,
+  `state` varchar(30) DEFAULT NULL,
+  `country` varchar(30) DEFAULT NULL,
+  `zipcode` int(11) DEFAULT NULL,
+  `mobileno` int(15) DEFAULT NULL,
+  `workphoneno` int(11) DEFAULT NULL,
+  `homephoneno` int(11) DEFAULT NULL,
+  `primaryemail` varchar(30) DEFAULT NULL,
+  `secondaryemail` varchar(30) DEFAULT NULL,
+  `occupationtype` varchar(30) DEFAULT NULL,
+  `occupationrole` varchar(30) DEFAULT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`person_id`),
+  UNIQUE KEY `UNI_firstname` (`firstname`),
+  UNIQUE KEY `UNI_lastname` (`lastname`),
+  UNIQUE KEY `UNI_dob` (`dob`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `person001mb`
+--
+
+/*!40000 ALTER TABLE `person001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `person001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `preventiveaction001mb`
+--
+
+DROP TABLE IF EXISTS `preventiveaction001mb`;
+CREATE TABLE `preventiveaction001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `sslno` int(11) NOT NULL,
+  `rcslno` int(11) NOT NULL,
+  `name` varchar(250) NOT NULL,
+  `details` varchar(250) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `sslno` (`sslno`),
+  KEY `rcslno` (`rcslno`),
+  CONSTRAINT `preventiveaction001mb_ibfk_1` FOREIGN KEY (`sslno`) REFERENCES `status001mb` (`sl_no`) ON DELETE CASCADE,
+  CONSTRAINT `preventiveaction001mb_ibfk_2` FOREIGN KEY (`rcslno`) REFERENCES `rootcause001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `preventiveaction001mb`
+--
+
+/*!40000 ALTER TABLE `preventiveaction001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `preventiveaction001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `preventivechecklist001wb`
+--
+
+DROP TABLE IF EXISTS `preventivechecklist001wb`;
+CREATE TABLE `preventivechecklist001wb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `mslno` int(11) NOT NULL,
+  `cpslno` int(11) NOT NULL,
+  `checkpointdate` datetime NOT NULL,
+  `observation` varchar(250) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `mslno` (`mslno`),
+  KEY `cpslno` (`cpslno`),
+  CONSTRAINT `preventivechecklist001wb_ibfk_1` FOREIGN KEY (`mslno`) REFERENCES `machine001mb` (`sl_no`) ON DELETE CASCADE,
+  CONSTRAINT `preventivechecklist001wb_ibfk_2` FOREIGN KEY (`cpslno`) REFERENCES `checklist001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `preventivechecklist001wb`
+--
+
+/*!40000 ALTER TABLE `preventivechecklist001wb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `preventivechecklist001wb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `preventiveplan001wb`
+--
+
+DROP TABLE IF EXISTS `preventiveplan001wb`;
+CREATE TABLE `preventiveplan001wb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `mslno` int(11) NOT NULL,
+  `status` char(1) NOT NULL,
+  `date` datetime NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `mslno` (`mslno`),
+  CONSTRAINT `preventiveplan001wb_ibfk_1` FOREIGN KEY (`mslno`) REFERENCES `machine001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `preventiveplan001wb`
+--
+
+/*!40000 ALTER TABLE `preventiveplan001wb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `preventiveplan001wb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `prod001mb`
+--
+
+DROP TABLE IF EXISTS `prod001mb`;
+CREATE TABLE `prod001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `proddno` varchar(50) NOT NULL,
+  `proddname` varchar(250) NOT NULL,
+  `catno` varchar(250) NOT NULL,
+  `drawingno` varchar(250) NOT NULL,
+  `cusdetails` varchar(250) NOT NULL,
+  `remarks` varchar(250) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `prod001mb`
+--
+
+/*!40000 ALTER TABLE `prod001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `prod001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `purchaseable001mb`
+--
+
+DROP TABLE IF EXISTS `purchaseable001mb`;
+CREATE TABLE `purchaseable001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `purscode` varchar(500) NOT NULL,
+  `pursname` varchar(500) NOT NULL,
+  `descrip` varchar(500) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `purchaseable001mb`
+--
+
+/*!40000 ALTER TABLE `purchaseable001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `purchaseable001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `purchaseinvoiceitems001wb`
+--
+
+DROP TABLE IF EXISTS `purchaseinvoiceitems001wb`;
+CREATE TABLE `purchaseinvoiceitems001wb` (
+  `sl_no` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `purchaseslno` int(20) DEFAULT NULL,
+  `itemcode` int(20) DEFAULT NULL,
+  `itemname` varchar(250) DEFAULT NULL,
+  `descrip` varchar(250) DEFAULT NULL,
+  `qunty` varchar(250) DEFAULT NULL,
+  `uom` varchar(250) DEFAULT NULL,
+  `hsn` varchar(250) DEFAULT NULL,
+  `unitrate` varchar(250) DEFAULT NULL,
+  `totalamount` int(50) DEFAULT NULL,
+  `cucode` int(11) DEFAULT NULL,
+  `cuname` varchar(250) DEFAULT NULL,
+  `cudescrip` varchar(250) DEFAULT NULL,
+  `cuqunty` varchar(250) DEFAULT NULL,
+  `cuom` varchar(250) DEFAULT NULL,
+  `chsn` varchar(250) DEFAULT NULL,
+  `cunitrate` varchar(250) DEFAULT NULL,
+  `cutotalamount` int(50) DEFAULT NULL,
+  `cptcode` int(11) DEFAULT NULL,
+  `cptname` varchar(250) DEFAULT NULL,
+  `cptdescrip` varchar(250) DEFAULT NULL,
+  `cptqunty` varchar(250) DEFAULT NULL,
+  `cptuom` varchar(250) DEFAULT NULL,
+  `cpthsn` varchar(250) DEFAULT NULL,
+  `cptunitrate` varchar(250) DEFAULT NULL,
+  `cpttotalamount` int(50) DEFAULT NULL,
+  `prtcode` int(11) DEFAULT NULL,
+  `prtmname` varchar(250) DEFAULT NULL,
+  `prtdescrip` varchar(250) DEFAULT NULL,
+  `prtqunty` varchar(250) DEFAULT NULL,
+  `prtuom` varchar(250) DEFAULT NULL,
+  `prthsn` varchar(250) DEFAULT NULL,
+  `prtunitrate` varchar(250) DEFAULT NULL,
+  `prttotalamount` int(50) DEFAULT NULL,
+  `insert_user` varchar(40) DEFAULT NULL,
+  `insert_datetime` datetime DEFAULT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `purchaseslno` (`purchaseslno`),
+  CONSTRAINT `purchaseinvoiceitems001wb_ibfk_1` FOREIGN KEY (`purchaseslno`) REFERENCES `purchaseinvoicepay001wb` (`sl_no`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `purchaseinvoiceitems001wb`
+--
+
+/*!40000 ALTER TABLE `purchaseinvoiceitems001wb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `purchaseinvoiceitems001wb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `purchaseinvoicepay001wb`
+--
+
+DROP TABLE IF EXISTS `purchaseinvoicepay001wb`;
+CREATE TABLE `purchaseinvoicepay001wb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `cDate` datetime NOT NULL,
+  `po_slno` int(20) NOT NULL,
+  `prsNo` int(20) DEFAULT NULL,
+  `grnNo` int(20) DEFAULT NULL,
+  `suppliercode` int(20) DEFAULT NULL,
+  `suppliername` varchar(50) DEFAULT NULL,
+  `purchaseInvoice` varchar(50) DEFAULT NULL,
+  `reqDate` datetime NOT NULL,
+  `incomingNo` varchar(50) DEFAULT NULL,
+  `status` varchar(200) DEFAULT NULL,
+  `remarks` varchar(200) DEFAULT NULL,
+  `filename` varchar(200) DEFAULT NULL,
+  `originalfilename` varchar(200) DEFAULT NULL,
+  `filepath` varchar(200) DEFAULT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `po_slno` (`po_slno`),
+  CONSTRAINT `purchaseinvoicepay001wb_ibfk_1` FOREIGN KEY (`po_slno`) REFERENCES `purchaseorder001wb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `purchaseinvoicepay001wb`
+--
+
+/*!40000 ALTER TABLE `purchaseinvoicepay001wb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `purchaseinvoicepay001wb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `purchaseorder001wb`
+--
+
+DROP TABLE IF EXISTS `purchaseorder001wb`;
+CREATE TABLE `purchaseorder001wb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `suplier_slno` int(15) NOT NULL,
+  `suplierName` varchar(50) NOT NULL,
+  `suplieraddress` varchar(50) NOT NULL,
+  `pono` varchar(50) NOT NULL,
+  `date` datetime NOT NULL,
+  `prsno` int(11) DEFAULT NULL,
+  `qno` varchar(50) NOT NULL,
+  `dispatch_through` varchar(50) DEFAULT NULL,
+  `destination` varchar(50) NOT NULL,
+  `terms_delivery` varchar(100) NOT NULL,
+  `supplier_from` varchar(150) NOT NULL,
+  `due_on` datetime NOT NULL,
+  `status_slno` int(15) DEFAULT NULL,
+  `remarks` varchar(200) DEFAULT NULL,
+  `tAmount` int(11) DEFAULT NULL,
+  `tWords` varchar(200) DEFAULT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  `status` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `suplier_slno` (`suplier_slno`),
+  CONSTRAINT `purchaseorder001wb_ibfk_1` FOREIGN KEY (`suplier_slno`) REFERENCES `supplierquotation001wb` (`sl_no`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `purchaseorder001wb`
+--
+
+/*!40000 ALTER TABLE `purchaseorder001wb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `purchaseorder001wb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `purchasereqitem001wb`
+--
+
+DROP TABLE IF EXISTS `purchasereqitem001wb`;
+CREATE TABLE `purchasereqitem001wb` (
+  `sl_no` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `prslno` int(11) DEFAULT NULL,
+  `orderslno` int(11) DEFAULT NULL,
+  `itemname` varchar(250) DEFAULT NULL,
+  `descrip` varchar(250) DEFAULT NULL,
+  `qunty` varchar(250) DEFAULT NULL,
+  `uom` varchar(250) DEFAULT NULL,
+  `unitrate` varchar(250) DEFAULT NULL,
+  `totalamount` int(50) DEFAULT NULL,
+  `cucode` int(11) DEFAULT NULL,
+  `cuname` varchar(250) DEFAULT NULL,
+  `cudescrip` varchar(250) DEFAULT NULL,
+  `cuqunty` varchar(250) DEFAULT NULL,
+  `cuom` varchar(250) DEFAULT NULL,
+  `cunitrate` varchar(250) DEFAULT NULL,
+  `cutotalamount` int(50) DEFAULT NULL,
+  `cptcode` int(11) DEFAULT NULL,
+  `cptname` varchar(250) DEFAULT NULL,
+  `cptdescrip` varchar(250) DEFAULT NULL,
+  `cptqunty` varchar(250) DEFAULT NULL,
+  `cptuom` varchar(250) DEFAULT NULL,
+  `cptunitrate` varchar(250) DEFAULT NULL,
+  `cpttotalamount` int(50) DEFAULT NULL,
+  `prtcode` int(11) DEFAULT NULL,
+  `prtmname` varchar(250) DEFAULT NULL,
+  `prtdescrip` varchar(250) DEFAULT NULL,
+  `prtqunty` varchar(250) DEFAULT NULL,
+  `prtuom` varchar(250) DEFAULT NULL,
+  `prtunitrate` varchar(250) DEFAULT NULL,
+  `prttotalamount` int(50) DEFAULT NULL,
+  `hsn` varchar(250) DEFAULT NULL,
+  `chsn` varchar(250) DEFAULT NULL,
+  `cpthsn` varchar(250) DEFAULT NULL,
+  `prthsn` varchar(250) DEFAULT NULL,
+  `insert_user` varchar(40) DEFAULT NULL,
+  `insert_datetime` datetime DEFAULT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `prslno` (`prslno`),
+  KEY `orderslno` (`orderslno`),
+  KEY `cucode` (`cucode`),
+  KEY `cptcode` (`cptcode`),
+  KEY `prtcode` (`prtcode`),
+  CONSTRAINT `purchasereqitem001wb_ibfk_1` FOREIGN KEY (`prslno`) REFERENCES `purchasereqslip001wb` (`sl_no`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `purchasereqitem001wb_ibfk_2` FOREIGN KEY (`orderslno`) REFERENCES `orderitem001mb` (`sl_no`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `purchasereqitem001wb_ibfk_3` FOREIGN KEY (`cucode`) REFERENCES `consumble001mb` (`sl_no`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `purchasereqitem001wb_ibfk_4` FOREIGN KEY (`cptcode`) REFERENCES `childpart001mb` (`sl_no`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `purchasereqitem001wb_ibfk_5` FOREIGN KEY (`prtcode`) REFERENCES `part001mb` (`sl_no`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `purchasereqitem001wb`
+--
+
+/*!40000 ALTER TABLE `purchasereqitem001wb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `purchasereqitem001wb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `purchasereqslip001wb`
+--
+
+DROP TABLE IF EXISTS `purchasereqslip001wb`;
+CREATE TABLE `purchasereqslip001wb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `date` datetime NOT NULL,
+  `prs_no` varchar(30) NOT NULL,
+  `po_date` datetime NOT NULL,
+  `req_date` datetime NOT NULL,
+  `po_no` varchar(30) NOT NULL,
+  `remarks` varchar(100) NOT NULL,
+  `suppliertype` varchar(100) NOT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  `tAmount` int(11) DEFAULT NULL,
+  `tWords` varchar(200) DEFAULT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `purchasereqslip001wb`
+--
+
+/*!40000 ALTER TABLE `purchasereqslip001wb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `purchasereqslip001wb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `rawmaterialinspection001wb`
+--
+
+DROP TABLE IF EXISTS `rawmaterialinspection001wb`;
+CREATE TABLE `rawmaterialinspection001wb` (
+  `sl_no` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `rawmaterialslno` int(11) DEFAULT NULL,
+  `itemcode` int(11) DEFAULT NULL,
+  `itemname` varchar(250) DEFAULT NULL,
+  `descrip` varchar(250) DEFAULT NULL,
+  `qunty` int(11) DEFAULT NULL,
+  `received_qty` int(30) DEFAULT NULL,
+  `accepted_qty` int(30) DEFAULT NULL,
+  `acceptedsum` int(11) DEFAULT NULL,
+  `rejected_qty` int(30) DEFAULT NULL,
+  `rejectesum` int(15) DEFAULT NULL,
+  `closing` int(20) DEFAULT NULL,
+  `outstanding` int(30) DEFAULT NULL,
+  `cucode` int(11) DEFAULT NULL,
+  `cuname` varchar(250) DEFAULT NULL,
+  `cudescrip` varchar(250) DEFAULT NULL,
+  `cuqunty` int(11) DEFAULT NULL,
+  `cureceived_qty` int(30) DEFAULT NULL,
+  `cuaccepted_qty` int(30) DEFAULT NULL,
+  `cucolsing` int(15) DEFAULT NULL,
+  `cuacceptedsum` int(15) DEFAULT NULL,
+  `curejected_qty` int(30) DEFAULT NULL,
+  `curejectesum` int(15) DEFAULT NULL,
+  `cuoutstanding` int(30) DEFAULT NULL,
+  `cptcode` int(11) DEFAULT NULL,
+  `cptname` varchar(250) DEFAULT NULL,
+  `cptdescrip` varchar(250) DEFAULT NULL,
+  `cptqunty` int(11) DEFAULT NULL,
+  `cptreceived_qty` int(30) DEFAULT NULL,
+  `cptaccepted_qty` int(30) DEFAULT NULL,
+  `cptcolsing` int(15) DEFAULT NULL,
+  `cptacceptedsum` int(15) DEFAULT NULL,
+  `cptrejected_qty` int(30) DEFAULT NULL,
+  `cptrejectesum` int(15) DEFAULT NULL,
+  `cptoutstanding` int(30) DEFAULT NULL,
+  `prtcode` int(11) DEFAULT NULL,
+  `prtname` varchar(250) DEFAULT NULL,
+  `prtdescrip` varchar(250) DEFAULT NULL,
+  `prtqunty` int(11) DEFAULT NULL,
+  `prtreceived_qty` int(30) DEFAULT NULL,
+  `prtaccepted_qty` int(30) DEFAULT NULL,
+  `prtcolsing` int(15) DEFAULT NULL,
+  `prtacceptedsum` int(15) DEFAULT NULL,
+  `prtrejected_qty` int(30) DEFAULT NULL,
+  `prtrejectesum` int(15) DEFAULT NULL,
+  `prtoutstanding` int(30) DEFAULT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `rawmaterialslno` (`rawmaterialslno`),
+  KEY `itemcode` (`itemcode`),
+  KEY `cucode` (`cucode`),
+  KEY `cptcode` (`cptcode`),
+  KEY `prtcode` (`prtcode`),
+  CONSTRAINT `rawmaterialinspection001wb_ibfk_1` FOREIGN KEY (`rawmaterialslno`) REFERENCES `materialinspection001wb` (`sl_no`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `rawmaterialinspection001wb_ibfk_2` FOREIGN KEY (`itemcode`) REFERENCES `orderitem001mb` (`sl_no`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `rawmaterialinspection001wb_ibfk_3` FOREIGN KEY (`cucode`) REFERENCES `consumble001mb` (`sl_no`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `rawmaterialinspection001wb_ibfk_4` FOREIGN KEY (`cptcode`) REFERENCES `childpart001mb` (`sl_no`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `rawmaterialinspection001wb_ibfk_5` FOREIGN KEY (`prtcode`) REFERENCES `part001mb` (`sl_no`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `rawmaterialinspection001wb`
+--
+
+/*!40000 ALTER TABLE `rawmaterialinspection001wb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `rawmaterialinspection001wb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `registration001mb`
+--
+
+DROP TABLE IF EXISTS `registration001mb`;
+CREATE TABLE `registration001mb` (
+  `registerid` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `firstname` varchar(45) NOT NULL,
+  `lastname` varchar(45) NOT NULL,
+  `domain` varchar(30) NOT NULL,
+  `username` varchar(45) NOT NULL,
+  `securityquestion` varchar(100) NOT NULL,
+  `securityanswer` varchar(45) NOT NULL,
+  `message` varchar(200) DEFAULT NULL,
+  `status` varchar(45) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`registerid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `registration001mb`
+--
+
+/*!40000 ALTER TABLE `registration001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `registration001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `returnstock001wb`
+--
+
+DROP TABLE IF EXISTS `returnstock001wb`;
+CREATE TABLE `returnstock001wb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `date` datetime DEFAULT NULL,
+  `time` varchar(50) DEFAULT NULL,
+  `paidamount` int(50) DEFAULT NULL,
+  `dispatch` varchar(250) DEFAULT NULL,
+  `vichleno` varchar(250) DEFAULT NULL,
+  `personname` varchar(250) DEFAULT NULL,
+  `mobilenumber` varchar(10) DEFAULT NULL,
+  `status` varchar(250) DEFAULT NULL,
+  `referenceid` varchar(150) DEFAULT NULL,
+  `ordernumber` int(11) DEFAULT NULL,
+  `rejectitems` int(50) DEFAULT NULL,
+  `cudate` datetime DEFAULT NULL,
+  `cutime` varchar(50) DEFAULT NULL,
+  `cupaidamount` int(50) DEFAULT NULL,
+  `cudispatch` varchar(250) DEFAULT NULL,
+  `cuvichleno` varchar(250) DEFAULT NULL,
+  `cupersonname` varchar(250) DEFAULT NULL,
+  `cumobilenumber` varchar(10) DEFAULT NULL,
+  `custatus` varchar(250) DEFAULT NULL,
+  `cureferenceid` varchar(150) DEFAULT NULL,
+  `cuordernumber` int(11) DEFAULT NULL,
+  `curejectitems` int(50) DEFAULT NULL,
+  `cptdate` datetime DEFAULT NULL,
+  `cpttime` varchar(50) DEFAULT NULL,
+  `cptpaidamount` int(50) DEFAULT NULL,
+  `cptdispatch` varchar(250) DEFAULT NULL,
+  `cptvichleno` varchar(250) DEFAULT NULL,
+  `cptpersonname` varchar(250) DEFAULT NULL,
+  `cptmobilenumber` varchar(10) DEFAULT NULL,
+  `cptstatus` varchar(250) DEFAULT NULL,
+  `cptreferenceid` varchar(150) DEFAULT NULL,
+  `childpartnumber` int(11) DEFAULT NULL,
+  `cptrejectitems` int(50) DEFAULT NULL,
+  `prtdate` datetime DEFAULT NULL,
+  `prttime` varchar(50) DEFAULT NULL,
+  `prtpaidamount` int(50) DEFAULT NULL,
+  `prtdispatch` varchar(250) DEFAULT NULL,
+  `prtvichleno` varchar(250) DEFAULT NULL,
+  `prtpersonname` varchar(250) DEFAULT NULL,
+  `prtmobilenumber` varchar(10) DEFAULT NULL,
+  `prtstatus` varchar(250) DEFAULT NULL,
+  `prtreferenceid` varchar(150) DEFAULT NULL,
+  `partnumber` int(11) DEFAULT NULL,
+  `prtrejectitems` int(50) DEFAULT NULL,
+  `insert_user` varchar(40) DEFAULT NULL,
+  `insert_datetime` datetime DEFAULT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `returnstock001wb`
+--
+
+/*!40000 ALTER TABLE `returnstock001wb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `returnstock001wb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `role001mb`
+--
+
+DROP TABLE IF EXISTS `role001mb`;
+CREATE TABLE `role001mb` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `rolename` varchar(40) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `role001mb`
+--
+
+/*!40000 ALTER TABLE `role001mb` DISABLE KEYS */;
+INSERT INTO `role001mb` (`id`,`unitslno`,`rolename`,`insert_user`,`insert_datetime`,`updated_user`,`updated_datetime`) VALUES 
+ (1,1,'superadmin','siva','2021-09-06 13:18:33','siva','2021-09-06 13:18:33'),
+ (2,1,'admin','siva','2021-09-06 13:18:33','siva','2021-09-06 13:18:33'),
+ (3,1,'user','siva','2021-09-06 13:18:33','siva','2021-09-06 13:18:33'),
+ (4,1,'guest','siva','2021-09-06 13:18:33','siva','2021-09-06 13:18:33');
+/*!40000 ALTER TABLE `role001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `rootcause001mb`
+--
+
+DROP TABLE IF EXISTS `rootcause001mb`;
+CREATE TABLE `rootcause001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `sslno` int(11) NOT NULL,
+  `brslno` int(11) NOT NULL,
+  `name` varchar(250) NOT NULL,
+  `details` varchar(250) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `sslno` (`sslno`),
+  KEY `brslno` (`brslno`),
+  CONSTRAINT `rootcause001mb_ibfk_1` FOREIGN KEY (`sslno`) REFERENCES `status001mb` (`sl_no`) ON DELETE CASCADE,
+  CONSTRAINT `rootcause001mb_ibfk_2` FOREIGN KEY (`brslno`) REFERENCES `breakdown001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `rootcause001mb`
+--
+
+/*!40000 ALTER TABLE `rootcause001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `rootcause001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `safetyequwb001`
+--
+
+DROP TABLE IF EXISTS `safetyequwb001`;
+CREATE TABLE `safetyequwb001` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `seNo` varchar(200) NOT NULL,
+  `pur` varchar(100) NOT NULL,
+  `stock` varchar(100) NOT NULL,
+  `remark` varchar(100) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `safetyequwb001`
+--
+
+/*!40000 ALTER TABLE `safetyequwb001` DISABLE KEYS */;
+/*!40000 ALTER TABLE `safetyequwb001` ENABLE KEYS */;
+
+
+--
+-- Definition of table `sales001mb`
+--
+
+DROP TABLE IF EXISTS `sales001mb`;
+CREATE TABLE `sales001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `procode` varchar(250) NOT NULL,
+  `proname` varchar(250) NOT NULL,
+  `prodescrip` varchar(250) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `sales001mb`
+--
+
+/*!40000 ALTER TABLE `sales001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `sales001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `salesinvoice001wb`
+--
+
+DROP TABLE IF EXISTS `salesinvoice001wb`;
+CREATE TABLE `salesinvoice001wb` (
+  `sl_no` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `custmr_slno` int(15) NOT NULL,
+  `sInvoice` varchar(100) NOT NULL,
+  `cDate` datetime NOT NULL,
+  `custemer_code` varchar(100) NOT NULL,
+  `consignee` varchar(50) NOT NULL,
+  `date` datetime NOT NULL,
+  `pono` varchar(50) NOT NULL,
+  `refno` varchar(50) DEFAULT NULL,
+  `other_ref` varchar(50) NOT NULL,
+  `dispatch_through` varchar(50) NOT NULL,
+  `destination` varchar(50) NOT NULL,
+  `terms_delivery` varchar(100) NOT NULL,
+  `supplier_from` varchar(150) NOT NULL,
+  `HSN` varchar(50) NOT NULL,
+  `due_on` datetime NOT NULL,
+  `status_slno` int(15) DEFAULT NULL,
+  `remarks` varchar(200) DEFAULT NULL,
+  `tAmount` int(11) DEFAULT NULL,
+  `tWords` varchar(200) DEFAULT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `custmr_slno` (`custmr_slno`),
+  CONSTRAINT `salesinvoice001wb_ibfk_1` FOREIGN KEY (`custmr_slno`) REFERENCES `custemerregistration001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `salesinvoice001wb`
+--
+
+/*!40000 ALTER TABLE `salesinvoice001wb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `salesinvoice001wb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `salesitem001mb`
+--
+
+DROP TABLE IF EXISTS `salesitem001mb`;
+CREATE TABLE `salesitem001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `procode` varchar(250) NOT NULL,
+  `proname` varchar(250) NOT NULL,
+  `prodescrip` varchar(250) NOT NULL,
+  `proqunty` varchar(250) NOT NULL,
+  `prounitamount` int(50) NOT NULL,
+  `prouom` varchar(250) NOT NULL,
+  `progst` int(50) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `salesitem001mb`
+--
+
+/*!40000 ALTER TABLE `salesitem001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `salesitem001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `salesorder001wb`
+--
+
+DROP TABLE IF EXISTS `salesorder001wb`;
+CREATE TABLE `salesorder001wb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `porder_slno` int(11) NOT NULL,
+  `invoice_no` varchar(50) NOT NULL,
+  `date` date NOT NULL,
+  `delivery_note` varchar(100) NOT NULL,
+  `mode_pay` varchar(50) NOT NULL,
+  `Ref_no_date` varchar(50) NOT NULL,
+  `other_ref` varchar(50) NOT NULL,
+  `buyer_order_no` varchar(50) NOT NULL,
+  `buyer_date` date NOT NULL,
+  `dispatch_doc_no` varchar(50) NOT NULL,
+  `delivery_note_date` varchar(50) NOT NULL,
+  `dispatch_through` varchar(50) NOT NULL,
+  `destination` varchar(50) NOT NULL,
+  `bill_of_lading` varchar(50) NOT NULL,
+  `motorvehicle_no` varchar(50) NOT NULL,
+  `terms_delivery` varchar(100) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `salesorder001wb`
+--
+
+/*!40000 ALTER TABLE `salesorder001wb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `salesorder001wb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `salesquotation001wb`
+--
+
+DROP TABLE IF EXISTS `salesquotation001wb`;
+CREATE TABLE `salesquotation001wb` (
+  `sl_no` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `custmr_slno` int(15) DEFAULT NULL,
+  `sInvoice` varchar(100) NOT NULL,
+  `cDate` datetime NOT NULL,
+  `custemer_code` varchar(100) NOT NULL,
+  `consignee` varchar(50) NOT NULL,
+  `date` datetime NOT NULL,
+  `pono` varchar(50) NOT NULL,
+  `refno` varchar(50) DEFAULT NULL,
+  `other_ref` varchar(50) NOT NULL,
+  `dispatch_through` varchar(50) NOT NULL,
+  `destination` varchar(50) NOT NULL,
+  `terms_delivery` varchar(100) NOT NULL,
+  `supplier_from` varchar(150) NOT NULL,
+  `HSN` varchar(50) NOT NULL,
+  `due_on` datetime NOT NULL,
+  `status_slno` int(15) DEFAULT NULL,
+  `remarks` varchar(200) DEFAULT NULL,
+  `tAmount` int(11) DEFAULT NULL,
+  `tWords` varchar(200) DEFAULT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `custmr_slno` (`custmr_slno`),
+  CONSTRAINT `salesquotation001wb_ibfk_1` FOREIGN KEY (`custmr_slno`) REFERENCES `custemerregistration001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `salesquotation001wb`
+--
+
+/*!40000 ALTER TABLE `salesquotation001wb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `salesquotation001wb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `spares001mb`
+--
+
+DROP TABLE IF EXISTS `spares001mb`;
+CREATE TABLE `spares001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `msslno` int(11) NOT NULL,
+  `sslno` int(11) NOT NULL,
+  `spares` varchar(50) NOT NULL,
+  `sparescost` int(11) DEFAULT NULL,
+  `specification` varchar(50) NOT NULL,
+  `leadtime` varchar(255) DEFAULT NULL,
+  `minimumstocklevel` int(11) DEFAULT '0',
+  `reorderlevel` int(11) DEFAULT '0',
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `msslno` (`msslno`),
+  KEY `sslno` (`sslno`),
+  CONSTRAINT `spares001mb_ibfk_1` FOREIGN KEY (`msslno`) REFERENCES `machine001mb` (`sl_no`) ON DELETE CASCADE,
+  CONSTRAINT `spares001mb_ibfk_2` FOREIGN KEY (`sslno`) REFERENCES `status001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `spares001mb`
+--
+
+/*!40000 ALTER TABLE `spares001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `spares001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `staff001mb`
+--
+
+DROP TABLE IF EXISTS `staff001mb`;
+CREATE TABLE `staff001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `staff_code` varchar(100) NOT NULL,
+  `status` char(100) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `staff001mb`
+--
+
+/*!40000 ALTER TABLE `staff001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `staff001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `status001mb`
+--
+
+DROP TABLE IF EXISTS `status001mb`;
+CREATE TABLE `status001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `code_group` int(11) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  `status` char(5) DEFAULT NULL,
+  `name` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`sl_no`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `status001mb`
+--
+
+/*!40000 ALTER TABLE `status001mb` DISABLE KEYS */;
+INSERT INTO `status001mb` (`sl_no`,`unitslno`,`code_group`,`insert_user`,`insert_datetime`,`updated_user`,`updated_datetime`,`status`,`name`) VALUES 
+ (1,1,1,'Moorthy','2021-09-06 13:18:33','setmt1','2022-07-19 19:00:45','A','Approved'),
+ (2,1,1,'Moorthy','2021-09-06 13:18:33','setmt1','2022-07-19 19:00:51','PA','Partially Approved'),
+ (4,1,1,'Aravinth','2022-01-04 17:28:03','u1tms1','2022-09-07 11:18:28','H','Hold'),
+ (5,1,1,'Aravinth','2022-01-04 17:29:17','u1tms1','2022-09-07 11:18:15','R','Reject'),
+ (6,1,3,'Aravinth','2022-01-04 17:29:41','setmt1','2022-07-19 19:01:30','S','Submit'),
+ (7,1,3,'Aravinth','2022-01-04 17:30:07','setmt1','2022-07-19 19:01:43','SA','Save'),
+ (8,1,4,'setmt1','2022-08-03 15:44:30',NULL,NULL,'A','ACTIVE'),
+ (9,1,4,'setmt1','2022-08-03 15:45:23',NULL,NULL,'I','IN ACTIVE');
+/*!40000 ALTER TABLE `status001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `statutory001wb`
+--
+
+DROP TABLE IF EXISTS `statutory001wb`;
+CREATE TABLE `statutory001wb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `bslno` int(11) NOT NULL,
+  `ecode` varchar(50) NOT NULL,
+  `ename` varchar(50) NOT NULL,
+  `escheckbox` varchar(200) NOT NULL,
+  `esno` varchar(100) NOT NULL,
+  `escheme` varchar(100) NOT NULL,
+  `esstartdate` datetime NOT NULL,
+  `esenddate` datetime NOT NULL,
+  `pfcheckbox` varchar(200) NOT NULL,
+  `pfno` varchar(100) NOT NULL,
+  `pscheme` varchar(100) NOT NULL,
+  `pfstartdate` datetime NOT NULL,
+  `pfenddate` datetime NOT NULL,
+  `inscheckbox` varchar(200) NOT NULL,
+  `insurno` varchar(100) NOT NULL,
+  `inscheme` varchar(100) NOT NULL,
+  `instartdate` datetime NOT NULL,
+  `insenddate` datetime NOT NULL,
+  `medicheckbox` varchar(200) NOT NULL,
+  `mediclno` varchar(100) NOT NULL,
+  `mscheme` varchar(100) NOT NULL,
+  `mstartdate` datetime NOT NULL,
+  `menddate` datetime NOT NULL,
+  `bankcheckbox` varchar(200) NOT NULL,
+  `acholdername` varchar(100) NOT NULL,
+  `accno` varchar(100) NOT NULL,
+  `ifsccode` varchar(100) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `bslno` (`bslno`),
+  CONSTRAINT `statutory001wb_ibfk_1` FOREIGN KEY (`bslno`) REFERENCES `bank001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `statutory001wb`
+--
+
+/*!40000 ALTER TABLE `statutory001wb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `statutory001wb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `stock001wb`
+--
+
+DROP TABLE IF EXISTS `stock001wb`;
+CREATE TABLE `stock001wb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `cname` varchar(250) NOT NULL,
+  `proname` varchar(250) NOT NULL,
+  `recdate` datetime DEFAULT NULL,
+  `outdate` datetime DEFAULT NULL,
+  `loc` varchar(250) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `stock001wb`
+--
+
+/*!40000 ALTER TABLE `stock001wb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `stock001wb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `student`
+--
+
+DROP TABLE IF EXISTS `student`;
+CREATE TABLE `student` (
+  `StudentID` int(10) unsigned NOT NULL,
+  `unitslno` int(11) NOT NULL,
+  `FirstName` varchar(25) DEFAULT NULL,
+  `LastName` varchar(25) NOT NULL,
+  PRIMARY KEY (`StudentID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `student`
+--
+
+/*!40000 ALTER TABLE `student` DISABLE KEYS */;
+/*!40000 ALTER TABLE `student` ENABLE KEYS */;
+
+
+--
+-- Definition of table `suppchecklist001mb`
+--
+
+DROP TABLE IF EXISTS `suppchecklist001mb`;
+CREATE TABLE `suppchecklist001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `activitysl_no` int(11) NOT NULL,
+  `checkpoints_name` varchar(250) NOT NULL,
+  `status` char(1) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `activitysl_no` (`activitysl_no`),
+  CONSTRAINT `suppchecklist001mb_ibfk_1` FOREIGN KEY (`activitysl_no`) REFERENCES `activity001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `suppchecklist001mb`
+--
+
+/*!40000 ALTER TABLE `suppchecklist001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `suppchecklist001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `supplierassessment001wb`
+--
+
+DROP TABLE IF EXISTS `supplierassessment001wb`;
+CREATE TABLE `supplierassessment001wb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `supp_slno` int(11) NOT NULL,
+  `assess_slno` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `supp_slno` (`supp_slno`),
+  KEY `assess_slno` (`assess_slno`),
+  CONSTRAINT `supplierassessment001wb_ibfk_1` FOREIGN KEY (`supp_slno`) REFERENCES `supplierregistration001mb` (`sl_no`) ON DELETE CASCADE,
+  CONSTRAINT `supplierassessment001wb_ibfk_2` FOREIGN KEY (`assess_slno`) REFERENCES `assessmentcriteria001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `supplierassessment001wb`
+--
+
+/*!40000 ALTER TABLE `supplierassessment001wb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `supplierassessment001wb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `supplierattendancereport001wb`
+--
+
+DROP TABLE IF EXISTS `supplierattendancereport001wb`;
+CREATE TABLE `supplierattendancereport001wb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `supregsl_no` int(11) NOT NULL,
+  `trainingsl_no` int(11) NOT NULL,
+  `trainer_name` varchar(150) NOT NULL,
+  `trainee_name` varchar(150) NOT NULL,
+  `trainee_role` varchar(150) NOT NULL,
+  `attendancestatus` char(1) NOT NULL,
+  `date` datetime NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `supregsl_no` (`supregsl_no`),
+  KEY `trainingsl_no` (`trainingsl_no`),
+  CONSTRAINT `supplierattendancereport001wb_ibfk_1` FOREIGN KEY (`supregsl_no`) REFERENCES `supplierregistration001mb` (`sl_no`) ON DELETE CASCADE,
+  CONSTRAINT `supplierattendancereport001wb_ibfk_2` FOREIGN KEY (`trainingsl_no`) REFERENCES `trainingplan001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `supplierattendancereport001wb`
+--
+
+/*!40000 ALTER TABLE `supplierattendancereport001wb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `supplierattendancereport001wb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `supplieraudit001wb`
+--
+
+DROP TABLE IF EXISTS `supplieraudit001wb`;
+CREATE TABLE `supplieraudit001wb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `supregslno` int(11) NOT NULL,
+  `status` char(1) NOT NULL,
+  `date` datetime NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `supregslno` (`supregslno`),
+  CONSTRAINT `supplieraudit001wb_ibfk_1` FOREIGN KEY (`supregslno`) REFERENCES `supplierregistration001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `supplieraudit001wb`
+--
+
+/*!40000 ALTER TABLE `supplieraudit001wb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `supplieraudit001wb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `suppliercontact001wb`
+--
+
+DROP TABLE IF EXISTS `suppliercontact001wb`;
+CREATE TABLE `suppliercontact001wb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `suppliersl_no` int(50) DEFAULT NULL,
+  `pname` varchar(200) NOT NULL,
+  `designation` varchar(200) NOT NULL,
+  `department` varchar(200) NOT NULL,
+  `level` varchar(200) NOT NULL,
+  `altmnumber` varchar(15) DEFAULT NULL,
+  `mnumber` varchar(10) DEFAULT NULL,
+  `mailid` varchar(200) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `suppliersl_no` (`suppliersl_no`),
+  CONSTRAINT `suppliercontact001wb_ibfk_1` FOREIGN KEY (`suppliersl_no`) REFERENCES `supplierregistration001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `suppliercontact001wb`
+--
+
+/*!40000 ALTER TABLE `suppliercontact001wb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `suppliercontact001wb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `supplierquotation001wb`
+--
+
+DROP TABLE IF EXISTS `supplierquotation001wb`;
+CREATE TABLE `supplierquotation001wb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `supplier_slno` int(11) NOT NULL,
+  `supliername` varchar(150) NOT NULL,
+  `supliertype` varchar(150) NOT NULL,
+  `address` varchar(150) NOT NULL,
+  `quotation_no` varchar(150) NOT NULL,
+  `quotation_date` datetime NOT NULL,
+  `validity` datetime NOT NULL,
+  `prsno` int(11) DEFAULT NULL,
+  `person_name` int(11) DEFAULT NULL,
+  `desgnation` varchar(100) NOT NULL,
+  `level` varchar(30) NOT NULL,
+  `mnumber` varchar(10) DEFAULT NULL,
+  `mobile` varchar(15) DEFAULT NULL,
+  `department` varchar(30) NOT NULL,
+  `mailid` varchar(30) NOT NULL,
+  `tAmount` int(11) DEFAULT NULL,
+  `tWords` varchar(200) DEFAULT NULL,
+  `terms_condition` varchar(100) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  `status` varchar(200) DEFAULT NULL,
+  `remarks` varchar(200) DEFAULT NULL,
+  `filename` varchar(200) DEFAULT NULL,
+  `originalfilename` varchar(200) DEFAULT NULL,
+  `filepath` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `supplier_slno` (`supplier_slno`),
+  KEY `prsno` (`prsno`),
+  CONSTRAINT `supplierquotation001wb_ibfk_1` FOREIGN KEY (`supplier_slno`) REFERENCES `supplierregistration001mb` (`sl_no`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `supplierquotation001wb_ibfk_2` FOREIGN KEY (`prsno`) REFERENCES `purchasereqslip001wb` (`sl_no`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `supplierquotation001wb`
+--
+
+/*!40000 ALTER TABLE `supplierquotation001wb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `supplierquotation001wb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `supplierquotationitems001wb`
+--
+
+DROP TABLE IF EXISTS `supplierquotationitems001wb`;
+CREATE TABLE `supplierquotationitems001wb` (
+  `sl_no` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `suplierslno` int(11) DEFAULT NULL,
+  `itemcode` int(11) DEFAULT NULL,
+  `itemname` varchar(250) DEFAULT NULL,
+  `descrip` varchar(250) DEFAULT NULL,
+  `qunty` varchar(250) DEFAULT NULL,
+  `uom` varchar(250) DEFAULT NULL,
+  `unitrate` varchar(250) DEFAULT NULL,
+  `totalamount` int(50) DEFAULT NULL,
+  `cucode` int(11) DEFAULT NULL,
+  `cuname` varchar(250) DEFAULT NULL,
+  `cudescrip` varchar(250) DEFAULT NULL,
+  `cuqunty` varchar(250) DEFAULT NULL,
+  `cuom` varchar(250) DEFAULT NULL,
+  `cunitrate` varchar(250) DEFAULT NULL,
+  `cutotalamount` int(50) DEFAULT NULL,
+  `cptcode` int(11) DEFAULT NULL,
+  `cptname` varchar(250) DEFAULT NULL,
+  `cptdescrip` varchar(250) DEFAULT NULL,
+  `cptqunty` varchar(250) DEFAULT NULL,
+  `cptuom` varchar(250) DEFAULT NULL,
+  `cptunitrate` varchar(250) DEFAULT NULL,
+  `cpttotalamount` int(50) DEFAULT NULL,
+  `prtcode` int(11) DEFAULT NULL,
+  `prtmname` varchar(250) DEFAULT NULL,
+  `prtdescrip` varchar(250) DEFAULT NULL,
+  `prtqunty` varchar(250) DEFAULT NULL,
+  `prtuom` varchar(250) DEFAULT NULL,
+  `prtunitrate` varchar(250) DEFAULT NULL,
+  `prttotalamount` int(50) DEFAULT NULL,
+  `hsn` varchar(250) DEFAULT NULL,
+  `chsn` varchar(250) DEFAULT NULL,
+  `cpthsn` varchar(250) DEFAULT NULL,
+  `prthsn` varchar(250) DEFAULT NULL,
+  `insert_user` varchar(40) DEFAULT NULL,
+  `insert_datetime` datetime DEFAULT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `suplierslno` (`suplierslno`),
+  CONSTRAINT `supplierquotationitems001wb_ibfk_1` FOREIGN KEY (`suplierslno`) REFERENCES `supplierquotation001wb` (`sl_no`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `supplierquotationitems001wb`
+--
+
+/*!40000 ALTER TABLE `supplierquotationitems001wb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `supplierquotationitems001wb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `supplierregistration001mb`
+--
+
+DROP TABLE IF EXISTS `supplierregistration001mb`;
+CREATE TABLE `supplierregistration001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `supplier_name` varchar(40) NOT NULL,
+  `supplier_code` varchar(40) NOT NULL,
+  `address` varchar(200) NOT NULL,
+  `contact` varchar(40) NOT NULL,
+  `gstin` varchar(30) NOT NULL,
+  `certification` varchar(50) NOT NULL,
+  `nature` varchar(50) NOT NULL,
+  `supcategory` varchar(255) DEFAULT NULL,
+  `product_desc` varchar(100) NOT NULL,
+  `reputed_cust` varchar(50) NOT NULL,
+  `concern` varchar(100) NOT NULL,
+  `other_Info` varchar(100) NOT NULL,
+  `ac_name` varchar(40) DEFAULT NULL,
+  `bank_name` varchar(100) DEFAULT NULL,
+  `ac_no` varchar(20) NOT NULL,
+  `branch` varchar(100) DEFAULT NULL,
+  `ifsc_code` varchar(100) DEFAULT NULL,
+  `filename` varchar(100) DEFAULT NULL,
+  `originalfilename` varchar(200) DEFAULT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  `website` varchar(250) DEFAULT NULL,
+  PRIMARY KEY (`sl_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `supplierregistration001mb`
+--
+
+/*!40000 ALTER TABLE `supplierregistration001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `supplierregistration001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `supplierreport001wb`
+--
+
+DROP TABLE IF EXISTS `supplierreport001wb`;
+CREATE TABLE `supplierreport001wb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `supregsl_no` int(11) NOT NULL,
+  `activesl_no` int(11) NOT NULL,
+  `supchecksl_no` int(11) NOT NULL,
+  `observation` varchar(250) NOT NULL,
+  `audit_score` int(20) NOT NULL,
+  `NCR_ref` int(20) NOT NULL,
+  `remarks` varchar(250) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `supregsl_no` (`supregsl_no`),
+  KEY `activesl_no` (`activesl_no`),
+  KEY `supchecksl_no` (`supchecksl_no`),
+  CONSTRAINT `supplierreport001wb_ibfk_1` FOREIGN KEY (`supregsl_no`) REFERENCES `supplierregistration001mb` (`sl_no`) ON DELETE CASCADE,
+  CONSTRAINT `supplierreport001wb_ibfk_2` FOREIGN KEY (`activesl_no`) REFERENCES `activity001mb` (`sl_no`) ON DELETE CASCADE,
+  CONSTRAINT `supplierreport001wb_ibfk_3` FOREIGN KEY (`supchecksl_no`) REFERENCES `suppchecklist001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `supplierreport001wb`
+--
+
+/*!40000 ALTER TABLE `supplierreport001wb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `supplierreport001wb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `suppliertrainingplan001wb`
+--
+
+DROP TABLE IF EXISTS `suppliertrainingplan001wb`;
+CREATE TABLE `suppliertrainingplan001wb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `supregsl_no` int(11) NOT NULL,
+  `trainingsl_no` int(11) NOT NULL,
+  `status` char(1) NOT NULL,
+  `date` datetime NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `supregsl_no` (`supregsl_no`),
+  KEY `trainingsl_no` (`trainingsl_no`),
+  CONSTRAINT `suppliertrainingplan001wb_ibfk_1` FOREIGN KEY (`supregsl_no`) REFERENCES `supplierregistration001mb` (`sl_no`) ON DELETE CASCADE,
+  CONSTRAINT `suppliertrainingplan001wb_ibfk_2` FOREIGN KEY (`trainingsl_no`) REFERENCES `trainingplan001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `suppliertrainingplan001wb`
+--
+
+/*!40000 ALTER TABLE `suppliertrainingplan001wb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `suppliertrainingplan001wb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `suppliertype001mb`
+--
+
+DROP TABLE IF EXISTS `suppliertype001mb`;
+CREATE TABLE `suppliertype001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `sslno` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `descrip` varchar(100) NOT NULL,
+  `order` varchar(100) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `sslno` (`sslno`),
+  CONSTRAINT `suppliertype001mb_ibfk_1` FOREIGN KEY (`sslno`) REFERENCES `status001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `suppliertype001mb`
+--
+
+/*!40000 ALTER TABLE `suppliertype001mb` DISABLE KEYS */;
+INSERT INTO `suppliertype001mb` (`sl_no`,`unitslno`,`sslno`,`name`,`descrip`,`order`,`insert_user`,`insert_datetime`,`updated_user`,`updated_datetime`) VALUES 
+ (1,1,8,'Raw Material','Steel','1','u1tms1','2022-10-13 14:55:57',NULL,NULL),
+ (2,1,8,'Consumable Item','Paint','2','u1tms1','2022-10-13 14:56:35',NULL,NULL),
+ (3,1,8,'Child Part','Bolt','3','u1tms1','2022-10-13 14:57:08',NULL,NULL),
+ (4,1,8,'Part','Clamp','4','u1tms1','2022-10-13 14:57:49',NULL,NULL);
+/*!40000 ALTER TABLE `suppliertype001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `systemproperties001mb`
+--
+
+DROP TABLE IF EXISTS `systemproperties001mb`;
+CREATE TABLE `systemproperties001mb` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `description` varchar(60) NOT NULL,
+  `type` varchar(20) NOT NULL,
+  `status` char(1) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `systemproperties001mb`
+--
+
+/*!40000 ALTER TABLE `systemproperties001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `systemproperties001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `tool001mb`
+--
+
+DROP TABLE IF EXISTS `tool001mb`;
+CREATE TABLE `tool001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `pdno` int(50) NOT NULL,
+  `Fix1` varchar(500) NOT NULL,
+  `Fix2` varchar(500) NOT NULL,
+  `Fix3` varchar(500) NOT NULL,
+  `Fix4` varchar(500) NOT NULL,
+  `Fix5` varchar(500) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tool001mb`
+--
+
+/*!40000 ALTER TABLE `tool001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tool001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `toolschecklist001mb`
+--
+
+DROP TABLE IF EXISTS `toolschecklist001mb`;
+CREATE TABLE `toolschecklist001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `tcslno` int(11) NOT NULL,
+  `tstatus` int(11) NOT NULL,
+  `tcheckpoints` varchar(250) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `tcslno` (`tcslno`),
+  KEY `tstatus` (`tstatus`),
+  CONSTRAINT `toolschecklist001mb_ibfk_1` FOREIGN KEY (`tcslno`) REFERENCES `toolsmaster001mb` (`sl_no`) ON DELETE CASCADE,
+  CONSTRAINT `toolschecklist001mb_ibfk_2` FOREIGN KEY (`tstatus`) REFERENCES `toolsstatus001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `toolschecklist001mb`
+--
+
+/*!40000 ALTER TABLE `toolschecklist001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `toolschecklist001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `toolsmaster001mb`
+--
+
+DROP TABLE IF EXISTS `toolsmaster001mb`;
+CREATE TABLE `toolsmaster001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `tsslno` int(11) NOT NULL,
+  `tcode` varchar(50) NOT NULL,
+  `tname` varchar(500) NOT NULL,
+  `tyear` datetime NOT NULL,
+  `tcapacity` varchar(100) NOT NULL,
+  `ttype` varchar(100) NOT NULL,
+  `tmake` varchar(100) NOT NULL,
+  `tlocation` varchar(100) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `tsslno` (`tsslno`),
+  CONSTRAINT `toolsmaster001mb_ibfk_1` FOREIGN KEY (`tsslno`) REFERENCES `toolsstatus001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `toolsmaster001mb`
+--
+
+/*!40000 ALTER TABLE `toolsmaster001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `toolsmaster001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `toolspreventiveaction001mb`
+--
+
+DROP TABLE IF EXISTS `toolspreventiveaction001mb`;
+CREATE TABLE `toolspreventiveaction001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `sslno` int(11) NOT NULL,
+  `trcslno` int(11) NOT NULL,
+  `tname` varchar(250) NOT NULL,
+  `tdetails` varchar(250) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `sslno` (`sslno`),
+  CONSTRAINT `toolspreventiveaction001mb_ibfk_1` FOREIGN KEY (`sslno`) REFERENCES `toolsstatus001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `toolspreventiveaction001mb`
+--
+
+/*!40000 ALTER TABLE `toolspreventiveaction001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `toolspreventiveaction001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `toolsrootcause001mb`
+--
+
+DROP TABLE IF EXISTS `toolsrootcause001mb`;
+CREATE TABLE `toolsrootcause001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `sslno` int(11) NOT NULL,
+  `tbrslno` int(11) NOT NULL,
+  `tname` varchar(250) NOT NULL,
+  `tdetails` varchar(250) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `sslno` (`sslno`),
+  CONSTRAINT `toolsrootcause001mb_ibfk_1` FOREIGN KEY (`sslno`) REFERENCES `toolsstatus001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `toolsrootcause001mb`
+--
+
+/*!40000 ALTER TABLE `toolsrootcause001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `toolsrootcause001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `toolsspares001mb`
+--
+
+DROP TABLE IF EXISTS `toolsspares001mb`;
+CREATE TABLE `toolsspares001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `msslno` int(11) NOT NULL,
+  `tsslno` int(11) NOT NULL,
+  `tspares` varchar(50) NOT NULL,
+  `tsparescost` int(11) DEFAULT NULL,
+  `tspecification` varchar(50) NOT NULL,
+  `tleadtime` datetime DEFAULT NULL,
+  `tminimumstocklevel` int(11) DEFAULT '0',
+  `treorderlevel` int(11) DEFAULT '0',
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `msslno` (`msslno`),
+  KEY `tsslno` (`tsslno`),
+  CONSTRAINT `toolsspares001mb_ibfk_1` FOREIGN KEY (`msslno`) REFERENCES `toolsmaster001mb` (`sl_no`) ON DELETE CASCADE,
+  CONSTRAINT `toolsspares001mb_ibfk_2` FOREIGN KEY (`tsslno`) REFERENCES `toolsstatus001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `toolsspares001mb`
+--
+
+/*!40000 ALTER TABLE `toolsspares001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `toolsspares001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `toolsstatus001mb`
+--
+
+DROP TABLE IF EXISTS `toolsstatus001mb`;
+CREATE TABLE `toolsstatus001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `code_group` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `status` char(100) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `toolsstatus001mb`
+--
+
+/*!40000 ALTER TABLE `toolsstatus001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `toolsstatus001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `trainingplan001mb`
+--
+
+DROP TABLE IF EXISTS `trainingplan001mb`;
+CREATE TABLE `trainingplan001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `trainingname` varchar(150) NOT NULL,
+  `status` char(1) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `trainingplan001mb`
+--
+
+/*!40000 ALTER TABLE `trainingplan001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `trainingplan001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `unitdeptmaster001mb`
+--
+
+DROP TABLE IF EXISTS `unitdeptmaster001mb`;
+CREATE TABLE `unitdeptmaster001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `departsl_no` int(11) NOT NULL,
+  `unitsl_no` int(11) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`),
+  KEY `departsl_no` (`departsl_no`),
+  KEY `unitsl_no` (`unitsl_no`),
+  CONSTRAINT `unitdeptmaster001mb_ibfk_1` FOREIGN KEY (`departsl_no`) REFERENCES `department001mb` (`sl_no`) ON DELETE CASCADE,
+  CONSTRAINT `unitdeptmaster001mb_ibfk_2` FOREIGN KEY (`unitsl_no`) REFERENCES `unitmaster001mb` (`sl_no`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `unitdeptmaster001mb`
+--
+
+/*!40000 ALTER TABLE `unitdeptmaster001mb` DISABLE KEYS */;
+INSERT INTO `unitdeptmaster001mb` (`sl_no`,`departsl_no`,`unitsl_no`,`insert_user`,`insert_datetime`,`updated_user`,`updated_datetime`) VALUES 
+ (1,1,1,'sekar1','2022-08-05 11:55:29',NULL,NULL),
+ (2,2,1,'sekar1','2022-08-05 11:55:33','setmt1','2022-08-19 15:56:17'),
+ (3,3,1,'sekar1','2022-08-05 11:55:44','setmt1','2022-08-19 15:56:32'),
+ (4,4,1,'sekar1','2022-08-05 11:55:52','setmt1','2022-08-19 15:57:26'),
+ (5,5,1,'sekar1','2022-08-05 11:56:12','setmt1','2022-08-19 15:57:34'),
+ (6,6,1,'sekar1','2022-08-05 11:56:24','setmt1','2022-08-19 15:57:49'),
+ (7,7,1,'sekar1','2022-08-05 17:01:21','setmt1','2022-08-19 15:58:00'),
+ (8,8,1,'sekar1','2022-08-05 17:01:29','setmt1','2022-08-19 15:58:19'),
+ (9,9,1,'setmt1','2022-08-19 15:58:49',NULL,NULL),
+ (10,10,1,'setmt1','2022-08-19 15:59:28',NULL,NULL),
+ (11,11,1,'setmt1','2022-08-19 15:59:41',NULL,NULL),
+ (12,1,2,'setmt1','2022-08-19 15:59:46',NULL,NULL),
+ (13,2,2,'setmt1','2022-08-19 15:59:59',NULL,NULL),
+ (14,3,2,'setmt1','2022-08-19 16:00:04',NULL,NULL),
+ (15,4,2,'setmt1','2022-08-19 16:00:22',NULL,NULL),
+ (16,5,2,'setmt1','2022-08-19 16:00:26',NULL,NULL),
+ (17,6,2,'setmt1','2022-08-19 16:00:32',NULL,NULL),
+ (18,7,2,'setmt1','2022-08-19 16:00:39',NULL,NULL),
+ (19,8,2,'setmt1','2022-08-19 16:00:43',NULL,NULL),
+ (20,9,2,'setmt1','2022-08-19 16:00:48',NULL,NULL),
+ (21,10,2,'setmt1','2022-08-19 16:00:53','setmt1','2022-08-19 16:01:22'),
+ (22,11,2,'setmt1','2022-08-19 16:01:29',NULL,NULL);
+/*!40000 ALTER TABLE `unitdeptmaster001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `unitmaster001mb`
+--
+
+DROP TABLE IF EXISTS `unitmaster001mb`;
+CREATE TABLE `unitmaster001mb` (
+  `sl_no` int(11) NOT NULL AUTO_INCREMENT,
+  `unit_name` varchar(100) NOT NULL,
+  `unit_describtion` varchar(200) NOT NULL,
+  `status` char(10) DEFAULT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`sl_no`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `unitmaster001mb`
+--
+
+/*!40000 ALTER TABLE `unitmaster001mb` DISABLE KEYS */;
+INSERT INTO `unitmaster001mb` (`sl_no`,`unit_name`,`unit_describtion`,`status`,`insert_user`,`insert_datetime`,`updated_user`,`updated_datetime`) VALUES 
+ (1,'Unit1','unit description','8','','2022-08-02 18:52:13','setmt2','2022-08-22 13:34:41'),
+ (2,'Unit2','unit description','8','','2022-08-02 19:07:30','setmt2','2022-08-22 13:32:49');
+/*!40000 ALTER TABLE `unitmaster001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `user001mb`
+--
+
+DROP TABLE IF EXISTS `user001mb`;
+CREATE TABLE `user001mb` (
+  `person_id` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `dpslno` int(11) NOT NULL,
+  `roleid` int(11) NOT NULL,
+  `firstname` varchar(45) NOT NULL,
+  `lastname` varchar(45) NOT NULL,
+  `username` varchar(40) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `status` char(1) NOT NULL,
+  `email` varchar(30) NOT NULL,
+  `securityquestion` varchar(250) NOT NULL,
+  `securityanswer` varchar(250) NOT NULL,
+  `theme` varchar(10) DEFAULT '#286090',
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`person_id`),
+  KEY `unitslno` (`unitslno`),
+  KEY `dpslno` (`dpslno`),
+  KEY `roleid` (`roleid`),
+  CONSTRAINT `user001mb_ibfk_1` FOREIGN KEY (`unitslno`) REFERENCES `unitmaster001mb` (`sl_no`),
+  CONSTRAINT `user001mb_ibfk_2` FOREIGN KEY (`dpslno`) REFERENCES `department001mb` (`sl_no`),
+  CONSTRAINT `user001mb_ibfk_3` FOREIGN KEY (`roleid`) REFERENCES `role001mb` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=142 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user001mb`
+--
+
+/*!40000 ALTER TABLE `user001mb` DISABLE KEYS */;
+INSERT INTO `user001mb` (`person_id`,`unitslno`,`dpslno`,`roleid`,`firstname`,`lastname`,`username`,`password`,`status`,`email`,`securityquestion`,`securityanswer`,`theme`,`insert_user`,`insert_datetime`,`updated_user`,`updated_datetime`) VALUES 
+ (1,1,1,1,'','','siva','$2b$10$8xe6b3pcuGvl0jNRxzJlVeetMM96.Y.p4jqEceYHbPnkkVTUYIIGa','A','adc@gmail.com','What was your childhood nickname ?','ss','#286090','siva','2021-09-06 13:18:33','siva','2021-09-06 13:18:33'),
+ (2,1,2,2,'','','latha','$2b$10$juQ8/Mh4ZN33FB9v8slr3ug6RvG0JNqEvV/hZ7SUhTtk8KBhXptLG','A','latha0707hema@gmail.com','What was your childhood nickname ?','latha','#8d4da6','latha','2022-01-20 08:59:58','latha','2022-02-09 12:07:18'),
+ (3,1,3,3,'','','aravinth','$2b$10$juQ8/Mh4ZN33FB9v8slr3ug6RvG0JNqEvV/hZ7SUhTtk8KBhXptLG','A','latha0707hema@gmail','What was your childhood nickname ?','latha','#1f812c','latha','2021-09-06 13:18:33','siva','2022-02-09 12:06:50'),
+ (5,1,4,4,'','','sekar','$2b$10$juQ8/Mh4ZN33FB9v8slr3ug6RvG0JNqEvV/hZ7SUhTtk8KBhXptLG','A','kavichandran877@gmail.com','What was your childhood nickname ?','latha','#286090','latha','2022-01-20 08:59:58','latha','2022-02-03 12:52:44'),
+ (8,1,5,3,'','','kavitha','$2b$10$cSZ1TGPDJAs.FMCyHj0RleysCcTIkWJTaGKoYrT0bsGypTINbXbXO','A','kavitha270895@gmail.com','What was your childhood nickname ?','kavi','#286090','latha','2022-02-11 13:33:13','latha','2022-02-11 13:36:01'),
+ (9,1,6,2,'','','selvam','$2b$10$Co1fTNvFwbLi0aCKfxadZOCR33Ll.xsu5Jj4ImTFZOSqoDDcn.ude','A','latha0707hema@gmail.com','What was your childhood nickname ?','selvam','#286090','latha','2022-02-11 13:37:45',NULL,NULL),
+ (10,1,7,1,'','','sfd','$2b$10$jCowSnXffbaSYAxDYNDSEei05Fs1.ZFWqmm3FdDfNMhc0uiAIwp2a','A','selvamraja1104@gmail.com','What was your childhood nickname ?','sfd','#286090','latha','2022-02-11 14:20:10',NULL,NULL),
+ (11,1,4,4,'sripur','chase','moorthy','$2b$10$v0032Ost0h5Gr9nDp7xQJ.fjVDlB9Tgj0ZBy2oylNH3PLeuLlRdDa','A','moorthyp2096@gmail.com','What was your childhood nickname ?','moorthy','#286090','latha','2022-02-24 13:39:48','u1tms1','2022-09-02 17:21:56'),
+ (12,1,1,1,'sritop','management','u1tms1','$2b$10$F2x7grVPANYmWxEU212ftuh6kD4V1O3tNGPjP4k4tK2DAVeep5vYO','A','dhayalaguru.g@gmail.com','What was your childhood nickname ?','a','#a44444','siva','2022-06-01 13:28:00','u1tms1','2022-09-02 17:11:07'),
+ (14,1,2,1,'srinimar','keting','u1mks1','$2b$10$1oOHQaftBNq1/xFvYprp2OkvEMFesuNuIJ7QQ2ZPzWQT/aq7S9qTi','A','dhayalaguru.g@gmail.com','In what city did you meet your spouse/significant other ?','vcd','#286090','setmt1','2022-06-01 13:45:34','u1tms1','2022-09-02 17:11:34'),
+ (15,1,8,1,'sriqua','lity','u1qas1','$2b$10$CLECdI5fJh4JQEo84dJfn.RyGrGFP/IZZVYZA5Yu89lIP34UUjo62','A','dhayalaguru.g@gmail.com','In what city did you meet your spouse/significant other ?','sdf','#286090','semar1','2022-06-01 13:49:45','u1tms1','2022-09-02 17:11:54'),
+ (16,1,7,1,'sriproduc','tion','u1prds1','$2b$10$0l6Vn11xzpMFys/gjhuFKu/WYfHRsDuM77WixqgoWZ2A6Upzjnp2i','A','dhayalaguru.g@gmail.com','What is the name of your favorite childhood friend ?','df','#286090','seqal1','2022-06-01 13:52:35','u1tms1','2022-09-02 17:12:10'),
+ (20,1,5,1,'sristo','re','u1strs1','$2b$10$Xil3Y8P/E/rVX7T6s4mzIur.YZCOQrIC5ftZnvuCEc0t85I7gBc8G','A','dhayalaguru.g@gmail.com','In what city did you meet your spouse/significant other ?','qwdew','#286090','seprd1','2022-06-01 14:47:01','u1tms1','2022-09-02 17:12:29'),
+ (22,1,6,1,'sri','hr','u1hrs1','$2b$10$ErKeRHGJm6woqNiMyBk4dOvUbhufqbtB58VBybJFe24ynopcHPT8q','A','dhayalaguru.g@gmail.com','What is the name of your favorite childhood friend ?','asd','#286090','sestr1','2022-06-01 14:53:55','u1tms1','2022-09-02 17:12:43'),
+ (23,1,4,1,'sripur','chase','u1purs1','$2b$10$l12.vyHo8WawQUF6qNB57OXywWNURNWgDrrnR2CE46cHfKT25APqG','A','dhayalaguru.g@gmail.com','What was your childhood nickname ?','sdf','#320daf','sehrm1','2022-06-01 14:57:00','u1tms1','2022-09-02 17:13:33'),
+ (24,1,9,1,'srimain','tenance','u1mtns1','$2b$10$1.t2SsuVII2KW7wsQAhh.O.oIpObNd4crA1kYq/Ofwe5L0rxAaL/i','A','dhayalaguru.g@gmail.com','What is the name of your favorite childhood friend ?','sd','#286090','sepur1','2022-06-01 14:59:19','u1tms1','2022-09-02 17:14:24'),
+ (25,1,11,1,'srisales','sales','u1dss1','$2b$10$BPVEaMiPWPD0BJ0jH.jQ8.WcRLf4haC9PHVvaEjwYME8YvTF.OiRC','A','kavichandran877@gmail.com','What was your childhood nickname ?','sales','#286090','setmt1','2022-08-03 15:39:17','u1tms1','2022-09-02 17:15:25'),
+ (26,1,9,1,'','','sekarL','$2b$10$5OmcA1YkRqw6VOgM7uceXeq3tweuWQHXwoxU9ePpAvQagFF75cHXi','A','sekarL@gmail.com','What was your childhood nickname ?','sekarL','#286090','setmt1','2022-08-19 15:07:40',NULL,NULL),
+ (27,2,1,1,'Sri1','Top','u2tms1','$2b$10$6PIUfq/SJQQ5pOqne.4s7.VHuvwyWpmAdwus02AVBoTS/PKYMLX6q','A','kavichandran877@gmail.com','What was your childhood nickname ?','setmt2','#286090','sesale1','2022-08-19 17:39:08','u1tms1','2022-09-02 17:08:05'),
+ (28,2,2,1,'Sri2','Marketing','u2mks1','$2b$10$on4zGzYhOg31B/GD6g1GHeNlCZ4ys/mIIuHNQ5A6Z/g3yIPhzPV9O','A','kavichandran877@gmail.com','What was your childhood nickname ?','semar2','#286090','setmt1','2022-08-19 17:45:11','u1tms1','2022-09-02 17:07:21'),
+ (29,2,8,1,'Sri3','Quality','u2qas1','$2b$10$UpUbG5ojeVNj9zJPXPekCOW2FlnCPDhc/oFVEmZWw3ltHMMP9cMW2','A','kavichandran877@gmail.com','What was your childhood nickname ?','seqal2','#286090','setmt1','2022-08-19 17:48:18','u1tms1','2022-09-02 17:07:01'),
+ (30,2,7,1,'Sri4','Production','u2prds1','$2b$10$eYm7dIuSu9x0UGSA8a1r5eK2bnN.zpCqSUIAWtCXMAWUgKrq5v.zK','A','kavichandran877@gmail.com','What was your childhood nickname ?','seprd2','#286090','setmt1','2022-08-19 17:51:02','u1tms1','2022-09-02 17:05:26'),
+ (31,2,5,1,'Sri5','Store','u2strs1','$2b$10$MCiU8iHMTkNTdpxYbYCSUOTxt0NqZIKVrOpG4bmueaM88SwckSDLu','A','kavichandran877@gmail.com','What was your childhood nickname ?','sestr2','#286090','setmt1','2022-08-19 17:53:00','u1tms1','2022-09-02 17:05:02'),
+ (33,2,6,1,'Sri6','HRmgnt','u2hrs1','$2b$10$99/JS.YhUrfh/NxA.2TN3eEACPoSR7xzkyinqf4/LhNZc.Oif3dyK','A','kavichandran877@gmail.com','What was your childhood nickname ?','sehrm2','#286090','setmt1','2022-08-19 18:31:11','u1tms1','2022-09-02 17:04:29'),
+ (34,2,4,1,'sri7','purchase','u2purs1','$2b$10$hvm/TCEaMCEOYMBs27i/8.ycA4Xfhhr1PFdTzO7.I8NPkOof3OrSu','A','kavichandran877@gmail.com','What was your childhood nickname ?','sepur2','#286090','setmt1','2022-08-19 18:34:41','u1tms1','2022-09-02 17:03:38'),
+ (35,2,9,1,'Sri8','Maintenance','u2mtns1','$2b$10$KG7puUkj6KKQGI4Qcwk1luxQA/1GG72JLqBMKayfs24Vi.ctg3cJC','A','kavichandran877@gmail.com','What was your childhood nickname ?','semtn2','#286090','setmt1','2022-08-19 18:37:38','u1tms1','2022-09-02 17:02:49'),
+ (36,2,11,1,'Sri9','Sale','u2dss1','$2b$10$S4a1.r3gLJkcwOS.nx7Hb.5JxHQA2oR5oQD99i3pzpZgNx.KCPVEW','A','kavichandran877@gmail.com','What was your childhood nickname ?','sesale2','#286090','setmt1','2022-08-19 18:39:32','u1tms1','2022-09-02 17:01:39'),
+ (55,1,1,2,'u1tma1','u1tma1','u1tma1','$2b$10$ml8RVie/tbvJC1a.1qiaPu/9BfxjjzNgPVguyH5UKDV9/ITp3KLJm','A','kavichandran877@gmail.com','In what city did you meet your spouse/significant other ?','u1tma1','#286090','u1tms1','2022-09-01 16:48:59','u1tms1','2022-09-02 16:57:34'),
+ (58,1,1,2,'sampletest','sampletest','sampletest','$2b$10$GA.8UMzfWDeNqHyE7FJPGeAxMc9wbyXS/ByTS6lCnqekTG5jD.EZK','A','kavichandran877@gmail.com','What was your childhood nickname ?','sampletest','#286090','u1tms1','2022-09-01 18:48:37','u1tms1','2022-09-02 16:56:47'),
+ (59,2,1,2,'sri','topadmin','u2tma1','$2b$10$g/ABXaLzAmdmxbx5epmYwez.dLN4O2OY1dpCbUJbiYZqEGK1A7uzm','A','dhayalaguru.g@gmail.com','What was your childhood nickname ?','s','#286090','u1tms1','2022-09-06 11:43:36',NULL,NULL),
+ (60,1,9,2,'sri','mainadmin','u1mtna1','$2b$10$4GllnsuJN2JZUKIXtygQGe5AhWtZrJazPBmrjSIUspzoCw1fhTTXm','A','dhayalaguruganapathyraman@gmai','What was your childhood nickname ?','a','#286090','u1tms1','2022-09-06 11:55:28',NULL,NULL),
+ (61,2,9,2,'sri','mainadm','u2mtna1','$2b$10$78ZVlJXQAkO2koNlBFpcz.rWcne9JH5TQkKaDKGLGv8BHLXZ2uoHe','A','dhayalaguruganapathyraman@gmai','What was your childhood nickname ?','s','#286090','u1tms1','2022-09-06 11:57:22',NULL,NULL),
+ (62,1,9,3,'sri','maintenance','u1mtnu1','$2b$10$RIuNw3Z62nGmG1s8i5Z0V.fsyFXDnO.tbbXnIjLC.RuKJsoX/y.hi','A','dhayalaguruganapathyraman@gmai','What is the name of your favorite childhood friend ?','a','#286090','u1tms1','2022-09-06 12:19:05',NULL,NULL),
+ (63,2,9,3,'sri','mainuser','u2mtnu1','$2b$10$PnJhjvTwiNH9axcP7OYc7eH.oDr6MeDdZAae0D9zkrpzEVOu2QG3y','A','dhayalaguruganapathyraman@gmai','What was your childhood nickname ?','a','#286090','u1tms1','2022-09-06 12:20:48',NULL,NULL),
+ (64,1,9,4,'sri','mainguest','u1mtng1','$2b$10$1VjJzgxY/NLQrQrTvrDnH.qkT9IceVaYLsiPDhzSuryPgt/ZpIDw.','A','dhayalaguruganapathyraman@gmai','What was your childhood nickname ?','a','#286090','u1tms1','2022-09-06 12:24:20',NULL,NULL),
+ (65,2,9,4,'sri','main','u2mtng1','$2b$10$t3su0n0zhvqYMjz4uRNzuefuX8bE.Wd.nQtBvQY.vSsEMm2dje0z.','A','dhayalaguruganapathyraman@gmai','What was your childhood nickname ?','s','#286090','u1tms1','2022-09-06 12:26:32',NULL,NULL),
+ (66,1,11,2,'sri','sales','u1dsa1','$2b$10$rITsh2kEifL4vaQjXFVaQOvq/VO/64zaeMJIcquWtt.36/5DnI0t2','A','dhayalaguruganapathyraman@gmai','In what city did you meet your spouse/significant other ?','a','#286090','u1tms1','2022-09-06 12:55:59',NULL,NULL),
+ (67,1,11,2,'sri','sales','u1dsa1','$2b$10$URyDCtDTQZdll/V1TqHAPOzsVhsZlXHY.71K3iMqPsXn8UIesCsjW','A','dhayalaguruganapathyraman@gmai','In what city did you meet your spouse/significant other ?','a','#286090','u1tms1','2022-09-06 12:55:59',NULL,NULL),
+ (68,2,11,2,'sri','salesadmin','u2dsa1','$2b$10$/O3FwbaPWddmYCUZXWxzu.a9GCtfupyTlOhSb3U.zp7TlBU09F7Gi','A','dhayalaguruganapathyraman@gmai','What is the name of your favorite childhood friend ?','s','#286090','u1tms1','2022-09-06 12:57:24',NULL,NULL),
+ (69,1,11,3,'sri','salesuser','u1dsu1','$2b$10$W8NB2wqWa3lygZPsbygiAelB5HNmTTT.rPVljJH0.H.FS.Ip2W.HK','A','dhayalaguruganapathyraman@gmai','What was your childhood nickname ?','s','#286090','u1tms1','2022-09-06 12:59:12',NULL,NULL),
+ (70,2,11,3,'sri','sal','u2dsu1','$2b$10$YAGhtl7bNbKIW10Z0uHRAu6kdb/wWssK./08kRSc5jeNDiZZTo6Yu','A','dhayalaguruganapathyraman@gmai','In what city did you meet your spouse/significant other ?','a','#286090','u1tms1','2022-09-06 13:02:49',NULL,NULL),
+ (71,1,11,4,'sri','guest','u1dsg1','$2b$10$oxqMS721k43qIZ9wAjQVCOSX.FMt2Bbh5MNARiD6JLoc.6hpfIz6G','A','dhayalaguruganapathyraman@gmai','What was your childhood nickname ?','sd','#286090','u1tms1','2022-09-06 13:04:35',NULL,NULL),
+ (72,2,11,4,'sri','saleguest','u2dsg1','$2b$10$CF/mpvT/dVW4Zj85SZX0HO2jt3SBXxHtx9wIlLwCxeYWnibFO7BHy','A','dhayalaguruganapathyraman@gmai','What was your childhood nickname ?','s','#286090','u1tms1','2022-09-06 13:05:54',NULL,NULL),
+ (73,1,4,2,'sri','purchase','u1pura1','$2b$10$1LHduLqXREoMWBu8MHH.YudI4JDDd2fWgkbr01yhC7.mzvSLqoNiy','A','dhayalaguruganapathyraman@gmai','In what city did you meet your spouse/significant other ?','s','#286090','u1tms1','2022-09-06 13:19:53',NULL,NULL),
+ (74,2,4,2,'sri','puradmin','u2pura1','$2b$10$vxlnZTKabIQCRAM41fVkouwr2DWimoe3xXA1g8HSRqDtNfYIGKYJG','A','dhayalaguruganapathyraman@gmai','What was your childhood nickname ?','s','#286090','u2tms1','2022-09-06 13:25:58',NULL,NULL),
+ (75,1,4,3,'sri','pur','u1puru1','$2b$10$PKlHKDbiuwAexesKrOZkEeEMc3w0wM1scXiyAQgtE3RVlmRgmLtOm','A','dhayalaguruganapathyraman@gmai','What was your childhood nickname ?','z','#286090','u1tms1','2022-09-06 13:28:08',NULL,NULL),
+ (76,2,4,3,'sri','puruser','u2puru1','$2b$10$IPgAgrLRU5x4xDaknU421uCiMojymCC6UII2W6IHZ7m7Ag7uggU5u','A','dhayalaguruganapathyraman@gmai','What was your childhood nickname ?','z','#286090','u2tms1','2022-09-06 13:29:35',NULL,NULL),
+ (77,1,4,4,'sri','guest','u1purg1','$2b$10$rbJGODNplhCaUodU/w3bSOiNo82bPvq5okzZbrGCjyYBgvAXj5JNu','A','dhayalaguruganapathyraman@gmai','In what city did you meet your spouse/significant other ?','s','#286090','u1tms1','2022-09-06 13:30:44',NULL,NULL),
+ (78,2,4,4,'sri','purguest','u2purg1','$2b$10$KC7nWfa2S26zbN5isTekOuGKyTs1wP4lPbuXmIyf208seYKFORWGm','A','dhayalaguruganapathyraman@gmai','What was your childhood nickname ?','s','#286090','u2tms1','2022-09-06 13:32:48',NULL,NULL),
+ (79,1,1,1,'VASU','DEVAN','u1topmgnt','$2b$10$MSHNGjg5NfVYdS7/MJkmw.0tVLSwHOESuj4g9i0fhitlO8lNpoWyy','A','v@gmail.com','What was your childhood nickname ?','red','#286090','u1tms1','2022-09-06 13:42:14',NULL,NULL),
+ (80,1,1,1,'VASU','DEVAN','u1topmgnt','$2b$10$/Go9WbipLSaVSVLi14CGUuSsvkEbwxbNrQ/aZgukukBozdHjOta8q','A','v@gmail.com','What was your childhood nickname ?','red','#286090','u1tms1','2022-09-06 13:45:04',NULL,NULL),
+ (81,1,1,1,'VASU','DEVAN','u1topmgnt','$2b$10$EbFa36SufbEY03PjHrd.1uotDaWqO2RHqOICT4XFYaknFijC6R42C','A','v@gmail.com','What was your childhood nickname ?','red','#286090','u1tms1','2022-09-06 13:45:11',NULL,NULL),
+ (82,1,5,2,'sri','storeadmin','u1stra1','$2b$10$tvOS9/ZnXt.VU/tP4fM/m.RMAk1iUnGtx.bisZD32VKhNqo2/LtK2','A','dhayalaguruganapathyraman@gmai','In what city did you meet your spouse/significant other ?','as','#286090','u1tms1','2022-09-06 13:57:19',NULL,NULL),
+ (83,2,5,2,'sri','storead','u2stra1','$2b$10$J.0DP3qDPc.352oDhXfwfe5cBSQ1Elcxl8qS2NVi1RSNkA6BWECJK','A','dhayalaguruganapathyraman@gmai','In what city did you meet your spouse/significant other ?','as','#286090','u2tms1','2022-09-06 13:58:38',NULL,NULL),
+ (84,1,5,3,'sri','storeuser','u1stru1','$2b$10$FOukrPs.oaH/p1XBQ74pwOr5Dn2LtezbmZQjMnbGiLNZNi11EcptW','A','dhayalaguruganapathyraman@gmai','What is the name of your favorite childhood friend ?','sa','#286090','u1tms1','2022-09-06 13:59:51',NULL,NULL),
+ (85,2,5,3,'sri','storeur','u2stru1','$2b$10$ZPSTU.m5D9OYzkPM/xOUk.Eugy5bFiHg8pH2DjGuzdfJsYMGfdsl6','A','dhayalaguruganapathyraman@gmai','What was your childhood nickname ?','d','#286090','u2tms1','2022-09-06 14:01:29',NULL,NULL),
+ (86,1,5,4,'sri','storeguest','u1strg1','$2b$10$WLHkhfiy38HwrCslCWGYN.W.zCKX59W/hsqc/MrCjw5p1UiQ1dl1y','A','dhayalaguruganapathyraman@gmai','What was your childhood nickname ?','w','#286090','u1tms1','2022-09-06 14:02:43',NULL,NULL),
+ (87,2,5,4,'sri','strguest','u2strg1','$2b$10$KNjv5bBlH/Z0oTnvOOKDwuONYRqz6NPfVMW0WlVORcMBousvsByCu','A','dhayalaguruganapathyraman@gmai','What was your childhood nickname ?','d','#286090','u2tms1','2022-09-06 14:04:31',NULL,NULL),
+ (88,1,7,2,'sri','production','u1prda1','$2b$10$sYfl5axUB1izbyu2enYBceCz4uhfjob4ayE/JLhUhAzaBrhkbcBZW','A','dhayalaguruganapathyraman@gmai','What is the name of your favorite childhood friend ?','s','#286090','u1tms1','2022-09-06 14:54:06',NULL,NULL),
+ (89,2,7,2,'sri','proadmin','u2prda1','$2b$10$lwGOVpkHnl/4cPbWOhxzQuTdyC1CW.c/kLgg6O4bs.JeXedChRKoS','A','dhayalaguruganapathyraman@gmai','What is the name of your favorite childhood friend ?','z','#286090','u2tms1','2022-09-06 14:55:34',NULL,NULL),
+ (90,1,7,3,'sri','prd','u1prdu1','$2b$10$CG9FtjUGQDg3lwo3afH1VeBUe/OoMyBduIT4b4vsPefICdS4fEbdu','A','dhayalaguruganapathyraman@gmai','What was your childhood nickname ?','xz','#286090','u1tms1','2022-09-06 14:56:56',NULL,NULL),
+ (91,2,7,3,'sri','prduser','u2prdu1','$2b$10$hgcoLs0uQEfRYOLCy1PgVOiEO8F8gbAPgcRGXhYUJVWILy9C8z1w6','A','dhayalaguruganapathyraman@gmai','What was your childhood nickname ?','sd','#286090','u2tms1','2022-09-06 14:58:14',NULL,NULL),
+ (92,1,7,4,'sri','prod','u1prdg1','$2b$10$ky6UaELJ2dXW161ZIXTvjOsQZnt72Pyjn6dksACAPCu5p4Yv8FJeK','A','dhayalaguruganapathyraman@gmai','What was your childhood nickname ?','as','#286090','u1tms1','2022-09-06 14:59:36',NULL,NULL),
+ (93,2,7,4,'sri','proguest','u2prdg1','$2b$10$kL7z0IG1hqg4R1mcwskrIu9sSim1W4bz6vsM9s..VlIDaXgF0iNgG','A','dhayalaguruganapathyraman@gmai','In what city did you meet your spouse/significant other ?','sd','#286090','u2tms1','2022-09-06 15:01:17',NULL,NULL),
+ (94,1,8,2,'sri','qua','u1qaa1','$2b$10$jIEUQRxMFIPcU5Z9LTQv9uZpVKIApJEqCNhwIqp1litE0yuIp3Gq2','A','dhayalaguruganapathyraman@gmai','What was your childhood nickname ?','x','#286090','u1tms1','2022-09-06 15:11:36',NULL,NULL),
+ (95,2,8,2,'sri','quaadmin','u2qaa1','$2b$10$vTRX36pBSsru6VEIkXDPOOZzZsCicuVaGKEzC.vky221Jw5jOTdFe','A','dhayalaguruganapathyraman@gmai','In what city did you meet your spouse/significant other ?','sas','#286090','u2tms1','2022-09-06 15:12:52',NULL,NULL),
+ (97,1,4,1,'TEST','PURCHASE USER','u1pur','$2b$10$aiUJh46rYkqm5DZK3ZwO.OgV149toAKSMvHqn21AO9Bg3Oh8TrPFm','A','g@gmail.com','What was your childhood nickname ?','red','#286090','u1topmgnt','2022-09-06 15:18:41',NULL,NULL),
+ (98,1,4,1,'TEST','PURCHASE USER','u1pur','$2b$10$yozlaHfxjnBinOx2n2type5y6B3/nnpyez9MPyr42hyyHdAgzf706','A','g@gmail.com','What was your childhood nickname ?','red','#286090','u1topmgnt','2022-09-06 15:18:45',NULL,NULL),
+ (99,1,4,1,'TEST','PURCHASE USER','u1pur','$2b$10$WvQdu9fx2lSscDFZsvo3Ou8ZX.hDPO.CVD60T7cvXh5.5r/tbElba','A','g@gmail.com','What was your childhood nickname ?','red','#286090','u1topmgnt','2022-09-06 15:18:46',NULL,NULL),
+ (100,1,4,1,'TEST','PURCHASE USER','u1pur','$2b$10$4HQCiRrLX/GIHdVl9mU2neLbqrVSUgO/m/An08BbwGmaPkdt2Ujru','A','g@gmail.com','What was your childhood nickname ?','red','#286090','u1topmgnt','2022-09-06 15:18:47',NULL,NULL),
+ (101,1,4,1,'TEST','PURCHASE USER','u1pur','$2b$10$M5x6NeKwPZO9UccLNhWTBOLSFkenMeHvFPDHpPLG97XNPfQ1MM/72','A','g@gmail.com','What was your childhood nickname ?','red','#286090','u1topmgnt','2022-09-06 15:18:48',NULL,NULL),
+ (102,1,4,1,'TEST','PURCHASE USER','u1pur','$2b$10$yWz1QwQ1e/NpmEAGXOYzVOkTvmHUArz1iBGSEj6U0j8JH7BzjwAay','A','g@gmail.com','What was your childhood nickname ?','red','#286090','u1topmgnt','2022-09-06 15:18:49',NULL,NULL),
+ (103,1,4,1,'TEST','PURCHASE USER','u1pur','$2b$10$Moj1mZ1fbp6dHLbw4wpAR.oL7vGiwK3vvxFC1OksA74LDYaQPfM9y','A','g@gmail.com','What was your childhood nickname ?','red','#286090','u1topmgnt','2022-09-06 15:18:50',NULL,NULL),
+ (104,1,4,1,'TEST','PURCHASE USER','u1pur','$2b$10$2z8M0Cuv4LLv4NesiTK2Nu5M8leY.Or16l5fG4Vff/VUcwI.I9Jw.','A','g@gmail.com','What was your childhood nickname ?','red','#286090','u1topmgnt','2022-09-06 15:18:54',NULL,NULL),
+ (105,1,4,1,'TEST','PURCHASE USER','u1pur','$2b$10$t3KAfuBliUjIKIl0ag7eZuFyFMSYZJ0PyYRIsFNPSpl7Cke1aink.','A','g@gmail.com','What was your childhood nickname ?','red','#286090','u1topmgnt','2022-09-06 15:19:20',NULL,NULL),
+ (106,1,4,1,'TEST','PURCHASE USER','u1pur','$2b$10$oJm1l9iNNAnRGcXlN8jUvu/8/ozFU/95K6ND7R5M577b9tEcHbwNm','A','g@gmail.com','What was your childhood nickname ?','red','#286090','u1topmgnt','2022-09-06 15:19:25',NULL,NULL),
+ (107,1,8,3,'sri','qual','u1qau1','$2b$10$Ivo2hC2VtvU4kAKHM92CY.zjUl0AzrMXpl.oSFdkPcmqIRM/4PSna','A','dhayalaguruganapathyraman@gmai','In what city did you meet your spouse/significant other ?','s','#286090','u1tms1','2022-09-06 15:41:13','u1tms1','2022-09-06 15:50:31'),
+ (108,2,8,3,'sri','quauser','u2qau1','$2b$10$xsHpA.HAMW8CSZugoi7ubOsY/QOnQy8RpAKR8w1Kd7tyvVkqW2Q4S','A','dhayalaguruganapathyraman@gmai','In what city did you meet your spouse/significant other ?','sd','#286090','u2tms1','2022-09-06 15:42:43',NULL,NULL),
+ (109,1,8,4,'sri','quali','u1qag1','$2b$10$NxKqCUP7v8/BRZOIwvrawebEH982bNS7kNv8KPvDi/OeM4gYeTt76','A','dhayalaguruganapathyraman@gmai','In what city did you meet your spouse/significant other ?','d','#286090','u1tms1','2022-09-06 15:43:47',NULL,NULL),
+ (110,2,8,4,'sri','qauguest','u2qag1','$2b$10$Ocf9qiibOe84LuYJ906AqOb2QlKQX3fG6v5/36MYK1J12rZqh5oxO','A','dhayalaguruganapathyraman@gmai','In what city did you meet your spouse/significant other ?','s','#286090','u2tms1','2022-09-06 15:45:43',NULL,NULL),
+ (111,1,6,2,'sri','hr','u1hra1','$2b$10$4.tUB9zN/GiY/04IVxWvou3FPtGSqv4cHZjsphfkw/VGUbwWw3Pem','A','dhayalaguruganapathyraman@gmai','In what city did you meet your spouse/significant other ?','df','#286090','u1tms1','2022-09-06 16:09:39',NULL,NULL),
+ (112,2,6,2,'sri','hradmin','u2hra1','$2b$10$PIaBveiYN1Pt3sFBnKXlKu2ni9VimzV/nWsU3LcdizsAjhpKj50J6','A','dhayalaguruganapathyraman@gmai','What was your childhood nickname ?','zx','#286090','u2tms1','2022-09-06 16:11:11',NULL,NULL),
+ (113,1,6,3,'sri','hrr','u1hru1','$2b$10$waoickByekrQ3qDPZ64r0.DzpcFxdR.z63UWyE/SSTr3eYpdmmn5y','A','dhayalaguruganapathyraman@gmai','What is the name of your favorite childhood friend ?','fd','#286090','u1tms1','2022-09-06 16:12:39',NULL,NULL),
+ (114,1,5,1,'TEST ','STORE USER','u1store','$2b$10$48m5n97nWCuE94ZBAdNHVuUl65LeFA5Dr/n760BZjDdIaL8PxJU32','A','h@gmail.com','What was your childhood nickname ?','red','#286090','u1topmgnt','2022-09-06 16:12:55',NULL,NULL),
+ (115,2,6,3,'sri','hruser','u2hru1','$2b$10$GZ1solwERRwgMRoQPyuKn.96T6lAqgZwp99qnuShCSuiQYyByn1GO','A','dhayalaguruganapathyraman@gmai','What street did you live on in third grade ?','df','#286090','u1tms1','2022-09-06 16:14:25',NULL,NULL),
+ (116,1,6,4,'sri','hrg','u1hrg1','$2b$10$0qWLpc4mizptnmFnkLvwk.v3gdnpB.6r3lwCrHzYA86F2/1m1yVM.','A','dhayalaguruganapathyraman@gmai','What street did you live on in third grade ?','zdds','#286090','u1tms1','2022-09-06 16:16:17',NULL,NULL),
+ (117,2,6,4,'sri','hrguest','u2hrg1','$2b$10$Mg9BYSlQb8LGMWW1jtSiHec5TjOJA3ubsP33CrXTYljcKFjgEiGhW','A','dhayalaguruganapathyraman@gmai','What is the name of your favorite childhood friend ?','d','#286090','u2tms1','2022-09-06 16:18:24',NULL,NULL),
+ (118,1,2,2,'sri','mar','u1mka1','$2b$10$vA5Ka3cQgFtBWzu2.lN4HeVKcwJrZrEAMGqP/11xLL20a4CcxMU9e','A','dhayalaguruganapathyraman@gmai','What was your childhood nickname ?','xz','#286090','u1tms1','2022-09-06 16:31:18',NULL,NULL),
+ (119,2,2,2,'sri','mkkk','u2mka1','$2b$10$6DLxPy5VWqWQtk1zettKGObg4ScFx49Zr.ZOgFuMGxP0.5Vfj4wsa','A','dhayalaguruganapathyraman@gmai','In what city did you meet your spouse/significant other ?','xz','#286090','u2tms1','2022-09-06 16:33:17',NULL,NULL),
+ (120,1,4,4,'Test ','Guest User','u1guest','$2b$10$IuRWC4kUWHYWysarrMzxVe1AIVWfE5jiy7JBkB6GfdUxkCLzKthQC','A','n@gmail.com','What was your childhood nickname ?','red','#286090','u1pur','2022-09-06 16:33:39',NULL,NULL),
+ (121,1,2,3,'sri','mkuser','u1mku1','$2b$10$xZAegt0p1Cw/14GzsWSC5eQlMrnLhpY37.TQSuUZWUQEBFHLXMuqq','A','dhayalaguruganapathyraman@gmai','What is the name of your favorite childhood friend ?','zx','#286090','u1tms1','2022-09-06 16:35:39',NULL,NULL),
+ (122,2,2,3,'sri','mku','u2mku1','$2b$10$mmyG9.bzKfB.RCBCff/mtuWs5s6qkP4Zk8SRW1POUreYN8iIcR.OO','A','dhayalaguruganapathyraman@gmai','What is the name of your favorite childhood friend ?','sd','#286090','u2tms1','2022-09-06 16:42:55',NULL,NULL),
+ (123,1,2,4,'sri','mkg','u1mkg1','$2b$10$Y7exXH.NZ2Mjt8cvD3XNzuFWUYaEo6zPmHeytZRePAy7vzs7MpeMO','A','dhayalaguruganapathyraman@gmai','What is the name of your favorite childhood friend ?','xc','#286090','u1tms1','2022-09-06 16:44:24',NULL,NULL),
+ (124,2,2,4,'sri','mar','u2mkg1','$2b$10$D0uJINosAaOp90b62fOZu.UdUPg2nftvoWGvNz.V2QLhCnecI/OLa','A','dhayalaguruganapathyraman@gmai','What is the name of your favorite childhood friend ?','zx','#286090','u2tms1','2022-09-06 16:45:36',NULL,NULL),
+ (125,1,3,1,'sri','npds','u1npds1','$2b$10$gUGFerZqjDJhjz/uuyYDC.XKtq.WFFuh1vKDY7pwNCDbA0Ov0lD0G','A','dhayalaguruganapathyraman@gmai','What is the name of your favorite childhood friend ?','ds','#286090','u1tms1','2022-09-06 16:52:54',NULL,NULL),
+ (126,1,3,2,'sri','npda','u1npda1','$2b$10$nEs0vo3vlq.wtEAoy3YdMOwvQvQnabd8a0BKdh37KIT6GCy4AqcDC','A','dhayalaguruganapathyraman@gmai','What street did you live on in third grade ?','zx','#286090','u1tms1','2022-09-06 16:54:16',NULL,NULL),
+ (127,1,8,1,'Test ','Quality User','u1quality','$2b$10$ycAQ5sV81Jvs7ZneFQKRBOMmAaUNh/0q4f8EGRV0F2pmwBWBDbQiS','A','m@gmail.com','What was your childhood nickname ?','red','#286090','u1topmgnt','2022-09-06 16:54:21',NULL,NULL),
+ (128,1,3,3,'sri','npdu','u1npdu1','$2b$10$ic2fHn6RlcSvbWTKP6rIMO4bKqBomncffcUch9OQ.i4NJcsHYJ7JW','A','dhayalaguruganapathyraman@gmai','What is the name of your favorite childhood friend ?','sd','#286090','u1tms1','2022-09-06 16:55:27',NULL,NULL),
+ (129,1,3,4,'sri','npdg','u1npdg1','$2b$10$pT4WLGIiHPY/FYbw6jIaT.mW/kBYiuaIGL8CSpOY1h31l8D2c7Cg.','A','dhayalaguruganapathyraman@gmai','In what city did you meet your spouse/significant other ?','sd','#286090','u1tms1','2022-09-06 16:56:42',NULL,NULL),
+ (130,2,3,1,'sri','npdss','u2npds1','$2b$10$soGKknTAB96NPShg2yoQRuu1wwQuZtKnvaiCxNWpByCP5j8W6BEqa','A','dhayalaguruganapathyraman@gmai','What is the name of your favorite childhood friend ?','dfv','#286090','u2tms1','2022-09-06 16:57:50',NULL,NULL),
+ (131,2,3,2,'sri','npdaa','u2npda1','$2b$10$U2hQtJZN3DhBn6IqNpr/Ou0k5JcCg36vZeByYQ3c8Ym6L7oCsQSLm','A','dhayalaguruganapathyraman@gmai','What is the name of your favorite childhood friend ?','zx','#286090','u2tms1','2022-09-06 16:58:56',NULL,NULL),
+ (132,2,3,3,'sri','npduu','u2npdu1','$2b$10$6wPiC4IbDo16gGSJndwGxuUheH27uqDw.7lxMbT04kMJ4dAJjSfJG','A','dhayalaguruganapathyraman@gmai','In what city did you meet your spouse/significant other ?','sd','#286090','u2tms1','2022-09-06 17:00:11',NULL,NULL),
+ (133,2,3,4,'sri','npdgg','u2npdg1','$2b$10$ZrQ/mpW3lUXF7mqvgQqHFOZDJdF4HyoJujHJlPJ8.n..FQW9A3nYK','A','dhayalaguruganapathyraman@gmai','What is the name of your favorite childhood friend ?','x','#286090','u2tms1','2022-09-06 17:01:40',NULL,NULL),
+ (134,1,10,1,'sri','dps','u1dps1','$2b$10$uNn0e9Q0SjIpf1owuXOMOu4ZBD.lz3GLTwQe1iQLneUGTNzFxL7l2','A','dhayalaguruganapathyraman@gmai','What is the name of your favorite childhood friend ?','hg','#286090','u1tms1','2022-09-06 17:23:09',NULL,NULL),
+ (135,1,10,2,'sri','dpa','u1dpa1','$2b$10$pxE33LiO/VxxSS2xKO0HxeulDrgMKFbM2XwcUKJa6Nx9PcXY55WqS','A','dhayalaguruganapathyraman@gmai','In what city did you meet your spouse/significant other ?','m','#286090','u1tms1','2022-09-06 17:25:33',NULL,NULL),
+ (136,1,10,3,'sri','dpu','u1dpu1','$2b$10$Rf54NtdVzgJN.Kz7U5ZcPe8i0vVv8o2TWrLyPo5mYkvax8cRtg17K','A','dhayalaguruganapathyraman@gmai','What is the name of your favorite childhood friend ?','hj','#286090','u1tms1','2022-09-06 17:30:25',NULL,NULL),
+ (137,1,10,4,'sri','dpg','u1dpg1','$2b$10$FxLOThEwGUwdRfl02yBgsuUmg.Ea9tlMtxBZphAw9gtPmv5iSYYlG','A','dhayalaguruganapathyraman@gmai','What is the name of your favorite childhood friend ?','sd','#286090','u1tms1','2022-09-06 17:32:31',NULL,NULL),
+ (138,2,10,1,'sri','dps','u2dps1','$2b$10$RAEONByo98idzDTXxnQR1OUR3Ga3NlLKqjTg1r3dWPQTm4JGp25ky','A','dhayalaguruganapathyraman@gmai','In what city did you meet your spouse/significant other ?','as','#286090','u2tms1','2022-09-06 17:34:10',NULL,NULL),
+ (139,2,10,2,'sri','dpaa','u2dpa1','$2b$10$G8MibifHIS53aN638.hM2OeVg19OnjdjmDROZgzAMyLDAY5jF5hCa','A','dhayalaguruganapathyraman@gmai','What street did you live on in third grade ?','d','#286090','u2tms1','2022-09-06 17:35:32',NULL,NULL),
+ (140,2,10,3,'sri','dpuu','u2dpu1','$2b$10$YEyPmtBSU/CAVnvHCqECCONHcjMiGcu8ugSvvpbWSQaeznyc1tsFe','A','dhayalaguruganapathyraman@gmai','In what city did you meet your spouse/significant other ?','sd','#286090','u2tms1','2022-09-06 17:36:28',NULL,NULL),
+ (141,2,10,4,'sri','dpgg','u2dpg1','$2b$10$i44bhvjOlyuzTxbNjVfCNuqNAuyD3xS4AWpY82fm.N.zoa2lvq3w2','A','dhayalaguruganapathyraman@gmai','In what city did you meet your spouse/significant other ?','xc','#286090','u2tms1','2022-09-06 17:37:59',NULL,NULL);
+/*!40000 ALTER TABLE `user001mb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `userrole001mb`
+--
+
+DROP TABLE IF EXISTS `userrole001mb`;
+CREATE TABLE `userrole001mb` (
+  `userroleid` int(11) NOT NULL AUTO_INCREMENT,
+  `unitslno` int(11) NOT NULL,
+  `loginid` int(11) NOT NULL,
+  `role` varchar(45) NOT NULL,
+  `username` varchar(45) NOT NULL,
+  `insert_user` varchar(40) NOT NULL,
+  `insert_datetime` datetime NOT NULL,
+  `updated_user` varchar(40) DEFAULT NULL,
+  `updated_datetime` datetime DEFAULT NULL,
+  PRIMARY KEY (`userroleid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `userrole001mb`
+--
+
+/*!40000 ALTER TABLE `userrole001mb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `userrole001mb` ENABLE KEYS */;
+
+
+
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
