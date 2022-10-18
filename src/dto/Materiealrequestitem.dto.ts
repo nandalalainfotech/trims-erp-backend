@@ -3,19 +3,19 @@ import { Materiealrequestitem001wb } from "src/entity/Materiealrequestitem001wb"
 export class MateriealrequestitemDTO {
     slNo: number;
     unitslno: number;
-    itemcode: number;
+    itemcode: string;
     itemname: string;
     descrip: string;
     qunty: number;
-    cucode: number;
+    cucode: string;
     cuname: string;
     cudescrip: string;
     cuqunty: number;
-    cptcode: number;
+    cptcode: string;
     cptname: string;
     cptdescrip: string;
     cptqunty: number;
-    prtcode: number;
+    prtcode: string;
     prtname: string;
     prtdescrip: string;
     prtqunty: number;
